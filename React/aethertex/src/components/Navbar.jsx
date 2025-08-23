@@ -1,18 +1,36 @@
 import React from "react";
-import "./Navbar.css";
-import Input from "@mui/joy/Input";
+import { Avatar } from "@mui/joy";
+import Button from "./Button";
+import Input from "./Input";
+import UserCard from "./UserCard";
+import { FaCartShopping } from "react-icons/fa6";
 
 function Navbar() {
   return (
-    <div className="container">
-      <div className="Logo">
-        <h1>Logo</h1>
+    <div className="navbar-container">
+      {/* Logo Section */}
+      <div className="logo">
+        <h1>AetherteX</h1>
       </div>
+
+      {/* Search Section */}
       <div>
-        <Input placeholder="Search" />
+        <Input
+          buttonLabel={"Search"}
+          containerClassName={"search-container"}
+          inputClassName={"search-input"}
+          buttonClassName={"search-button"}
+        />
       </div>
-      <div className="user-container">
-        <h1>User</h1>
+
+      {/* User Section */}
+      <div className="navbarRightContainer">
+        <UserCard
+          containerClassName={"user-container"}
+          avatarContainerClassName={"user-avatar-container"}
+          userInfoContainerClassName={"user-info-container"}
+        />
+        <FaCartShopping className="cart-icon" color="white" size={"32px"} />
       </div>
     </div>
   );
