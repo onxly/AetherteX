@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { FaStar, FaStarHalfAlt, FaRegStar } from "react-icons/fa";
+import "../stylesheets/WriteReview.css";
 
 function WriteReview() {
     let stars = [];
@@ -15,58 +16,21 @@ function WriteReview() {
 
     return (
         <div>
-            <button
-                style={{backgroundColor: "rgba(209, 166, 61, 1)", marginTop: "10px", marginLeft: "10px", marginBottom: "10px", padding: "10px 20px", borderRadius: "20px", cursor: "pointer", width: "150px", height: "40px", fontWeight: "bold", textAlign: "center"}}
-                onClick={() => setShowModal(true)} 
-            >
-                Write a review
+            <button className="btnWrite" onClick={() => setShowModal(true)} >
+                Write a review``
             </button>
 
         {showModal && (
-            <div 
-            style={{
-                position: "fixed",
-                top: 0, left: 0, right: 0, bottom: 0,
-                backgroundColor: "rgba(0,0,0,0.6)", // dark background overlay
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                Index: 1000,
-            }}
-            >
-                
-            <div 
-                style={{
-                position: "relative",
-                backgroundColor: "#121212",
-                padding: "10px",
-                borderRadius: "10px",
-                minWidth: "300px",
-                boxShadow: "0 4px 10px rgba(0,0,0,0.3)",                
-                display: "flex",    
-                flexDirection: "column",
-                }}
-            >
-                
-                <span
-                    onClick={() => setShowModal(false)}
-                    style={{
-                    position: "absolute",
-                    top: "10px",
-                    right: "15px",
-                    cursor: "pointer",
-                    fontWeight: "bold",
-                    fontSize: "20px",
-                    color: "white",
-                    }}
-                >
+            <div className="WriteModel">          
+            <div className="WriteContent">
+                <span className="close" onClick={() => setShowModal(false)}>
                     ×
                 </span>
                 
                 <h2>Write a review</h2>
-                <p style={{marginTop: "-10px"}}>Enter the number of stars</p>
+                <p className="NumStars">Enter the number of stars</p>
                 
-                <div style={{ display: "flex", gap: "5px", fontSize: "20px", cursor: "pointer", marginTop: "-10px"}}>
+                <div>
                     {[1, 2, 3, 4, 5].map((star) =>
                         star <= rating ? (
                         <FaStar 
@@ -84,10 +48,10 @@ function WriteReview() {
                     )}
                 </div>
 
-                <p style={{marginTop: "20px"}}>Your review</p>
-                <textarea style={{marginTop: "-8px", height: "150px", borderRadius: "10px", backgroundColor: "#1a1a1a", color: "white", padding: "10px", border: "none", resize: "none"}}
-                placeholder="Write your review here...(255 characters max)"
-                maxLength={255}
+                <p className="txtRev">Your review</p>
+                <textarea className="taComment" id="taComment"
+                    placeholder="Write your review here...(255 characters max)"
+                    maxLength={255}
                 >   
                 </textarea>
 

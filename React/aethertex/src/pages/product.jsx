@@ -4,7 +4,7 @@ import ImgProduct from '../components/imgProduct.jsx'
 import InfoProduct from '../components/infoProduct.jsx'
 import PurchaseProduct from '../components/purchaseProduct.jsx'
 import ReviewProduct from '../components/reviewProduct.jsx'  
-import '../stylesheets/index.css' 
+import '../stylesheets/product.css' 
 
 function App() {
     let price = "21 900.00";

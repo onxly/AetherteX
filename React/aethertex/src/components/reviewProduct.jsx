@@ -1,4 +1,4 @@
-import '../stylesheets/index.css'
+import '../stylesheets/reviewProduct.css'
 import { BarChart, Bar, XAxis, YAxis, Tooltip, Legend, CartesianGrid } from "recharts"
 import { FaStar, FaStarHalfAlt, FaRegStar } from "react-icons/fa"
 import ReviewBox from "./reviewBox.jsx"
@@ -28,13 +28,12 @@ function reviewProduct(Reviews)
 
     return(
         <section 
-            className="review-product"
-            id='reviews-product'
-            style={{display:"flex", flexDirection:"row", gap:"15px", marginTop:"20px"}}
+            className="reviewSec"
+            id='reviewSec'
         >   
             <div style={{display:"flex", flexDirection:"column"}}>  
-                <h2 style={{marginLeft:"10px"}} >Product Reviews</h2>
-                <span style={{marginLeft: "10px"}}>{stars} {Reviews.rating}</span>
+                <h2>Product Reviews</h2>
+                <span>{stars} {Reviews.rating}</span>
                 <BarChart 
                     data={data}
                     width={500}
@@ -62,24 +61,14 @@ function reviewProduct(Reviews)
                     <Legend />
                     <Bar dataKey="percentage" fill="gold"/>
                 </BarChart>
-
-                
                 <WriteReview />
             </div>
 
             <div>
-                <h2 style={{marginLeft:"10px"}}>Top reviews</h2>
-                <div style={{display:"flex", flexDirection:"column", gap:"15px", marginTop:"10px", marginLeft:"10px"}}>
+                <h2>Top reviews</h2>
+                <div className='CommentSec'>
                     {Object.entries(Reviews.CusReviews || {}).map(([key, value]) => (
-                    <div 
-                        key={key} 
-                        style={{
-                        backgroundColor: "#1a1a1a",
-                        padding: "10px",
-                        borderRadius: "10px",
-                        width: "600px"
-                        }}
-                    >
+                    <div className='reviewBox' key={key}>
                         <ReviewBox 
                         Name={value.user} 
                         numStars={value.rating} 
@@ -89,9 +78,7 @@ function reviewProduct(Reviews)
                     ))}
                     
                 </div>
-                <a 
-                    href="#reviews-product" 
-                    style={{marginLeft: "10px", fontSize: "12px", textDecoration: "none", color: "cyan"}}>
+                <a href="#reviews-product">
                         See more
                 </a>
             </div>

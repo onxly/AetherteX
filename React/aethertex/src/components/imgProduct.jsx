@@ -1,4 +1,4 @@
-import '../stylesheets/index.css'
+import "../stylesheets/imgProduct.css";
 import { useState } from "react";
 function imgProduct(imgItem) {
     const [mainImg, setMainImg] = useState(imgItem.imgMain)
@@ -8,16 +8,11 @@ function imgProduct(imgItem) {
         const oldMain = mainImg;
 
         setMainImg(clickedImg)
-
-        {/*
-        const updatedThumbs = [...thumbnails];
-        updatedThumbs[index] = oldMain;
-        setThumbnails(updatedThumbs); */}
     };
     return (
         <div className="product-img">
             <img className="MainImg" src={mainImg} alt="Product Image" height={500} width={500} />
-            <div style={{display: "flex", flexDirection: "row", gap: "15px", minHeight: "100px", marginBottom: "20px"}}>
+            <div className="thumbSec">
                 {thumbnails.map((thumb, idx) => (
                 <img 
                     className ="thumbnail"
@@ -25,7 +20,6 @@ function imgProduct(imgItem) {
                     alt="Product Image" 
                     height={100} 
                     width={100} 
-                    style={{marginTop: "10px"}}
                     key={idx}  
                     onClick={() => swapImg(thumb, idx)}
                 />

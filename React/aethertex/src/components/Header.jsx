@@ -1,8 +1,7 @@
-import Icon from '../assets/AetherteXIcon.png'
-import UserIcon from '../assets/userIcon.png'
-import CartIcon from '../assets/CartIcon.png'
-import '../stylesheets/index.css'
-//import './Stylesheets/index.css'
+import Icon from '../assets/AetherteXIcon.png';
+import UserIcon from '../assets/userIcon.png';
+import CartIcon from '../assets/CartIcon.png';
+import "../stylesheets/header.css";
 function Header(CartElm) {
     return (
         <header className="navBar">
