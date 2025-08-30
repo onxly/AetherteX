@@ -1,0 +1,141 @@
+:root {
+  --primary-color: #d3ae0c;
+  --primary-color-dark: #ae900c;
+  --secondary-color: #ffffff;
+  --background-color: #242424;
+  --background-color-light: #2f2f2f;
+}
+
+button {
+  border: none;
+  border-radius: 15px;
+}
+
+.navbar-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: black;
+  padding: 0 2rem;
+  height: 70px;
+}
+
+.logo h1 {
+  font-size: 1.5rem;
+  cursor: pointer;
+  transition: color 0.2s ease;
+  color: var(--primary-color);
+}
+
+.search-container {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+
+.user-container {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  border: solid;
+  border-color: var(--primary-color);
+  padding: 5px;
+  border-width: 2px;
+  border-radius: 30px;
+  width: 12vw;
+  transition: opacity 0.2s ease;
+  background-color: var(--primary-color);
+}
+
+.user-info-container {
+  width: 60%;
+  color: white;
+}
+
+.user-container:hover {
+  opacity: 0.4;
+}
+
+.username {
+  font-size: 1rem;
+}
+
+.search-button {
+  border: none;
+  padding: 6px;
+  border: solid;
+  border-width: 2px;
+  border-color: transparent;
+  border-radius: 0;
+  border-end-end-radius: 18px;
+  border-top-right-radius: 18px;
+  width: 90px;
+  background-color: var(--primary-color);
+  transition: background-color 0.1s ease-in;
+  cursor: pointer;
+}
+
+.search-button:hover {
+  background-color: var(--primary-color-dark);
+}
+
+.search-container {
+  background-color: white;
+  border: solid;
+  border-width: 2px;
+  border-color: var(--primary-color);
+  border-radius: 20px;
+  width: 40vw;
+}
+
+.search-input {
+  border: none;
+  background-color: transparent;
+  width: 100%;
+  padding: 5px;
+  margin: 5px;
+  height: 20px;
+  caret-color: black;
+  color: black;
+}
+
+.search-input:focus {
+  outline: none; /* removes the border/outline */
+  border: none; /* optional: removes the normal border too */
+}
+
+.navbarRightContainer {
+  display: flex;
+  align-items: center;
+  gap: 25px;
+}
+
+.cart-icon {
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+}
+
+.cart-icon:hover {
+  opacity: 0.3;
+}
+
+.cart-icon-container {
+  position: relative;
+  display: inline-block;
+}
+
+.cart-counter-container {
+  position: absolute;
+  top: -6px; /* move it above */
+  right: -6px; /* move it to the right corner */
+  background-color: red;
+  color: white;
+  font-size: 12px;
+  font-weight: bold;
+  padding: 2px 6px;
+  border-radius: 50%;
+  min-width: 18px;
+  text-align: center;
+  line-height: 1;
+}

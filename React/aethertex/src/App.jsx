@@ -6,10 +6,13 @@ import Register from "./pages/register";
 import Cart from "./pages/cart";
 import Profile from "./pages/profile";
 import { AuthProvider } from "./contexts/AuthContext";
+import Navbar from "./components/Navbar";
+import "./App.css";
 
 function App() {
   return (
     <AuthProvider>
+      <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/product/:id" element={<Product />} />
