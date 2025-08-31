@@ -1,6 +1,6 @@
 import "../stylesheets/imgProduct.css";
 import { useState } from "react";
-function imgProduct(imgItem) {
+function ImgProduct(imgItem) {
     const [mainImg, setMainImg] = useState(imgItem.imgMain)
     const [thumbnails, setThumbnails] = useState([imgItem.img1, imgItem.img2, imgItem.img3, imgItem.img4])
 
@@ -28,4 +28,4 @@ function imgProduct(imgItem) {
         </div>
     );
 }
-export default imgProduct
+export default ImgProduct

@@ -1,6 +1,6 @@
 import "../stylesheets/purchaseProduct.css";
 
-function purchaseProduct(info) {
+function PurchaseProduct(info) {
     let stockInfo;
     if (info.stock > 0) {
         stockInfo = <span>
@@ -29,4 +29,4 @@ function purchaseProduct(info) {
         </div>
     );
 }
-export default purchaseProduct
+export default PurchaseProduct

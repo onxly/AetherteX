@@ -2,7 +2,7 @@ import { FaStar, FaStarHalfAlt, FaRegStar } from "react-icons/fa";
 import ProductSummary from "./ProductSummary.jsx";
 import "../stylesheets/infoProduct.css";
 
-function infoProduct(info) {
+function InfoProduct(info) {
     const stars = [];
     for (let i = 1; i <= 5; i++) {
         if (info.rating >= i) {
@@ -46,4 +46,4 @@ function infoProduct(info) {
         </div>
     );
 }
-export default infoProduct
+export default InfoProduct

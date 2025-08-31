@@ -1,11 +1,11 @@
 import '../stylesheets/reviewProduct.css'
 import { BarChart, Bar, XAxis, YAxis, Tooltip, Legend, CartesianGrid } from "recharts"
 import { FaStar, FaStarHalfAlt, FaRegStar } from "react-icons/fa"
-import ReviewBox from "./reviewBox.jsx"
+import CommentBox from "./CommentBox.jsx"
 import WriteReview from './WriteReview.jsx';
 import { useState } from 'react'
 
-function reviewProduct(Reviews)
+function ReviewProduct(Reviews)
 {
     const stars = [];
         for (let i = 1; i <= 5; i++) {
@@ -69,7 +69,7 @@ function reviewProduct(Reviews)
                 <div className='CommentSec'>
                     {Object.entries(Reviews.CusReviews || {}).map(([key, value]) => (
                     <div className='reviewBox' key={key}>
-                        <ReviewBox 
+                        <CommentBox 
                         Name={value.user} 
                         numStars={value.rating} 
                         comment={value.comment} 
@@ -85,4 +85,4 @@ function reviewProduct(Reviews)
         </section>
     )
 
-} export default reviewProduct
+} export default ReviewProduct

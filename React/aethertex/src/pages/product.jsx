@@ -1,12 +1,12 @@
 import { useState } from 'react'
 import Header from '../components/Header.jsx'
-import ImgProduct from '../components/imgProduct.jsx'
-import InfoProduct from '../components/infoProduct.jsx'
+import ImgProduct from '../components/ImgProduct.jsx'
+import InfoProduct from '../components/InfoProduct.jsx'
 import PurchaseProduct from '../components/purchaseProduct.jsx'
-import ReviewProduct from '../components/reviewProduct.jsx'  
+import ReviewProduct from '../components/CommentBox.jsx'  
 import '../stylesheets/product.css' 
 
-function product() {
+function Product() {
     let price = "21 900.00";
     let stock = 5;
     let rating = 4.3;
@@ -91,4 +91,4 @@ function product() {
     */
 }
 
-export default product
+export default Product
