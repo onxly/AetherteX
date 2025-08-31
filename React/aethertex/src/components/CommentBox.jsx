@@ -1,6 +1,6 @@
 import { FaStar, FaStarHalfAlt, FaRegStar } from "react-icons/fa"
 
-function ReviewBox(cusReview){
+function CommentBox(cusReview){
     return(
         <div>
             <b>{cusReview.Name}</b>
@@ -8,4 +8,4 @@ function ReviewBox(cusReview){
             <p>{cusReview.comment}</p>
         </div>
     )
-} export default ReviewBox
+} export default CommentBox

@@ -2,8 +2,8 @@ import { useState } from 'react'
 import Header from '../components/Header.jsx'
 import ImgProduct from '../components/ImgProduct.jsx'
 import InfoProduct from '../components/InfoProduct.jsx'
-import PurchaseProduct from '../components/purchaseProduct.jsx'
-import ReviewProduct from '../components/CommentBox.jsx'  
+import PurchaseProduct from '../components/PurchaseProduct.jsx'
+import ReviewProduct from '../components/ReviewProduct.jsx'  
 import '../stylesheets/product.css' 
 
 function Product() {
