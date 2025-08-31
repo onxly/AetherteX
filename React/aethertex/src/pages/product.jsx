@@ -6,7 +6,7 @@ import PurchaseProduct from '../components/purchaseProduct.jsx'
 import ReviewProduct from '../components/reviewProduct.jsx'  
 import '../stylesheets/product.css' 
 
-function App() {
+function product() {
     let price = "21 900.00";
     let stock = 5;
     let rating = 4.3;
@@ -91,4 +91,4 @@ function App() {
     */
 }
 
-export default App
+export default product
