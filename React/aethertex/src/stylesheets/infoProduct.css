@@ -1,0 +1,73 @@
+.product-info{
+  margin-top: 25px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  color: white;
+  margin-left: 10px;
+  grid-row: 2; 
+  grid-column: 2;
+}
+
+.product-info h1{
+  margin: 0;
+  font-size: 30px;
+  text-shadow: 
+    -1px -1px 0 rgba(209, 166, 61, 1),  
+     1px -1px 0 rgba(209, 166, 61, 1),
+    -1px  1px 0 rgba(209, 166, 61, 1),
+     1px  1px 0 rgba(209, 166, 61, 1);
+}
+
+.product-info .ratings{
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+}
+
+.spanStars{
+  margin-left: 8px;
+}
+
+a{
+    margin-left: 10px;
+    font-size: 12px;
+    text-decoration: none;
+    color: cyan;
+}
+
+table{
+    border-collapse: collapse;
+    width: 500px;
+}
+
+caption{
+    font-weight: bold;
+    margin-bottom: 8px;
+    text-align: left; 
+}
+
+.col1{
+    font-weight: bold;
+    width: 30%;
+}
+
+.col2{
+    width: 70%;
+}
+
+.buttonSec{
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+}
+.buttonSec .btnShowMore{
+    background-color: transparent;
+    border: 2px solid white;
+    color: white;
+    cursor: pointer;
+    width: 125px;
+    height: 40px;
+    font-weight: bold;
+}
