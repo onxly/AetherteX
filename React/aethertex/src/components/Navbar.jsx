@@ -2,9 +2,10 @@ import React, { useContext } from "react";
 import { Link } from "react-router";
 import InputSubmit from "./InputSubmit";
 import UserCard from "./UserCard";
-import { FaCartShopping } from "react-icons/fa6";
 import "../styles/Navbar.css";
 import { AuthContext } from "../contexts/AuthContext";
+import Icon from "../assets/AetherteXIcon.png";
+import CartIcon from "./CartIcon";
 
 function Navbar() {
   const { user, isLoggedIn, login, logout, register } = useContext(AuthContext);
@@ -13,7 +14,13 @@ function Navbar() {
       {/* Logo Section */}
       <div className="logo">
         <Link to={"/"} style={{ textDecorationLine: "none" }}>
-          <h1>AetherteX</h1>
+          <img
+            className="imgAetherteX"
+            src={Icon}
+            alt="AetherteX Icon"
+            height={35}
+            width={115}
+          />
         </Link>
       </div>
 
@@ -27,8 +34,7 @@ function Navbar() {
         />
       </div>
 
-      {/* User Section */}
-
+      {/* User and Cart */}
       <div className="navbarRightContainer">
         <Link
           to={isLoggedIn ? `/profile/${user.id}` : "/login"}
@@ -44,7 +50,7 @@ function Navbar() {
         </Link>
 
         <Link to={"/cart"} style={{ textDecorationLine: "none" }}>
-          <FaCartShopping className="cart-icon" color="white" size={"32px"} />
+          <CartIcon iconColor={"white"} numItems={17} />
         </Link>
       </div>
     </div>

@@ -1,0 +1,24 @@
+.sidebar-container {
+  background-color: #2f2f2f;
+  transition: all 0.3s ease;
+}
+
+.sidebar-toggle-container {
+  width: auto;
+  padding: 5px;
+}
+
+.sidebar-toggle-button {
+  cursor: pointer;
+  border: solid;
+  border-color: transparent;
+  border-width: 2px;
+}
+
+.sidebar-toggle-button:hover {
+  opacity: 0.5;
+}
+
+.sidebar-radio-buttons {
+  padding-left: 10px;
+}

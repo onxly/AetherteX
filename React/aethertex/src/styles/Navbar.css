@@ -1,5 +1,5 @@
 :root {
-  --primary-color: #d3ae0c;
+  --primary-color: #c29a39;
   --primary-color-dark: #ae900c;
   --secondary-color: #ffffff;
   --background-color: #242424;
@@ -18,13 +18,13 @@ button {
   color: black;
   padding: 0 2rem;
   height: 70px;
+  max-width: 94vw;
 }
 
-.logo h1 {
-  font-size: 1.5rem;
+.logo {
+  justify-items: center;
   cursor: pointer;
-  transition: color 0.2s ease;
-  color: var(--primary-color);
+  padding-top: 15px;
 }
 
 .search-container {
@@ -45,7 +45,7 @@ button {
   border-radius: 30px;
   width: 12vw;
   transition: opacity 0.2s ease;
-  background-color: var(--primary-color);
+  background-color: #c29a39;
 }
 
 .user-info-container {
@@ -54,7 +54,7 @@ button {
 }
 
 .user-container:hover {
-  opacity: 0.4;
+  background-color: #ddad3c;
 }
 
 .username {
@@ -71,13 +71,13 @@ button {
   border-end-end-radius: 18px;
   border-top-right-radius: 18px;
   width: 90px;
-  background-color: var(--primary-color);
+  background-color: #c29a39;
   transition: background-color 0.1s ease-in;
   cursor: pointer;
 }
 
 .search-button:hover {
-  background-color: var(--primary-color-dark);
+  background-color: #ddad3c;
 }
 
 .search-container {
@@ -101,8 +101,8 @@ button {
 }
 
 .search-input:focus {
-  outline: none; /* removes the border/outline */
-  border: none; /* optional: removes the normal border too */
+  outline: none;
+  border: none;
 }
 
 .navbarRightContainer {
@@ -116,26 +116,21 @@ button {
   transition: opacity 0.2s ease;
 }
 
-.cart-icon:hover {
-  opacity: 0.3;
-}
-
 .cart-icon-container {
   position: relative;
   display: inline-block;
 }
 
-.cart-counter-container {
+.cart-counter {
   position: absolute;
-  top: -6px; /* move it above */
-  right: -6px; /* move it to the right corner */
-  background-color: red;
+  padding: 5px;
+  bottom: auto;
+  left: auto;
   color: white;
-  font-size: 12px;
-  font-weight: bold;
-  padding: 2px 6px;
-  border-radius: 50%;
-  min-width: 18px;
-  text-align: center;
-  line-height: 1;
+  font-size: large;
+  height: 1.5rem;
+  justify-content: center;
+  align-items: center;
+  color: var(--primary-color);
+  font-weight: 750;
 }
