@@ -57,12 +57,20 @@ caption{
     width: 70%;
 }
 
+.hRow{
+  font-weight: bold; 
+  text-decoration: underline;
+  background-color: #1a1a1a;
+  text-align: center;
+}
+
 .buttonSec{
     display: flex;
     gap: 10px;
     margin-top: 10px;
 }
-.buttonSec .btnShowMore{
+
+.btnShow{
     background-color: transparent;
     border: 2px solid white;
     color: white;
