@@ -3,7 +3,7 @@
 {
     width:80%;
     max-height:600px;
-    background-color:black; 
+    background-color:#101010; 
     transition: 0.3s ease-in-out;
     display:flex;
     flex-direction: column;
@@ -22,7 +22,7 @@
 {
     width:60%;
     height:150%;
-    background-color:black;
+    background-color:#101010;
     margin-left: 50px;
     text-align: center;
     transition: 0.3s ease-in-out;

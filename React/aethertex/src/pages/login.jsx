@@ -1,6 +1,6 @@
 import React from 'react';
-import Zeus from './Zeus.jpg';  // <-- import the image
-import '../styling/login.css';
+import Zeus from '../assets/Zeus.jpg';  // <-- import the image
+import '../stylesheets/login.css';
 import { Link } from 'react-router-dom';
 
 function Login() {
