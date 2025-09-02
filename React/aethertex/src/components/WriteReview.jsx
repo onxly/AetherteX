@@ -17,7 +17,7 @@ function WriteReview() {
     return (
         <div>
             <button className="btnWrite" onClick={() => setShowModal(true)} >
-                Write a review``
+                Write a review
             </button>
 
         {showModal && (

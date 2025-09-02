@@ -4,6 +4,7 @@ import ImgProduct from "../components/ImgProduct.jsx";
 import InfoProduct from "../components/InfoProduct.jsx";
 import PurchaseProduct from "../components/PurchaseProduct.jsx";
 import ReviewProduct from "../components/ReviewProduct.jsx";
+import Footer from "../components/Footer.jsx";
 import "../stylesheets/product.css";
 
 function Product() {
@@ -27,6 +28,21 @@ function Product() {
     PowerSupply: "850W 80+ Gold",
     Case: "Prometheus Metallic Gear Neo Qube Case",
   };
+
+  let CPU = {
+    Cores: 16,
+    Theads: 24,
+    ClockSpeed: 5.2,
+    CPUCache: 30,
+    Benchmark: 117.0,
+  };
+
+  let GPU = {
+    VRAM: 16,
+    ClockSpeed: 2321,
+    Benchmark: 49.6,
+  };
+
   let CusReviews = [
     { user: "Boyzn1", rating: 5, comment: "Excellent product!" },
     { user: "Boyzn2", rating: 4, comment: "Very good, but could be improved." },
@@ -39,6 +55,7 @@ function Product() {
 
   return (
     <div className="cApp">
+      <Header NumOf={4} AccName={"Account"} />
       <ImgProduct
         imgMain={imgMain}
         img1={img1}
@@ -52,9 +69,12 @@ function Product() {
         rating={rating}
         reviews={reviews}
         specs={specs}
+        CPU={CPU}
+        GPU={GPU}
       />
       <PurchaseProduct price={price} stock={stock} />
       <ReviewProduct rating={rating} CusReviews={CusReviews} />
+      <Footer />
     </div>
   );
 

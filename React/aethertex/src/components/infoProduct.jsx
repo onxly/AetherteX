@@ -1,8 +1,11 @@
 import { FaStar, FaStarHalfAlt, FaRegStar } from "react-icons/fa";
 import ProductSummary from "./ProductSummary.jsx";
 import "../stylesheets/infoProduct.css";
+import { useState } from "react";
 
 function InfoProduct(info) {
+    const [showModel, setShowModal] = useState(false);
+
     const stars = [];
     for (let i = 1; i <= 5; i++) {
         if (info.rating >= i) {
@@ -35,12 +38,41 @@ function InfoProduct(info) {
                         </tr>
                     ))}
                 </tbody>
+                {showModel && (
+                        <tbody>  
+                            <tr>
+                                <td colSpan={2} className="hRow">CPU</td>
+                            </tr>
+                            {Object.entries(info.CPU || {}).map(([key, value]) => (
+                                <tr key ={key}>
+                                    <td className="col1">{key}:</td>
+                                    <td className="col2">{info.CPU[key]}</td>
+                                </tr>
+                            ))}
+                            <tr>
+                                <td colSpan={2} className="hRow">GPU</td>
+                            </tr>
+                            {Object.entries(info.GPU || {}).map(([key, value]) => (
+                                <tr key ={key}>
+                                    <td className="col1">{key}:</td>
+                                    <td className="col2">{info.GPU[key]}</td>
+                                </tr>
+                            ))} 
+                        </tbody>   
+                    )}
             </table>
             <div className="buttonSec">
-                <button className="btnShowMore">
-                    Show More
-                </button>
-                
+                {
+                    showModel == true ? (
+                        <button className="btnShow" onClick={() => setShowModal(false)}>
+                            Show Less
+                        </button>  
+                    ) : (
+                        <button className="btnShow" onClick={() => setShowModal(true)}>
+                            Show More
+                        </button>
+                    )}
+    
                 <ProductSummary />
             </div>
         </div>
