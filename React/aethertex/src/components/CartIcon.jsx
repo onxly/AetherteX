@@ -5,11 +5,7 @@ import { FaCartShopping } from "react-icons/fa6";
 export default function CartIcon({ numItems, iconColor, numColor, iconSize }) {
   return (
     <div className="cart-wrap">
-      <FaCartShopping
-        className="cart-icon"
-        color={iconColor || "white"}
-        size={iconSize || "100px"}
-      />
+      <FaCartShopping className="cart-icon" color={iconColor || "white"} />
 
       {numItems > 0 && (
         <span className="cart-badge" style={{ color: numColor || "white" }}>

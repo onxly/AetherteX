@@ -4,42 +4,12 @@
   padding: 16px;
   color: #222;
 }
-.control-row {
-  display: flex;
-  gap: 16px;
-  align-items: center;
-  flex-wrap: wrap;
-  margin-bottom: 16px;
-}
-.control {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-.control label {
-  font-size: 14px;
-  color: #444;
-  white-space: nowrap;
-}
-.control input[type="number"] {
-  width: 90px;
-  padding: 6px 8px;
-  border: 1px solid #d0d0d0;
-  border-radius: 8px;
-  font-size: 14px;
-}
-.control input[type="color"] {
-  width: 36px;
-  height: 28px;
-  padding: 0;
-  border: none;
-  background: none;
-  cursor: pointer;
-}
+
 .cart-wrap {
   position: relative;
   display: inline-block;
-  padding: 5px;
+  margin-left: 15px;
+  height: 50px;
 }
 
 .cart-wrap:hover {
@@ -48,14 +18,15 @@
 
 .cart-icon {
   display: block;
-  width: 40px;
-  height: 40px;
+  width: 35px;
+  height: 35px;
 }
+
 .cart-badge {
   position: absolute;
   top: 4px;
   right: 4px;
-  min-width: 15px;
+  max-width: 10px;
   height: 15px;
   padding: 0 6px;
   border-radius: 999px;
@@ -70,9 +41,4 @@
   transform: translate(25%, -25%);
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.12);
   user-select: none;
-}
-.hint {
-  font-size: 12px;
-  color: #666;
-  margin-top: 8px;
 }

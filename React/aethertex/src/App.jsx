@@ -6,16 +6,16 @@ import Register from "./pages/register";
 import Cart from "./pages/cart";
 import Profile from "./pages/profile";
 import { AuthProvider } from "./contexts/AuthContext";
-import Navbar from "./components/Navbar";
 import "./App.css";
 import NotFound from "./pages/not-found";
 import AdminHome from "./pages/admin";
+import Header from "./components/Header";
 
 // Layout that always shows Navbar
 function LayoutWithNavbar() {
   return (
     <>
-      <Navbar />
+      <Header />
       <Outlet />
     </>
   );

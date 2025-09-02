@@ -22,3 +22,8 @@
 .sidebar-radio-buttons {
   padding-left: 10px;
 }
+
+.radio-buttons {
+  display: flex;
+  flex-direction: column;
+}

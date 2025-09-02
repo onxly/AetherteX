@@ -39,7 +39,6 @@ function Product() {
 
   return (
     <div className="cApp">
-      {/*<Header  NumOf={4} AccName={"Account"}/>*/}
       <ImgProduct
         imgMain={imgMain}
         img1={img1}
