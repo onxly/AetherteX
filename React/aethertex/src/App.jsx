@@ -1,4 +1,4 @@
-import { Route, Routes } from "react-router";
+import { Outlet, Route, Routes } from "react-router";
 import Home from "./pages";
 import Product from "./pages/product";
 import Login from "./pages/login";
@@ -9,6 +9,25 @@ import Personaldetails from "./pages/Personaldetails";
 import addressbook from "./pages/Addresssbook";
 
 import { AuthProvider } from "./contexts/AuthContext";
+import "./App.css";
+import NotFound from "./pages/not-found";
+import AdminHome from "./pages/admin";
+import Header from "./components/Header";
+
+// Layout that always shows Navbar
+function LayoutWithNavbar() {
+  return (
+    <>
+      <Header NumOf={4} AccName={"Account"} />
+      <Outlet />
+    </>
+  );
+}
+
+// Layout without Navbar
+function LayoutNoNavbar() {
+  return <Outlet />;
+}
 
 function App() {
   return (
@@ -22,6 +41,7 @@ function App() {
         <Route path="/profile/:id" element={<Profile />} />
         <Route path="/Personaldetails" element={<Personaldetails />} />
         <Route path="/Addresssbook" element={<addressbook />} />
+
       </Routes>
     </AuthProvider>
   );
