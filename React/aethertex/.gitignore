@@ -22,3 +22,5 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+src/stylesheets/Navbar.css
+src/components/Navbar.jsx
