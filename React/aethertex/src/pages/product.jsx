@@ -1,5 +1,3 @@
-import { useState } from "react";
-import Header from "../components/Header.jsx";
 import ImgProduct from "../components/ImgProduct.jsx";
 import InfoProduct from "../components/InfoProduct.jsx";
 import PurchaseProduct from "../components/PurchaseProduct.jsx";
@@ -55,7 +53,6 @@ function Product() {
 
   return (
     <div className="cApp">
-      <Header NumOf={4} AccName={"Account"} />
       <ImgProduct
         imgMain={imgMain}
         img1={img1}

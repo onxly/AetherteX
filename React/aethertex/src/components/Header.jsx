@@ -3,6 +3,7 @@ import UserIcon from "../assets/userIcon.png";
 import "../stylesheets/header.css";
 import { Link } from "react-router";
 import { useState } from "react";
+import CartIcon from "./CartIcon";
 
 function Header(HeadElm) {
   const [showModel, setShowModel] = useState(false);
@@ -44,10 +45,8 @@ function Header(HeadElm) {
         )}
       </div>
 
-      <Link to="/cart" className="Cart">
-        <img src={CartIcon} alt="Cart Icon" height={30} width={34} />
-        <b className="NumOf">{HeadElm.NumOf}</b>
-        <b className="cartTxt">Cart</b>
+      <Link to={"/cart"} style={{ textDecorationLine: "none" }}>
+        <CartIcon iconColor={"white"} numItems={17} />
       </Link>
     </header>
   );

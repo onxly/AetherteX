@@ -15,7 +15,7 @@ import Header from "./components/Header";
 function LayoutWithNavbar() {
   return (
     <>
-      <Header />
+      <Header NumOf={4} AccName={"Account"} />
       <Outlet />
     </>
   );
