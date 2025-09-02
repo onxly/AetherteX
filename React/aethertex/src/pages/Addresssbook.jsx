@@ -1,6 +1,6 @@
 function addressbook ()
 {
-    return
+    return(
     <>
         <div className="address1">
             <div>
@@ -20,7 +20,8 @@ function addressbook ()
             <button>add address</button>
             <label>pop up page</label>
         </div>
-    
-    </>;
+
+    </>
+    );
 }
 export default addressbook

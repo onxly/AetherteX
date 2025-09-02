@@ -48,21 +48,25 @@ html,body
 
 .alldetails
 {
-    max-width: 600px;
-    align-self: center;
+    max-width: 500px;
+    margin: 0 auto;
 }
 
 .Managedetails
 {
     display: flex;
+    flex-direction: row;
     align-items: center;
-    max-width: 100%;
+    border-bottom: 2px solid gold;
+    border-top: 2px solid gold;
 }
 
 .Currentdetails
 {
-    max-width: 70%;
-    display: block;
+    display: flex;
+    flex-direction: column;
+    width: 200px;
+    margin: 5px;
 }
 
 .btneditdetails
@@ -70,4 +74,5 @@ html,body
     border-radius: 50px;
     height: 30px;
     width: 100px;
+    margin: 5px;
 }

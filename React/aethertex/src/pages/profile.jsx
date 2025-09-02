@@ -25,7 +25,7 @@ function Profile() {
                       </section>
                     </Link>
                   
-                <a>
+                <Link to="/Addressbook">
                   <section className="Profilesection">
                     <div>
                       <img src={AdressPic} className="Icon"></img>
@@ -35,7 +35,7 @@ function Profile() {
                       <p>Add, delete, or edit an address</p>
                     </div>
                   </section>
-                </a>
+                </Link>
 
                 <a>
                   <section className="Profilesection">
