@@ -37,10 +37,3 @@
     margin-top: 20px;
  
 }
-.formFields {
-    display: flex;
-    flex-direction: column;
-    align-items: center;  /* center everything */
-    gap: 15px;            /* spacing between inputs/buttons */
-    margin-top: 20px;
-}
