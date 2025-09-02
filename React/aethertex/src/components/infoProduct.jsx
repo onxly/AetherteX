@@ -49,6 +49,7 @@ function InfoProduct(info) {
                                     <td className="col2">{info.CPU[key]}</td>
                                 </tr>
                             ))}
+
                             <tr>
                                 <td colSpan={2} className="hRow">GPU</td>
                             </tr>
@@ -56,6 +57,16 @@ function InfoProduct(info) {
                                 <tr key ={key}>
                                     <td className="col1">{key}:</td>
                                     <td className="col2">{info.GPU[key]}</td>
+                                </tr>
+                            ))} 
+
+                            <tr>
+                                <td colSpan={2} className="hRow">RAM</td>
+                            </tr>
+                            {Object.entries(info.RAM || {}).map(([key, value]) => (
+                                <tr key ={key}>
+                                    <td className="col1">{key}:</td>
+                                    <td className="col2">{info.RAM[key]}</td>
                                 </tr>
                             ))} 
                         </tbody>   

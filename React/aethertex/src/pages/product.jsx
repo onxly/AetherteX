@@ -41,6 +41,13 @@ function Product() {
     Benchmark: 49.6,
   };
 
+  let RAM = {
+    Name: "Corsair Vengeance RGB PRO",
+    Speed: 3200,
+    Channel: "Single channel",
+    Benchmark: 88.5,
+  };
+
   let CusReviews = [
     { user: "Boyzn1", rating: 5, comment: "Excellent product!" },
     { user: "Boyzn2", rating: 4, comment: "Very good, but could be improved." },
@@ -68,8 +75,9 @@ function Product() {
         specs={specs}
         CPU={CPU}
         GPU={GPU}
+        RAM={RAM}
       />
-      <PurchaseProduct price={price} stock={stock} />
+      - <PurchaseProduct price={price} stock={stock} />
       <ReviewProduct rating={rating} CusReviews={CusReviews} />
       <Footer />
     </div>
