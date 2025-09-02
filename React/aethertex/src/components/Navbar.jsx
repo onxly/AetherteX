@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import { Link } from "react-router";
 import InputSubmit from "./InputSubmit";
 import UserCard from "./UserCard";
-import "../styles/Navbar.css";
+import "../stylesheets/Navbar.css";
 import { AuthContext } from "../contexts/AuthContext";
 import Icon from "../assets/AetherteXIcon.png";
 import CartIcon from "./CartIcon";
