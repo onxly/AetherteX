@@ -5,14 +5,13 @@ import Login from "./pages/login";
 import Register from "./pages/register";
 import Cart from "./pages/cart";
 import Profile from "./pages/profile";
-import Personaldetails from "./pages/Personaldetails";
-import addressbook from "./pages/Addresssbook";
-
 import { AuthProvider } from "./contexts/AuthContext";
 import "./App.css";
 import NotFound from "./pages/not-found";
 import AdminHome from "./pages/admin";
 import Header from "./components/Header";
+import Personaldetails from "./pages/Personaldetails";
+import Addressbook from "./pages/Addresssbook";
 
 // Layout that always shows Navbar
 function LayoutWithNavbar() {
@@ -33,15 +32,25 @@ function App() {
   return (
     <AuthProvider>
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/product/:id" element={<Product />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/cart" element={<Cart />} />
-        <Route path="/profile/:id" element={<Profile />} />
-        <Route path="/Personaldetails" element={<Personaldetails />} />
-        <Route path="/Addresssbook" element={<addressbook />} />
+        {/* Routes with navbar */}
+        <Route element={<LayoutWithNavbar />}>
+          <Route path="/" element={<Home />} />
+          <Route path="/cart" element={<Cart />} />
+          <Route path="/product/:id" element={<Product />} />
+          <Route path="/profile/:id" element={<Profile />} />
+          <Route path="/personaldetails" element={<Personaldetails />} />
+          <Route path="/addresssbook" element={<Addressbook />} />
+        </Route>
 
+        {/* Routes without navbar */}
+        <Route element={<LayoutNoNavbar />}>
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/admin/:id" element={<AdminHome />} />
+        </Route>
+
+        {/* Catch all */}
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </AuthProvider>
   );
