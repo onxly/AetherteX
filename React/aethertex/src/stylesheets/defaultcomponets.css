@@ -1,0 +1,73 @@
+html,body
+{
+    background-color: #121212;
+    color: white;
+    height: 100%;
+}
+
+.displayprof
+{
+    display: flex;
+    flex-direction: column;
+}
+
+.Displayprof-row1
+{
+    display: flex;
+    flex-direction: row;
+}
+
+.Displayprof-row2
+{
+    display: flex;
+    flex-direction: row;
+}
+
+.Profilesection
+{
+    display: flex;
+    flex-direction: row;
+    width: 450px;
+    padding: 5px;
+}
+
+.Profilesection:hover
+{
+    background-color: gold;
+    color: black;
+    transform: translate(0%,-2%);
+    transition: transform 0.3s ease;
+    cursor: pointer;
+}
+
+.Icon
+{
+    width: 100px;
+    height: 100px;
+}
+
+.alldetails
+{
+    max-width: 600px;
+    align-self: center;
+}
+
+.Managedetails
+{
+    display: flex;
+    align-items: center;
+    max-width: 100%;
+}
+
+.Currentdetails
+{
+    max-width: 70%;
+    display: block;
+}
+
+.btneditdetails
+{
+    border-radius: 50px;
+    height: 30px;
+    width: 100px;
+}

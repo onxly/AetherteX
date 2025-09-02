@@ -1,56 +1,75 @@
 function personaldetails()
 {
-    return
+    return(
             <>
-                <div className="ManageUsername">
-                  <div className="Currentdetails">
-                    <h1>Username</h1>
-                    <address></address>
-                  </div>
-                  <div className="Editdetails">
-                    <button>Edit</button>
-                  </div>
-                </div>
+              <h1>Personal details</h1>
+                <div className="alldetails">
+                    <div className="Managedetails">
+                      <div className="Currentdetails">
+                        <p>Username</p>
+                        <address>Username</address>
+                      </div>
+                      <div className="Editdetails">
+                        <button className="btneditdetails">Edit</button>
+                      </div>
+                    </div>
 
-                <div className="ManageName">
-                  <div className="Currentdetails">
-                    <h1>Name</h1>
-                    <address></address>
-                  </div>
-                  <div className="Editdetails">
-                    <button>Edit</button>
-                  </div>
-                </div>
+                    <div className="Managedetails">
+                      <div className="Currentdetails">
+                        <p>Name</p>
+                        <address>Name</address>
+                      </div>
+                      <div className="Editdetails">
+                        <button className="btneditdetails">Edit</button>
+                      </div>
+                    </div>
 
-                <div className="ManageSurname">
-                  <div className="Currentdetails">
-                    <h1>Surname</h1>
-                    <address></address>
-                  </div>
-                  <div className="Editdetails">
-                    <button>Edit</button>
-                  </div>
-                </div>
+                    <div className="Managedetails">
+                      <div className="Currentdetails">
+                        <p>Surname</p>
+                        <address>Surname</address>
+                      </div>
+                      <div className="Editdetails">
+                        <button className="btneditdetails">Edit</button>
+                      </div>
+                    </div>
 
-                <div className="ManageEmail">
-                  <div className="Currentdetails">
-                    <h1>Email</h1>
-                    <address></address>
-                  </div>
-                  <div className="Editdetails">
-                    <button>Edit</button>
-                  </div>
-                </div>
+                    <div className="Managedetails">
+                      <div className="Currentdetails">
+                        <p>Email</p>
+                        <address>Email</address>
+                      </div>
+                      <div className="Editdetails">
+                        <button className="btneditdetails">Edit</button>
+                      </div>
+                    </div>
 
-                <div className="ManagePhonenum">
-                  <div className="Currentdetails">
-                    <h1>Phone number</h1>
-                    <address></address>
-                  </div>
-                  <div className="Editdetails">
-                    <button>Edit</button>
-                  </div>
+                    <div className="Managedetails">
+                      <div className="Currentdetails">
+                        <p>Phone number</p>
+                        <address>Phone number</address>
+                      </div>
+                      <div className="Editdetails">
+                        <button className="btneditdetails">Edit</button>
+                      </div>
+                    </div>
+                      
+                    <div className="Managedetails">
+                      <div className="Currentdetails">
+                          <p>Password</p>
+                          <label>Current password</label>
+                          <input type="text"></input>
+                          <label>Current password</label>
+                          <input type="text"></input>
+                          <label>Current password</label>
+                          <input type="text"></input>
+                      </div>
+                      <div className="Editdetails">
+                          <button className="btneditdetails">Edit</button>
+                      </div>
+                    </div>
                 </div>
-            </>;
+            </>
+          );
 }
 export default personaldetails

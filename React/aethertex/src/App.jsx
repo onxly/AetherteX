@@ -5,6 +5,8 @@ import Login from "./pages/login";
 import Register from "./pages/register";
 import Cart from "./pages/cart";
 import Profile from "./pages/profile";
+import Personaldetails from "./pages/Personaldetails";
+
 import { AuthProvider } from "./contexts/AuthContext";
 
 function App() {
@@ -17,6 +19,7 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/cart" element={<Cart />} />
         <Route path="/profile/:id" element={<Profile />} />
+        <Route path="/Personaldetails" element={<Personaldetails />} />
       </Routes>
     </AuthProvider>
   );
