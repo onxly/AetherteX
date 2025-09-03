@@ -22,14 +22,14 @@
     background-color: rgba(209, 166, 61, 1);
     padding: 5px 15px 5px 15px;
     border-radius: 0px 10px 10px 0px;
-    margin-right: 5px;
+    margin-left: 0px;
 }
 
 .OutStock{
     color: pink;
 }
 
-b{
+.purchase-product b{
     margin-top: 10px;
     font-size: 20px;
 }
@@ -39,20 +39,24 @@ b{
     font-size: 16px;
 }
 
-input{
+.txtQuantity{
     width: 50px;
     margin-left: 10px;
-    border-radius: 5px;
+    border-radius: 5px; 
 }
 
 .btnBuy{
     background-color: gold;
     margin-left: 10px;
+    border: none;
+    color: black;
 }
 
 .btnAdd{
     background-color: #FFA41C;
     margin-left: 10px;
+    border: none;
+    color: black;
 }
 
 .btnBuy:hover, .btnAdd:hover{

@@ -10,7 +10,7 @@
     margin-top: 20px;
 }
 
-h2, span{
+.reviewSec h2, span{
     margin-left: 10px;
 }
 
@@ -29,7 +29,7 @@ h2, span{
     width: 600px;
 }
 
-a{
+.reviewSec a{
     margin-left: 10px;
     font-size: 12px;
     text-decoration: none;

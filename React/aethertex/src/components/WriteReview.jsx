@@ -56,7 +56,7 @@ function WriteReview() {
                 </textarea>
 
                 <button
-                    style={{backgroundColor: "rgba(209, 166, 61, 1)", marginTop: "10px", marginBottom: "10px", borderRadius: "10px", cursor: "pointer", width: "75px", height: "35px", fontWeight: "bold", textAlign: "center"}}
+                    className="btnSubmit"
                     onClick={() => setShowModal(false)} 
                 >
                     Submit
