@@ -1,7 +1,6 @@
 import ProfPic from '../assets/ProfilepageIcons/PersonaldetIcon.png';
 import AdressPic from '../assets/ProfilepageIcons/AdressbookIcon.png';
 import CupponPic from '../assets/ProfilepageIcons/CupponIcon.png';
-import SecurityPic from '../assets/ProfilepageIcons/SettingsIcon.png';
 import OrdersPic from '../assets/ProfilepageIcons/OrdersIcon.png';
 import '../stylesheets/defaultcomponets.css';
 import { Link } from "react-router-dom";
@@ -37,7 +36,10 @@ function Profile() {
                   </section>
                 </Link>
 
-                <a>
+              </div>
+
+              <div className="Displayprof-row2">
+                <Link to="Cuppons">
                   <section className="Profilesection">
                     <div>
                       <img src={CupponPic} className="Icon"></img>
@@ -47,25 +49,9 @@ function Profile() {
                       <p>make use of coupons</p>
                     </div>
                   </section>
-                </a>
+                </Link>
 
-              </div>
-
-              <div className="Displayprof-row2">
-                <a>
-                  <section className="Profilesection">
-                    <div>
-                      <img src={SecurityPic} className="Icon"></img>
-                    </div>
-
-                    <div className="Info"> 
-                      <h1>Security settings</h1>
-                      <p>Change passowrd or enable 2 step authentication </p>
-                    </div>
-                  </section>
-                </a>
-
-                <a>
+                <Link to="/pages/orderhistory">
                   <section className="Profilesection">
                     <div>
                       <img src={OrdersPic} className="Icon"></img>
@@ -75,7 +61,7 @@ function Profile() {
                       <p>view all your orders</p>
                     </div>
                   </section>
-                </a>
+                </Link>
 
               </div>
 

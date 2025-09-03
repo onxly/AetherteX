@@ -1,8 +1,29 @@
 function checkout()
 {
-    return
+    return(
     <>
     <div className="PGSection">
+        <div className="Paymentoptions">
+                    <h1>Delivery address</h1>
+                    <div className="radiothingy">
+                    <label>
+                    <input type="radio" name="Address" value="delivery adress 1" ></input>
+                    47 Maple Crescent, Silverbrook, Westshire, 45812
+                    </label>
+                    <label>
+                    <input type="radio" name="Address" value="delivery adress 2"></input>
+                    1020 Horizon Lane, Sunvale Heights, Riverton, 90214"
+                    </label>
+                    <label>                    
+                    <input type="radio" name="Address" value="delivery adress 3"></input>
+                        89 Willowbend Avenue, Crystalford, Northport, 77106                    </label>
+                    </div>
+                    
+                    <label>add adress</label>
+                    <label>pop up page</label>
+
+                    <button>Deliver to this address</button>
+        </div>
     <h1 className="heading">Payment options</h1>
         <div className="Paymentlayout">
         <div className="nameandnum">
@@ -28,24 +49,7 @@ function checkout()
         <button>aplly cuppon</button>
         <button className="Paymentbtn">pay now</button>
         </div>
-
-
-        <div className="Paymentoptions">
-                    <h1>Delivery address</h1>
-                    <input type="radio" name="delivery adress 1" value="1">
-                    </input>
-                    <input type="radio" name="delivery adress 2" value="2">
-                    </input>
-                    <input type="radio" name="delivery adress 3" value="3">
-                    </input>
-                    
-                    <label>add adress</label>
-                    <label>pop up page</label>
-
-                    <button>Deliver to this address</button>
-
-        </div>
     </div>
-    </>;
+    </>);
 }
 export default checkout

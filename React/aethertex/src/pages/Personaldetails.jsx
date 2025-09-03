@@ -1,73 +1,47 @@
+import { Button } from "@mui/material";
+
 function personaldetails()
 {
     return(
             <>
               <h1>Personal details</h1>
                 <div className="alldetails">
-                    <div className="Managedetails">
+                    <div className="row">
                       <div className="Currentdetails">
-                        <p>Username</p>
-                        <address>Username</address>
+                        <label>Username</label>
+                        <input type="text" defaultValue="Username"></input>
                       </div>
-                      <div className="Editdetails">
-                        <button className="btneditdetails">Edit</button>
+                      <div className="Currentdetails">
+                        <label>Name</label>
+                        <input type="text" defaultValue="name"></input>
                       </div>
                     </div>
 
-                    <div className="Managedetails">
+                    <div className="row">
                       <div className="Currentdetails">
-                        <p>Name</p>
-                        <address>Name</address>
+                        <label>Surname</label>
+                        <input type="text" defaultValue="Surname"></input>
                       </div>
-                      <div className="Editdetails">
-                        <button className="btneditdetails">Edit</button>
+                      <div className="Currentdetails">
+                        <label>Email</label>
+                        <input type="text" defaultValue="Email"></input>
                       </div>
                     </div>
 
-                    <div className="Managedetails">
+                    <div className="row">
                       <div className="Currentdetails">
-                        <p>Surname</p>
-                        <address>Surname</address>
-                      </div>
-                      <div className="Editdetails">
-                        <button className="btneditdetails">Edit</button>
+                        <label>Phone number</label>
+                        <input type="text" defaultValue="Phone number"></input>
                       </div>
                     </div>
-
-                    <div className="Managedetails">
-                      <div className="Currentdetails">
-                        <p>Email</p>
-                        <address>Email</address>
-                      </div>
-                      <div className="Editdetails">
-                        <button className="btneditdetails">Edit</button>
-                      </div>
-                    </div>
-
-                    <div className="Managedetails">
-                      <div className="Currentdetails">
-                        <p>Phone number</p>
-                        <address>Phone number</address>
-                      </div>
-                      <div className="Editdetails">
-                        <button className="btneditdetails">Edit</button>
-                      </div>
-                    </div>
-                      
-                    <div className="Managedetails">
-                      <div className="Currentdetails">
+                    <div className="editpassword">
                           <p>Password</p>
-                          <label>Current password</label>
-                          <input type="text"></input>
-                          <label>Current password</label>
-                          <input type="text"></input>
-                          <label>Current password</label>
-                          <input type="text"></input>
-                      </div>
-                      <div className="Editdetails">
-                          <button className="btneditdetails">Edit</button>
-                      </div>
+                          <input type="text" className="changepassword" defaultValue="Current password:"></input>
+                          <input type="text" className="changepassword" defaultValue="New password:"></input>
+                          <input type="text" className="changepassword" defaultValue="Re-enter new password:"></input>
                     </div>
+
+                    <Button>save changes</Button>
                 </div>
             </>
           );
