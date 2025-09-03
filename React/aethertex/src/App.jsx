@@ -10,6 +10,12 @@ import "./App.css";
 import NotFound from "./pages/not-found";
 import AdminHome from "./pages/admin";
 import Header from "./components/Header";
+import Personaldetails from "./pages/Personaldetails";
+import Addressbook from "./pages/Addressbook";
+import Order from "./pages/order";
+import Orderhistory from "./pages/orderhistory";
+import Cuppons from "./pages/cuppons";
+import Checkout from "./pages/checkout";
 
 // Layout that always shows Navbar
 function LayoutWithNavbar() {
@@ -36,6 +42,12 @@ function App() {
           <Route path="/cart" element={<Cart />} />
           <Route path="/product/:id" element={<Product />} />
           <Route path="/profile/:id" element={<Profile />} />
+          <Route path="/personaldetails" element={<Personaldetails />} />
+          <Route path="/addressbook" element={<Addressbook />} />
+          <Route path="/order" element={<Order />} />
+          <Route path="/orderhistory" element={<Orderhistory />} />
+          <Route path="/personaldetails" element={<Personaldetails />} />
+          <Route path="/cuppons" element={<Cuppons />} />
         </Route>
 
         {/* Routes without navbar */}
@@ -43,6 +55,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/admin/:id" element={<AdminHome />} />
+          <Route path="/checkout" element={<Checkout />} />
         </Route>
 
         {/* Catch all */}
