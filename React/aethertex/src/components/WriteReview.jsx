@@ -56,7 +56,7 @@ function WriteReview() {
                 </textarea>
 
                 <button
-                    className="btnSubmit
+                    className="btnSubmit"
                     onClick={() => setShowModal(false)} 
                 >
                     Submit
