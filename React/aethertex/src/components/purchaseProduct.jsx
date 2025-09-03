@@ -17,8 +17,8 @@ function PurchaseProduct(info) {
             <div>{stockInfo}</div>
             <b>R {info.price}</b>
             <div className='QuantitySec'>
-                Quantity: 
-                <input type="number" min="1" max={info.stock} defaultValue="1"/>
+                Quantity:
+                <input className="txtQuantity" type="number" min="1" max={info.stock} defaultValue="1"/>
             </div>
             <button className="btnBuy">
                 Buy Now
