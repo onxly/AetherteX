@@ -25,7 +25,7 @@ function LayoutWithNavbar() {
       <Outlet />
     </>
   );
-} 
+}
 
 // Layout without Navbar
 function LayoutNoNavbar() {
@@ -44,10 +44,10 @@ function App() {
           <Route path="/profile/:id" element={<Profile />} />
           <Route path="/personaldetails" element={<Personaldetails />} />
           <Route path="/addressbook" element={<Addressbook />} />
-          <Route path="/pages/order" element={<Order />} />
-          <Route path="/pages/orderhistory" element={<Orderhistory />} />
+          <Route path="/order" element={<Order />} />
+          <Route path="/orderhistory" element={<Orderhistory />} />
           <Route path="/personaldetails" element={<Personaldetails />} />
-          <Route path="/pages/cuppons" element={<Cuppons />} />
+          <Route path="/cuppons" element={<Cuppons />} />
         </Route>
 
         {/* Routes without navbar */}
@@ -55,8 +55,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/admin/:id" element={<AdminHome />} />
-          <Route path="/pages/checkout" element={<Checkout />} />
-          
+          <Route path="/checkout" element={<Checkout />} />
         </Route>
 
         {/* Catch all */}
