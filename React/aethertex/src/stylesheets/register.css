@@ -1,6 +1,6 @@
  .RegisterBoxs {
             height: 100%;
-            width: 300px;
+            width: 400px;
             color: white;
             background-color: transparent;
 			margin-top:10px;
@@ -24,33 +24,37 @@
             flex-direction:column;
             align-items: center;
             justify-content: center;
-            padding: 30px;
+        
             background-color: black;
             color: white;
-            width:400px;
-            height:600px;
-            margin-left:500px;
-            margin-top:40px;
+            width:800px;
+            height:800px;
+            margin-left:380px;
+            margin-top:0px;
              transition: 0.5s ease;
             transition: 0.5s ease-out;
-            border-radius:10px
+
+            border-left: 1px solid white;
+            border-right: 1px solid white;
         }
         .column:hover
         {
             transition: 1s ease;
             transition: 1s ease-out;
-            box-shadow:  10px 0px 1px tan,
-                         -10px 0px 1px tan;
+            box-shadow:  5px 0px 10px tan,
+                         -5px 0px 10px tan;
+            cursor: pointer;
         }
         .Registerloginbtn
 		{
-			width:350px;
+			width:550px;
 			height:60px;
             color: black;
 			padding:20px;
             background-color: tan;
             border-radius: 20px;
             border: none;
+            cursor: pointer;
         }
         .imageContainer {
             margin-bottom: 20px;

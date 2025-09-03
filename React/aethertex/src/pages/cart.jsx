@@ -149,15 +149,15 @@ function Cart() {
         <div className="billing">{/*right column*/}
             <h3 style={{marginRight:460}}>Price details</h3>
             <hr width="600px"/>
-            <p style={{marginRight:200, marginTop:30}}><label htmlFor="items" style={{marginRight:30}}>No. Items </label><input id="items" value={"R "+total} /></p>
+            <p style={{marginRight:200, marginTop:30}}><label htmlFor="items" style={{marginRight:30}} >No. Items </label><input id="items" value={"R "+total} className="billingInput" /></p>
 
-            <p style={{marginRight:200, marginTop:30}}><label htmlFor="savings" style={{marginRight:45}}>Savings </label><input id="savings" value="R 0"/></p>
+            <p style={{marginRight:200, marginTop:30}}><label htmlFor="savings" style={{marginRight:45}}>Savings </label><input id="savings" value="R 0" className="billingInput"/></p>
 
-            <p style={{marginRight:200, marginTop:30}}><label htmlFor="Subtotal" style={{marginRight:40}}>Subtotal </label><input id="Subtotal" value={"R "+subtotal}/></p>
+            <p style={{marginRight:200, marginTop:30}}><label htmlFor="Subtotal" style={{marginRight:40}}>Subtotal </label><input id="Subtotal" value={"R "+subtotal} className="billingInput"/></p>
 
-            <p style={{marginRight:200, marginTop:30}}><label htmlFor="Delivery" style={{marginRight:15}}>Delivery fee </label><input id="Delivery" value={"R "+DeliveryFee}/></p>
+            <p style={{marginRight:200, marginTop:30}}><label htmlFor="Delivery" style={{marginRight:15}}>Delivery fee </label><input id="Delivery" value={"R "+DeliveryFee} className="billingInput"/></p>
 
-            <p style={{marginRight:200, marginTop:30}}><b><label htmlFor="Total amount" style={{marginRight:7}}>Total Amount</label><input id="Total amount" value={"R "+total}/></b></p>
+            <p style={{marginRight:200, marginTop:30}}><b><label htmlFor="Total amount" style={{marginRight:7}}>Total Amount</label><input id="Total amount" value={"R "+total} className="billingInput"/></b></p>
 
             <button className="btnCheckout">Checkout</button>
         </div>

@@ -10,7 +10,7 @@ function Login() {
         <img src={Zeus} width={300} height={300} alt="Zeus" />
       </div>
 
-      <div style={{ marginRight: 100 }}>
+      <div style={{ }}>
         <input
           type="text"
           id="email"
@@ -18,7 +18,7 @@ function Login() {
           className="Boxs"
         />{" "}
       </div>
-      <div style={{ marginRight: 100 }}>
+      <div style={{ }}>
         <input
           type="password"
           id="password"
