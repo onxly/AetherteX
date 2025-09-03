@@ -2,8 +2,8 @@ function addressbook ()
 {
     return(
     <>
-    <div className="adresspage">
-        <div className="address1">
+    <div className="DisplayAdressBook">
+        <div className="address">
             <div>
                 <address>Name:</address>
                 <address>Steet:</address>
@@ -11,14 +11,14 @@ function addressbook ()
                 <address>country:</address>
                 <address>phone number:</address>
             </div>
-            <div className="managemnt buttons">
-                <button className="editadress">edit</button>
-                <button className="editadress">remove</button>
-                <button className="editadress">set as default</button>
+            <div className="btnmanageadress">
+                <button className="btneditadress">edit</button>
+                <button className="btneditadress">remove</button>
+                <button className="btneditadress">set as default</button>
             </div>                          
         </div>
 
-        <div className="address1">
+        <div className="address">
             <div>
                 <address>Name:</address>
                 <address>Steet:</address>
@@ -26,14 +26,14 @@ function addressbook ()
                 <address>country:</address>
                 <address>phone number:</address>
             </div>
-            <div className="managemnt buttons">
-                <button className="editadress">edit</button>
-                <button className="editadress">remove</button>
-                <button className="editadress">set as default</button>
+            <div className="btnmanageadress">
+                <button className="btneditadress">edit</button>
+                <button className="btneditadress">remove</button>
+                <button className="btneditadress">set as default</button>
             </div>                          
         </div>
 
-        <div className="address1">
+        <div className="address">
             <div>
                 <address>Name:</address>
                 <address>Steet:</address>
@@ -41,14 +41,14 @@ function addressbook ()
                 <address>country:</address>
                 <address>phone number:</address>
             </div>
-            <div className="managemnt buttons">
-                <button className="editadress">edit</button>
-                <button className="editadress">remove</button>
-                <button className="editadress">set as default</button>
+            <div className="btnmanageadress">
+                <button className="btneditadress">edit</button>
+                <button className="btneditadress">remove</button>
+                <button className="btneditadress">set as default</button>
             </div>                          
         </div>
 
-        <div className="address1">
+        <div className="address">
             <div>
                 <address>Name:</address>
                 <address>Steet:</address>
@@ -56,14 +56,14 @@ function addressbook ()
                 <address>country:</address>
                 <address>phone number:</address>
             </div>
-            <div className="managemnt buttons">
-                <button className="editadress">edit</button>
-                <button className="editadress">remove</button>
-                <button className="editadress">set as default</button>
+            <div className="btnmanageadress">
+                <button className="btneditadress">edit</button>
+                <button className="btneditadress">remove</button>
+                <button className="btneditadress">set as default</button>
             </div>                          
         </div>
 
-        <div className="address1">
+        <div className="address">
             <div>
                 <address>Name:</address>
                 <address>Steet:</address>
@@ -71,16 +71,16 @@ function addressbook ()
                 <address>country:</address>
                 <address>phone number:</address>
             </div>
-            <div className="managemnt buttons">
-                <button className="editadress">edit</button>
-                <button className="editadress">remove</button>
-                <button className="editadress">set as default</button>
+            <div className="btnmanageadress">
+                <button className="btneditadress">edit</button>
+                <button className="btneditadress">remove</button>
+                <button className="btneditadress">set as default</button>
             </div>                          
         </div>
 
         <div className="addadress">
-            <button>add address</button>
-            <div className="inputaddresdet">
+            <button className="btnaddaddress">add address</button>
+            <div className="newinputaddress">
             <label>pop up page</label>
             </div>
         </div>

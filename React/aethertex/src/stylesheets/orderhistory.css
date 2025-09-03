@@ -1,0 +1,45 @@
+html,body
+{
+    background-color: #121212;
+    color: white;
+    height: 100%;
+}
+
+.OrderDateOptions
+{
+    background-color:rgba(209, 166, 61, 1);
+    width: px;
+    height: 35px;
+}
+
+.OrderDateOptions:hover
+{
+    cursor: pointer;
+    background-color: rgba(209, 166, 61, 0.8);
+}
+
+.SimplifiedOrder
+{
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+}
+
+.Productimg
+{
+    width: 200px;
+}
+
+.orderimage
+{
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+}
+
+.BriefOderDet
+{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}

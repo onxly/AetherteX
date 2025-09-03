@@ -1,0 +1,56 @@
+html,body
+{
+    background-color: #121212;
+    color: white;
+    height: 100%;
+}
+
+
+.DisplayDetails
+{
+    display: flex;
+    flex-direction: column;
+}
+
+.DisplayDetails_row1
+{
+    display: flex;
+    flex-direction: row;
+}
+
+.DisplayDetails_row2
+{
+    display: flex;
+    flex-direction: row;
+}
+
+.Currentdetails
+{
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    align-items: left;
+    gap:5px;
+}
+
+.btneditdetails
+{
+    border-radius: 50px;
+    height: 30px;
+    width: 100px;
+    margin: 5px;
+}
+
+.editpasswordsection
+{
+    display: flex;
+    flex-direction: column;
+}
+
+.changepassword
+{
+    background-color: white;
+    color: black;
+    width: 300;
+    height: 300;
+}

@@ -1,0 +1,48 @@
+html,body
+{
+    background-color: #121212;
+    color: white;
+    height: 100%;
+}
+
+
+.DisplayDetailedOrder
+{
+    display: flex;
+    flex-direction: column;  
+    gap: 10px;
+}
+
+.orderproducts
+{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.product
+{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.productdet
+{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin-left: 5px;
+}
+
+.ordershippingdet
+{
+    display: flex;
+    flex-direction: column;
+}
+
+.ordersummarydet
+{
+    display: flex;
+    flex-direction: column; 
+}

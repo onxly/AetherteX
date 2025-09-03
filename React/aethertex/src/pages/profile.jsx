@@ -16,7 +16,7 @@ function Profile() {
               <div>
                 <img src={ProfPic} className="Icon"></img>
               </div>
-              <div className="Info">
+              <div className="ProfilesectionInfo">
                 <h1>Personal details</h1>
                 <p>Edit username,name,surname,email and phone number</p>
               </div>
@@ -28,7 +28,7 @@ function Profile() {
               <div>
                 <img src={AdressPic} className="Icon"></img>
               </div>
-              <div className="Info">
+              <div className="ProfilesectionInfo">
                 <h1>Adress book</h1>
                 <p>Add, delete, or edit an address</p>
               </div>
@@ -42,7 +42,7 @@ function Profile() {
               <div>
                 <img src={CupponPic} className="Icon"></img>
               </div>
-              <div className="Info">
+              <div className="ProfilesectionInfo">
                 <h1>Cuppons and offers</h1>
                 <p>make use of coupons</p>
               </div>
@@ -54,7 +54,7 @@ function Profile() {
               <div>
                 <img src={OrdersPic} className="Icon"></img>
               </div>
-              <div className="Info">
+              <div className="ProfilesectionInfo">
                 <h1>orders</h1>
                 <p>view all your orders</p>
               </div>

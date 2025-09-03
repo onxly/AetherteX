@@ -4,7 +4,7 @@ function orderhistory() {
   return (
     <>
       <h1>Orders</h1>
-      <select className="orderoptions">
+      <select className="OrderDateOptions">
         <option>Period</option>
         <option>Last week</option>
         <option>Last month</option>
@@ -12,7 +12,7 @@ function orderhistory() {
       </select>
 
       <Link to="/order">
-        <div className="order">
+        <div className="SimplifiedOrder">
           <div className="orderimage">
             <img
               src="https://m.media-amazon.com/images/I/41BiCUr2t9L.jpg"
@@ -35,7 +35,7 @@ function orderhistory() {
               className="Productimg"
             ></img>
           </div>
-          <div className="Briefdetails">
+          <div className="BriefOderDet">
             <label>Date:</label>
             <label>Number of items:</label>
             <label>Price:</label>

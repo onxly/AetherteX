@@ -1,0 +1,31 @@
+html,body
+{
+    background-color: #121212;
+    color: white;
+    height: 100%;
+}
+
+
+.DisplayAdressBook
+{
+    display: flex;
+    flex-direction: column;
+}
+
+.address
+{
+    background-color:rgba(209, 166, 61, 0.8);
+    border: 2px solid white;
+    border-radius: 10px;
+}
+
+.btnmanageadress
+{
+    background-color: blue;
+}
+
+.btneditadress
+{
+    background-color: (209, 166, 61, 0.8);
+    color: white;
+}
