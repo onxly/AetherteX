@@ -2,7 +2,7 @@ import ProfPic from "../assets/ProfilepageIcons/PersonaldetIcon.png";
 import AdressPic from "../assets/ProfilepageIcons/AdressbookIcon.png";
 import CupponPic from "../assets/ProfilepageIcons/CupponIcon.png";
 import OrdersPic from "../assets/ProfilepageIcons/OrdersIcon.png";
-import "../stylesheets/defaultcomponets.css";
+import "../stylesheets/ProfilePage.css";
 import { Link } from "react-router";
 
 function Profile() {

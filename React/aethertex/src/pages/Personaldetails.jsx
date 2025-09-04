@@ -1,4 +1,4 @@
-import { Button } from "@mui/material";
+import "../stylesheets/PersonalDetailsPage.css";
 
 function personaldetails()
 {

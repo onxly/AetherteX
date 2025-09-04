@@ -1,11 +1,19 @@
+import '../stylesheets/checkout.css'
+import { Link } from "react-router";
+
+
 function checkout()
 {
     return(
     <>
     <div className="Displaycheckout">
+        
         <div className="AddressSection">
-            <h1>Delivery address</h1>
+            <h1>Delivery details</h1>
+                <label>Name:</label>
+                <label>Phone number:</label>
                 <div className="AddressOption">
+                    <label>Adress:</label>
                     <label>
                         <input type="radio" name="Address" value="delivery adress 1" ></input>
                         47 Maple Crescent, Silverbrook, Westshire, 45812
@@ -19,38 +27,44 @@ function checkout()
                         89 Willowbend Avenue, Crystalford, Northport, 77106                    
                     </label>
                 </div>
-                    
-                    <button>add adress</button>
-                    <label>pop up page</label>
+                <Link> 
+                    <p className='newaddresslink'>Use a different adress</p>
+                </Link>  
 
-                    <button>Deliver to this address</button>
+                <textarea className='txtdeliverto'></textarea>
+                <button className='btndeliverto'>Deliver to this address</button>
         </div>
-        <div className="PaymentOptions">
-            <h1 className="heading">Payment options</h1>
+
+        <div className="PaymentInfosection">
+            <h1 className="heading">Payment info</h1>
                 <div className="Paymentlayout">
                     <div className="nameandnum">
-                        <label>Card holder name</label>
+                        <div className='checkoutoptlbl'>
+                        <label className='Paymenttoplbl'>Card holder name</label>
+                        <label className='Paymenttoplbl'>Card number</label>
+                        </div>
+                        <div className='checkoutopttxt'>
                         <input className="Paymenttoptxt" placeholder="type you name" type:Text></input>
-                        <label>Card number</label>
                         <input className="Paymenttoptxt" placeholder="type you number" type:Text></input>
+                        </div>
                     </div>
                     <div className="exp-cvv-Items">
                         <div className="Exp-Items">
-                            <label>EXP</label>
+                            <label className='lblcheckoutitem'>EXP</label>
                             <input className="Paymentbottxt" type:Text></input>
                         </div>
 
                         <div className="CVV-Items">
-                            <label>CVV</label>
+                            <label className='lblcheckoutitem'>CVV</label>
                             <input className="Paymentbottxt" type:Text></input>
                         </div>
                     </div>
+                        <input type="text"></input>
+                        <button>aplly cuppon</button>
+                        <button className="Paymentbtn">pay now</button>
                 </div>  
         </div>
-
-        <input type="text"></input>
-        <button>aplly cuppon</button>
-        <button className="Paymentbtn">pay now</button>
+        
     </div>
 
     </>);

@@ -4,3 +4,96 @@ html,body
     color: white;
     height: 100%;
 }
+
+.Displaycheckout
+{
+    display: flex;
+    flex-direction: row; 
+}
+
+.AddressSection
+{
+    display: flex;
+    flex-direction: column;
+    margin-left: 10px;
+    flex: 1;
+}
+
+.AddressOption
+{
+    display: flex;
+    flex-direction: column;
+}
+
+.newaddresslink
+{
+    width: 150px;
+    color: rgb(100, 100, 245);
+}
+
+.newaddresslink:hover
+{
+    cursor: pointer;
+}
+
+.txtdeliverto
+{
+    background-color: white;
+    color: black;
+}
+
+.btndeliverto
+{
+    width: 200px;
+}
+
+.PaymentInfosection
+{
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    background-color: rgb(49, 49, 49);
+}
+
+.Paymenttoptxt
+{
+    width: 150px;
+    background-color: white;
+    color: black;
+    margin-left: 10px;
+}
+
+.nameandnum
+{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+.Paymentbottxt
+{
+    width: 50px;
+    background-color: white;
+    color: black;
+    margin-left: 2px;
+}
+
+.exp-cvv-Items
+{
+    display: flex;
+    flex-direction: row;
+}
+
+.Exp-Items
+{
+    flex: 1;
+}
+
+.CVV-Items
+{
+    flex:1;
+}
+
+.txtcheckoutitem
+{
+    margin: 0%;
+}
