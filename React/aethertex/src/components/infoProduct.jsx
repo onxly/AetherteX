@@ -23,13 +23,13 @@ function InfoProduct(info) {
             <div className="rating">
                 <span>{info.rating}</span>
                 <span className="spanStars">{stars}</span>
-                <a href="#reviewSec" >
+                <a className="PrdATag" href="#reviewSec" >
                         {info.reviews} reviews
                 </a>
             </div>
             <p>{info.description}</p>
-            <table border="1" cellPadding="8">
-                <caption>Specifications</caption>
+            <table className="PrdTable" border="1" cellPadding="8">
+                <caption className="PrdCaption">Specifications</caption>
                 <tbody>
                     {Object.entries(info.specs || {}).map(([key, value]) => (
                         <tr key={key}>

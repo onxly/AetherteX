@@ -42,7 +42,6 @@ function App() {
           <Route path="/cart" element={<Cart />} />
           <Route path="/product/:id" element={<Product />} />
           <Route path="/profile/:id" element={<Profile />} />
-          <Route path="/personaldetails" element={<Personaldetails />} />
           <Route path="/addressbook" element={<Addressbook />} />
           <Route path="/order" element={<Order />} />
           <Route path="/orderhistory" element={<Orderhistory />} />
