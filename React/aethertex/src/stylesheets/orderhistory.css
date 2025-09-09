@@ -37,7 +37,7 @@ html,body
 .SimplifiedOrder:hover
 {
     background-color: #2e2e2e;
-
+    border: rgba(209, 166, 61, 1) solid 1px;
 }
 
 .Productimg
@@ -58,3 +58,4 @@ html,body
     flex-direction: column;
     gap: 10px;
 }
+

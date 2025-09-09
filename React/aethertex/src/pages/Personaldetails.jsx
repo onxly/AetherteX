@@ -1,49 +1,75 @@
 import "../stylesheets/PersonalDetailsPage.css";
+import ProfPic from "../assets/ProfilepageIcons/PersonaldetIcon.png";
 
 function personaldetails()
 {
     return(
             <>
-              <h1>Personal details</h1>
+            <div className="DisplayDetailspage">
                 <div className="DisplayDetails">
-                    <div className="DisplayDetails_row1">
+                  <h1>Personal details</h1>
+                  <div className="userdetails">
+                    <div className="DisplayDetails_col1">
                       <div className="Currentdetails">
                         <label>Username</label>
-                        <input type="text" defaultValue="Username"></input>
-                      </div>
-                      <div className="Currentdetails">
-                        <label>Name</label>
-                        <input type="text" defaultValue="name"></input>
-                      </div>
-                    </div>
-
-                    <div className="DisplayDetails_row2">
-                      <div className="Currentdetails">
-                        <label>Surname</label>
-                        <input type="text" defaultValue="Surname"></input>
+                        <input type="text" className="txtPersonaldetails"></input>
                       </div>
                       <div className="Currentdetails">
                         <label>Email</label>
-                        <input type="text" defaultValue="Email"></input>
+                        <input type="text" className="txtPersonaldetails"></input>
                       </div>
                     </div>
 
-                    <div className="row">
+                    <div className="DisplayDetails_col2">
+                      <div className="Currentdetails">
+                        <label>Name</label>
+                        <input type="text" className="txtPersonaldetails"></input>
+                      </div>
                       <div className="Currentdetails">
                         <label>Phone number</label>
-                        <input type="text" defaultValue="Phone number"></input>
+                        <input type="text" className="txtPersonaldetails" ></input>
                       </div>
                     </div>
+
+                    <div className="DisplayDetails_col3">
+                      <div className="Currentdetails">
+                          <label>Surname</label>
+                          <input type="text" className="txtPersonaldetails"></input>
+                      </div>
+                    </div>
+                  </div>
                     <div className="editpasswordsection">
-                          <p>Password</p>
-                          <input type="text" className="changepassword" defaultValue="Current password:"></input>
-                          <input type="text" className="changepassword" defaultValue="New password:"></input>
-                          <input type="text" className="changepassword" defaultValue="Re-enter new password:"></input>
+                          <h1>Password</h1>
+                            <div className="Passworddetails">
+                              <div className="changepasswordsect">
+                                <label>Current password:</label>
+                                <input type="text" className="txtchangepassword"></input>
+                              </div>
+                              <div className="changepasswordsect">
+                                <label>New password:</label>
+                                <input type="text" className="txtchangepassword"></input>
+                              </div>
+                              <div className="changepasswordsect">
+                                <label>Re-enter new password:</label>
+                                <input type="text" className="txtchangepassword" ></input>
+                              </div>
+                            </div>
                     </div>
 
-                    <Button className="btnsavechanges">save changes</Button>
-                </div>
+                    <button className="btnsavechanges">save changes</button>
+                  </div>
+                  <div className="userimage">
+                      <section className="Profileimg">
+                                    <div>
+                                      <img src={ProfPic} className="ProfiledetIcon"></img>
+                                    </div>
+                                    <div className="ProfInfo">
+                                      <p>username<br/>email</p>
+                                    </div>
+                                  </section>
+                  </div>
+            </div>
             </>
           );
 }
-export default personaldetails
+export default personaldetails;

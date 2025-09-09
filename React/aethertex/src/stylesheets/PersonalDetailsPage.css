@@ -5,23 +5,89 @@ html,body
     height: 100%;
 }
 
+.DisplayDetailspage
+{
+    display: flex;
+    flex-direction: row;
+}
 
 .DisplayDetails
 {
     display: flex;
     flex-direction: column;
+    gap: 10px;
+    background-color: #383838;
+    margin: 10px;
+    border-radius: 20px;
 }
 
-.DisplayDetails_row1
+.Profileimg
 {
     display: flex;
     flex-direction: row;
+    background-color: #383838;
+    border-radius: 20px;
 }
 
-.DisplayDetails_row2
+.userdetails
 {
     display: flex;
     flex-direction: row;
+    padding: 10px;
+    gap: 10px;
+}
+
+.ProfiledetIcon
+{
+    width: 100px;
+    height: 100px;
+    border-radius: 50px;
+}
+
+.userimage
+{
+    margin: 10px;
+    width: 500px;
+    height: 300px;
+}
+
+.ProfInfo
+{
+    margin-left: 20px;
+}
+.Passworddetails
+{
+    display: flex;
+    flex-direction: row;
+    padding: 10px; 
+}
+
+.changepasswordsect
+{
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+
+}
+.DisplayDetails_col1
+{
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.DisplayDetails_col2
+{
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.DisplayDetails_col3
+{
+    display: flex;
+    flex-direction: column;
+    flex: 1;
 }
 
 .Currentdetails
@@ -33,24 +99,29 @@ html,body
     gap:5px;
 }
 
-.btneditdetails
+.txtPersonaldetails
 {
-    border-radius: 50px;
-    height: 30px;
-    width: 100px;
-    margin: 5px;
-}
-
-.editpasswordsection
-{
-    display: flex;
-    flex-direction: column;
-}
-
-.changepassword
-{
+    width: 300px;
+    height: 150;
     background-color: white;
-    color: black;
-    width: 300;
-    height: 300;
+}
+
+.txtchangepassword
+{
+    width: 300px;
+    height: 150;
+    background-color: white;
+}
+
+.btnsavechanges
+{
+    width: 100px;
+    height: 30px;
+    border-radius: 10px;
+    margin-left: 10px;
+}
+
+.btnsavechanges:hover
+{
+    border: 2px solid gold;
 }

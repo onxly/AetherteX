@@ -10,7 +10,7 @@ import "./App.css";
 import NotFound from "./pages/not-found";
 import AdminHome from "./pages/admin";
 import Header from "./components/Header";
-import Personaldetails from "./pages/Personaldetails";
+import Personaldetails from "./pages/personaldetails";
 import Addressbook from "./pages/Addressbook";
 import Order from "./pages/order";
 import Orderhistory from "./pages/orderhistory";
