@@ -3,6 +3,7 @@ import "../stylesheets/register.css";
 import { Link } from "react-router";
 
 function Register() {
+  document.title = "Register | AetherteX"
   return (
     <form style={{ }}>
       <div className="column">

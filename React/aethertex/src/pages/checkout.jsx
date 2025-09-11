@@ -5,6 +5,7 @@ import "../stylesheets/checkout.css"
 
 function checkout(info)
 {
+    document.title = "Checkout | AetherteX";
     const currentYear = new Date().getFullYear();
     const endYear = 2035;
     const years = [];
@@ -24,7 +25,7 @@ function checkout(info)
     for (let y = currentYear; y <= endYear; y++) {
         years.push(y);
     }
-
+    
     return(
     <section className="ckPage">
         <div className="PGSection">
@@ -51,9 +52,9 @@ function checkout(info)
                 width={164}
             />
             <h2>Order Summary</h2>
-            <b>3 items: &nbsp;</b>R20 1233 <br /> <br />
+            <b>3 items: &nbsp;</b>R20 123 <br /> <br />
             <em>No coupons applied</em> <br /> <br />
-            <b>To pay: &nbsp;</b> R20 1233 <br /> <br />
+            <b>To pay: &nbsp;</b> R20 123 <br /> <br />
             <FaLock size={20} color="gray" /> Secure checkout
             
         </div>
@@ -64,12 +65,12 @@ function checkout(info)
             <label>
                 <b>Card holder name</b>
                 <br />
-                <input className="Longtext" placeholder="type you name" type:Text></input>
+                <input className="Longtext" placeholder="Type you name" type:Text></input>
             </label>
             <label>
                 <b>Card number</b>
                 <br />
-                <input className="Longtext" placeholder="type you number" type:Text></input>
+                <input className="Longtext" placeholder="Type you number" type:Text></input>
             </label>
                 
                 <b className="EXPHead">Expiration date</b>

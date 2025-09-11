@@ -1,7 +1,7 @@
 import React,{ useState } from "react";
 import '../stylesheets/cart.css';
 function Cart() {
-
+  document.title = "Cart | AetherteX";
   const[Items,setItems] = useState([
     {
       id:1,

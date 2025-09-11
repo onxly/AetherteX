@@ -4,6 +4,7 @@ import "../stylesheets/login.css";
 import { Link } from "react-router";
 
 function Login() {
+  document.title = "Login | AetherteX";
   return (
     <div className="formStyle">
       <div>
