@@ -1,5 +1,4 @@
-import "../stylesheets/PersonalDetailsPage.css";
-import ProfPic from "../assets/ProfilepageIcons/PersonaldetIcon.png";
+import { Button } from "@mui/joy";
 
 function personaldetails()
 {

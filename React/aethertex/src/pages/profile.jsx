@@ -4,10 +4,6 @@ import CupponPic from "../assets/ProfilepageIcons/CupponIcon.png";
 import OrdersPic from "../assets/ProfilepageIcons/OrdersIcon.png";
 import "../stylesheets/ProfilePage.css";
 import { Link } from "react-router";
-import imgProfile from "../assets/ProfilepageIcons/PersonalIcon.png";
-import imgAddress from "../assets/ProfilepageIcons/AdressbookIcon.png";
-import imgOrder from "../assets/ProfilepageIcons/OrdersIcon.png";
-import imgInvoice from "../assets/ProfilepageIcons/InvoiceIcon.png";
 import { useState } from "react";
 
 function Profile() {
