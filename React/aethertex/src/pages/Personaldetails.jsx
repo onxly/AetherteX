@@ -12,7 +12,7 @@ function personaldetails()
                         <input type="text" defaultValue="Username"></input>
                       </div>
                       <div className="Currentdetails">
-                        <label>Name</label>
+                        <label>Name</label> 
                         <input type="text" defaultValue="name"></input>
                       </div>
                     </div>
