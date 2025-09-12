@@ -10,7 +10,7 @@ function checkout()
         
         <div className="AddressSection">
             <h1>Delivery details</h1>
-                <label>Name:</label>
+                <label>Name: </label>
                 <label>Phone number:</label>
                 <div className="AddressOption">
                     <label>Adress:</label>
