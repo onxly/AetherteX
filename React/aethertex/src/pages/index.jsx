@@ -4,6 +4,7 @@ import ProductsList from "../components/ProductsList";
 import "../stylesheets/Home.css";
 
 function Home() {
+  document.title = "Home | AetherteX";
   const [products, setProducts] = useState({});
   const [isShowingSidebar, setIsShowingSidebar] = useState(false);
 

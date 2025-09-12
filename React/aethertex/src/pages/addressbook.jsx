@@ -1,92 +1,24 @@
+import { useState } from "react";
+import AddressBox from "../components/AddressBox";
+import "../stylesheets/AddressBook.css"
+
 function addressbook ()
 {
+    let Addr = [
+        {id: 1, Name: "Boyzn", Street: "1234 The streets", City: "Mahikeng", Postal: 2732, Phone: "0123456789"},
+        {id: 2, Name: "Boyzn1", Street: "56789 The streets1", City: "Mahikeng1", Postal: 2732, Phone: "0123456789"},
+        {id: 3, Name: "Boyzn2", Street: "1111 The streets2", City: "Mahikeng2", Postal: 2732, Phone: "0123456789"}
+    ]
+
     return(
-    <>
-    <div className="adresspage">
-        <div className="address1">
-            <div>
-                <address>Name:</address>
-                <address>Steet:</address>
-                <address>city:</address>
-                <address>country:</address>
-                <address>phone number:</address>
-            </div>
-            <div className="managemnt buttons">
-                <button className="editadress">edit</button>
-                <button className="editadress">remove</button>
-                <button className="editadress">set as default</button>
-            </div>                          
-        </div>
+    <div className="AddressPage">
+        <h2>Address Book</h2>
+        {Addr.map(Addr => (
+            <AddressBox key={Addr.id} Name={Addr.Name} Street={Addr.Street} City={Addr.City} Postal={Addr.Postal} Phone={Addr.Phone}/>
+        ))}
+        <button className="btnAddAddr">Add</button>
+    </div>
 
-        <div className="address1">
-            <div>
-                <address>Name:</address>
-                <address>Steet:</address>
-                <address>city:</address>
-                <address>country:</address>
-                <address>phone number:</address>
-            </div>
-            <div className="managemnt buttons">
-                <button className="editadress">edit</button>
-                <button className="editadress">remove</button>
-                <button className="editadress">set as default</button>
-            </div>                          
-        </div>
-
-        <div className="address1">
-            <div>
-                <address>Name:</address>
-                <address>Steet:</address>
-                <address>city:</address>
-                <address>country:</address>
-                <address>phone number:</address>
-            </div>
-            <div className="managemnt buttons">
-                <button className="editadress">edit</button>
-                <button className="editadress">remove</button>
-                <button className="editadress">set as default</button>
-            </div>                          
-        </div>
-
-        <div className="address1">
-            <div>
-                <address>Name:</address>
-                <address>Steet:</address>
-                <address>city:</address>
-                <address>country:</address>
-                <address>phone number:</address>
-            </div>
-            <div className="managemnt buttons">
-                <button className="editadress">edit</button>
-                <button className="editadress">remove</button>
-                <button className="editadress">set as default</button>
-            </div>                          
-        </div>
-
-        <div className="address1">
-            <div>
-                <address>Name:</address>
-                <address>Steet:</address>
-                <address>city:</address>
-                <address>country:</address>
-                <address>phone number:</address>
-            </div>
-            <div className="managemnt buttons">
-                <button className="editadress">edit</button>
-                <button className="editadress">remove</button>
-                <button className="editadress">set as default</button>
-            </div>                          
-        </div>
-
-        <div className="addadress">
-            <button>add address</button>
-            <div className="inputaddresdet">
-            <label>pop up page</label>
-            </div>
-        </div>
-        </div>
-
-    </>
     );
 }
 export default addressbook

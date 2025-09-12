@@ -11,7 +11,7 @@ import NotFound from "./pages/not-found";
 import AdminHome from "./pages/admin";
 import Header from "./components/Header";
 import Personaldetails from "./pages/Personaldetails";
-import Addressbook from "./pages/Addressbook";
+import Addressbook from "./pages/addressbook";
 import Order from "./pages/order";
 import Orderhistory from "./pages/orderhistory";
 import Cuppons from "./pages/cuppons";
