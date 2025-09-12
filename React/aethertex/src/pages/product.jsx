@@ -57,7 +57,7 @@ function Product() {
       comment: "Average performance for the price.",
     },
   ];
-
+  document.title = name + " | AetherteX";
   return (
     <div className="cApp">
       <ImgProduct
