@@ -63,13 +63,4 @@
 		{
 			margin-right:235px;
 		}
-		input::placeholder {
-			font-size: 10px; /* Adjust this value as needed */
-			color: #ccc;     /* Optional: change placeholder color */
-			font-style: italic; /* Optional: add styling */
-		}
-        body
-        {
-            background-color: black;
-        }
         

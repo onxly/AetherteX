@@ -54,16 +54,27 @@
     margin-bottom:10px ;
 }
 
+.btnRemoveItem{
+    font-size: 16px; 
+    background-color: transparent;
+    color: white;
+    cursor: pointer;
+    margin-top: 30px;
+    width: fit-content;
+}
+
 .IncDecStyle
 {
     padding-left: 10px;
     padding-right: 5px;
-    border-color: 2px white;
-    background-color: grey;
+    border-color: 2px gold solid;
+    background-color: rgb(100, 100, 100);
     border-radius: 40px;
     width: fit-content;
+    height: fit-content;
     display: flex;
     align-items: center;
+    margin-top: 20px;
     gap: 10px;
 }
 
@@ -74,7 +85,7 @@
     outline:none;
     border:none;
     color:white;
-    cursor:"pointer";
+    cursor: pointer;
 }
 
 .billing
@@ -88,22 +99,23 @@
     grid-column: 2;
 }
 
-.billing p{
-
+.btnCheckout{
+    background-color: rgba(209, 166, 61, 1);
+    margin-top: 10px; 
+    margin-bottom: 10px; 
+    border-radius: 10px; 
+    cursor: pointer; 
+    width: 100px; 
+    height: 35px; 
+    font-weight: bold; 
+    text-align: center;
+    color: black;
+    border: none;
 }
 
-.btnCheckout  
-{
-    width:50%;
-    height:50px;
-    outline: none;
-    border-radius: 10px;
-    background-color: rgba(209, 166, 61, 1);
-    color: black;
-    font-size: 16px;
-    font-weight:bold;
-    border-color: transparent;
-    margin-top:10px
+.btnCheckout:hover{
+    opacity: 0.8;
+    border: 2px solid black;
 }
 
 .billingInput

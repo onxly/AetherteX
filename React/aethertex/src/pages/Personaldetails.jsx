@@ -1,9 +1,11 @@
 import { Button } from "@mui/joy";
 
+
 function personaldetails()
 {
     return(
             <>
+            {/*
             <div className="DisplayDetailspage">
                 <div className="DisplayDetails">
                   <h1>Personal details</h1>
@@ -11,7 +13,20 @@ function personaldetails()
                     <div className="DisplayDetails_col1">
                       <div className="Currentdetails">
                         <label>Username</label>
-                        <input type="text" className="txtPersonaldetails"></input>
+
+                        <input type="text" defaultValue="Username"></input>
+                      </div>
+                      <div className="Currentdetails">
+                        <label>Name</label> 
+                        <input type="text" defaultValue="name"></input>
+                      </div>
+                    </div>
+
+                    <div className="row">
+                      <div className="Currentdetails">
+                        <label>Surname</label>
+                        <input type="text" defaultValue="Surname"></input>
+>>>>>>> 7b6ad3beee986dff3a52607efc830fb8a5505347
                       </div>
                       <div className="Currentdetails">
                         <label>Email</label>
@@ -68,6 +83,7 @@ function personaldetails()
                                   </section>
                   </div>
             </div>
+            */}
             </>
           );
 }

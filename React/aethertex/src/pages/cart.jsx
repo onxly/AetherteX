@@ -101,7 +101,7 @@ function Cart() {
   <section className="CartSec" >
       <div className="CartHeading">
         <h1>Cart - {totalItems}</h1>
-        <p>Home/Cart</p>
+        
       </div>
         
     <div className="items">
@@ -117,14 +117,14 @@ function Cart() {
                     <div className="itemDetails" >
                         <h3>{item.name}</h3>
                         <em>In stock</em>
-                        <div className="IncDecStyle" style={{marginTop:20}}>
+                        <div className="IncDecStyle">
                             <span id="Price"> R {item.price}</span>
                             <button id="decrease" className="btnIncOrDec" onClick={() => decreaseCount(item.id)}>-</button>
                             <span>{item.count}</span>
                             <button id="increase" className="btnIncOrDec" onClick={() => increaseCount(item.id)}>+</button>
                         </div>
 
-                        <button onClick={() => removeItem(item.id)} style={{fontSize:16, backgroundColor:"transparent", border:'none', color:"white",cursor:"pointer",marginTop:30}}><FaTrash color="rgba(209, 166, 61, 1)"/> Remove</button>                    
+                        <span className="btnRemoveItem" onClick={() => removeItem(item.id)} ><FaTrash color="rgba(209, 166, 61, 1)"/> Remove</span>                    
                     </div>{/*items details*/}
                 </div>
             }
