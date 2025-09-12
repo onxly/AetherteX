@@ -1,8 +1,8 @@
-import ProfPic from "../assets/ProfilepageIcons/PersonaldetIcon.png";
-import AdressPic from "../assets/ProfilepageIcons/AdressbookIcon.png";
-import CupponPic from "../assets/ProfilepageIcons/CupponIcon.png";
-import OrdersPic from "../assets/ProfilepageIcons/OrdersIcon.png";
-import "../stylesheets/ProfilePage.css";
+import imgProfile from "../assets/ProfilepageIcons/PersonalIcon.png";
+import imgAddress from "../assets/ProfilepageIcons/AdressbookIcon.png";
+import imgOrder from "../assets/ProfilepageIcons/OrdersIcon.png";
+import imgInvoice from "../assets/ProfilepageIcons/InvoiceIcon.png";
+import "../stylesheets/profile.css";
 import { Link } from "react-router";
 import { useState } from "react";
 
