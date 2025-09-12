@@ -20,6 +20,4 @@ app.UseAuthorization();
 
 app.MapControllers();
 
-app.MapCartEndpoints();
-
 app.Run();
