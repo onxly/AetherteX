@@ -1,0 +1,37 @@
+.reviewSec{
+    background-color: #121212;
+    color: white;
+    margin-top: 20px;
+    grid-row: 3;
+    grid-column: 1/ -1; 
+    display: flex;
+    flex-direction: row;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.reviewSec h2, span{
+    margin-left: 10px;
+}
+
+.CommentSec{
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-top: 10px;
+    margin-left: 10px;
+}
+
+.reviewBox{
+    background-color: #1a1a1a;
+    padding: 10px;
+    border-radius: 10px;
+    width: 600px;
+}
+
+.reviewSec a{
+    margin-left: 10px;
+    font-size: 12px;
+    text-decoration: none;
+    color: cyan;
+}
