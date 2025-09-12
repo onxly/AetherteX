@@ -99,3 +99,7 @@
 .footer {
   margin: 0;
 }
+
+.product-card .link {
+  text-decoration-line: none;
+}
