@@ -88,6 +88,10 @@
     cursor: pointer;
 }
 
+.btnRemoveItem:hover{
+    opacity: 0.8;
+}
+
 .billing
 {
     padding: 20px;
