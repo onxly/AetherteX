@@ -1,0 +1,45 @@
+# =====================
+# Build output
+# =====================
+bin/
+obj/
+out/
+
+# =====================
+# Visual Studio / IDE
+# =====================
+.vs/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# =====================
+# EF Core
+# =====================
+Migrations/
+
+# =====================
+# Configuration / Secrets
+# =====================
+appsettings.Development.json
+secrets.json
+*.pfx
+*.key
+*.cert
+
+# =====================
+# NuGet
+# =====================
+*.nupkg
+packages/
+project.lock.json
+project.fragment.lock.json
+artifacts/
+
+# =====================
+# Others
+# =====================
+*.DS_Store
+*.userprefs
+*.swp
