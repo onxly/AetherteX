@@ -36,7 +36,16 @@ function RadioButtonList({
               key={"Radio#" + idx}
               value={defaultValue ? idx : lbl}
               control={<Radio sx={buttonColor} />}
-              label={lbl}
+              label={
+  typeof lbl === "string"
+    ? lbl.split("\n").map((line, i) => (
+        <span key={i}>
+          {line}
+          <br />
+        </span>
+      ))
+    : lbl
+}
               size="sm"
               sx={{ color: textcolor }}
             />

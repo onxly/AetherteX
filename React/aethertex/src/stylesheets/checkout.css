@@ -1,99 +1,90 @@
-html,body
-{
-    background-color: #121212;
-    color: white;
-    height: 100%;
+
+.ckPage{
+  padding-left: 20px;
+  display: grid;
+  grid-template-columns: 70% 30%;
+  grid-template-rows: auto 1fr;
 }
 
-.Displaycheckout
-{
-    display: flex;
-    flex-direction: row; 
+.PGSection{
+    text-align: left;
+    padding-bottom: 50px;
+    grid-column: 1;
+    grid-row: 1;
+    margin-left: 200px;
 }
 
-.AddressSection
-{
-    display: flex;
-    flex-direction: column;
-    margin-left: 10px;
-    flex: 1;
+.ckSummary{
+    margin-top: 50px;
+    grid-column: 2;
+    grid-row: 1;
+    padding-left: 10px;
+    
 }
 
-.AddressOption
-{
-    display: flex;
-    flex-direction: column;
+.ckSummary img{
+    
 }
 
-.newaddresslink
-{
-    width: 150px;
-    color: rgb(100, 100, 245);
-}
-
-.newaddresslink:hover
-{
-    cursor: pointer;
-}
-
-.txtdeliverto
-{
-    background-color: white;
-    color: black;
-}
-
-.btndeliverto
-{
-    width: 200px;
-}
-
-.PaymentInfosection
-{
-    display: flex;
-    flex-direction: column;
-    flex: 1;
-    background-color: rgb(49, 49, 49);
-}
-
-.Paymenttoptxt
-{
-    width: 150px;
-    background-color: white;
-    color: black;
+.ckAddress{
+    gap: 10px;
+    width: 60%;
+    border-radius: 10px; 
+    background-color: #1a1a1a; 
+    padding: 10px; 
+    border: none; 
+    resize: none;
     margin-left: 10px;
 }
 
-.nameandnum
-{
+.Paymentlayout{
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    font-size: 16px;
+    padding: 10px;
+    gap: 10px;
+    grid-row: 2;
+    grid-column: 1;
+    margin-left: 200px
 }
-.Paymentbottxt
-{
+
+.Longtext{
+    width: 300px;
+    height: 25px;
+}
+
+.Exp-Items{
+    display: flex;
+    gap: 25px;
+}
+
+.EXPHead{
+    text-decoration: underline;
+    font-weight: bold;
+}
+
+.Exp-Items select{
+    height: 25px;
+}
+
+.Paymentbottxt{
     width: 50px;
-    background-color: white;
-    color: black;
-    margin-left: 2px;
 }
 
-.exp-cvv-Items
-{
-    display: flex;
-    flex-direction: row;
+.btnCheck{
+  background-color: rgba(209, 166, 61, 1);
+  color: black;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 15px;
+  cursor: pointer;
+  width: 150px;
+  height: 40px;
+  font-weight: bold;
+  text-align: center;
 }
 
-.Exp-Items
-{
-    flex: 1;
-}
-
-.CVV-Items
-{
-    flex:1;
-}
-
-.txtcheckoutitem
-{
-    margin: 0%;
+.btnCheck:hover{
+    opacity: 0.8;
+  border: 2px solid black;
 }

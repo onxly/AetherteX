@@ -3,12 +3,13 @@ import "../stylesheets/register.css";
 import { Link } from "react-router";
 
 function Register() {
+  document.title = "Register | AetherteX"
   return (
-    <form style={{ backgroundColor: "black" }}>
+    <form style={{ }}>
       <div className="column">
         <h2>Create your Account</h2>
 
-        <label htmlFor="username" style={{ marginRight: "235px" }}>
+        <label htmlFor="username" style={{ marginRight: "335px" ,fontSize:12}}>
           Username
         </label>
         <input
@@ -19,7 +20,7 @@ function Register() {
           style={{ height: "60px" }}
         />
 
-        <label htmlFor="name" style={{ marginRight: "250px" }}>
+        <label htmlFor="name" style={{ marginRight: "360px",fontSize:12 }}>
           Name
         </label>
         <input
@@ -29,7 +30,7 @@ function Register() {
           className="RegisterBoxs"
         />
 
-        <label htmlFor="surname" style={{ marginRight: "245px" }}>
+        <label htmlFor="surname" style={{ marginRight: "345px",fontSize:12 }}>
           Surname
         </label>
         <input
@@ -39,7 +40,7 @@ function Register() {
           className="RegisterBoxs"
         />
 
-        <label htmlFor="email" style={{ marginRight: "260px" }}>
+        <label htmlFor="email" style={{ marginRight: "360px" ,fontSize:12}}>
           Email
         </label>
         <input
@@ -49,7 +50,7 @@ function Register() {
           className="RegisterBoxs"
         />
 
-        <label htmlFor="phoneNumber" style={{ marginRight: "204px" }}>
+        <label htmlFor="phoneNumber" style={{ marginRight: "304px" ,fontSize:12}}>
           Phone Number
         </label>
         <input
@@ -59,7 +60,7 @@ function Register() {
           className="RegisterBoxs"
         />
 
-        <label htmlFor="password" style={{ marginRight: "240px" }}>
+        <label htmlFor="password" style={{ marginRight: "340px",fontSize:12 }}>
           Password
         </label>
         <input
@@ -69,7 +70,7 @@ function Register() {
           className="RegisterBoxs"
         />
 
-        <label htmlFor="confirmPassword" style={{ marginRight: "184px" }}>
+        <label htmlFor="confirmPassword" style={{ marginRight: "284px",fontSize:12 }}>
           Confirm Password
         </label>
         <input
@@ -82,7 +83,7 @@ function Register() {
         <button type="submit" className="Registerloginbtn">
           Create Account
         </button>
-        <p style={{ marginTop: "10px" }}>
+        <p style={{ marginTop: "10px",fontSize:13 }}>
           Already a Member? <Link to="/login">Click here!</Link>
         </p>
         <hr />
