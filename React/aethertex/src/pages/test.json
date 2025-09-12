@@ -1,8 +1,0 @@
-{
-    "name": "Itu",
-    "colors": ["red", "blue", "green", "orange"],
-    "mom":{
-        "name": "Scarlet",
-        "salary": 5000
-    }
-}
