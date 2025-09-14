@@ -47,15 +47,25 @@
         }
         .Registerloginbtn
 		{
-			width:550px;
-			height:60px;
-            color: black;
-			padding:20px;
-            background-color: tan;
-            border-radius: 20px;
+			font-size: 16px;
+            font-weight: bold;
+            width: 500px;
+            padding-bottom: 10px;
+            padding-top: 10px;
+            height: fit-content;
+            border-radius: 15px;
+            background-color: var(--primary-color);
             border: none;
-            cursor: pointer;
+            color: black;
+            cursor: pointer; 
+            margin-top: 20px;
         }
+
+        .Registerloginbtn:hover{
+            background-color: var(--primary-color-dark);
+            border: black solid 2px;
+        }
+
         .imageContainer {
             margin-bottom: 20px;
         }
