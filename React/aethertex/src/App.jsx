@@ -19,7 +19,7 @@ import Checkout from "./pages/checkout";
 function LayoutWithNavbar() {
   return (
     <>
-      <Header NumOf={4} AccName={"Account"} />
+      <Header />
       <Outlet />
     </>
   );
