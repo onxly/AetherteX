@@ -3,7 +3,7 @@ import "../stylesheets/AddressBox.css"
 function AddressBox(addr){
     return(
     <div className="AddrBox">
-        <div>
+        <div className="AddrDetails">
             <u>{addr.Name}</u>
             <address>{addr.Street}, {addr.City}, {addr.Postal}</address>
             <em>{addr.Phone}</em>

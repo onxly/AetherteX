@@ -1,4 +1,5 @@
 import React from "react";
+import Welcome from "../assets/Welcome.png";
 import "../stylesheets/register.css";
 import { Link } from "react-router";
 
@@ -7,7 +8,7 @@ function Register() {
   return (
     <form style={{ }}>
       <div className="column">
-        <h2>Create your Account</h2>
+        <img src={Welcome} alt="" width={450} height={150}/>
 
         <label htmlFor="username" style={{ marginRight: "335px" ,fontSize:12}}>
           Username

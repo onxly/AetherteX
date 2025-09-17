@@ -24,7 +24,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 
-  --primary-color: #c29a39;
+  --primary-color: rgba(209, 166, 61, 1);
   --primary-color-dark: #ae900c;
   --secondary-color: #ffffff;
   --background-color: #242424;

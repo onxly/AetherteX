@@ -3,8 +3,9 @@ import React, { createContext, useState } from "react";
 export const AuthContext = createContext();
 
 export function AuthProvider({ children }) {
-  const [user, setUser] = useState({});
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [user, setUser] = useState({username: "Boyzn", name: "Boyzn", surname: "Fem", email: "example@gmail.com", phone: "0123456789", password: "example"});
+  const [isLoggedIn, setIsLoggedIn] = useState(true);
+  const [cart, setCart] = useState({numOf: 4});
 
   /**
    *Logs in a user
@@ -32,7 +33,7 @@ export function AuthProvider({ children }) {
   function register(name, surname, username, email, phoneNumber, password) {}
 
   return (
-    <AuthContext.Provider value={{ user, isLoggedIn, login, logout, register }}>
+    <AuthContext.Provider value={{ user, setUser, cart, setCart, isLoggedIn, setIsLoggedIn, login, logout, register }}>
       {children}
     </AuthContext.Provider>
   );
