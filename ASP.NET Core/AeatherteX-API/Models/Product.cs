@@ -41,6 +41,8 @@ public partial class Product
 
     public virtual Ram Ram { get; set; } = null!;
 
+    public virtual ICollection<Rating> Ratings { get; set; } = new List<Rating>();
+
     public virtual Storage Storage { get; set; } = null!;
 
     public virtual ICollection<Wishlist> Wishlists { get; set; } = new List<Wishlist>();
