@@ -3,7 +3,7 @@
     background-color: #1a1a1a;
     color: white;
     border-radius: 20px;
-    width: 60%;
+    width: 600px;
     padding: 20px;
     display: flex;
 }
@@ -24,10 +24,15 @@
     font-size: 12px;
 }
 
+.AddrDetails{
+    margin-right: 100px;
+}
+
 .Addrbuttons{
     position: absolute;
     display: flex;
     flex-direction: column;
+    
     top: 15px;
     right: 25px;
     gap: 10px;

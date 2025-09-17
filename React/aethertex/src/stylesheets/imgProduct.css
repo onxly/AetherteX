@@ -19,12 +19,15 @@
     gap: 15px;
     min-height: 125px;
     margin-bottom: 20px;
+    
 }
 
 .thumbnail{
   cursor: pointer;
   margin-top: 10px;
   transition: transform 0.3s ease;
+  border: 2px solid rgba(209, 166, 61, 1);
+  border-radius: 10px;
 }
 
 .thumbnail:hover{

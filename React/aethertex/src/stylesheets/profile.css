@@ -135,3 +135,42 @@ Detail start
 /*
 Detail end
 */
+
+/*
+Order start
+*/
+.OrdersPage{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding-left: 20px;
+    margin-left: 100px;
+    grid-column: 2;
+}
+
+.OrderBox{
+    background-color: #1a1a1a;
+    color: white;
+    border-radius: 20px;
+    width: 600px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.OrderBox:hover{
+    background-color: rgb(65, 65, 65);
+    border: rgba(209, 166, 61, 1) solid 1px;
+}
+
+.DelDate{
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.TotalPrice{
+    font-size: 12px;
+}
+/*
+Order end
+*/

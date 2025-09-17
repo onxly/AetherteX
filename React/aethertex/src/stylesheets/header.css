@@ -41,8 +41,13 @@ rgba(209,166,61,255)
   border: gold solid 1px;
 }
 .navBar .userOptions {
+  padding-left: 10px;
+  padding-right: 15px;
   margin-left: 120px;
-  width: 10%;
+  margin-right: 20px;
+  width: fit-content;
+  align-items: center;
+  gap: 5px;
   max-height: 30px;
   display: flex;
   color: white;
@@ -51,14 +56,7 @@ rgba(209,166,61,255)
   border-radius: 30px;
 }
 
-.navBar .userOptions img {
-  margin-left: 10px;
-  margin-top: 5px;
-}
-
 .navBar .userOptions p {
-  margin-left: 7px;
-  margin-top: 3px;
   font-size: 16px;
 }
 
@@ -67,57 +65,39 @@ rgba(209,166,61,255)
   border: gold soli0d 1px;
 }
 
-.AccModel {
-  margin-top: 74px;
-  margin-left: -120px;
-  background-color: rgba(0, 0, 0, 0.6); /* dark background overlay */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.AccContent {
-  position: relative;
-  background-color: #1a1a1a;
-  padding: 10px;
-  border-radius: 10px;
-  min-width: 300px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-}
-
-.navBar .Cart {
-  margin-left: 20px;
-  width: 10%;
-  max-height: 30px;
-  display: flex;
-  color: white;
-  cursor: pointer;
-}
-
-.navBar .Cart .NumOf {
-  margin-left: -16px;
-  margin-top: 6px;
-  color: rgba(209, 166, 61, 1);
-  font-size: 14px;
-}
-
-.navBar .Cart .cartTxt {
-  margin-left: 10px;
-  margin-top: 6px;
-  font-size: 16px;
-}
 
 .searchBar:focus {
   outline: rgba(209, 166, 61, 1) solid 2px;
 }
 
+.UserBox {
+  position: relative;
+  width: fit-content;
+}
+
+.AccModel {
+  position: absolute;  
+  top: 100%;
+  right: 0;
+  z-index: 9999;
+}
+
+.AccContent {
+  background-color: #1a1a1a;
+  padding: 10px 30px;
+  border-radius: 10px;
+  width: fit-content;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
 .btnSign {
   background-color: rgba(209, 166, 61, 1);
-
+  color: black;
   padding: 10px 20px;
+  border: none;
   border-radius: 20px;
   cursor: pointer;
   width: 200px;
@@ -130,13 +110,13 @@ rgba(209,166,61,255)
   width: 200px;
   height: 40px;
   margin-top: 5px;
-  margin-left: 50px;
+  margin-left: 10px;
   margin-bottom: 5px;
   border-radius: 20px;
 }
 
 .txtRegister {
-  margin-left: 60px;
+  margin-left: 12px;
   font-size: 12px;
 }
 

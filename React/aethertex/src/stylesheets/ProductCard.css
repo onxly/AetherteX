@@ -25,12 +25,10 @@
 
 /* Text content */
 .description {
-  flex: 1;
-  padding: 15px;
   display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  gap: 50px;
+  flex-direction: column;
+  padding: 0px;
+  gap: 5px;
 }
 
 .product-title {
@@ -51,6 +49,10 @@
   font-weight: 700;
   color: var(--primary-color);
   margin: 0;
+}
+
+.ProdStars{
+  font-size: 14px;
 }
 
 /* Buttons */
@@ -96,10 +98,11 @@
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
 }
 
-.footer {
-  margin: 0;
-}
-
 .product-card .link {
   text-decoration-line: none;
+}
+
+.Prodbtn{
+  display: flex;
+  gap: 20px;
 }
