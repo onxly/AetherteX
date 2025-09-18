@@ -7,11 +7,19 @@ public partial class Client
 {
     public int ClientId { get; set; }
 
-    public byte[] Username { get; set; } = null!;
+    public string? Username { get; set; }
 
-    public int LoyaltyPoints { get; set; }
+    public int? LoyaltyPoints { get; set; }
 
-    public bool IsPremium { get; set; }
+    public int? IsPremium { get; set; }
+
+    public int? Address1 { get; set; }
+
+    public int? Address2 { get; set; }
+
+    public virtual Address? Address1Navigation { get; set; }
+
+    public virtual Address? Address2Navigation { get; set; }
 
     public virtual User ClientNavigation { get; set; } = null!;
 

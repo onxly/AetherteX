@@ -90,7 +90,14 @@ rgba(209,166,61,255)
   box-shadow: 0 4px 10px rgba(0,0,0,0.3);
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 2px;
+}
+
+.HeadAccDet{
+  color: white;
+  gap: 2px;
+  display: flex;
+  flex-direction: column;
 }
 
 .btnSign {
@@ -123,4 +130,16 @@ rgba(209,166,61,255)
 .btnSign:hover {
   opacity: 0.8;
   border: 2px solid black;
+}
+
+.IsPrem{
+  font-size: 10px;
+  color: gray;
+}
+
+.HeadAccItems{
+  text-decoration: none;
+  font-size: 12px;
+  color: white;
+  margin: 0;
 }
