@@ -4,7 +4,7 @@ import { Link } from "react-router";
 import { FaStar, FaStarHalfAlt, FaRegStar } from "react-icons/fa";
 import "../stylesheets/ProductCard.css";
 
-function ProductCard({ imgSrc, title, price, discount, prodId, rating, ReviewsNum}) {
+function ProductCard({ imgSrc, title, price, discount, prodId, rating, ReviewsNum, comPCs=[], setComPCs}) {
   const stars = [];
       for (let i = 1; i <= 5; i++) {
           if (rating >= i) {
@@ -16,6 +16,11 @@ function ProductCard({ imgSrc, title, price, discount, prodId, rating, ReviewsNu
           }
       }
   
+      const addItem = (newID) => {
+        CheckId = comPCs.find(c => c.id === newId)
+        if  (CheckId)
+        setComPCs([...comPCs, newID]); 
+      };
   return (
     <div className="product-card">
       {/* Badge */}
@@ -50,7 +55,17 @@ function ProductCard({ imgSrc, title, price, discount, prodId, rating, ReviewsNu
             Add to Cart
           </Button>
 
-          <Checkbox label="Compare" sx={{ color: "white" }} size="sm" />
+            {comPCs.length < 2?(
+              <Checkbox 
+                onChange={() => addItem(prodId)}
+                label="Compare" 
+                sx={{ color: "white" }} 
+                size="sm" 
+              />
+            ):(
+              <Checkbox disabled="true" label="Compare" sx={{ color: "white" }} size="sm" />
+            )}
+          
         </div>
         
       </div>

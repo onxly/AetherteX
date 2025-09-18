@@ -14,8 +14,8 @@
 }
 .formStyle:hover
 {
-     box-shadow:  0px 50px 10px tan,
-                    0px -50px 10px tan;
+     box-shadow:  0px 50px 10px var(--primary-color),
+                    0px -50px 10px var(--primary-color);
 }
 
 .Boxs 
