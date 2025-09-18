@@ -10,9 +10,7 @@ import "./App.css";
 import NotFound from "./pages/not-found";
 import AdminHome from "./pages/admin";
 import Header from "./components/Header";
-import Order from "./pages/order";
-import Orderhistory from "./pages/orderhistory";
-import Cuppons from "./pages/cuppons";
+
 import Checkout from "./pages/checkout";
 
 // Layout that always shows Navbar
@@ -40,9 +38,6 @@ function App() {
           <Route path="/cart" element={<Cart />} />
           <Route path="/product/:id" element={<Product />} />
           <Route path="/profile/:id" element={<Profile />} />
-          <Route path="/order" element={<Order />} />
-          <Route path="/orderhistory" element={<Orderhistory />} />
-          <Route path="/cuppons" element={<Cuppons />} />
         </Route>
 
         {/* Routes without navbar */}
