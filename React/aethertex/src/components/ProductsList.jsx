@@ -195,7 +195,8 @@ function ProductsList({ toggleSidebar, isShowingSidebar }) {
                                   title={item.title} 
                                   discount={item.discount} 
                                   rating={item.rating} 
-                                  ReviewsNum={item.rating}
+                                  ReviewsNum={item.ReviewsNum}
+                                  imgSrc={item.imgSrc}
                                 />
                     }
                 )

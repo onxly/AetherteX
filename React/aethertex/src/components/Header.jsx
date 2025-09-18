@@ -5,7 +5,7 @@ import { AuthContext } from "../contexts/AuthContext";
 import { useContext } from "react";
 import { Link } from "react-router";
 import { useState } from "react";
-import { FaUser } from "react-icons/fa";
+import { FaUser, FaCrown  } from "react-icons/fa";
 import CartIcon from "./CartIcon";
 
 function Header() {
@@ -35,7 +35,12 @@ function Header() {
     >
       {/* Trigger button */} 
         <div className="userOptions">
-          <FaUser width={20} height={20} color="black" />
+          {user.IsPremium?(
+            <FaCrown width={20} height={20} color="black" />
+          ):(
+            <FaUser width={20} height={20} color="black" />
+          )}
+          
           <p>{user.username}</p>
         </div>
   
@@ -47,14 +52,31 @@ function Header() {
             <span className="close" onClick={() => setUserModel(false)}>
               ×
             </span>
-
-            <h2>Account</h2>
+            <div className="HeadAccDet">
+            {user.IsPremium?(
+              <h2><FaCrown width={20} height={20} color="gold" /> &nbsp;{user.username} <em className="IsPrem">(Premium)</em></h2>
+            ):(
+              <h2><FaUser width={20} height={20} color="rgba(209, 166, 61, 1)" /> &nbsp;{user.username}</h2>
+            )}
+            <em style={{marginTop:"-20px", fontSize:"12px"}}>Loyaltity points: {user.LPoints}</em>
+            <b style={{marginTop:"8px"}}>Account</b>
             <Link to={`/profile/${user.username}`}>
-              <span>Personal details</span>
+              <span className="HeadAccItems">Personal details</span>
+            </Link>
+            <Link to={`/profile/${user.username}`}>
+              <span className="HeadAccItems">Addresses</span>
+            </Link>
+            <Link to={`/profile/${user.username}`}>
+              <span className="HeadAccItems">Orders</span>
+            </Link>
+            <Link to={`/profile/${user.username}`}>
+              <span className="HeadAccItems">Coupons</span>
             </Link>
             <Link className="lkSign" to="/">
               <button className="btnSign" onClick={() => setIsLoggedIn(false)}>Sign out</button>
             </Link>
+            </div>
+
           </div>
         </div>
       )}
@@ -67,7 +89,6 @@ function Header() {
     >
       {/* Trigger button */} 
         <div className="userOptions">
-          <FaUser width={20} height={20} color="black" />
           <p>Account</p>
         </div>
   

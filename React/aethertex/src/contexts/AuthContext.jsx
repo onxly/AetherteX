@@ -3,7 +3,7 @@ import React, { createContext, useState } from "react";
 export const AuthContext = createContext();
 
 export function AuthProvider({ children }) {
-  const [user, setUser] = useState({username: "Boyzn", name: "Boyzn", surname: "Fem", email: "example@gmail.com", phone: "0123456789", password: "example"});
+  const [user, setUser] = useState({username: "Boyzn", LPoints: 142, IsPremium: true, name: "Boyzn", surname: "Fem", email: "example@gmail.com", phone: "0123456789", password: "example"});
   const [isLoggedIn, setIsLoggedIn] = useState(true);
   const [cart, setCart] = useState({numOf: 4});
 

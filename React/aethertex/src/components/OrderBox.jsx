@@ -1,7 +1,7 @@
-function OrderBox({price, DelDate, title, address, quantity, products =[]})
+function OrderBox({price, DelDate, title, address, quantity, products =[], onClick})
 {
     return (
-        <div className="OrderBox">
+        <div className="OrderBox" onClick={onClick}>
             <span className="DelDate">Delivered: {DelDate}</span>
             <span className="TotalPrice">Total Price: R {price}</span>
             <div className="thumbSec">
