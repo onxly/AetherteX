@@ -33,27 +33,33 @@ function ProductCard({ imgSrc, title, price, discount, prodId, rating, ReviewsNu
               imgSrc ||
               "https://blocks.astratic.com/img/general-img-landscape.png"
             }
-            style={{ objectFit: "contain" }}
+            style={{ }}
             alt={"Image of " + title}
           />
+          {/* Description Section */}
+          <div className="Details_getCart">
+              <h4 className="product-title">{title}</h4>
+              <div className="description">
+              <span className="ProdStars">{stars} ({ReviewsNum})</span>
+              <p className="product-price">R{price}</p>
+          </div>
+             
+          <div className="hiddenBox">
+              
+                  <div className="Prodbtn">
+                    <Button buttonClassName={"product-card-button-cart"}>
+                      Add to Cart
+                    </Button>
+                    <Checkbox label="Compare" sx={{ color: "white" }} size="sm" />
+                  </div>
+                </div>
+          </div>
+          
         </div>
 
-        {/* Description Section */}
-        <h4 className="product-title">{title}</h4>
-      </Link>
-      <div className="description">
-        <span className="ProdStars">{stars} ({ReviewsNum})</span>
-        <p className="product-price">R{price}</p>
-
-        <div className="Prodbtn">
-          <Button buttonClassName={"product-card-button-cart"}>
-            Add to Cart
-          </Button>
-
-          <Checkbox label="Compare" sx={{ color: "white" }} size="sm" />
-        </div>
         
-      </div>
+      </Link>
+     
     </div>
   );
 }

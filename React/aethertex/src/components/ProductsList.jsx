@@ -9,7 +9,7 @@ function ProductsList({ toggleSidebar, isShowingSidebar }) {
         id: 1,
         price: 21900,
         title: "AetherteX Prometheus II i9 12900K PC Desktop",
-        imgSrc: "https://m.media-amazon.com/images/I/51DfICIDimL._SL500_.jpg",
+        imgSrc: "https://www.presse-citron.net/app/uploads/2020/09/evenement-playstation-5-ps5.jpg",
         rating: 4.8,
         ReviewsNum: 183,
       },
@@ -17,7 +17,7 @@ function ProductsList({ toggleSidebar, isShowingSidebar }) {
         id: 2,
         price: 21900,
         title: "AetherteX Prometheus II i9 12900K PC Desktop",
-        imgSrc: "https://m.media-amazon.com/images/I/51DfICIDimL._SL500_.jpg",
+        imgSrc: "https://helios-i.mashable.com/imagery/reviews/00NFEL8nNFtMySuAyzrCYiX/images-7.fill.size_2000x1125.v1749674789.jpg",
         rating: 4.8,
         ReviewsNum: 183,
       },
@@ -25,7 +25,7 @@ function ProductsList({ toggleSidebar, isShowingSidebar }) {
         id: 3,
         price: 21900,
         title: "AetherteX Prometheus II i9 12900K PC Desktop",
-        imgSrc: "https://m.media-amazon.com/images/I/51DfICIDimL._SL500_.jpg",
+        imgSrc: "https://www.cnet.com/a/img/resize/89db9c90737f64484345936daffef359dbf665e4/hub/2020/10/27/8a5b615a-c5ff-4d4d-bdbd-c58e9e6543af/xbox-series-x-s-console-hoyle-studio-promo-23.jpg?auto=webp&fit=crop&height=362&width=644",
         rating: 4.8,
         ReviewsNum: 183,
       },
@@ -33,7 +33,7 @@ function ProductsList({ toggleSidebar, isShowingSidebar }) {
         id: 4,
         price: 21900,
         title: "AetherteX Prometheus II i9 12900K PC Desktop",
-        imgSrc: "https://m.media-amazon.com/images/I/51DfICIDimL._SL500_.jpg",
+        imgSrc: "https://helios-i.mashable.com/imagery/reviews/00NFEL8nNFtMySuAyzrCYiX/images-7.fill.size_2000x1125.v1749674789.jpg",
         rating: 4.8,
         ReviewsNum: 183,
       },
@@ -41,7 +41,7 @@ function ProductsList({ toggleSidebar, isShowingSidebar }) {
         id: 5,
         price: 21900,
         title: "AetherteX Prometheus II i9 12900K PC Desktop",
-        imgSrc: "https://m.media-amazon.com/images/I/51DfICIDimL._SL500_.jpg",
+        imgSrc: "https://images.immediate.co.uk/production/volatile/sites/3/2023/07/xbox-controller-236e35e.jpg",
         rating: 4.8,
         ReviewsNum: 183,
         Discount: 0,
@@ -50,122 +50,12 @@ function ProductsList({ toggleSidebar, isShowingSidebar }) {
         id: 6,
         price: 21900,
         title: "AetherteX Prometheus II i9 12900K PC Desktop",
-        imgSrc: "https://m.media-amazon.com/images/I/51DfICIDimL._SL500_.jpg",
+        imgSrc: "https://cdn.shopify.com/s/files/1/0550/0554/4682/files/Weixin_Screenshot_20250619164923.jpg?v=1750323409",
         rating: 4.8,
         ReviewsNum: 183,
       },
-      {
-        id: 7,
-        price: 21900,
-        title: "AetherteX Prometheus II i9 12900K PC Desktop",
-        imgSrc: "https://m.media-amazon.com/images/I/51DfICIDimL._SL500_.jpg",
-        rating: 4.8,
-        ReviewsNum: 183,
-      },
-      {
-        id: 8,
-        price: 21900,
-        title: "AetherteX Prometheus II i9 12900K PC Desktop",
-        imgSrc: "https://m.media-amazon.com/images/I/51DfICIDimL._SL500_.jpg",
-        rating: 4.8,
-        ReviewsNum: 183,
-      },
-      {
-        id: 9,
-        price: 21900,
-        title: "AetherteX Prometheus II i9 12900K PC Desktop",
-        imgSrc: "https://m.media-amazon.com/images/I/51DfICIDimL._SL500_.jpg",
-        rating: 4.8,
-        ReviewsNum: 183,
-      },
-      {
-        id: 10,
-        price: 21900,
-        title: "AetherteX Prometheus II i9 12900K PC Desktop",
-        imgSrc: "https://m.media-amazon.com/images/I/51DfICIDimL._SL500_.jpg",
-        rating: 4.8,
-        ReviewsNum: 183,
-      },
-      {
-        id: 11,
-        price: 21900,
-        title: "AetherteX Prometheus II i9 12900K PC Desktop",
-        imgSrc: "https://m.media-amazon.com/images/I/51DfICIDimL._SL500_.jpg",
-        rating: 4.8,
-        ReviewsNum: 183,
-      },
-      {
-        id: 12,
-        price: 21900,
-        title: "AetherteX Prometheus II i9 12900K PC Desktop",
-        imgSrc: "https://m.media-amazon.com/images/I/51DfICIDimL._SL500_.jpg",
-        rating: 4.8,
-        ReviewsNum: 183,
-      },
-      {
-        id: 13,
-        price: 21900,
-        title: "AetherteX Prometheus II i9 12900K PC Desktop",
-        imgSrc: "https://m.media-amazon.com/images/I/51DfICIDimL._SL500_.jpg",
-        rating: 4.8,
-        ReviewsNum: 183,
-      },
-      {
-        id: 14,
-        price: 21900,
-        title: "AetherteX Prometheus II i9 12900K PC Desktop",
-        imgSrc: "https://m.media-amazon.com/images/I/51DfICIDimL._SL500_.jpg",
-        rating: 4.8,
-        ReviewsNum: 183,
-      },
-      {
-        id: 15,
-        price: 21900,
-        title: "AetherteX Prometheus II i9 12900K PC Desktop",
-        imgSrc: "https://m.media-amazon.com/images/I/51DfICIDimL._SL500_.jpg",
-        rating: 4.8,
-        ReviewsNum: 183,
-      },
-      {
-        id: 16,
-        price: 21900,
-        title: "AetherteX Prometheus II i9 12900K PC Desktop",
-        imgSrc: "https://m.media-amazon.com/images/I/51DfICIDimL._SL500_.jpg",
-        rating: 4.8,
-        ReviewsNum: 183,
-      },
-      {
-        id: 17,
-        price: 21900,
-        title: "AetherteX Prometheus II i9 12900K PC Desktop",
-        imgSrc: "https://m.media-amazon.com/images/I/51DfICIDimL._SL500_.jpg",
-        rating: 4.8,
-        ReviewsNum: 183,
-      },
-      {
-        id: 18,
-        price: 21900,
-        title: "AetherteX Prometheus II i9 12900K PC Desktop",
-        imgSrc: "https://m.media-amazon.com/images/I/51DfICIDimL._SL500_.jpg",
-        rating: 4.8,
-        ReviewsNum: 183,
-      },
-      {
-        id: 19,
-        price: 21900,
-        title: "AetherteX Prometheus II i9 12900K PC Desktop",
-        imgSrc: "https://m.media-amazon.com/images/I/51DfICIDimL._SL500_.jpg",
-        rating: 4.8,
-        ReviewsNum: 183,
-      },
-      {
-        id: 20,
-        price: 21900,
-        title: "AetherteX Prometheus II i9 12900K PC Desktop",
-        imgSrc: "https://m.media-amazon.com/images/I/51DfICIDimL._SL500_.jpg",
-        rating: 4.8,
-        ReviewsNum: 183,
-      }
+      
+      
     
     ]);
 
@@ -195,7 +85,8 @@ function ProductsList({ toggleSidebar, isShowingSidebar }) {
                                   title={item.title} 
                                   discount={item.discount} 
                                   rating={item.rating} 
-                                  ReviewsNum={item.rating}
+                                  ReviewsNum={item.ReviewsNum}
+                                  imgSrc={item.imgSrc}
                                 />
                     }
                 )

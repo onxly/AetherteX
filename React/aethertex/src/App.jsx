@@ -1,4 +1,5 @@
-import { Outlet, Route, Routes } from "react-router";
+import { useState, useEffect} from "react";
+import { Outlet, Route, Routes,useLocation} from "react-router-dom";
 import Home from "./pages";
 import Product from "./pages/product";
 import Login from "./pages/login";
@@ -14,6 +15,8 @@ import Order from "./pages/order";
 import Orderhistory from "./pages/orderhistory";
 import Cuppons from "./pages/cuppons";
 import Checkout from "./pages/checkout";
+
+import Loader from "./components/Loader";
 
 // Layout that always shows Navbar
 function LayoutWithNavbar() {
@@ -31,8 +34,40 @@ function LayoutNoNavbar() {
 }
 
 function App() {
+  
+  const [loading, setLoading] = useState(true);
+  const [fadeOut, setFadeOut] = useState(false);
+  const location = useLocation();
+
+  // Initial page load
+  useEffect(() => {
+    const timer = setTimeout(() => setFadeOut(true), 1500);
+    return () => clearTimeout(timer);
+  }, []);
+
+  useEffect(() => {
+    if (!fadeOut) return;
+    const timer = setTimeout(() => setLoading(false), 500);
+    return () => clearTimeout(timer);
+  }, [fadeOut]);
+
+  // Show loader on route change
+  useEffect(() => {
+    setLoading(true);
+    setFadeOut(false);
+    const timer = setTimeout(() => setFadeOut(true), 300); // loader duration on page change
+    return () => clearTimeout(timer);
+  }, [location]);
+  
+
   return (
     <AuthProvider>
+      {loading && (
+        <div id="preloder" className={fadeOut ? "fade-out" : ""}>
+          <div className="loader"></div>
+        </div>
+      )}
+
       <Routes>
         {/* Routes with navbar */}
         <Route element={<LayoutWithNavbar />}>
