@@ -31,21 +31,24 @@ namespace AeatherteX_API.Controllers
         [HttpPost("login")]
         public ActionResult<User> Login([FromBody] LoginRequest request) // Login in user using email and password
         {
-            var hashed = Secrecy.HashPassword(request.Password);
-
             var user = (from u in db.Users
-                        where u.Email.Equals(request.Email) && u.Password.Equals(hashed)
+                        where u.Email.Equals(request.Email)
                         select u).FirstOrDefault();
 
             if (user == null)
-                return StatusCode(1, "Invalid Credentials");
+                return StatusCode(1, "Email does not exist");
 
-            return StatusCode(0, user);
+            if (!Secrecy.VerifyPassword(request.Password, user.Password))
+            {
+                return StatusCode(1, "Incorrect password");
+            }
+
+                return StatusCode(0, user);
         }
 
         // POST: AeatherAPI/users/register
         [HttpPost("register")]
-        public ActionResult<User> Register([FromBody] RegisterRequest request) // Register a new user given name, surname, email, phone number, password and type
+        public ActionResult<int> Register([FromBody] RegisterRequest request) // Register a new user given name, surname, email, phone number, password and type
         {
 
             // Check if email already exists
@@ -62,7 +65,7 @@ namespace AeatherteX_API.Controllers
                 Surname = request.Surname,
                 Email = request.Email,
                 PhoneNumber = request.PhoneNumber,
-                Password = request.Password,
+                Password = Secrecy.HashPassword(request.Password),
                 Type = request.Type
             };
 
@@ -70,13 +73,14 @@ namespace AeatherteX_API.Controllers
             try {
                 db.SaveChanges();
             }
-            catch(DbUpdateException ex) 
+            catch(DbUpdateException ex)
             {
+                ex.GetBaseException();
                 return StatusCode(-1, "Database update error");
             }
             
 
-            return StatusCode(0, newUser);
+            return StatusCode(0, newUser.UserId);
         }
         
 
