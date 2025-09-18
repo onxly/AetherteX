@@ -5,13 +5,11 @@ namespace AeatherteX_API.Models;
 
 public partial class Shipping
 {
-    public int AddressId { get; set; }
-
-    public int ClientId { get; set; }
+    public int InvoiceId { get; set; }
 
     public string? Instructions { get; set; }
 
-    public virtual Address Address { get; set; } = null!;
+    public string Status { get; set; } = null!;
 
-    public virtual Client Client { get; set; } = null!;
+    public virtual Invoice Invoice { get; set; } = null!;
 }

@@ -15,8 +15,6 @@ public partial class Product
 
     public decimal Price { get; set; }
 
-    public DateOnly Date { get; set; }
-
     public string Motherboard { get; set; } = null!;
 
     public string Case { get; set; } = null!;
