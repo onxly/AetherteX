@@ -16,10 +16,18 @@ function ProductCard({ imgSrc, title, price, discount, prodId, rating, ReviewsNu
           }
       }
   
-      const addItem = (newID) => {
-        CheckId = comPCs.find(c => c.id === newId)
-        if  (CheckId)
-        setComPCs([...comPCs, newID]); 
+
+      const toggleItem = (newID) => {
+        // check if id already exists
+        const exists = comPCs.includes(newID);
+
+        if (exists) {
+          // remove it
+          setComPCs(comPCs.filter(id => id !== newID));
+        } else {
+          // add it
+          setComPCs([...comPCs, newID]);
+        }
       };
   return (
     <div className="product-card">
@@ -55,16 +63,14 @@ function ProductCard({ imgSrc, title, price, discount, prodId, rating, ReviewsNu
             Add to Cart
           </Button>
 
-            {comPCs.length < 2?(
-              <Checkbox 
-                onChange={() => addItem(prodId)}
-                label="Compare" 
-                sx={{ color: "white" }} 
-                size="sm" 
-              />
-            ):(
-              <Checkbox disabled="true" label="Compare" sx={{ color: "white" }} size="sm" />
-            )}
+            <Checkbox 
+              checked={comPCs.includes(prodId)}
+              onChange={() => toggleItem(prodId)}
+              disabled={comPCs.length >= 2 && !comPCs.includes(prodId)} 
+              label="Compare" 
+              sx={{ color: "white" }} 
+              size="sm"   z
+            />
           
         </div>
         
