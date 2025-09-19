@@ -246,3 +246,111 @@ Order Det start
 /*
 Order Det start
 */
+
+/*
+Invoice start
+*/
+.btnDownInvoice{
+    background-color: rgba(209, 166, 61, 1);
+    color: black;
+    border: none;
+    margin-top: 10px;
+    margin-left: 10px;
+    margin-bottom: 10px;
+    padding: 10px 20px;
+    border-radius: 20px;
+    cursor: pointer;
+    width: 200px;
+    height: 40px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.btnDownInvoice:hover{
+    opacity: 0.8;
+    border: 2px solid black;
+}
+
+.InvoicePDF{
+    color: black;
+    background-color: white;
+    padding: 15px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+}
+
+.row1-col1{
+    display: flex;
+    flex-direction: column;
+    grid-row: 1;
+    grid-column: 1;
+}
+
+.InvoicePDF h1{
+    color: rgba(209, 166, 61, 1);
+    text-shadow: 
+    -1px -1px 0 black,  
+     1px -1px 0 black,
+    -1px  1px 0 black,
+     1px  1px 0 black;
+
+    
+}
+
+.CompName{
+    color: rgba(209, 166, 61, 1);
+
+}
+
+.row1-col3{
+    margin-top: 30px;
+    margin-left: 15px;
+    grid-row: 1;
+    grid-column: 3;
+}
+
+.row2-col1{
+    display: flex;
+    flex-direction: column;
+    padding-right: 15px;
+    grid-row: 2;
+    grid-column: 1;
+}
+
+.InvoicePDF h2{
+    margin-bottom: 1px;
+}
+
+.row2-col2{
+    display: flex;
+    flex-direction: column;
+    padding-right: 15px;
+    grid-row: 2;
+    grid-column: 2;
+}
+
+.row2-col3{
+    display: flex;
+    flex-direction: column;
+    grid-row: 2;
+    grid-column: 3;
+}
+
+.row3{
+    grid-row: 3;
+    grid-column: 1 / -1;
+    width: 100%; 
+    table-layout: fixed; 
+}
+
+.btnDownloadInv{
+    background-color: transparent;
+    font-size: 20px;
+    border: none;
+    cursor: pointer;
+
+}
+/*
+Invoice end
+*/

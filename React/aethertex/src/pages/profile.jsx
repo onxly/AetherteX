@@ -5,7 +5,7 @@ import imgInvoice from "../assets/ProfilepageIcons/InvoiceIcon.png";
 import AddressModel from "../components/AddressModel.jsx";
 import DetailsModel from "../components/DetailsModel.jsx";
 import OrdersModel from "../components/OrdersModel.jsx";
-import OrderDetModel from "../components/OrderDetModel.jsx"
+import InvoiceModel from "../components/InvoiceModel.jsx"
 import "../stylesheets/profile.css";
 import { useState } from "react";
 
@@ -34,18 +34,21 @@ function Profile() {
         price: 21900,
         title: "AetherteX Prometheus II i9 12900K PC Desktop",
         imgSrc: "https://m.media-amazon.com/images/I/51DfICIDimL._SL500_.jpg",
+        Quantity: 1,
       },
       {
         id: 2,
         price: 21900,
         title: "AetherteX Prometheus II i9 12900K PC Desktop",
         imgSrc: "https://m.media-amazon.com/images/I/51DfICIDimL._SL500_.jpg",
+        Quantity: 2,
       },
       {
         id: 3,
         price: 21900,
         title: "AetherteX Prometheus II i9 12900K PC Desktop",
         imgSrc: "https://m.media-amazon.com/images/I/51DfICIDimL._SL500_.jpg",
+        Quantity: 3,
       },
     ]
   },
@@ -62,18 +65,21 @@ function Profile() {
         price: 21900,
         title: "AetherteX Prometheus II i9 12900K PC Desktop",
         imgSrc: "https://m.media-amazon.com/images/I/51DfICIDimL._SL500_.jpg",
+        Quantity: 2,
       },
       {
         id: 2,
         price: 21900,
         title: "AetherteX Prometheus II i9 12900K PC Desktop",
         imgSrc: "https://m.media-amazon.com/images/I/51DfICIDimL._SL500_.jpg",
+        Quantity: 1,
       },
       {
         id: 3,
         price: 21900,
         title: "AetherteX Prometheus II i9 12900K PC Desktop",
         imgSrc: "https://m.media-amazon.com/images/I/51DfICIDimL._SL500_.jpg",
+        Quantity: 3,
       },
      
     ]
@@ -110,7 +116,7 @@ function Profile() {
             {activeModel === "details" && <DetailsModel User={User}/>}
             {activeModel === "address" && <AddressModel Addr={Addr}/>}
             {activeModel === "orders" && <OrdersModel Orders={orders} Addr={Addr}/>}
-            {activeModel === "invoices" && <OrderDetModel id={orders[1].id} price={orders[1].Price} Date={orders[1].Date} Addr={Addr[0]} products={orders[1].products}/>}
+            {activeModel === "invoices" && <InvoiceModel Orders={orders} Addr={Addr}/>}
         </div>
         
     </section>    
