@@ -12,7 +12,10 @@ namespace AeatherteX_API.Controllers
         public class AddProductRequest
         {
             public string Title { get; set; }
-            public string Image { get; set; }
+            public string Image1 { get; set; }
+            public string? Image2 { get; set; }
+            public string? Image3 { get; set; }
+            public string? Image4 { get; set; }
             public string Description { get; set; }
             public decimal Price { get; set; }
             public string Motherboard { get; set; }
@@ -22,12 +25,17 @@ namespace AeatherteX_API.Controllers
             public int GpuId { get; set; }
             public int RamId { get; set; }
             public int StorageId { get; set; }
+            public int IsActive { get; set; }
+            public int Stock { get; set; }
         }
 
         public class UpdateProductRequest
         {
             public string? Title { get; set; }
-            public string? Image { get; set; }
+            public string? Image1 { get; set; }
+            public string? Image2 { get; set; }
+            public string? Image3 { get; set; }
+            public string? Image4 { get; set; }
             public string? Description { get; set; }
             public decimal? Price { get; set; }
             public string? Motherboard { get; set; }
@@ -37,15 +45,18 @@ namespace AeatherteX_API.Controllers
             public int? GpuId { get; set; }
             public int? RamId { get; set; }
             public int? StorageId { get; set; }
+            public int? IsActive { get; set; }
+            public int? Stock { get; set; }
         }
 
 
 
         // GET: AeatherAPI/products
         [HttpGet]
-        public ActionResult<List<Product>> GetAllProducts() // Get all products
+        public ActionResult<List<Product>> GetAllProducts() // Get all active and in-stock products
         {
             var products = (from p in db.Products
+                            where p.IsActive == 1 && p.Stock > 0
                             select p).ToList();
             return StatusCode(0, products);
         }
@@ -99,7 +110,10 @@ namespace AeatherteX_API.Controllers
             var newProduct = new Product
             {
                 Title = request.Title,
-                Image = request.Image,
+                Image1 = request.Image1,
+                Image2 = request.Image2 ?? null,
+                Image3 = request.Image3 ?? null,
+                Image4 = request.Image4 ?? null,
                 Description = request.Description,
                 Price = request.Price,
                 Motherboard = request.Motherboard,
@@ -108,7 +122,9 @@ namespace AeatherteX_API.Controllers
                 CpuId = request.CpuId,
                 GpuId = request.GpuId,
                 RamId = request.RamId,
-                StorageId = request.StorageId
+                StorageId = request.StorageId,
+                IsActive = request.IsActive,
+                Stock = request.Stock
             };
             db.Products.Add(newProduct);
             db.SaveChanges();
@@ -147,8 +163,14 @@ namespace AeatherteX_API.Controllers
                     return StatusCode(1, "Another product with the same title already exists");
                 product.Title = request.Title;
             }
-            if (request.Image != null)
-                product.Image = request.Image;
+            if (request.Image1 != null)
+                product.Image1 = request.Image1;
+            if (request.Image2 != null)
+                product.Image2 = request.Image2;
+            if (request.Image3 != null)
+                product.Image3 = request.Image3;
+            if (request.Image4 != null)
+                product.Image4 = request.Image4;
             if (request.Description != null)
                 product.Description = request.Description;
             if (request.Price.HasValue)
@@ -196,6 +218,10 @@ namespace AeatherteX_API.Controllers
                 product.StorageId = request.StorageId.Value;
 
             }
+            if (request.IsActive.HasValue)
+                product.IsActive = request.IsActive.Value;
+            if (request.Stock.HasValue)
+                product.Stock = request.Stock.Value;
             db.SaveChanges();
             return StatusCode(0, "Product updated successfully");
         }

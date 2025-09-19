@@ -9,23 +9,15 @@ namespace AeatherteX_API.Controllers
 
         public class GetCartResponse
         {
-            public List<Product> Products { get; set; }
+            public Product Product { get; set; }
             public int Quantity { get; set; }
             public decimal Price { get; set; }
         }
 
-        public class AddToCartRequest
+        public class UpdateCartRequest
         {
             public int ProductId { get; set; }
             public int Quantity { get; set; }
-            public decimal Price { get; set; }
-        }
-
-        public class RemoveFromCartRequest
-        {
-            public int ProductId { get; set; }
-            public int Quantity { get; set; }
-            public decimal Price { get; set; }
         }
 
         public class ClearCartRequest
@@ -51,15 +43,15 @@ namespace AeatherteX_API.Controllers
             foreach (var item in cartItems)
             {
                 var product = (from p in db.Products
-                               where p.ProductId == item.ProductId
+                               where p.ProductId == item.ProductId && p.IsActive == 1
                                select p).FirstOrDefault();
                 if (product != null)
                 {
                     cart.Add(new GetCartResponse
                     {
-                        Products = new List<Product> { product },
+                        Product = product,
                         Quantity = item.Quantity ?? 0,
-                        Price = item.Price ?? 0
+                        Price = product.Price * (item.Quantity ?? 0)
                     });
                 }
             }
@@ -68,7 +60,7 @@ namespace AeatherteX_API.Controllers
 
         // POST: AeatherAPI/cart/{id}
         [HttpPost]
-        public ActionResult AddToCart(int id, [FromBody] AddToCartRequest request) // Add a product to the cart
+        public ActionResult AddToCart(int id, [FromBody] UpdateCartRequest request) // Add a product to the cart
         {
             var user = (from u in db.Users
                         where u.UserId == id
@@ -76,17 +68,17 @@ namespace AeatherteX_API.Controllers
             if (user == null)
                 return StatusCode(1, "User not found");
             var product = (from p in db.Products
-                           where p.ProductId == request.ProductId
+                           where p.ProductId == request.ProductId && p.IsActive == 1
                            select p).FirstOrDefault();
             if (product == null)
-                return StatusCode(2, "Product not found");
+                return StatusCode(1, "Product not found");
             var cartItem = (from c in db.Carts
                             where c.UserId == id && c.ProductId == request.ProductId
                             select c).FirstOrDefault();
             if (cartItem != null)
             {
                 cartItem.Quantity += request.Quantity;
-                cartItem.Price += request.Price;
+                cartItem.Price = product.Price * cartItem.Quantity;
                 db.Carts.Update(cartItem);
             }
             else
@@ -96,7 +88,7 @@ namespace AeatherteX_API.Controllers
                     UserId = id,
                     ProductId = request.ProductId,
                     Quantity = request.Quantity,
-                    Price = request.Price
+                    Price = product.Price * request.Quantity
                 };
                 db.Carts.Add(newCartItem);
             }
@@ -107,18 +99,23 @@ namespace AeatherteX_API.Controllers
 
         // DELETE: AeatherAPI/cart/{id}
         [HttpDelete("{id}")]
-        public ActionResult RemoveFromCart(int id, [FromBody] RemoveFromCartRequest request) // Remove a product from the cart
+        public ActionResult RemoveFromCart(int id, [FromBody] UpdateCartRequest request) // Remove a product from the cart
         {
             var user = (from u in db.Users
                         where u.UserId == id
                         select u).FirstOrDefault();
             if (user == null)
                 return StatusCode(1, "User not found");
+            var product = (from p in db.Products
+                           where p.ProductId == request.ProductId && p.IsActive.Equals(1)
+                           select p).FirstOrDefault();
+            if (product == null)
+                return StatusCode(1, "Product not found");
             var cartItem = (from c in db.Carts
                             where c.UserId == id && c.ProductId == request.ProductId
                             select c).FirstOrDefault();
             if (cartItem == null)
-                return StatusCode(2, "Product not found in cart");
+                return StatusCode(1, "Product not found in cart");
             if (cartItem.Quantity <= request.Quantity)
             {
                 db.Carts.Remove(cartItem);
@@ -126,7 +123,7 @@ namespace AeatherteX_API.Controllers
             else
             {
                 cartItem.Quantity -= request.Quantity;
-                cartItem.Price -= request.Price;
+                cartItem.Price -= product.Price * request.Quantity;
                 db.Carts.Update(cartItem);
             }
             db.SaveChanges();

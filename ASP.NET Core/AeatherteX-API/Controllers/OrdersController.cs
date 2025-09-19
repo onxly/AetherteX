@@ -16,7 +16,7 @@ namespace AeatherteX_API.Controllers
 
         public class CreateOrderRequest
         {
-            public Purchase[] Purchases { get; set; }
+            public List<Purchase> Purchases { get; set; }
             public int ClientId { get; set; }
             public int AddressId { get; set; }
             public string? Instructions { get; set; }
@@ -111,13 +111,18 @@ namespace AeatherteX_API.Controllers
             foreach (var purchase in request.Purchases)
             {
                 var product = (from p in db.Products
-                               where p.ProductId == purchase.ProductId
+                               where p.ProductId == purchase.ProductId && p.IsActive == 1 && p.Stock >= purchase.Quantity
                                select p).FirstOrDefault();
-                if (product == null)
-                    return StatusCode(1, $"Product with ID {purchase.ProductId} not found");
-                totalPrice += product.Price * purchase.Quantity;
-                totalQuantity += purchase.Quantity;
+                if (product != null)
+                {
+                    totalPrice += product.Price * purchase.Quantity;
+                    totalQuantity += purchase.Quantity;
+                }
+                          
             }
+            if (totalQuantity <= 0 || totalPrice <= 0)
+                return StatusCode(1, "No valid products in the order");
+
             var invoice = new Invoice
             {
                 ClientId = request.ClientId,
@@ -131,16 +136,20 @@ namespace AeatherteX_API.Controllers
             foreach (var purchase in request.Purchases)
             {
                 var product = (from p in db.Products
-                               where p.ProductId == purchase.ProductId
+                               where p.ProductId == purchase.ProductId && p.IsActive == 1 && p.Stock >= purchase.Quantity
                                select p).FirstOrDefault();
-                var newPurchase = new Purchase
+                if(product != null)
                 {
-                    InvoiceId = invoice.InvoiceId,
-                    ProductId = purchase.ProductId,
-                    Quantity = purchase.Quantity,
-                    Price = purchase.Price
-                };
-                db.Purchases.Add(newPurchase);
+                    var newPurchase = new Purchase
+                    {
+                        InvoiceId = invoice.InvoiceId,
+                        ProductId = product.ProductId,
+                        Quantity = purchase.Quantity,
+                        Price = product.Price * purchase.Quantity
+                    };
+                    db.Purchases.Add(newPurchase);
+                    product.Stock -= purchase.Quantity;
+                }
             }
             db.SaveChanges();
 
