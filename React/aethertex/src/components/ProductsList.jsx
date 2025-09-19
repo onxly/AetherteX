@@ -214,9 +214,7 @@ function ProductsList({ toggleSidebar, isShowingSidebar }) {
         className="productlist-container-scrollview"
         style={{ width: isShowingSidebar ? "80vw" : "94vw" }}
       >
-        {Items.length !== 0 ?
-            (
-                Items.map
+                {Items.map
                 (
                     item =>
                     {
@@ -234,11 +232,7 @@ function ProductsList({ toggleSidebar, isShowingSidebar }) {
                                 />
                     }
                 )
-            ) 
-            :
-            (
-                <p style={{padding:"20px", textAlign:"center",color:"black" ,backgroundColor:"tan"}}>Your cart is empty.</p>
-            )}
+               }
       </div>
 
       {comPCs.length >= 2 && showModal && (

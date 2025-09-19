@@ -6,6 +6,7 @@ import Footer from "../components/Footer.jsx";
 import "../stylesheets/product.css";
 
 function Product() {
+  let id = 1;
   let price = "21 900.00";
   let stock = 5;
   let rating = 4.3;
@@ -77,7 +78,7 @@ function Product() {
         GPU={GPU}
         RAM={RAM}
       />
-      <PurchaseProduct price={price} stock={stock} />
+      <PurchaseProduct id={id} price={price} stock={stock} />
       <ReviewProduct rating={rating} CusReviews={CusReviews} />
       <Footer />
     </div>

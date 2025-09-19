@@ -22,7 +22,7 @@ function PurchaseProduct(info) {
                 <input className="txtQuantity" type="number" min="1" max={info.stock} defaultValue="1"/>
             </div>
 
-            <Link to={`/product/${1}`} className="link">
+            <Link to={`/checkout/${info.id}`} className="link">
                 <button className="btnBuy">
                     Buy Now
                 </button>
