@@ -69,7 +69,7 @@ function ProductCard({ imgSrc, title, price, discount, prodId, rating, ReviewsNu
               disabled={comPCs.length >= 2 && !comPCs.includes(prodId)} 
               label="Compare" 
               sx={{ color: "white" }} 
-              size="sm"   z
+              size="sm" 
             />
           
         </div>
