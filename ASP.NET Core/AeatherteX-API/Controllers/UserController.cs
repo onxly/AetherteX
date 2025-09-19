@@ -42,6 +42,20 @@ namespace AeatherteX_API.Controllers
             public string? Password { get; set; }
         }
 
+        public class UpdateLoyaltyPointsRequest
+        {
+            public int ClientId { get; set; }
+            public int PointsToAdd { get; set; }
+
+        }
+
+        public class UpdatePremiumStatusRequest
+        {
+            public int ClientId { get; set; }
+            public int IsPremium { get; set; }
+
+        }
+
         // POST: AeatherAPI/users/login
         [HttpPost("login")]
         public ActionResult<User> Login([FromBody] LoginRequest request) // Login in user using email and password
@@ -150,13 +164,61 @@ namespace AeatherteX_API.Controllers
             return StatusCode(0, user.UserId);
         }
 
-        // GET: AeatherAPI/users/test
-        [HttpGet("test")]
-        public IActionResult Index()
+        // PUT: AeatherAPI/users/loyaltypoints
+        [HttpPut("loyaltypoints")]
+        public ActionResult<int> UpdateLoyaltyPoints([FromBody] UpdateLoyaltyPointsRequest request) // Update loyalty points for a specific client
         {
-            return Ok("API is online!!!");
+            var client = (from c in db.Clients
+                          where c.ClientId == request.ClientId
+                          select c).FirstOrDefault();
+            if (client == null)
+                return StatusCode(1, "Client not found");
+            client.LoyaltyPoints = (client.LoyaltyPoints ?? 0) + request.PointsToAdd;
+            try {
+                db.SaveChanges();
+            }
+            catch(DbUpdateException ex)
+            {
+                ex.GetBaseException();
+                return StatusCode(-1, "Database update error");
+            }
+            return StatusCode(0, "Upadted Loyalty Points");
         }
+
+        // GET: AeatherAPI/users/loyaltypoints/{id}
+        [HttpGet("loyaltypoints/{id}")]
+        public ActionResult<int> GetLoyaltyPoints(int id) // Get loyalty points for a specific client
+        {
+            var client = (from c in db.Clients
+                          where c.ClientId == id
+                          select c).FirstOrDefault();
+            if (client == null)
+                return StatusCode(1, "Client not found");
+            return StatusCode(0, client.LoyaltyPoints ?? 0);
+        }
+
+        // PUT: AeatherAPI/users/premiumstatus
+        [HttpPut("premiumstatus")]
+        public ActionResult<int> UpdatePremiumStatus([FromBody] UpdatePremiumStatusRequest request) // Update premium status for a specific client
+        {
+            var client = (from c in db.Clients
+                          where c.ClientId == request.ClientId
+                          select c).FirstOrDefault();
+            if (client == null)
+                return StatusCode(1, "Client not found");
+            client.IsPremium = request.IsPremium;
+            try {
+                db.SaveChanges();
+            }
+            catch(DbUpdateException ex)
+            {
+                ex.GetBaseException();
+                return StatusCode(-1, "Database update error");
+            }
+            return StatusCode(0, "Updated Premium Status");
+        }
+
     }
 
-    
+
 }
