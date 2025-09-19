@@ -1,4 +1,5 @@
 import RadioButtonList from "../components/RadioButtonList";
+import { useParams } from "react-router-dom";
 import Icon from "../assets/AetherteXIcon.png";
 import { FaLock } from "react-icons/fa";
 import "../stylesheets/checkout.css"
@@ -25,6 +26,8 @@ function checkout(info)
     for (let y = currentYear; y <= endYear; y++) {
         years.push(y);
     }
+
+    const { id } = useParams();
     
     return(
     <section className="ckPage">

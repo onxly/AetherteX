@@ -1,4 +1,5 @@
 import "../stylesheets/purchaseProduct.css";
+import { Link } from "react-router";
 
 function PurchaseProduct(info) {
     let stockInfo;
@@ -20,9 +21,12 @@ function PurchaseProduct(info) {
                 Quantity:
                 <input className="txtQuantity" type="number" min="1" max={info.stock} defaultValue="1"/>
             </div>
-            <button className="btnBuy">
-                Buy Now
-            </button>
+
+            <Link to={`/checkout/${info.id}`} className="link">
+                <button className="btnBuy">
+                    Buy Now
+                </button>
+            </Link>
             <button className="btnAdd">
                 Add to Cart
             </button>

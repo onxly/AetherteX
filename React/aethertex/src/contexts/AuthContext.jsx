@@ -3,10 +3,17 @@ import axios from "axios";
 export const AuthContext = createContext();
 
 export function AuthProvider({ children }) {
+<<<<<<< HEAD
   const [user, setUser] = useState();
   const [isLoggedIn, setIsLoggedIn] = useState();
   
   const apilink="http://localhost:3000/AeatherAPI/";
+=======
+  const [user, setUser] = useState({username: "Boyzn", LPoints: 142, IsPremium: false, name: "Boyzn", surname: "Fem", email: "example@gmail.com", phone: "0123456789", password: "example"});
+  const [isLoggedIn, setIsLoggedIn] = useState(true);
+  const [cart, setCart] = useState({numOf: 4});
+
+>>>>>>> 6380522e3c3d47086bbfed0d9cb6cee7f4d2e22d
   /**
    *Logs in a user
    *

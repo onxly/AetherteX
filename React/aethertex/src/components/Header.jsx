@@ -1,5 +1,4 @@
 import Icon from "../assets/AetherteXIcon.png";
-import UserIcon from "../assets/userIcon.png";
 import "../stylesheets/header.css";
 import { AuthContext } from "../contexts/AuthContext";
 import { useContext } from "react";
