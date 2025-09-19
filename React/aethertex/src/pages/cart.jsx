@@ -4,6 +4,8 @@ import { FaTrash } from "react-icons/fa";
 import '../stylesheets/cart.css';
 function Cart() {
   document.title = "Cart | AetherteX";
+
+  async
   const[Items,setItems] = useState([
     {
       id:1,
@@ -45,6 +47,10 @@ function Cart() {
    
   ]); 
    
+  async function setCart()
+  {
+    
+  }
    
 
   function increaseCount(id) {

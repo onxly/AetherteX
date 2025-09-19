@@ -3,6 +3,7 @@ import Checkbox from "@mui/joy/Checkbox";
 import { Link } from "react-router";
 import { FaStar, FaStarHalfAlt, FaRegStar } from "react-icons/fa";
 import "../stylesheets/ProductCard.css";
+ 
 
 function ProductCard({ imgSrc, title, price, discount, prodId, rating, ReviewsNum, comPCs=[], setComPCs}) {
   const stars = [];

@@ -5,81 +5,25 @@ import imgInvoice from "../assets/ProfilepageIcons/InvoiceIcon.png";
 import AddressModel from "../components/AddressModel.jsx";
 import DetailsModel from "../components/DetailsModel.jsx";
 import OrdersModel from "../components/OrdersModel.jsx";
-import OrderDetModel from "../components/OrderDetModel.jsx"
+
 import "../stylesheets/profile.css";
 import { useState } from "react";
 
+import {getAddresses} from "../jsfunctions/alljsfunctions.js";
+
 function Profile() {
-    document.title = "Profile | AetherteX";
-    const [activeModel, setActiveModel] = useState("details"); 
+  const { isLoggedIn, setIsLoggedIn, user, cart, login } = useContext(AuthContext);
 
-    let Addr = [
-        {id: 1, Name: "Boyzn", Street: "1234 The streets", City: "Mahikeng", Postal: 2732, Phone: "0123456789"},
-        {id: 2, Name: "Boyzn1", Street: "56789 The streets1", City: "Mahikeng1", Postal: 2732, Phone: "0123456789"},
-        {id: 3, Name: "Boyzn2", Street: "1111 The streets2", City: "Mahikeng2", Postal: 2732, Phone: "0123456789"}
-    ]
-    let User = {Username: "Boyzn", FirstName: "Orefemetse", LastName: "Mokotedi", Email: "example@gmail.com", Phone: "0123456789", Password: "example"};
-    let Orders = {id: 1, Date: "01-05-2025", TotalPrice: 10200};
+  document.title = "Profile | AetherteX";
+  const [activeModel, setActiveModel] = useState("details"); 
 
-    let orders = [
+
+  [AddrList,setAddrList]=useState();
+  async function setAddr()
   {
-    id: 1,
-    Price: 10000,
-    Date: "12-07-2025",
-    Address: 1,
-    Quantity: 3,
-    products: [ 
-      {
-        id: 1,
-        price: 21900,
-        title: "AetherteX Prometheus II i9 12900K PC Desktop",
-        imgSrc: "https://m.media-amazon.com/images/I/51DfICIDimL._SL500_.jpg",
-      },
-      {
-        id: 2,
-        price: 21900,
-        title: "AetherteX Prometheus II i9 12900K PC Desktop",
-        imgSrc: "https://m.media-amazon.com/images/I/51DfICIDimL._SL500_.jpg",
-      },
-      {
-        id: 3,
-        price: 21900,
-        title: "AetherteX Prometheus II i9 12900K PC Desktop",
-        imgSrc: "https://m.media-amazon.com/images/I/51DfICIDimL._SL500_.jpg",
-      },
-    ]
-  },
-
-  {
-    id: 2,
-    Price: 12000,
-    Date: "13-04-2025",
-    Address: 2,
-    Quantity: 3,
-    products: [ 
-      {
-        id: 1,
-        price: 21900,
-        title: "AetherteX Prometheus II i9 12900K PC Desktop",
-        imgSrc: "https://m.media-amazon.com/images/I/51DfICIDimL._SL500_.jpg",
-      },
-      {
-        id: 2,
-        price: 21900,
-        title: "AetherteX Prometheus II i9 12900K PC Desktop",
-        imgSrc: "https://m.media-amazon.com/images/I/51DfICIDimL._SL500_.jpg",
-      },
-      {
-        id: 3,
-        price: 21900,
-        title: "AetherteX Prometheus II i9 12900K PC Desktop",
-        imgSrc: "https://m.media-amazon.com/images/I/51DfICIDimL._SL500_.jpg",
-      },
-     
-    ]
+      const actAddrlist= await getAddresses();
+      setAddrList(actAddrlist);
   }
-];
-
 
   return (
     <section className="ProfileSec" id="Profile">
@@ -107,10 +51,9 @@ function Profile() {
         </div>
 
         <div>
-            {activeModel === "details" && <DetailsModel User={User}/>}
-            {activeModel === "address" && <AddressModel Addr={Addr}/>}
-            {activeModel === "orders" && <OrdersModel Orders={orders} Addr={Addr}/>}
-            {activeModel === "invoices" && <OrderDetModel id={orders[1].id} price={orders[1].Price} Date={orders[1].Date} Addr={Addr[0]} products={orders[1].products}/>}
+            {activeModel === "details" && <DetailsModel User={user}/>}
+            {activeModel === "address" && <AddressModel Addr={AddrList}/>}
+            {activeModel === "orders" && <OrdersModel Orders={Orderdet} Addr={Addr}/>}
         </div>
         
     </section>    
