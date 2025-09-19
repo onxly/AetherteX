@@ -4,7 +4,7 @@ import { Link } from "react-router";
 import { FaStar, FaStarHalfAlt, FaRegStar } from "react-icons/fa";
 import "../stylesheets/ProductCard.css";
 
-function ProductCard({ imgSrc, title, price, discount, prodId, rating, ReviewsNum}) {
+function ProductCard({ imgSrc, title, price, discount, prodId, rating, ReviewsNum, comPCs=[], setComPCs}) {
   const stars = [];
       for (let i = 1; i <= 5; i++) {
           if (rating >= i) {
@@ -16,6 +16,11 @@ function ProductCard({ imgSrc, title, price, discount, prodId, rating, ReviewsNu
           }
       }
   
+      const addItem = (newID) => {
+        CheckId = comPCs.find(c => c.id === newId)
+        if  (CheckId)
+        setComPCs([...comPCs, newID]); 
+      };
   return (
     <div className="product-card">
       {/* Badge */}
@@ -57,6 +62,33 @@ function ProductCard({ imgSrc, title, price, discount, prodId, rating, ReviewsNu
           
         </div>
 
+<<<<<<< HEAD
+=======
+        {/* Description Section */}
+        <h4 className="product-title">{title}</h4>
+      </Link>
+      <div className="description">
+        <span className="ProdStars">{stars} ({ReviewsNum})</span>
+        <p className="product-price">R{price}</p>
+
+        <div className="Prodbtn">
+          <Button buttonClassName={"product-card-button-cart"}>
+            Add to Cart
+          </Button>
+
+            {comPCs.length < 2?(
+              <Checkbox 
+                onChange={() => addItem(prodId)}
+                label="Compare" 
+                sx={{ color: "white" }} 
+                size="sm" 
+              />
+            ):(
+              <Checkbox disabled="true" label="Compare" sx={{ color: "white" }} size="sm" />
+            )}
+          
+        </div>
+>>>>>>> e48dfe62e5aa848d4fc17fd53c2a1e5984d45155
         
       </Link>
      

@@ -35,6 +35,8 @@ public partial class Database1Context : DbContext
 
     public virtual DbSet<Ram> Rams { get; set; }
 
+    public virtual DbSet<Rating> Ratings { get; set; }
+
     public virtual DbSet<Shipping> Shippings { get; set; }
 
     public virtual DbSet<Storage> Storages { get; set; }
@@ -45,7 +47,7 @@ public partial class Database1Context : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
-        => optionsBuilder.UseSqlServer("Server=(localdb)\\MSSQLLocalDB;AttachDbFilename=C:\\Programing fun\\ASP.net\\AetherteX\\App_Data\\Database1.mdf;Database=Database1;Trusted_Connection=True;MultipleActiveResultSets=true");
+        => optionsBuilder.UseSqlServer("Server=(localdb)\\MSSQLLocalDB;AttachDbFilename=C:\\Programing fun\\Full Stack\\AetherteX\\ASP.NET Core\\AeatherteX-API\\App_Data\\Database1.mdf;Database=Database1;Trusted_Connection=True;MultipleActiveResultSets=true");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -54,8 +56,6 @@ public partial class Database1Context : DbContext
             entity.HasKey(e => e.AddressId).HasName("PK__tmp_ms_x__091C2A1B3B4FB66E");
 
             entity.ToTable("Address");
-
-            entity.HasIndex(e => e.AddressId, "UQ__tmp_ms_x__091C2A1A999F63F4").IsUnique();
 
             entity.Property(e => e.AddressId).HasColumnName("AddressID");
             entity.Property(e => e.City)
@@ -119,7 +119,17 @@ public partial class Database1Context : DbContext
                 .ValueGeneratedNever()
                 .HasColumnName("ClientID");
             entity.Property(e => e.IsPremium).HasColumnName("isPremium");
-            entity.Property(e => e.Username).HasMaxLength(12);
+            entity.Property(e => e.Username)
+                .HasMaxLength(12)
+                .IsUnicode(false);
+
+            entity.HasOne(d => d.Address1Navigation).WithMany(p => p.ClientAddress1Navigations)
+                .HasForeignKey(d => d.Address1)
+                .HasConstraintName("FK__Client__Address1__3A4CA8FD");
+
+            entity.HasOne(d => d.Address2Navigation).WithMany(p => p.ClientAddress2Navigations)
+                .HasForeignKey(d => d.Address2)
+                .HasConstraintName("FK__Client__Address2__3B40CD36");
 
             entity.HasOne(d => d.ClientNavigation).WithOne(p => p.Client)
                 .HasForeignKey<Client>(d => d.ClientId)
@@ -129,14 +139,17 @@ public partial class Database1Context : DbContext
 
         modelBuilder.Entity<Cpu>(entity =>
         {
-            entity.HasKey(e => e.CpuId).HasName("PK__CPU__D70B1FFD946457AB");
+            entity.HasKey(e => e.CpuId).HasName("PK__tmp_ms_x__D70B1FFD212A5FBD");
 
             entity.ToTable("CPU");
 
-            entity.HasIndex(e => e.CpuId, "UQ__CPU__D70B1FFC877A0B2B").IsUnique();
+            entity.HasIndex(e => e.CpuId, "UQ__tmp_ms_x__D70B1FFC53B67761").IsUnique();
 
             entity.Property(e => e.CpuId).HasColumnName("CPU_ID");
             entity.Property(e => e.BenchmarkScore).HasColumnType("decimal(20, 2)");
+            entity.Property(e => e.Brand)
+                .HasMaxLength(50)
+                .IsUnicode(false);
             entity.Property(e => e.ClockSpeed).HasColumnType("decimal(4, 2)");
             entity.Property(e => e.Name)
                 .HasMaxLength(100)
@@ -170,12 +183,13 @@ public partial class Database1Context : DbContext
             entity.Property(e => e.InvoiceId).HasColumnName("InvoiceID");
             entity.Property(e => e.AddressId).HasColumnName("AddressID");
             entity.Property(e => e.ClientId).HasColumnName("ClientID");
+            entity.Property(e => e.Date).HasColumnType("datetime");
             entity.Property(e => e.Price).HasColumnType("decimal(10, 2)");
 
             entity.HasOne(d => d.Address).WithMany(p => p.Invoices)
                 .HasForeignKey(d => d.AddressId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Invoice__Address__534D60F1");
+                .HasConstraintName("FK__Invoice__Address__282DF8C2");
 
             entity.HasOne(d => d.Client).WithMany(p => p.Invoices)
                 .HasForeignKey(d => d.ClientId)
@@ -218,7 +232,7 @@ public partial class Database1Context : DbContext
             entity.HasOne(d => d.Cpu).WithMany(p => p.Products)
                 .HasForeignKey(d => d.CpuId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Product__CPU_ID__787EE5A0");
+                .HasConstraintName("FK__Product__CPU_ID__634EBE90");
 
             entity.HasOne(d => d.Gpu).WithMany(p => p.Products)
                 .HasForeignKey(d => d.GpuId)
@@ -275,27 +289,48 @@ public partial class Database1Context : DbContext
                 .IsUnicode(false);
         });
 
+        modelBuilder.Entity<Rating>(entity =>
+        {
+            entity.HasKey(e => e.RatingId).HasName("PK__Rating__FCCDF85C702D9ABF");
+
+            entity.ToTable("Rating");
+
+            entity.Property(e => e.RatingId).HasColumnName("RatingID");
+            entity.Property(e => e.ProductId).HasColumnName("ProductID");
+            entity.Property(e => e.Review)
+                .HasMaxLength(255)
+                .IsUnicode(false);
+            entity.Property(e => e.UserId).HasColumnName("UserID");
+
+            entity.HasOne(d => d.Product).WithMany(p => p.Ratings)
+                .HasForeignKey(d => d.ProductId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK__Rating__ProductI__17036CC0");
+
+            entity.HasOne(d => d.User).WithMany(p => p.Ratings)
+                .HasForeignKey(d => d.UserId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK__Rating__UserID__160F4887");
+        });
+
         modelBuilder.Entity<Shipping>(entity =>
         {
-            entity.HasKey(e => new { e.AddressId, e.ClientId }).HasName("PK__tmp_ms_x__577BCBBBDB2DDB4B");
+            entity.HasKey(e => e.InvoiceId).HasName("PK__tmp_ms_x__D796AAD5858B3160");
 
             entity.ToTable("Shipping");
 
-            entity.Property(e => e.AddressId)
-                .ValueGeneratedOnAdd()
-                .HasColumnName("AddressID");
-            entity.Property(e => e.ClientId).HasColumnName("ClientID");
+            entity.Property(e => e.InvoiceId)
+                .ValueGeneratedNever()
+                .HasColumnName("InvoiceID");
             entity.Property(e => e.Instructions).HasColumnType("text");
+            entity.Property(e => e.Status)
+                .HasMaxLength(10)
+                .IsUnicode(false);
 
-            entity.HasOne(d => d.Address).WithMany(p => p.Shippings)
-                .HasForeignKey(d => d.AddressId)
+            entity.HasOne(d => d.Invoice).WithOne(p => p.Shipping)
+                .HasForeignKey<Shipping>(d => d.InvoiceId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Shipping__Addres__52593CB8");
-
-            entity.HasOne(d => d.Client).WithMany(p => p.Shippings)
-                .HasForeignKey(d => d.ClientId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Shipping__Client__4AB81AF0");
+                .HasConstraintName("FK__Shipping__Invoic__4F47C5E3");
         });
 
         modelBuilder.Entity<Storage>(entity =>
@@ -333,6 +368,9 @@ public partial class Database1Context : DbContext
                 .IsUnicode(false);
             entity.Property(e => e.Surname)
                 .HasMaxLength(30)
+                .IsUnicode(false);
+            entity.Property(e => e.Type)
+                .HasMaxLength(10)
                 .IsUnicode(false);
         });
 

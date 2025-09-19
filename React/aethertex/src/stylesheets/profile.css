@@ -74,7 +74,7 @@ Detail start
 .DetailsPage{
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 5px;
     padding-left: 20px;
     margin-left: 100px;
     grid-column: 2;
@@ -148,6 +148,24 @@ Order start
     grid-column: 2;
 }
 
+.OrdReturn{
+    cursor: pointer;
+    color: rgba(209, 166, 61, 1);
+}
+
+.OrderHistory{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+
+}
+
+.OrderDet{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
 .OrderBox{
     background-color: #1a1a1a;
     color: white;
@@ -173,4 +191,58 @@ Order start
 }
 /*
 Order end
+*/
+
+/*
+Order Det start
+*/
+.OrderDetPage{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding-left: 20px;
+    grid-column: 2;
+}
+
+.OrdDetSec{
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    border-radius: 10px;
+    gap: 2px;
+    width: 800px;
+    background-color: #1a1a1a;
+}
+
+.OrdDetShip{
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+}
+
+.OrderDetProduct{
+    padding: 10px;
+    display: flex;                   
+    gap: 5px;               
+    margin-bottom: 10px;    
+    background-color: #1a1a1a;
+    border-radius: 10px;
+    width: 70%;
+    align-items: center;
+}
+
+.OrdProdDetails{
+    margin-left: 25px; 
+    display: flex;
+    flex-direction:column;
+    margin-bottom:10px;
+}
+
+
+.OrderImg{
+    border: 2px solid rgba(209, 166, 61, 1);
+    border-radius: 10px;
+}
+/*
+Order Det start
 */

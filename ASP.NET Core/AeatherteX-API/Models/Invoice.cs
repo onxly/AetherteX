@@ -11,7 +11,7 @@ public partial class Invoice
 
     public decimal Price { get; set; }
 
-    public DateOnly Date { get; set; }
+    public DateTime Date { get; set; }
 
     public int AddressId { get; set; }
 
@@ -22,4 +22,6 @@ public partial class Invoice
     public virtual Client Client { get; set; } = null!;
 
     public virtual ICollection<Purchase> Purchases { get; set; } = new List<Purchase>();
+
+    public virtual Shipping? Shipping { get; set; }
 }

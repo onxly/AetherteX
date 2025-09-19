@@ -17,7 +17,9 @@ public partial class Address
 
     public string PostalCode { get; set; } = null!;
 
-    public virtual ICollection<Invoice> Invoices { get; set; } = new List<Invoice>();
+    public virtual ICollection<Client> ClientAddress1Navigations { get; set; } = new List<Client>();
 
-    public virtual ICollection<Shipping> Shippings { get; set; } = new List<Shipping>();
+    public virtual ICollection<Client> ClientAddress2Navigations { get; set; } = new List<Client>();
+
+    public virtual ICollection<Invoice> Invoices { get; set; } = new List<Invoice>();
 }

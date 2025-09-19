@@ -5,7 +5,7 @@ import "../stylesheets/Home.css";
 
 function Home() {
   document.title = "Home | AetherteX";
-  const [products, setProducts] = useState({});
+  const [comPCs, setComPCs] = useState([]);
   const [isShowingSidebar, setIsShowingSidebar] = useState(false);
   const [filters, setFilters] = useState({cpuOption: "Nothing", priceRange:[0,10000]});
 
@@ -40,6 +40,8 @@ function Home() {
       <ProductsList
         toggleSidebar={toggleSidebar}
         isShowingSidebar={isShowingSidebar}
+        comPCs={comPCs}
+        setComPCs={setComPCs}
       />
     </div>
   );

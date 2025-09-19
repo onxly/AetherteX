@@ -3,7 +3,7 @@ import ProductCard from "./ProductCard";
 import { GiHamburgerMenu } from "react-icons/gi";
 import "../stylesheets/ProductsList.css";
 
-function ProductsList({ toggleSidebar, isShowingSidebar }) {
+function ProductsList({ toggleSidebar, isShowingSidebar, comPCs, setComPCs }) {
   const[Items,setItems] = useState([
       {
         id: 1,
@@ -87,6 +87,11 @@ function ProductsList({ toggleSidebar, isShowingSidebar }) {
                                   rating={item.rating} 
                                   ReviewsNum={item.ReviewsNum}
                                   imgSrc={item.imgSrc}
+<<<<<<< HEAD
+=======
+                                  comPCs={comPCs}
+                                  setComPCs={setComPCs}
+>>>>>>> e48dfe62e5aa848d4fc17fd53c2a1e5984d45155
                                 />
                     }
                 )

@@ -34,15 +34,14 @@
              transition: 0.5s ease;
             transition: 0.5s ease-out;
 
-            border-left: 1px solid white;
-            border-right: 1px solid white;
+            
         }
         .column:hover
         {
             transition: 1s ease;
             transition: 1s ease-out;
-            box-shadow:  5px 0px 10px tan,
-                         -5px 0px 10px tan;
+            box-shadow:  5px 0px 10px var(--primary-color),
+                         -5px 0px 10px var(--primary-color);
             cursor: pointer;
         }
         .Registerloginbtn
@@ -63,7 +62,6 @@
 
         .Registerloginbtn:hover{
             background-color: var(--primary-color-dark);
-            border: black solid 2px;
         }
 
         .imageContainer {
