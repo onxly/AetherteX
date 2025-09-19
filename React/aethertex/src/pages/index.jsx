@@ -7,10 +7,23 @@ function Home() {
   document.title = "Home | AetherteX";
   const [products, setProducts] = useState({});
   const [isShowingSidebar, setIsShowingSidebar] = useState(false);
+  const [filters, setFilters] = useState({cpuOption: "Nothing", priceRange:[0,10000]});
 
   function toggleSidebar() {
     setIsShowingSidebar((c) => !c);
   }
+  
+  const filteredProducts = Array.isArray(products)
+  ? products.filter(product => {
+      const matchesCPU =
+        filters.cpuOption === "Nothing" || product.cpu === filters.cpuOption;
+      const matchesPrice =
+        product.price >= filters.priceRange[0] &&
+        product.price <= filters.priceRange[1];
+      return matchesCPU && matchesPrice;
+    })
+  : [];
+
   return (
     <div className="home-container" style={{ height: "100vh" }}>
       <div
