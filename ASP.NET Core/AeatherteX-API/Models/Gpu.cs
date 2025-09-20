@@ -11,7 +11,7 @@ public partial class Gpu
 
     public int Vram { get; set; }
 
-    public decimal CoreClock { get; set; }
+    public int CoreClock { get; set; }
 
     public decimal BenchmarkScore { get; set; }
 
