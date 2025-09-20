@@ -1,5 +1,10 @@
 import { useState, useEffect} from "react";
+<<<<<<< HEAD
 import { Outlet, Route, Routes,useLocation} from "react-router-dom";
+=======
+import { Outlet, Route, Routes, useLocation} from "react-router-dom";
+import Loader from "./components/Loader";
+>>>>>>> 6380522e3c3d47086bbfed0d9cb6cee7f4d2e22d
 import Home from "./pages";
 import Product from "./pages/product";
 import Login from "./pages/login";
@@ -11,7 +16,6 @@ import "./App.css";
 import NotFound from "./pages/not-found";
 import AdminHome from "./pages/admin";
 import Header from "./components/Header";
-
 import Checkout from "./pages/checkout";
 
 import Loader from "./components/Loader";
@@ -32,7 +36,10 @@ function LayoutNoNavbar() {
 }
 
 function App() {
+<<<<<<< HEAD
   
+=======
+>>>>>>> 6380522e3c3d47086bbfed0d9cb6cee7f4d2e22d
   const [loading, setLoading] = useState(true);
   const [fadeOut, setFadeOut] = useState(false);
   const location = useLocation();
@@ -56,7 +63,10 @@ function App() {
     const timer = setTimeout(() => setFadeOut(true), 300); // loader duration on page change
     return () => clearTimeout(timer);
   }, [location]);
+<<<<<<< HEAD
   
+=======
+>>>>>>> 6380522e3c3d47086bbfed0d9cb6cee7f4d2e22d
 
   return (
     <AuthProvider>
@@ -65,7 +75,10 @@ function App() {
           <div className="loader"></div>
         </div>
       )}
+<<<<<<< HEAD
 
+=======
+>>>>>>> 6380522e3c3d47086bbfed0d9cb6cee7f4d2e22d
       <Routes>
         {/* Routes with navbar */}
         <Route element={<LayoutWithNavbar />}>
@@ -80,7 +93,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/admin/:id" element={<AdminHome />} />
-          <Route path="/checkout" element={<Checkout />} />
+          <Route path="/checkout/:id" element={<Checkout />} />
         </Route>
 
         {/* Catch all */}
