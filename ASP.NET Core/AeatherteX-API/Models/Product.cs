@@ -9,13 +9,17 @@ public partial class Product
 
     public string Title { get; set; } = null!;
 
-    public string Image { get; set; } = null!;
+    public string Image1 { get; set; } = null!;
+
+    public string? Image2 { get; set; }
+
+    public string? Image3 { get; set; }
+
+    public string? Image4 { get; set; }
 
     public string Description { get; set; } = null!;
 
     public decimal Price { get; set; }
-
-    public DateOnly Date { get; set; }
 
     public string Motherboard { get; set; } = null!;
 
@@ -30,6 +34,10 @@ public partial class Product
     public int RamId { get; set; }
 
     public int StorageId { get; set; }
+
+    public int IsActive { get; set; }
+
+    public int Stock { get; set; }
 
     public virtual ICollection<Cart> Carts { get; set; } = new List<Cart>();
 

@@ -24,6 +24,4 @@ public partial class Client
     public virtual User ClientNavigation { get; set; } = null!;
 
     public virtual ICollection<Invoice> Invoices { get; set; } = new List<Invoice>();
-
-    public virtual ICollection<Shipping> Shippings { get; set; } = new List<Shipping>();
 }

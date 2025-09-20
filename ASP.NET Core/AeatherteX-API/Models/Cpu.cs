@@ -9,6 +9,8 @@ public partial class Cpu
 
     public string Name { get; set; } = null!;
 
+    public string Brand { get; set; } = null!;
+
     public int Cores { get; set; }
 
     public int Threads { get; set; }

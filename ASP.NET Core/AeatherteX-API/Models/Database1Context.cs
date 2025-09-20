@@ -101,7 +101,7 @@ public partial class Database1Context : DbContext
             entity.HasOne(d => d.Product).WithMany(p => p.Carts)
                 .HasForeignKey(d => d.ProductId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Cart__ProductID__76969D2E");
+                .HasConstraintName("FK__Cart__ProductID__1C873BEC");
 
             entity.HasOne(d => d.User).WithMany(p => p.Carts)
                 .HasForeignKey(d => d.UserId)
@@ -139,14 +139,17 @@ public partial class Database1Context : DbContext
 
         modelBuilder.Entity<Cpu>(entity =>
         {
-            entity.HasKey(e => e.CpuId).HasName("PK__CPU__D70B1FFD946457AB");
+            entity.HasKey(e => e.CpuId).HasName("PK__tmp_ms_x__D70B1FFD212A5FBD");
 
             entity.ToTable("CPU");
 
-            entity.HasIndex(e => e.CpuId, "UQ__CPU__D70B1FFC877A0B2B").IsUnique();
+            entity.HasIndex(e => e.CpuId, "UQ__tmp_ms_x__D70B1FFC53B67761").IsUnique();
 
             entity.Property(e => e.CpuId).HasColumnName("CPU_ID");
             entity.Property(e => e.BenchmarkScore).HasColumnType("decimal(20, 2)");
+            entity.Property(e => e.Brand)
+                .HasMaxLength(50)
+                .IsUnicode(false);
             entity.Property(e => e.ClockSpeed).HasColumnType("decimal(4, 2)");
             entity.Property(e => e.Name)
                 .HasMaxLength(100)
@@ -155,18 +158,18 @@ public partial class Database1Context : DbContext
 
         modelBuilder.Entity<Gpu>(entity =>
         {
-            entity.HasKey(e => e.GpuId).HasName("PK__GPU__E5353DF357C422A2");
+            entity.HasKey(e => e.GpuId).HasName("PK__tmp_ms_x__E5353DF34CB67665");
 
             entity.ToTable("GPU");
 
-            entity.HasIndex(e => e.GpuId, "UQ__GPU__E5353DF2649E5B0F").IsUnique();
+            entity.HasIndex(e => e.GpuId, "UQ__tmp_ms_x__E5353DF20C2210FA").IsUnique();
 
             entity.Property(e => e.GpuId).HasColumnName("GPU_ID");
             entity.Property(e => e.BenchmarkScore).HasColumnType("decimal(20, 2)");
-            entity.Property(e => e.CoreClock).HasColumnType("decimal(4, 2)");
             entity.Property(e => e.Name)
                 .HasMaxLength(100)
                 .IsUnicode(false);
+            entity.Property(e => e.Vram).HasColumnName("VRAM");
         });
 
         modelBuilder.Entity<Invoice>(entity =>
@@ -180,6 +183,7 @@ public partial class Database1Context : DbContext
             entity.Property(e => e.InvoiceId).HasColumnName("InvoiceID");
             entity.Property(e => e.AddressId).HasColumnName("AddressID");
             entity.Property(e => e.ClientId).HasColumnName("ClientID");
+            entity.Property(e => e.Date).HasColumnType("datetime");
             entity.Property(e => e.Price).HasColumnType("decimal(10, 2)");
 
             entity.HasOne(d => d.Address).WithMany(p => p.Invoices)
@@ -195,27 +199,34 @@ public partial class Database1Context : DbContext
 
         modelBuilder.Entity<Product>(entity =>
         {
-            entity.HasKey(e => e.ProductId).HasName("PK__tmp_ms_x__B40CC6ED44EFF45F");
+            entity.HasKey(e => e.ProductId).HasName("PK__tmp_ms_x__B40CC6ED96562119");
 
             entity.ToTable("Product");
 
-            entity.Property(e => e.ProductId)
-                .ValueGeneratedNever()
-                .HasColumnName("ProductID");
+            entity.Property(e => e.ProductId).HasColumnName("ProductID");
             entity.Property(e => e.Case)
-                .HasMaxLength(50)
+                .HasMaxLength(255)
                 .IsUnicode(false);
             entity.Property(e => e.CpuId).HasColumnName("CPU_ID");
             entity.Property(e => e.Description).HasColumnType("text");
             entity.Property(e => e.GpuId).HasColumnName("GPU_ID");
-            entity.Property(e => e.Image)
+            entity.Property(e => e.Image1)
+                .HasMaxLength(255)
+                .IsUnicode(false);
+            entity.Property(e => e.Image2)
+                .HasMaxLength(255)
+                .IsUnicode(false);
+            entity.Property(e => e.Image3)
+                .HasMaxLength(255)
+                .IsUnicode(false);
+            entity.Property(e => e.Image4)
                 .HasMaxLength(255)
                 .IsUnicode(false);
             entity.Property(e => e.Motherboard)
-                .HasMaxLength(50)
+                .HasMaxLength(255)
                 .IsUnicode(false);
             entity.Property(e => e.PowerSupply)
-                .HasMaxLength(50)
+                .HasMaxLength(255)
                 .IsUnicode(false)
                 .HasColumnName("Power_Supply");
             entity.Property(e => e.Price).HasColumnType("decimal(10, 2)");
@@ -228,22 +239,22 @@ public partial class Database1Context : DbContext
             entity.HasOne(d => d.Cpu).WithMany(p => p.Products)
                 .HasForeignKey(d => d.CpuId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Product__CPU_ID__787EE5A0");
+                .HasConstraintName("FK__Product__CPU_ID__2057CCD0");
 
             entity.HasOne(d => d.Gpu).WithMany(p => p.Products)
                 .HasForeignKey(d => d.GpuId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Product__GPU_ID__797309D9");
+                .HasConstraintName("FK__Product__GPU_ID__1F63A897");
 
             entity.HasOne(d => d.Ram).WithMany(p => p.Products)
                 .HasForeignKey(d => d.RamId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Product__RAM_ID__7A672E12");
+                .HasConstraintName("FK__Product__RAM_ID__214BF109");
 
             entity.HasOne(d => d.Storage).WithMany(p => p.Products)
                 .HasForeignKey(d => d.StorageId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Product__Storage__7B5B524B");
+                .HasConstraintName("FK__Product__Storage__22401542");
         });
 
         modelBuilder.Entity<Purchase>(entity =>
@@ -264,7 +275,7 @@ public partial class Database1Context : DbContext
             entity.HasOne(d => d.Product).WithMany(p => p.Purchases)
                 .HasForeignKey(d => d.ProductId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Purchase__Produc__778AC167");
+                .HasConstraintName("FK__Purchase__Produc__1D7B6025");
         });
 
         modelBuilder.Entity<Ram>(entity =>
@@ -301,7 +312,7 @@ public partial class Database1Context : DbContext
             entity.HasOne(d => d.Product).WithMany(p => p.Ratings)
                 .HasForeignKey(d => d.ProductId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Rating__ProductI__17036CC0");
+                .HasConstraintName("FK__Rating__ProductI__1B9317B3");
 
             entity.HasOne(d => d.User).WithMany(p => p.Ratings)
                 .HasForeignKey(d => d.UserId)
@@ -311,25 +322,22 @@ public partial class Database1Context : DbContext
 
         modelBuilder.Entity<Shipping>(entity =>
         {
-            entity.HasKey(e => new { e.AddressId, e.ClientId }).HasName("PK__tmp_ms_x__577BCBBBDB2DDB4B");
+            entity.HasKey(e => e.InvoiceId).HasName("PK__tmp_ms_x__D796AAD5858B3160");
 
             entity.ToTable("Shipping");
 
-            entity.Property(e => e.AddressId)
-                .ValueGeneratedOnAdd()
-                .HasColumnName("AddressID");
-            entity.Property(e => e.ClientId).HasColumnName("ClientID");
+            entity.Property(e => e.InvoiceId)
+                .ValueGeneratedNever()
+                .HasColumnName("InvoiceID");
             entity.Property(e => e.Instructions).HasColumnType("text");
+            entity.Property(e => e.Status)
+                .HasMaxLength(10)
+                .IsUnicode(false);
 
-            entity.HasOne(d => d.Address).WithMany(p => p.Shippings)
-                .HasForeignKey(d => d.AddressId)
+            entity.HasOne(d => d.Invoice).WithOne(p => p.Shipping)
+                .HasForeignKey<Shipping>(d => d.InvoiceId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Shipping__Addres__2739D489");
-
-            entity.HasOne(d => d.Client).WithMany(p => p.Shippings)
-                .HasForeignKey(d => d.ClientId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Shipping__Client__4AB81AF0");
+                .HasConstraintName("FK__Shipping__Invoic__4F47C5E3");
         });
 
         modelBuilder.Entity<Storage>(entity =>
@@ -385,7 +393,7 @@ public partial class Database1Context : DbContext
             entity.HasOne(d => d.Product).WithMany(p => p.Wishlists)
                 .HasForeignKey(d => d.ProductId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Wishlist__Produc__7C4F7684");
+                .HasConstraintName("FK__Wishlist__Produc__1E6F845E");
 
             entity.HasOne(d => d.User).WithMany(p => p.Wishlists)
                 .HasForeignKey(d => d.UserId)

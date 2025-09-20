@@ -9,7 +9,9 @@ public partial class Gpu
 
     public string Name { get; set; } = null!;
 
-    public decimal CoreClock { get; set; }
+    public int Vram { get; set; }
+
+    public int CoreClock { get; set; }
 
     public decimal BenchmarkScore { get; set; }
 
