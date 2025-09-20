@@ -8,6 +8,8 @@ import "../stylesheets/product.css";
 
 function Product() {
   const {id} = useParams();
+
+  
   const Product = {
   ProductId: id,
   Title: "AetherteX Prometheus II i9 12900K PC Desktop",
@@ -62,6 +64,7 @@ function Product() {
     },
   ];
   document.title = Product.Title + " | AetherteX";
+
   return (
     <div className="cApp">
       <ImgProduct
