@@ -14,12 +14,11 @@
     "@emotion/styled": "^11.14.1",
     "@mui/joy": "^5.0.0-beta.52",
     "@mui/material": "^7.3.2",
-<<<<<<< HEAD
+
     "axios": "^1.12.1",
-=======
+
     "html2canvas": "^1.4.1",
     "jspdf": "^3.0.3",
->>>>>>> 6380522e3c3d47086bbfed0d9cb6cee7f4d2e22d
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
     "react-icons": "^5.5.0",
