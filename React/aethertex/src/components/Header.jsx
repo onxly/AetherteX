@@ -8,9 +8,11 @@ import { FaUser, FaCrown  } from "react-icons/fa";
 import CartIcon from "./CartIcon";
 
 function Header() {
-  const { isLoggedIn, setIsLoggedIn, user, cart } = useContext(AuthContext);
+  const { isLoggedIn, setIsLoggedIn, user, cart = [] } = useContext(AuthContext);
   const [LogModel, setLogModel] = useState(false);
   const [UserModel, setUserModel] = useState(false);
+
+  const totalItems = cart.reduce((acc, item) => acc + item.Quantity, 0);
   return (
     <header className="navBar">
       <Link to="/">
@@ -114,7 +116,7 @@ function Header() {
     
     {isLoggedIn?(
       <Link to={"/cart"} style={{ textDecorationLine: "none" }}>
-        <CartIcon iconColor={"white"} numItems={cart.numOf} />
+        <CartIcon iconColor={"white"} numItems={totalItems} />
       </Link>
     ):(
       <Link to={"/cart"} style={{ textDecorationLine: "none" }}>

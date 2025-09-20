@@ -2,11 +2,18 @@ import RadioButtonList from "../components/RadioButtonList";
 import { useParams } from "react-router-dom";
 import Icon from "../assets/AetherteXIcon.png";
 import { FaLock } from "react-icons/fa";
+import { AuthContext } from "../contexts/AuthContext";
+import { useContext } from "react";
 import "../stylesheets/checkout.css"
 
 function checkout(info)
 {
     document.title = "Checkout | AetherteX";
+    const { isLoggedIn, cart =[], setCart } = useContext(AuthContext);
+    const totalItems = cart.reduce((acc, item) => acc + item.Quantity, 0);
+    const subtotal = cart.reduce((acc, item) => acc + item.Price * item.Quantity, 0);
+    const DeliveryFee = subtotal > 0 ? 100 : 0;
+    const total = subtotal > 5100 ? subtotal : subtotal - DeliveryFee;
     const currentYear = new Date().getFullYear();
     const endYear = 2035;
     const years = [];
@@ -55,9 +62,9 @@ function checkout(info)
                 width={164}
             />
             <h2>Order Summary</h2>
-            <b>3 items: &nbsp;</b>R20 123 <br /> <br />
+            <b>{totalItems} items: &nbsp;</b>R {total} <br /> <br />
             <em>No coupons applied</em> <br /> <br />
-            <b>To pay: &nbsp;</b> R20 123 <br /> <br />
+            <b>To pay: &nbsp;</b> R {total} <br /> <br />
             <FaLock size={20} color="gray" /> Secure checkout
             
         </div>
