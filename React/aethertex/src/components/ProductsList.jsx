@@ -20,7 +20,7 @@ import {getAllProducts} from "../jsfunctions/alljsfunctions";
 function ProductsList({ toggleSidebar, isShowingSidebar }) {
   const [comPCs, setComPCs] = useState([]);
   const[showModal, setShowModal] = useState(true);
-  const[Items,setItems] = useState();
+  const[Items,setItems] = useState([]);
 
     useEffect(()=>
       {
