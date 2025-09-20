@@ -1,6 +1,5 @@
 ﻿using AeatherteX_API.Models;
 using Microsoft.AspNetCore.Mvc;
-using static AeatherteX_API.Controllers.OrdersController;
 
 namespace AeatherteX_API.Controllers
 {
@@ -45,6 +44,54 @@ namespace AeatherteX_API.Controllers
             var storages = (from s in db.Storages
                             select s).ToList();
             return StatusCode(0, storages);
+        }
+
+        // GET: AeatherAPI/components/cpu/{id}
+        [HttpGet("cpu/{id}")]
+        public ActionResult<Cpu> GetCPUById(int id) // Get CPU by ID
+        {
+            var cpu = db.Cpus.Find(id);
+            if (cpu == null)
+            {
+                return StatusCode(1, "CPU not found");
+            }
+            return StatusCode(0, cpu);
+        }
+
+        // GET: AeatherAPI/components/gpu/{id}
+        [HttpGet("gpu/{id}")]
+        public ActionResult<Gpu> GetGPUById(int id) // Get GPU by ID
+        {
+            var gpu = db.Gpus.Find(id);
+            if (gpu == null)
+            {
+                return StatusCode(1, "GPU not found");
+            }
+            return StatusCode(0, gpu);
+        }
+
+        // GET: AeatherAPI/components/ram/{id}
+        [HttpGet("ram/{id}")]
+        public ActionResult<Ram> GetRAMById(int id) // Get RAM by ID
+        {
+            var ram = db.Rams.Find(id);
+            if (ram == null)
+            {
+                return StatusCode(1, "RAM not found");
+            }
+            return StatusCode(0, ram);
+        }
+
+        // GET: AeatherAPI/components/storage/{id}
+        [HttpGet("storage/{id}")]
+        public ActionResult<Storage> GetStorageById(int id) // Get Storage by ID
+        {
+            var storage = db.Storages.Find(id);
+            if (storage == null)
+            {
+                return StatusCode(1, "Storage not found");
+            }
+            return StatusCode(0, storage);
         }
     }
 }

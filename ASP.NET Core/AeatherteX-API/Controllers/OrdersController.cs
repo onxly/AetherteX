@@ -16,7 +16,7 @@ namespace AeatherteX_API.Controllers
 
         public class CreateOrderRequest
         {
-            public Purchase[] Purchases { get; set; }
+            public List<Purchase> Purchases { get; set; }
             public int ClientId { get; set; }
             public int AddressId { get; set; }
             public string? Instructions { get; set; }
@@ -27,6 +27,12 @@ namespace AeatherteX_API.Controllers
             public Invoice Invoice { get; set; }
             public Shipping Shipping { get; set; }
             public List<Purchase> Purchases { get; set; }
+        }
+
+        public class GetByDateRequest
+        {
+            public DateTime StartDate { get; set; }
+            public DateTime EndDate { get; set; }
         }
 
 
@@ -105,13 +111,18 @@ namespace AeatherteX_API.Controllers
             foreach (var purchase in request.Purchases)
             {
                 var product = (from p in db.Products
-                               where p.ProductId == purchase.ProductId
+                               where p.ProductId == purchase.ProductId && p.IsActive == 1 && p.Stock >= purchase.Quantity
                                select p).FirstOrDefault();
-                if (product == null)
-                    return StatusCode(1, $"Product with ID {purchase.ProductId} not found");
-                totalPrice += product.Price * purchase.Quantity;
-                totalQuantity += purchase.Quantity;
+                if (product != null)
+                {
+                    totalPrice += product.Price * purchase.Quantity;
+                    totalQuantity += purchase.Quantity;
+                }
+                          
             }
+            if (totalQuantity <= 0 || totalPrice <= 0)
+                return StatusCode(1, "No valid products in the order");
+
             var invoice = new Invoice
             {
                 ClientId = request.ClientId,
@@ -125,16 +136,20 @@ namespace AeatherteX_API.Controllers
             foreach (var purchase in request.Purchases)
             {
                 var product = (from p in db.Products
-                               where p.ProductId == purchase.ProductId
+                               where p.ProductId == purchase.ProductId && p.IsActive == 1 && p.Stock >= purchase.Quantity
                                select p).FirstOrDefault();
-                var newPurchase = new Purchase
+                if(product != null)
                 {
-                    InvoiceId = invoice.InvoiceId,
-                    ProductId = purchase.ProductId,
-                    Quantity = purchase.Quantity,
-                    Price = product.Price * purchase.Quantity
-                };
-                db.Purchases.Add(newPurchase);
+                    var newPurchase = new Purchase
+                    {
+                        InvoiceId = invoice.InvoiceId,
+                        ProductId = product.ProductId,
+                        Quantity = purchase.Quantity,
+                        Price = product.Price * purchase.Quantity
+                    };
+                    db.Purchases.Add(newPurchase);
+                    product.Stock -= purchase.Quantity;
+                }
             }
             db.SaveChanges();
 
@@ -150,6 +165,35 @@ namespace AeatherteX_API.Controllers
             db.SaveChanges();
            
             return StatusCode(0, invoice.InvoiceId);
+        }
+
+        // POST: AeatherAPI/orders/bydate
+        [HttpPost("bydate")]
+        public ActionResult<List<OrderDetailsResponse>> GetOrdersByDate([FromBody] GetByDateRequest request) // Get all orders within a specific date range
+        {
+            var invoices = (from i in db.Invoices
+                            where i.Date >= request.StartDate && i.Date <= request.EndDate
+                            select i).ToList();
+            if (invoices.Count == 0)
+                return StatusCode(1, "No invoices found in the given date range");
+            var orders = new List<OrderDetailsResponse>();
+            foreach (var invoice in invoices)
+            {
+                var shipping = (from s in db.Shippings
+                                where s.InvoiceId == invoice.InvoiceId
+                                select s).FirstOrDefault();
+                var purchases = (from p in db.Purchases
+                                 where p.InvoiceId == invoice.InvoiceId
+                                 select p).ToList();
+                var order = new OrderDetailsResponse
+                {
+                    Invoice = invoice,
+                    Shipping = shipping,
+                    Purchases = purchases
+                };
+                orders.Add(order);
+            }
+            return StatusCode(0, orders);
         }
     }
 }

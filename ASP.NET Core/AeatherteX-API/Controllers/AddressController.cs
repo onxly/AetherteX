@@ -22,6 +22,7 @@ namespace AeatherteX_API.Controllers
         public class UpdateAddressRequest
         {
             public int ClientId { get; set; }
+            public int AddressId { get; set; }
             public string? Line1 { get; set; }
             public string? Line2 { get; set; }
             public string? City { get; set; }
@@ -31,7 +32,7 @@ namespace AeatherteX_API.Controllers
 
         // GET: AeatherAPI/address/{id}
         [HttpGet("{id}")]
-        public ActionResult<Address> GetAddress(int id)
+        public ActionResult<Address> GetAddress(int id) // Get address details by address ID
         {
             var address = (from a in db.Addresses
                            where a.AddressId == id
@@ -112,21 +113,13 @@ namespace AeatherteX_API.Controllers
                           select c).FirstOrDefault();
             if (client == null)
                 return StatusCode(1, "Client not found");
-            Address? address = null;
-            if (client.Address1 != null)
-            {
-                address = (from a in db.Addresses
-                           where a.AddressId == client.Address1
+            if (client.Address1 != request.AddressId && client.Address2 != request.AddressId)
+                return StatusCode(1, "Address not associated with client");
+            var address = (from a in db.Addresses
+                           where a.AddressId == request.AddressId
                            select a).FirstOrDefault();
-            }
-            if (address == null && client.Address2 != null)
-            {
-                address = (from a in db.Addresses
-                           where a.AddressId == client.Address2
-                           select a).FirstOrDefault();
-            }
             if (address == null)
-                return StatusCode(1, "Client has no associated addresses");
+                return StatusCode(1, "Address not found");
             if (request.Line1 != null)
                 address.Line1 = request.Line1;
             if (request.Line2 != null)
