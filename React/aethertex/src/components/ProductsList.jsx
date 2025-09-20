@@ -1,4 +1,4 @@
-import React,{ useState } from "react";
+import { useState,useEffect } from "react";
 import ProductCard from "./ProductCard";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { FaMicrochip, FaDatabase } from "react-icons/fa";   // CPU + storage (alt)
@@ -15,186 +15,22 @@ import {
   Legend
 } from "recharts";
 import "../stylesheets/ProductsList.css";
-import {GetProducts} from "../jsfunctions/alljsfunctions"
+import {getAllProducts} from "../jsfunctions/alljsfunctions";
 
-<<<<<<< HEAD
-function ProductsList({ toggleSidebar, isShowingSidebar, comPCs, setComPCs }) {
-  const[items,setitems] = useState();
-  
-  async function getitemslist()
-  {
-    const itemslist=await Getitems();
-    setitems(itemslist)
-  }
-=======
 function ProductsList({ toggleSidebar, isShowingSidebar }) {
   const [comPCs, setComPCs] = useState([]);
-  const[showModal, setShowModal] = useState(true)
-  const[Items,setItems] = useState([
+  const[showModal, setShowModal] = useState(true);
+  const[Items,setItems] = useState();
+
+    useEffect(()=>
       {
-        id: 1,
-        price: 21900,
-        title: "AetherteX Prometheus II i9 12900K PC Desktop",
-        imgSrc: "https://m.media-amazon.com/images/I/51DfICIDimL._SL500_.jpg",
-        rating: 4.8,
-        ReviewsNum: 183,
-      },
-      {
-        id: 2,
-        price: 21900,
-        title: "AetherteX Prometheus II i9 12900K PC Desktop",
-        imgSrc: "https://m.media-amazon.com/images/I/51DfICIDimL._SL500_.jpg",
-        rating: 4.8,
-        ReviewsNum: 183,
-      },
-      {
-        id: 3,
-        price: 21900,
-        title: "AetherteX Prometheus II i9 12900K PC Desktop",
-        imgSrc: "https://m.media-amazon.com/images/I/51DfICIDimL._SL500_.jpg",
-        rating: 4.8,
-        ReviewsNum: 183,
-      },
-      {
-        id: 4,
-        price: 21900,
-        title: "AetherteX Prometheus II i9 12900K PC Desktop",
-        imgSrc: "https://m.media-amazon.com/images/I/51DfICIDimL._SL500_.jpg",
-        rating: 4.8,
-        ReviewsNum: 183,
-      },
-      {
-        id: 5,
-        price: 21900,
-        title: "AetherteX Prometheus II i9 12900K PC Desktop",
-        imgSrc: "https://m.media-amazon.com/images/I/51DfICIDimL._SL500_.jpg",
-        rating: 4.8,
-        ReviewsNum: 183,
-        Discount: 0,
-      },
-      {
-        id: 6,
-        price: 21900,
-        title: "AetherteX Prometheus II i9 12900K PC Desktop",
-        imgSrc: "https://m.media-amazon.com/images/I/51DfICIDimL._SL500_.jpg",
-        rating: 4.8,
-        ReviewsNum: 183,
-      },
-      {
-        id: 7,
-        price: 21900,
-        title: "AetherteX Prometheus II i9 12900K PC Desktop",
-        imgSrc: "https://m.media-amazon.com/images/I/51DfICIDimL._SL500_.jpg",
-        rating: 4.8,
-        ReviewsNum: 183,
-      },
-      {
-        id: 8,
-        price: 21900,
-        title: "AetherteX Prometheus II i9 12900K PC Desktop",
-        imgSrc: "https://m.media-amazon.com/images/I/51DfICIDimL._SL500_.jpg",
-        rating: 4.8,
-        ReviewsNum: 183,
-      },
-      {
-        id: 9,
-        price: 21900,
-        title: "AetherteX Prometheus II i9 12900K PC Desktop",
-        imgSrc: "https://m.media-amazon.com/images/I/51DfICIDimL._SL500_.jpg",
-        rating: 4.8,
-        ReviewsNum: 183,
-      },
-      {
-        id: 10,
-        price: 21900,
-        title: "AetherteX Prometheus II i9 12900K PC Desktop",
-        imgSrc: "https://m.media-amazon.com/images/I/51DfICIDimL._SL500_.jpg",
-        rating: 4.8,
-        ReviewsNum: 183,
-      },
-      {
-        id: 11,
-        price: 21900,
-        title: "AetherteX Prometheus II i9 12900K PC Desktop",
-        imgSrc: "https://m.media-amazon.com/images/I/51DfICIDimL._SL500_.jpg",
-        rating: 4.8,
-        ReviewsNum: 183,
-      },
-      {
-        id: 12,
-        price: 21900,
-        title: "AetherteX Prometheus II i9 12900K PC Desktop",
-        imgSrc: "https://m.media-amazon.com/images/I/51DfICIDimL._SL500_.jpg",
-        rating: 4.8,
-        ReviewsNum: 183,
-      },
-      {
-        id: 13,
-        price: 21900,
-        title: "AetherteX Prometheus II i9 12900K PC Desktop",
-        imgSrc: "https://m.media-amazon.com/images/I/51DfICIDimL._SL500_.jpg",
-        rating: 4.8,
-        ReviewsNum: 183,
-      },
-      {
-        id: 14,
-        price: 21900,
-        title: "AetherteX Prometheus II i9 12900K PC Desktop",
-        imgSrc: "https://m.media-amazon.com/images/I/51DfICIDimL._SL500_.jpg",
-        rating: 4.8,
-        ReviewsNum: 183,
-      },
-      {
-        id: 15,
-        price: 21900,
-        title: "AetherteX Prometheus II i9 12900K PC Desktop",
-        imgSrc: "https://m.media-amazon.com/images/I/51DfICIDimL._SL500_.jpg",
-        rating: 4.8,
-        ReviewsNum: 183,
-      },
-      {
-        id: 16,
-        price: 21900,
-        title: "AetherteX Prometheus II i9 12900K PC Desktop",
-        imgSrc: "https://m.media-amazon.com/images/I/51DfICIDimL._SL500_.jpg",
-        rating: 4.8,
-        ReviewsNum: 183,
-      },
-      {
-        id: 17,
-        price: 21900,
-        title: "AetherteX Prometheus II i9 12900K PC Desktop",
-        imgSrc: "https://m.media-amazon.com/images/I/51DfICIDimL._SL500_.jpg",
-        rating: 4.8,
-        ReviewsNum: 183,
-      },
-      {
-        id: 18,
-        price: 21900,
-        title: "AetherteX Prometheus II i9 12900K PC Desktop",
-        imgSrc: "https://m.media-amazon.com/images/I/51DfICIDimL._SL500_.jpg",
-        rating: 4.8,
-        ReviewsNum: 183,
-      },
-      {
-        id: 19,
-        price: 21900,
-        title: "AetherteX Prometheus II i9 12900K PC Desktop",
-        imgSrc: "https://m.media-amazon.com/images/I/51DfICIDimL._SL500_.jpg",
-        rating: 4.8,
-        ReviewsNum: 183,
-      },
-      {
-        id: 20,
-        price: 21900,
-        title: "AetherteX Prometheus II i9 12900K PC Desktop",
-        imgSrc: "https://m.media-amazon.com/images/I/51DfICIDimL._SL500_.jpg",
-        rating: 4.8,
-        ReviewsNum: 183,
-      }
-    
-    ]);
->>>>>>> 6380522e3c3d47086bbfed0d9cb6cee7f4d2e22d
+        async function setProductList()
+          {
+            const ProdList=await getAllProducts();
+            setItems(ProdList);
+          }
+          setProductList();
+      },[]);
 
     const dataA = [
     
@@ -226,21 +62,15 @@ function ProductsList({ toggleSidebar, isShowingSidebar }) {
         className="itemslist-container-scrollview"
         style={{ width: isShowingSidebar ? "80vw" : "94vw" }}
       >
-<<<<<<< HEAD
-        {items.length !== 0 ?
-            (
-                items.map
-=======
                 {Items.map
->>>>>>> 6380522e3c3d47086bbfed0d9cb6cee7f4d2e22d
                 (
                     item =>
                     {
-                        return <itemsCard 
+                        return <ProductCard 
                                   key={item.id} 
                                   prodId={item.id} 
-                                  price={item.price} 
-                                  title={item.title} 
+                                  price={item.Price} 
+                                  title={item.Title} 
                                   discount={item.discount} 
                                   rating={item.rating} 
                                   ReviewsNum={item.ReviewsNum}

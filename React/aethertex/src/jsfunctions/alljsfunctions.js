@@ -1,21 +1,21 @@
 import axios from "axios";
 const apilink="http://localhost:3000/AeatherAPI/";
 
-/*export async function getOrders()
+export async function getAllProducts()
 {
-    const res=await axios.get(apilink);
+    const res=await axios.GET(apilink+"products");
     return res.data;
 }
 
-export async function UpdateUser(RequestBody)
-{
-    const res=await axios.PUT(apilink+"update/{id}",RequestBody);
-    return res.data;
-}*/
-
-export async function getAddresses()
+export async function getAllAddresses()
 {
     const res=await axios.GET(apilink+"address/{id}");
+    return res.data;
+}
+
+export async function getAllOrders()
+{
+    const res=await axios.get(apilink+"orders");
     return res.data;
 }
 
@@ -44,6 +44,19 @@ export async function updateAddress(clientId,line1,line2,City,region,postalCode)
     const res=await axios.PUT(apilink+"address",adressobj);
     return res.data;
 }
+
+/*export async function getOrders()
+{
+    const res=await axios.get(apilink);
+    return res.data;
+}
+
+export async function UpdateUser(RequestBody)
+{
+    const res=await axios.PUT(apilink+"update/{id}",RequestBody);
+    return res.data;
+}*/
+
 
 export async function GetProducts()
 {
