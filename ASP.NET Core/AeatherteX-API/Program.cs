@@ -11,6 +11,15 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 
+// Enable memory cache + session
+builder.Services.AddDistributedMemoryCache();
+builder.Services.AddSession(options =>
+{
+    options.Cookie.HttpOnly = true;
+    options.Cookie.IsEssential = true;
+});
+
+// Enable CORS for all origins, headers, and methods
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowAll", policy =>
@@ -30,9 +39,11 @@ var app = builder.Build();
 
 // Configure the HTTP request pipeline.
 
-app.UseCors("AllowAll");
+app.UseCors("AllowAll"); // Use the CORS policy
 
 app.UseAuthorization();
+
+app.UseSession(); // Use session
 
 app.MapControllers();
 

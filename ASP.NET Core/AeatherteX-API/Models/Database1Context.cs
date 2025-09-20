@@ -158,11 +158,11 @@ public partial class Database1Context : DbContext
 
         modelBuilder.Entity<Gpu>(entity =>
         {
-            entity.HasKey(e => e.GpuId).HasName("PK__GPU__E5353DF357C422A2");
+            entity.HasKey(e => e.GpuId).HasName("PK__tmp_ms_x__E5353DF34CB67665");
 
             entity.ToTable("GPU");
 
-            entity.HasIndex(e => e.GpuId, "UQ__GPU__E5353DF2649E5B0F").IsUnique();
+            entity.HasIndex(e => e.GpuId, "UQ__tmp_ms_x__E5353DF20C2210FA").IsUnique();
 
             entity.Property(e => e.GpuId).HasColumnName("GPU_ID");
             entity.Property(e => e.BenchmarkScore).HasColumnType("decimal(20, 2)");
@@ -170,6 +170,7 @@ public partial class Database1Context : DbContext
             entity.Property(e => e.Name)
                 .HasMaxLength(100)
                 .IsUnicode(false);
+            entity.Property(e => e.Vram).HasColumnName("VRAM");
         });
 
         modelBuilder.Entity<Invoice>(entity =>
@@ -246,7 +247,7 @@ public partial class Database1Context : DbContext
             entity.HasOne(d => d.Gpu).WithMany(p => p.Products)
                 .HasForeignKey(d => d.GpuId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Product__GPU_ID__7A3223E8");
+                .HasConstraintName("FK__Product__GPU_ID__09746778");
 
             entity.HasOne(d => d.Ram).WithMany(p => p.Products)
                 .HasForeignKey(d => d.RamId)

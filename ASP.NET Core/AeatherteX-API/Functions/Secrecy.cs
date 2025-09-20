@@ -11,6 +11,8 @@ namespace AeatherteX_API.Functions
 {
     public static class Secrecy
     {
+        public static string AdminPassword = "AcsseAetherInfo:code25"; // Default admin password
+
         public static string HashPassword(string password)
         {
             using (SHA256 sha256 = SHA256.Create())

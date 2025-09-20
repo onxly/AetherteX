@@ -32,7 +32,7 @@ namespace AeatherteX_API.Controllers
 
         // GET: AeatherAPI/address/{id}
         [HttpGet("{id}")]
-        public ActionResult<Address> GetAddress(int id)
+        public ActionResult<Address> GetAddress(int id) // Get address details by address ID
         {
             var address = (from a in db.Addresses
                            where a.AddressId == id
