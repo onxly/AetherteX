@@ -1,68 +1,24 @@
 import React,{ useState } from "react";
+import { Link, UNSAFE_useFogOFWarDiscovery } from "react-router";
+import { AuthContext } from "../contexts/AuthContext";
+import { useContext } from "react";
 import { FaTrash } from "react-icons/fa";
 
 import '../stylesheets/cart.css';
 function Cart() {
   document.title = "Cart | AetherteX";
-
-  async
-  const[Items,setItems] = useState([
-    {
-      id:1,
-      count:1,
-      name:"AetherteX Prometheus II i9 12900K PC Desktop",
-      price: 2000 ,
-      image: "https://m.media-amazon.com/images/I/41BiCUr2t9L.jpg",
-    }
-    ,
-    {
-      id:2,
-      count:1,
-      name: "AetherteX Prometheus II i9 12900K PC Desktop",
-      price: 1000,
-      image: "https://m.media-amazon.com/images/I/51mzyMImf+L._SL500_.jpg",
-    }
-    ,
-     {
-      id:3,
-      count:1,
-      name: "AetherteX Prometheus II i9 12900K PC Desktop",
-      price: 10000,
-      image: "https://m.media-amazon.com/images/I/41Zs+nz-M0L._SL500_.jpg",
-    },
-    {
-      id:4,
-       count:1,
-      name:"AetherteX Athena blade 32GB",
-      price: 10000,
-      image: "https://m.media-amazon.com/images/I/41tlFlXd+rL._SL500_.jpg",
-    },
-     {
-      id:5,
-      count:1,
-      name:"AetherteX Athena blade 32GB",
-      price: 10000,
-      image: "https://m.media-amazon.com/images/I/41tlFlXd+rL._SL500_.jpg",
-    }
+  const { isLoggedIn, cart =[], setCart } = useContext(AuthContext);
    
-  ]); 
-   
-  async function setCart()
-  {
-    
-  }
-   
-
   function increaseCount(id) {
-    setItems
+    setCart
     (
-      Items.map
+      cart.map
       (
         item=>
         {
           if(item.id==id)
           {
-            return {...item, count :item.count+1}
+            return {...item, Quantity :item.Quantity+1}
           }
           return item;
         }
@@ -71,15 +27,15 @@ function Cart() {
   }
 
     function decreaseCount(id) {
-    setItems
+    setCart
     (
-      Items.map
+      cart.map
       (
         item=>
         {
           if(item.id==id)
           {
-            return{...item, count: item.count > 0 ? item.count - 1 : 0 }
+            return{...item, Quantity: item.Quantity > 0 ? item.Quantity - 1 : 0 }
           }
           return item;
         }
@@ -88,9 +44,9 @@ function Cart() {
   }
   function removeItem(id)
   {
-    setItems
+    setCart
     (
-      Items.filter
+      cart.filter
       (
         item=>item.id!=id
       )
@@ -98,35 +54,42 @@ function Cart() {
   }
 
   {/*calculations for billing*/}
-  const subtotal = Items.reduce((acc, item) => acc + item.price * item.count, 0);
+  const subtotal = cart.reduce((acc, item) => acc + item.Price * item.Quantity, 0);
   const DeliveryFee = subtotal > 0 ? 100 : 0;
   const total = subtotal > 5100 ? subtotal : subtotal - DeliveryFee;
-  const totalItems = Items.reduce((acc, item) => acc + item.count, 0);
+  const totalItems = cart.reduce((acc, item) => acc + item.Quantity, 0);
 
   return (
   <section className="CartSec" >
       <div className="CartHeading">
-        <h1>Cart - {totalItems}</h1>
-        
+        {isLoggedIn?(
+          <h1>Cart - {totalItems}</h1>
+        ):(
+          <h1>Cart</h1>
+        )}
       </div>
         
     <div className="items">
-    {Items.length !== 0 ?
+    {cart.length !== 0 && isLoggedIn ?
     (
-        Items.map
+        cart.map
         (
             item =>
             {
                 return <div key={item.id} className="cartItem">
-                    <img className="itemImage" src={item.image} width={200} height={200}/>
+                    <img className="itemImage" src={item.Img} width={200} height={200}/>
 
                     <div className="itemDetails" >
-                        <h3>{item.name}</h3>
-                        <em>In stock</em>
+                        <h3>{item.Title}</h3>
+                        {item.Stock?(
+                          <em>In stock</em>
+                        ):(
+                          <em>Out of stock</em>
+                        )}
                         <div className="IncDecStyle">
-                            <span id="Price"> R {item.price}</span>
+                            <span id="Price"> R {item.Price}</span>
                             <button id="decrease" className="btnIncOrDec" onClick={() => decreaseCount(item.id)}>-</button>
-                            <span>{item.count}</span>
+                            <span>{item.Quantity}</span>
                             <button id="increase" className="btnIncOrDec" onClick={() => increaseCount(item.id)}>+</button>
                         </div>
 
@@ -140,9 +103,11 @@ function Cart() {
     (
         <p style={{padding:"20px", textAlign:"center",color:"black" ,backgroundColor:"tan"}}>Your cart is empty.</p>
     )}
+
 </div>{/*left column*/}  
 
-        <div className="billing">{/*right column*/}
+{isLoggedIn && cart.length !== 0?(
+  <div className="billing">{/*right column*/}
             <h3>Price details</h3>
             <p>
               <label htmlFor="items" style={{marginRight:30}} >No. Items </label>
@@ -167,8 +132,14 @@ function Cart() {
             <p>
               <b><label htmlFor="Total amount" style={{marginRight:7}}>Total Amount</label><input id="Total amount" value={"R "+total} className="billingInput"/></b></p>
 
-            <button className="btnCheckout">Checkout</button>
+            <Link to={"/checkout"} className="link">
+                <button className="btnCheckout">Checkout</button>
+            </Link>
+            
         </div>
+):(
+  <div></div>
+)}
       
   </section>
   );
