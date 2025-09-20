@@ -85,7 +85,7 @@ function Product() {
         RAM={RAM}
       />
       <PurchaseProduct Product={Product} />
-      <ReviewProduct rating={Product.Rating} CusReviews={CusReviews} />
+      <ReviewProduct id={Product.ProductId} rating={Product.Rating} CusReviews={CusReviews} />
       <Footer />
     </div>
   );
