@@ -62,9 +62,9 @@ function checkout(info)
                 width={164}
             />
             <h2>Order Summary</h2>
-            <b>{totalItems} items: &nbsp;</b>R{total} <br /> <br />
+            <b>{totalItems} items: &nbsp;</b>R {total} <br /> <br />
             <em>No coupons applied</em> <br /> <br />
-            <b>To pay: &nbsp;</b> R{total} <br /> <br />
+            <b>To pay: &nbsp;</b> R {total} <br /> <br />
             <FaLock size={20} color="gray" /> Secure checkout
             
         </div>
