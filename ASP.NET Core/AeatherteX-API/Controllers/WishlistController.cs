@@ -7,7 +7,12 @@ namespace AeatherteX_API.Controllers
     [Route("AeatherAPI/wishlist")]
     public class WishlistController : ControllerBase
     {
-        private readonly Database1Context db = new Database1Context();
+        private readonly Database1Context db;
+
+        public WishlistController(Database1Context context)
+        {
+            db = context;
+        }
 
         public class UpdateWishlistRequest
         {
@@ -15,21 +20,29 @@ namespace AeatherteX_API.Controllers
             public int ProductId { get; set; }
         }
 
+        public class WishlistResponse
+        {
+            public int ProductId { get; set; }
+            public string Title { get; set; }
+            public string Image1 { get; set; }
+            public decimal Price { get; set; }
+            public int IsActive { get; set; }
+            public int Stock { get; set; }
+        }
+
         // GET: AeatherAPI/wishlist/{id}
         [HttpGet("{id}")]
-        public ActionResult<List<Product>> GetWishlist(int id) // Get wishlist for a specific user
+        public ActionResult<List<WishlistResponse>> GetWishlist(int id) // Get wishlist for a specific user
         {
             var user = (from u in db.Users
                         where u.UserId == id
                         select u).FirstOrDefault();
             if (user == null)
-                return StatusCode(1, "User not found");
+                return NotFound("User not found");
             var wishlistItems = (from w in db.Wishlists
                                  where w.UserId == id
                                  select w).ToList();
-            if (wishlistItems.Count == 0)
-                return StatusCode(1, "Wishlist is empty");
-            var wishlist = new List<Product>();
+            var wishlistItemsDetails = new List<WishlistResponse>();
             foreach (var item in wishlistItems)
             {
                 var product = (from p in db.Products
@@ -37,10 +50,18 @@ namespace AeatherteX_API.Controllers
                                select p).FirstOrDefault();
                 if (product != null)
                 {
-                    wishlist.Add(product);
+                    wishlistItemsDetails.Add(new WishlistResponse
+                    {
+                        ProductId = product.ProductId,
+                        Title = product.Title,
+                        Image1 = product.Image1,
+                        Price = product.Price,
+                        IsActive = product.IsActive,
+                        Stock = product.Stock
+                    });
                 }
             }
-            return StatusCode(0, wishlist);
+            return Ok(wishlistItems);
         }
 
         // POST: AeatherAPI/wishlist
@@ -51,17 +72,17 @@ namespace AeatherteX_API.Controllers
                         where u.UserId == request.UserId
                         select u).FirstOrDefault();
             if (user == null)
-                return StatusCode(1, "User not found");
+                return NotFound("User not found");
             var product = (from p in db.Products
                            where p.ProductId == request.ProductId
                            select p).FirstOrDefault();
             if (product == null)
-                return StatusCode(1, "Product not found");
+                return NotFound("Product not found");
             var wishlistItem = (from w in db.Wishlists
                                 where w.UserId == request.UserId && w.ProductId == request.ProductId
                                 select w).FirstOrDefault();
             if (wishlistItem != null)
-                return StatusCode(1, "Product already in wishlist");
+                return Conflict("Product already in wishlist");
             var newWishlistItem = new Wishlist
             {
                 UserId = request.UserId,
@@ -71,7 +92,7 @@ namespace AeatherteX_API.Controllers
             };
             db.Wishlists.Add(newWishlistItem);
             db.SaveChanges();
-            return StatusCode(0, "Product added to wishlist");
+            return Ok();
         }
 
         // DELETE: AeatherAPI/wishlist
@@ -82,20 +103,39 @@ namespace AeatherteX_API.Controllers
                         where u.UserId == request.UserId
                         select u).FirstOrDefault();
             if (user == null)
-                return StatusCode(1, "User not found");
+                return NotFound("User not found");
             var product = (from p in db.Products
                            where p.ProductId == request.ProductId
                            select p).FirstOrDefault();
             if (product == null)
-                return StatusCode(1, "Product not found");
+                return NotFound("Product not found");
             var wishlistItem = (from w in db.Wishlists
                                 where w.UserId == request.UserId && w.ProductId == request.ProductId
                                 select w).FirstOrDefault();
             if (wishlistItem == null)
-                return StatusCode(1, "Product not in wishlist");
+                return Ok();
             db.Wishlists.Remove(wishlistItem);
             db.SaveChanges();
-            return StatusCode(0, "Product removed from wishlist");
+            return Ok();
+        }
+
+        // DELETE: AeatherAPI/wishlist/clear/{id}
+        [HttpDelete("clear/{id}")]
+        public ActionResult ClearWishlist(int id) // Clear the wishlist for a specific user
+        {
+            var user = (from u in db.Users
+                        where u.UserId == id
+                        select u).FirstOrDefault();
+            if (user == null)
+                return NotFound("User not found");
+            var wishlistItems = (from w in db.Wishlists
+                                 where w.UserId == id
+                                 select w).ToList();
+            if (wishlistItems.Count == 0)
+                return Ok();
+            db.Wishlists.RemoveRange(wishlistItems);
+            db.SaveChanges();
+            return Ok();
         }
     }
 }

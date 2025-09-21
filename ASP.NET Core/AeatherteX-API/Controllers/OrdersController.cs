@@ -7,7 +7,12 @@ namespace AeatherteX_API.Controllers
     [Route("AeatherAPI/orders")]
     public class OrdersController : ControllerBase
     {
-        private readonly Database1Context db = new Database1Context();
+        private readonly Database1Context db;
+
+        public OrdersController(Database1Context context)
+        {
+            db = context;
+        }
 
         public class GetOrdersRequest
         {
@@ -44,7 +49,7 @@ namespace AeatherteX_API.Controllers
                            where i.InvoiceId == id
                            select i).FirstOrDefault();
             if (invoice == null)
-                return StatusCode(1, "Invoice not found");
+                return NotFound("Invoice not found");
             var shipping = (from s in db.Shippings
                             where s.InvoiceId == id
                             select s).FirstOrDefault();
@@ -57,7 +62,7 @@ namespace AeatherteX_API.Controllers
                 Shipping = shipping,
                 Purchases = purchases
             };
-            return StatusCode(0, order);
+            return Ok(order);
         }
 
         // POST: AeatherAPI/orders
@@ -68,7 +73,7 @@ namespace AeatherteX_API.Controllers
                           where c.ClientId == request.ClientId
                           select c).FirstOrDefault();
             if (client == null)
-                return StatusCode(1, "Client not found");
+                return NotFound("Client not found");
             var invoices = (from i in db.Invoices
                             where i.ClientId == request.ClientId
                             select i).ToList();
@@ -89,7 +94,7 @@ namespace AeatherteX_API.Controllers
                 };
                 orders.Add(order);
             }
-            return StatusCode(0, orders);
+            return Ok(orders);
         }
 
         // PUT: AeatherAPI/orders
@@ -100,12 +105,12 @@ namespace AeatherteX_API.Controllers
                           where c.ClientId == request.ClientId
                           select c).FirstOrDefault();
             if (client == null)
-                return StatusCode(1, "Client not found");
+                return NotFound("Client not found");
             var address = (from a in db.Addresses
                            where a.AddressId == request.AddressId
                            select a).FirstOrDefault();
             if (address == null)
-                return StatusCode(1, "Address not found");
+                return NotFound("Address not found");
             decimal totalPrice = 0;
             int totalQuantity = 0;
             foreach (var purchase in request.Purchases)
@@ -121,7 +126,7 @@ namespace AeatherteX_API.Controllers
                           
             }
             if (totalQuantity <= 0 || totalPrice <= 0)
-                return StatusCode(1, "No valid products in the order");
+                return NotFound("No valid products in the order");
 
             var invoice = new Invoice
             {
@@ -164,7 +169,7 @@ namespace AeatherteX_API.Controllers
             db.Shippings.Add(shipping);
             db.SaveChanges();
            
-            return StatusCode(0, invoice.InvoiceId);
+            return Ok(invoice.InvoiceId);
         }
 
         // POST: AeatherAPI/orders/bydate
@@ -175,7 +180,7 @@ namespace AeatherteX_API.Controllers
                             where i.Date >= request.StartDate && i.Date <= request.EndDate
                             select i).ToList();
             if (invoices.Count == 0)
-                return StatusCode(1, "No invoices found in the given date range");
+                return NotFound("No invoices found in the given date range");
             var orders = new List<OrderDetailsResponse>();
             foreach (var invoice in invoices)
             {
@@ -193,7 +198,7 @@ namespace AeatherteX_API.Controllers
                 };
                 orders.Add(order);
             }
-            return StatusCode(0, orders);
+            return Ok(orders);
         }
     }
 }

@@ -17,6 +17,8 @@ public partial class Client
 
     public int? Address2 { get; set; }
 
+    public DateTime CreatedAt { get; set; }
+
     public virtual Address? Address1Navigation { get; set; }
 
     public virtual Address? Address2Navigation { get; set; }

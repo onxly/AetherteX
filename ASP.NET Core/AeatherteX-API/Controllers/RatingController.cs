@@ -8,7 +8,12 @@ namespace AeatherteX_API.Controllers
     [Route("AeatherAPI/ratings")]
     public class RatingController : ControllerBase
     {
-        private readonly Database1Context db = new Database1Context();
+        private readonly Database1Context db;
+
+        public RatingController(Database1Context context)
+        {
+            db = context;
+        }
 
         public class AddRatingRequest
         {
@@ -18,25 +23,39 @@ namespace AeatherteX_API.Controllers
             public int ProductId { get; set; }
         }
 
+        public class RatingResponse
+        {
+            public int RatingId { get; set; }
+            public int Stars { get; set; }
+            public DateTime DatePosted { get; set; }
+            public string? Review { get; set; }
+            public int UserId { get; set; }
+
+        }
+
         // GET: AeatherAPI/ratings/{id}
         [HttpGet("{id}")]
-        public ActionResult<List<Rating>> GetRatings(int id) // Get all ratings for a specific product
+        public ActionResult<List<RatingResponse>> GetRatings(int id) // Get all ratings for a specific product
         {
+            var product = (from p in db.Products
+                           where p.ProductId == id
+                           select p).FirstOrDefault();
+            if (product == null)
+                return NotFound("Product not found");
             var ratings = (from r in db.Ratings
                            where r.ProductId == id
-                           select r).ToList();
-            if (ratings == null || ratings.Count == 0)
-                return StatusCode(1, "No ratings found for this product");
-            var ratingsResponse = ratings.Select(r => new Rating
-            {
-                RatingId = r.RatingId,
-                Stars = r.Stars,
-                DatePosted = r.DatePosted,
-                Review = r.Review,
-                UserId = r.UserId,
-                ProductId = r.ProductId,
-            }).ToList();
-            return StatusCode(0, ratingsResponse);
+                           select new RatingResponse
+                           {
+                               RatingId = r.RatingId,
+                               Stars = r.Stars,
+                               DatePosted = r.DatePosted,
+                               Review = r.Review,
+                               UserId = r.UserId
+                           }).ToList();
+            if (ratings.Count == 0)
+                return NotFound("No ratings found for this product");
+            return Ok(ratings);
+
         }
 
         // POST: AeatherAPI/ratings
@@ -47,16 +66,16 @@ namespace AeatherteX_API.Controllers
                         where u.UserId == request.UserId
                         select u).FirstOrDefault();
             if (user == null)
-                return StatusCode(1, "User not found");
+                return NotFound("User not found");
             var product = (from p in db.Products
                            where p.ProductId == request.ProductId
                            select p).FirstOrDefault();
             if (product == null)
-                return StatusCode(1, "Product not found");
+                return NotFound("Product not found");
             var newRating = new Rating
             {
                 Stars = request.Stars,
-                DatePosted = DateOnly.FromDateTime(DateTime.Now),
+                DatePosted = DateTime.Now,
                 Review = request.Review,
                 UserId = request.UserId,
                 ProductId = request.ProductId
@@ -69,9 +88,9 @@ namespace AeatherteX_API.Controllers
             catch (DbUpdateException ex)
             {
                 ex.GetBaseException();
-                return StatusCode(-1, "Database update error");
+                return StatusCode(StatusCodes.Status500InternalServerError,"Database update error");
             }
-            return StatusCode(0, "Rating added successfully");
+            return Ok();
         }
 
         // GET: AeatherAPI/ratings/average/{id}
@@ -82,14 +101,15 @@ namespace AeatherteX_API.Controllers
                            where p.ProductId == id
                            select p).FirstOrDefault();
             if (product == null)
-                return StatusCode(1, "Product not found");
+                return NotFound("Product not found");
             var ratings = (from r in db.Ratings
                            where r.ProductId == id
                            select r).ToList();
             if (ratings == null || ratings.Count == 0)
-                return StatusCode(1, "No ratings found for this product");
+                return NotFound("No ratings found for this product");
             double average = ratings.Average(r => r.Stars);
-            return StatusCode(0, average);
+
+            return Ok(average);
         }
 
     }
