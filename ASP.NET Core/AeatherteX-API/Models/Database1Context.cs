@@ -6,10 +6,6 @@ namespace AeatherteX_API.Models;
 
 public partial class Database1Context : DbContext
 {
-    public Database1Context()
-    {
-    }
-
     public Database1Context(DbContextOptions<Database1Context> options)
         : base(options)
     {
@@ -44,10 +40,6 @@ public partial class Database1Context : DbContext
     public virtual DbSet<User> Users { get; set; }
 
     public virtual DbSet<Wishlist> Wishlists { get; set; }
-
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
-        => optionsBuilder.UseSqlServer("Server=(localdb)\\MSSQLLocalDB;AttachDbFilename=C:\\Programing fun\\Full Stack\\AetherteX\\ASP.NET Core\\AeatherteX-API\\App_Data\\Database1.mdf;Database=Database1;Trusted_Connection=True;MultipleActiveResultSets=true");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -118,6 +110,9 @@ public partial class Database1Context : DbContext
             entity.Property(e => e.ClientId)
                 .ValueGeneratedNever()
                 .HasColumnName("ClientID");
+            entity.Property(e => e.CreatedAt)
+                .HasDefaultValueSql("(getdate())")
+                .HasColumnType("datetime");
             entity.Property(e => e.IsPremium).HasColumnName("isPremium");
             entity.Property(e => e.Username)
                 .HasMaxLength(12)
@@ -303,6 +298,7 @@ public partial class Database1Context : DbContext
             entity.ToTable("Rating");
 
             entity.Property(e => e.RatingId).HasColumnName("RatingID");
+            entity.Property(e => e.DatePosted).HasColumnType("datetime");
             entity.Property(e => e.ProductId).HasColumnName("ProductID");
             entity.Property(e => e.Review)
                 .HasMaxLength(255)
