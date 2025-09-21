@@ -9,7 +9,7 @@ export async function getAllProducts()
 
 export async function getAllAddresses()
 {
-    const res=await axios.get(apilink+"address/{id}");
+    const res=await axios.get(apilink+"address/"+{id});
     return res.data;
 }
 
@@ -53,7 +53,7 @@ export async function updateAddress(clientId,line1,line2,City,region,postalCode)
 
 export async function UpdateUser(RequestBody)
 {
-    const res=await axios.PUT(apilink+"update/{id}",RequestBody);
+    const res=await axios.PUT(apilink+"update/"+{id},RequestBody);
     return res.data;
 }*/
 
@@ -67,6 +67,6 @@ export async function GetProducts()
 
 export async function GetProductbyID()
 {
-    const res=axios.get(apilink+"products/{id}");
+    const res=axios.get(apilink+"products/"+{id});
     return (await res).data;
 }

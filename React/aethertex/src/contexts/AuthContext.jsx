@@ -44,7 +44,7 @@ export function AuthProvider({ children }) {
       try{
         const userdata={Email:email,
                         Password:password };
-        const res=await axios.post(apilink+"users/login",userdata);
+        const res=await axios.post(apilink+"users/login",userdata,{withCredentials: true});
          return res.data;
       }catch(err)
       {
@@ -57,7 +57,7 @@ export function AuthProvider({ children }) {
       try{
         const userdata={Email:email,
                         Password:password };
-        const res=await axios.post(apilink+"users/verifyadmin",userdata);
+        const res=await axios.post(apilink+"users/verifyadmin",userdata,{withCredentials: true});
          return res.data;
       }catch(err)
       {
@@ -68,10 +68,13 @@ export function AuthProvider({ children }) {
   /**
    * Logs out the current user
    */
-  function logout() 
+  async function logout() 
   {
-    setUser(null);
+      const res=await axios.post(apilink+"logout",{withCredentials: true})
+      return res.data;
   }
+
+  
 
   /**
    *Registers a user

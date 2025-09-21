@@ -16,7 +16,7 @@ function OrdersModel({Orders= [], Addr = [] }){
                             <OrderBox
                                 key={order.id}
                                 price={order.Price}
-                                title={order.title}
+                                title={order.Title}
                                 DelDate={order.Date}
                                 address={Addr[order.address]}
                                 quantity={order.Quantity}

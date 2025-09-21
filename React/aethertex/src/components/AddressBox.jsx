@@ -21,9 +21,7 @@ export function AddressBox(addr,Name,Street,City,Postal,Phone,addressToEdit )
     <div className="AddrBox">
 
         <div>
-            <u>{addr.Name}</u>
             <address>{addr.Line1},{addr.Line2}, {addr.City}, {addr.Region} , {addr.Postal}</address>
-            <em>{addr.Phone}</em>
         </div>
         <div className="Addrbuttons">
             <button className="editadress" onClick={addressToEdit}>Edit</button>

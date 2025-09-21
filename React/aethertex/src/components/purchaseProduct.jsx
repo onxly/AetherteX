@@ -44,7 +44,7 @@ function PurchaseProduct({Product}) {
             <button className="btnAdd" 
                 onClick={() => 
                             
-                            addCart(parseInt(Product.ProductId), Product.Image1, Product.Title, Product.Price, true, parseInt(quantity))
+                            addCart(parseInt(Product.ProductId), Product.Image, Product.Title, Product.Price, true, parseInt(quantity))
                         }>
                 Add to Cart
             </button>

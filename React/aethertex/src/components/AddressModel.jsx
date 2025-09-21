@@ -29,12 +29,12 @@ function AddressModel({Addr=[]}){
                 {Addr.map(address => (
                     <AddressBox 
                         key={address.id} 
-                        ID={address.id} 
-                        Name={address.Name} 
-                        Street={address.Street} 
+                        ID={address.id}
+                        Line1={address.Line1}  
+                        Line2={address.Line2} 
                         City={address.City} 
-                        Postal={address.Postal} 
-                        Phone={address.Phone}
+                        Region={address.Region}
+                        Postal={address.PostalCode} 
                         addressToEdit=
                         {
                             setaddresToEdit(address)
