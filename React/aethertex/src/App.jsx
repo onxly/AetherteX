@@ -93,7 +93,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/admin/:id" element={<AdminHome />} />
-          <Route path="/checkout/:id" element={<Checkout />} />
+          <Route path="/checkout" element={<Checkout />} />
         </Route>
 
         {/* Catch all */}

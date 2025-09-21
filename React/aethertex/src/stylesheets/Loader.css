@@ -20,8 +20,8 @@
   margin-left: -40px; /* half of width */
   border-radius: 0px;
   border: 4px solid #f44336; /* initial border color */
-  animation: loader 0.8s linear infinite;
   -webkit-animation: loader 0.8s linear infinite;
+  animation: loader 0.8s linear infinite;
 }
 
 @keyframes loader {

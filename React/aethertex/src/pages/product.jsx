@@ -3,22 +3,24 @@ import InfoProduct from "../components/infoProduct.jsx";
 import PurchaseProduct from "../components/purchaseProduct.jsx";
 import ReviewProduct from "../components/ReviewProduct.jsx";
 import Footer from "../components/Footer.jsx";
+import { useParams } from "react-router-dom";
 import "../stylesheets/product.css";
 
 function Product() {
-  let id = 1;
-  let price = "21 900.00";
-  let stock = 5;
-  let rating = 4.3;
-  let reviews = 120;
-  let name = "AetherteX Prometheus II i9 12900K PC Desktop";
-  let imgMain = "https://m.media-amazon.com/images/I/41BiCUr2t9L.jpg";
-  let img1 = "https://m.media-amazon.com/images/I/41BiCUr2t9L.jpg";
-  let img2 = "https://m.media-amazon.com/images/I/51mzyMImf+L._SL500_.jpg";
-  let img3 = "https://m.media-amazon.com/images/I/41Zs+nz-M0L._SL500_.jpg";
-  let img4 = "https://m.media-amazon.com/images/I/41tlFlXd+rL._SL500_.jpg";
-  let description = "This is a sample product description.";
-  let specs = {
+  const {id} = useParams();
+  const Product = {
+  ProductId: id,
+  Title: "AetherteX Prometheus II i9 12900K PC Desktop",
+  Price: 21900,
+  Stock: 5,
+  Rating: 4.3,
+  Reviews: 120,
+  Description: "This is a sample product description.",
+  Image1: "https://m.media-amazon.com/images/I/41BiCUr2t9L.jpg",
+  Image2: "https://m.media-amazon.com/images/I/41BiCUr2t9L.jpg",
+  Image3: "https://m.media-amazon.com/images/I/51mzyMImf+L._SL500_.jpg",
+  Image4: "https://m.media-amazon.com/images/I/41tlFlXd+rL._SL500_.jpg",
+  Specs: {
     CPU: "Intel Core i9-12900K",
     GPU: "NVIDIA GeForce RTX 3090",
     RAM: "32GB DDR4",
@@ -26,7 +28,8 @@ function Product() {
     Motherboard: "ASUS TUF GAMING B550M‑PLUS WiFi II (AMD)",
     PowerSupply: "850W 80+ Gold",
     Case: "Prometheus Metallic Gear Neo Qube Case",
-  };
+  }
+}
 
   let CPU = {
     Cores: 16,
@@ -58,28 +61,28 @@ function Product() {
       comment: "Average performance for the price.",
     },
   ];
-  document.title = name + " | AetherteX";
+  document.title = Product.Title + " | AetherteX";
   return (
     <div className="cApp">
       <ImgProduct
-        imgMain={imgMain}
-        img1={img1}
-        img2={img2}
-        img3={img3}
-        img4={img4}
+        imgMain={Product.Image1}
+        img1={Product.Image1}
+        img2={Product.Image2}
+        img3={Product.Image3}
+        img4={Product.Image4}
       />
       <InfoProduct
-        name={name}
-        description={description}
-        rating={rating}
-        reviews={reviews}
-        specs={specs}
+        name={Product.Title}
+        description={Product.Description}
+        rating={Product.Rating}
+        reviews={Product.Reviews}
+        specs={Product.Specs}
         CPU={CPU}
         GPU={GPU}
         RAM={RAM}
       />
-      <PurchaseProduct id={id} price={price} stock={stock} />
-      <ReviewProduct rating={rating} CusReviews={CusReviews} />
+      <PurchaseProduct Product={Product} />
+      <ReviewProduct rating={Product.Rating} CusReviews={CusReviews} />
       <Footer />
     </div>
   );
