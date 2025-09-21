@@ -20,7 +20,7 @@ function Profile() {
     [AddrList,setAddrList]=useState();
     [OrderList,setOrderList]=useState();
 
-    useEffect=(()=>
+    useEffect(()=>
     {
         async function setAddr()
         {

@@ -60,13 +60,13 @@ export async function UpdateUser(RequestBody)
 
 export async function GetProducts()
 {
-    const res=get(apilink+"products");
+    const res= await get(apilink+"products");
     return res.data;
 }
 
 
 export async function GetProductbyID()
 {
-    const res=axios.get(apilink+"products/"+{id});
-    return (await res).data;
+    const res=await axios.get(apilink+"products/"+{id});
+    return  res.data;
 }
