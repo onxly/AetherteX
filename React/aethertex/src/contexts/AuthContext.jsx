@@ -75,7 +75,11 @@ export function AuthProvider({ children }) {
   }
 
   function addCart(newid, newImg, newTitle, newPrice, newStock, newQuantity)
-  {    
+  {  
+    if (!newid) {
+    console.error("Cart item missing ID:", {newid, newTitle});
+    return;
+  }  
     setCart(prevCart => {
       const existing = prevCart.find(item => item.id === newid);
 

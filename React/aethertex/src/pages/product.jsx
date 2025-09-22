@@ -22,7 +22,7 @@ function Product() {
     try {
       const product = await GetProductbyID(parseInt(id));
       setProd(product);
-
+      console.log("Product:", product);
       if (product?.cpuId) {
         const ascCpu = await GetCPU(product.cpuId);
         setCPU(ascCpu);
