@@ -5,11 +5,24 @@ namespace AeatherteX_API.Controllers
 {
     public class CartController : ControllerBase
     {
-        private readonly Database1Context db = new Database1Context();
+        private readonly Database1Context db;
+
+        public CartController(Database1Context context)
+        {
+            db = context;
+        }
+
+        public class CartItem
+        {
+           public string Title { get; set; }
+           public double Price { get; set; }
+           public string Image { get; set; }
+
+        }
 
         public class GetCartResponse
         {
-            public Product Product { get; set; }
+            public CartItem Product { get; set; }
             public int Quantity { get; set; }
             public decimal Price { get; set; }
         }
@@ -20,11 +33,6 @@ namespace AeatherteX_API.Controllers
             public int Quantity { get; set; }
         }
 
-        public class ClearCartRequest
-        {
-            public int UserId { get; set; }
-        }
-
         // Get: AeatherAPI/cart/{id}
         [HttpGet("{id}")]
         public ActionResult<List<GetCartResponse>> GetCart(int id) // Get cart for a specific user
@@ -33,29 +41,21 @@ namespace AeatherteX_API.Controllers
                         where u.UserId == id
                         select u).FirstOrDefault();
             if (user == null)
-                return StatusCode(1, "User not found");
+                return NotFound("User not found");
             var cartItems = (from c in db.Carts
                              where c.UserId == id
-                             select c).ToList();
-            if (cartItems.Count == 0)
-                return StatusCode(1, "Cart is empty");
-            var cart = new List<GetCartResponse>();
-            foreach (var item in cartItems)
-            {
-                var product = (from p in db.Products
-                               where p.ProductId == item.ProductId && p.IsActive == 1
-                               select p).FirstOrDefault();
-                if (product != null)
-                {
-                    cart.Add(new GetCartResponse
-                    {
-                        Product = product,
-                        Quantity = item.Quantity ?? 0,
-                        Price = product.Price * (item.Quantity ?? 0)
-                    });
-                }
-            }
-            return StatusCode(0, cart);
+                             select new GetCartResponse
+                             {
+                                 Product = new CartItem
+                                 {
+                                     Title = c.Product.Title,
+                                     Price = (double)c.Product.Price,
+                                     Image = c.Product.Image1
+                                 },
+                                 Quantity = c.Quantity ?? 0,
+                                 Price = c.Price ?? 0
+                             }).ToList();
+            return Ok(cartItems);
         }
 
         // POST: AeatherAPI/cart/{id}
@@ -66,12 +66,12 @@ namespace AeatherteX_API.Controllers
                         where u.UserId == id
                         select u).FirstOrDefault();
             if (user == null)
-                return StatusCode(1, "User not found");
+                return NotFound("User not found");
             var product = (from p in db.Products
                            where p.ProductId == request.ProductId && p.IsActive == 1
                            select p).FirstOrDefault();
             if (product == null)
-                return StatusCode(1, "Product not found");
+                return NotFound("Product not found");
             var cartItem = (from c in db.Carts
                             where c.UserId == id && c.ProductId == request.ProductId
                             select c).FirstOrDefault();
@@ -93,7 +93,7 @@ namespace AeatherteX_API.Controllers
                 db.Carts.Add(newCartItem);
             }
             db.SaveChanges();
-            return StatusCode(0, "Product added to cart");
+            return Ok();
 
         }
 
@@ -105,17 +105,17 @@ namespace AeatherteX_API.Controllers
                         where u.UserId == id
                         select u).FirstOrDefault();
             if (user == null)
-                return StatusCode(1, "User not found");
+                return NotFound("User not found");
             var product = (from p in db.Products
                            where p.ProductId == request.ProductId && p.IsActive.Equals(1)
                            select p).FirstOrDefault();
             if (product == null)
-                return StatusCode(1, "Product not found");
+                return NotFound("Product not found");
             var cartItem = (from c in db.Carts
                             where c.UserId == id && c.ProductId == request.ProductId
                             select c).FirstOrDefault();
             if (cartItem == null)
-                return StatusCode(1, "Product not found in cart");
+                return NotFound("Product not found in cart");
             if (cartItem.Quantity <= request.Quantity)
             {
                 db.Carts.Remove(cartItem);
@@ -127,26 +127,26 @@ namespace AeatherteX_API.Controllers
                 db.Carts.Update(cartItem);
             }
             db.SaveChanges();
-            return StatusCode(0, "Product removed from cart");
+            return Ok();
         }
 
-        // DELETE: AeatherAPI/cart/clear
-        [HttpDelete("clear")]
-        public ActionResult ClearCart([FromBody] ClearCartRequest request) // Clear the cart for a specific user
+        // DELETE: AeatherAPI/cart/clear/{id}
+        [HttpDelete("clear/{id}")]
+        public ActionResult ClearCart(int id) // Clear the cart for a specific user
         {
             var user = (from u in db.Users
-                        where u.UserId == request.UserId
+                        where u.UserId == id
                         select u).FirstOrDefault();
             if (user == null)
-                return StatusCode(1, "User not found");
+                return NotFound("User not found");
             var cartItems = (from c in db.Carts
-                             where c.UserId == request.UserId
+                             where c.UserId == id
                              select c).ToList();
             if (cartItems.Count == 0)
-                return StatusCode(1, "Cart is already empty");
+                return Ok("Cart is already empty");
             db.Carts.RemoveRange(cartItems);
             db.SaveChanges();
-            return StatusCode(0, "Cart cleared");
+            return Ok("Cart cleared");
         }
     }
 }

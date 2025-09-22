@@ -9,7 +9,7 @@ public partial class Rating
 
     public int Stars { get; set; }
 
-    public DateOnly DatePosted { get; set; }
+    public DateTime DatePosted { get; set; }
 
     public string? Review { get; set; }
 
