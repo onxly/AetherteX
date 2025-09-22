@@ -204,17 +204,17 @@ let dataA, dataB;
 
 if (CPU.length > 1 && GPU.length > 1 && RAM.length > 1 && Storage.length > 0) {
   dataA = [
-    { y: "Avg", x: 25 },
-    { y: "Storage", x: 10 },
-    { y: "RAM", x: 30 },
+    { y: "Avg", x: (((Storage[0].benchmarkScore / 712) *100) + ((RAM[0].benchmarkScore / 243) *100 ) + ((GPU[0].benchmarkScore / 183) *100) + (CPU[0].benchmarkScore / 133) *100) / 4 },
+    { y: "Storage", x: (Storage[0].benchmarkScore / 712) *100 },
+    { y: "RAM", x: (RAM[0].benchmarkScore / 243) *100 },
     { y: "GPU", x: (GPU[0].benchmarkScore / 183) *100 },
     { y: "CPU", x: (CPU[0].benchmarkScore / 133) *100 }
   ];
 
   dataB = [
-    { y: "Avg", x: 55 },
-    { y: "Storage", x: 40 },
-    { y: "RAM", x: 60 },
+    { y: "Avg", x: (((Storage[1].benchmarkScore / 712) *100) + ((RAM[1].benchmarkScore / 243) *100 ) + ((GPU[1].benchmarkScore / 183) *100) + (CPU[1].benchmarkScore / 133) *100) / 4 },
+    { y: "Storage", x: (Storage[1].benchmarkScore / 712) *100 },
+    { y: "RAM", x: (RAM[1].benchmarkScore / 243) *100 },
     { y: "GPU", x: (GPU[1].benchmarkScore / 183) *100 },
     { y: "CPU", x: (CPU[1].benchmarkScore / 133) *100 }
   ];
@@ -294,7 +294,7 @@ if (CPU.length > 1 && GPU.length > 1 && RAM.length > 1 && Storage.length > 0) {
                   </li>
                   <li>
                     <RiRamLine  color="rgba(209, 166, 61, 1)"/> {" "}
-                    {RAM.length > 0 ? RAM[0].name : "Loading..."}
+                    {RAM.length > 0 ? RAM[0].name + ", " + RAM[0].capacity + "GB": "Loading..."}
                   </li>
                   <li>
                     <BsHdd  color="rgba(209, 166, 61, 1)"/> {" "}
@@ -365,19 +365,19 @@ if (CPU.length > 1 && GPU.length > 1 && RAM.length > 1 && Storage.length > 0) {
                 <ul>
                   <li>
                     <FaMicrochip color="white" />{" "}
-                    {CPU.length > 0 ? CPU[1].name : "Loading..."}
+                    {CPU.length > 1 ? CPU[1].name : "Loading..."}
                   </li>
                   <li>
                     <MdGraphicEq  color="white"/> {" "}
-                    {GPU.length > 0 ? GPU[1].name : "Loading..."}
+                    {GPU.length > 1 ? GPU[1].name : "Loading..."}
                   </li>
                   <li>
                     <RiRamLine  color="white"/> {" "}
-                    {RAM.length > 0 ? RAM[1].name : "Loading..."}
+                    {RAM.length > 1 ? RAM[1].name + ", " + RAM[1].capacity + "GB": "Loading..."}
                   </li>
                   <li>
                     <BsHdd  color="white"/> {" "}
-                    {Storage.length > 0 ? Storage[1].capacity+ "GB, " + Storage[1].type +", "+Storage[1].speed+"Hz": "Loading..."}
+                    {Storage.length > 1 ? Storage[1].capacity+ "GB, " + Storage[1].type +", "+Storage[1].speed+"Hz": "Loading..."}
                   </li>
                 </ul>
               </div>

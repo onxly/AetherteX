@@ -57,6 +57,7 @@ namespace AeatherteX_API.Controllers
 
         public class ProductResponse
         {
+            public int ProductId { get; set; }
             public string Title { get; set; }
             public string Image1 { get; set; }
             public string Image2 { get; set; }
@@ -118,6 +119,7 @@ namespace AeatherteX_API.Controllers
                 return NotFound("Product not found");
             var productResponse = new ProductResponse
                 {
+                ProductId= product.ProductId,
                 Title = product.Title,
                 Image1 = product.Image1,
                 Image2 = product.Image2 ?? "",

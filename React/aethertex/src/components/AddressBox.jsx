@@ -16,6 +16,9 @@ export function AddressBox(addr,Name,line1,line2,city,postal,phone,addressToEdit
     {
         const res=await createAddress(clientId,line1,line2,City,region,postalCode);
         return res.data;
+    async function updateAddr( ){
+
+        const NewAddressID= await updateAddress(addressToEdit.ID,Line1,Line2,City,region,postalCode);
     }
     
     return(       

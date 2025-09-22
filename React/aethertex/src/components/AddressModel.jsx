@@ -1,6 +1,9 @@
 import "../stylesheets/profile.css";
 import { useState,useContext, useEffect } from "react";
+import { useState,useContext, useEffect } from "react";
 import AddressBox from "../components/AddressBox";
+import { AuthContext } from "../contexts/AuthContext";
+import {createAddress} from "../jsfunctions/alljsfunctions"
 import { AuthContext } from "../contexts/AuthContext";
 import {createAddress} from "../jsfunctions/alljsfunctions"
 
@@ -16,7 +19,10 @@ function AddressModel({Addr}){
             
     const [showModal, setShowModal] = useState(false);
 
+
     return(
+
+        <>
 
         <>
         <section className="AddressPage">
@@ -84,6 +90,10 @@ function AddressModel({Addr}){
                     <input type="password" defaultValue={Addr.Phone} disabled></input>
                     <button className="btnEditDet">Edit</button>
                 </div>
+                
+                <button className="btnSave">Save Changes</button>
+            </section>)}
+        </>
                 
                 <button className="btnSave">Save Changes</button>
             </section>)}
