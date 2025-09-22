@@ -1,80 +1,93 @@
 import "../stylesheets/profile.css";
+import { useState,useContext, useEffect } from "react";
 import AddressBox from "../components/AddressBox";
-import { useState } from "react";
-import {getNewAddress} from "../jsfunctions/alljsfunctions"
+import { AuthContext } from "../contexts/AuthContext";
+import {createAddress} from "../jsfunctions/alljsfunctions"
 
-function AddressModel({Addr=[]}){
+function AddressModel({Addr}){
 
-    [addresToEdit,setaddresToEdit]=useState(null);
+    const { isLoggedIn, setIsLoggedIn, user, cart = [] } = useContext(AuthContext);
 
-    [clientId,setclientId]=useState();
-    [line1,setline1]=useState();
-    [line2,setline2]=useState();
-    [city,setcity]=useState();
-    [region,region]=useState();
-    [postalCode,postalCode]=useState();
-
-    async function addAddr(clientId,line1,line2,city,region,postalCode){
-        const NewAddressID= await getNewAddress(clientId,line1,line2,City,region,postalCode);
-        Addr.add(NewAddressID);
-    }
-
+    async function setNewAddress()
+        {
+            const res=await createAddress(line1,line2,City,region,postalCode)
+            return res.data;
+        }
+            
     const [showModal, setShowModal] = useState(false);
-    
+
     return(
+
+        <>
         <section className="AddressPage">
-            {Addr.length!=0?(
-            <div>
-                <h2>Address Book</h2>
-                {Addr.map(address => (
-                    <AddressBox 
-                        key={address.id} 
-                        ID={address.id} 
-                        Name={address.Name} 
-                        Street={address.Street} 
-                        City={address.City} 
-                        Postal={address.Postal} 
-                        Phone={address.Phone}
-                        addressToEdit=
-                        {
-                            setaddresToEdit(address)
-                        }
-                    />
-                    
-                ))}
-                <button className="btnAddAddr" onClick={()=>addAddr()}>Add</button>
-
-                {showModal && (
-                            <div className="WriteModel">          
-                            <div className="WriteContent">
-                                <span className="close" onClick={() => setShowModal(false)}>
-                                    ×
-                                </span>
-
-                                <label>line1</label>
-                                <input type="text" defaultValue={line1}></input>
-
-                                <label>line2</label>
-                                <input type="text" defaultValue={line2}></input>
-
-                                <label>city</label>
-                                <input type="text" defaultValue={city}></input>
-
-                                <label>region</label>
-                                <input type="text" defaultValue={region}></input>
-
-                                <label>postalCode</label>
-                                <input type="text" defaultValue={postalCode}></input>
-                                
-                            </div>
-                            </div>
-                        )}
-            </div>
-            ):(
-                <div>
-                    <label>You havent added any address yet</label>
-                </div>
-            )}
+            <h2>Address Book</h2>
+            {Addr.map(address => (
+                <AddressBox 
+                    key={address.id} 
+                    Name={address.name} 
+                    Line1={address.line1} 
+                    Line2={address.line2} 
+                    City={address.city} 
+                    Region={address.region}
+                    Postal={address.postal} 
+                    Phone={address.phone} 
+                />
+            ))}
+            <button className="btnAddAddr" onClick={() => setShowModal(true)} >
+                Add an address
+            </button>
         </section>
+            
+        {showModal && (<section className="addAddressPage">
+
+                <h2>Address Details</h2>
+
+                <div className="addressDetailBox">
+                    <h3>Reciever name</h3>
+                    <input type="text" defaultValue={Addr.name} disabled></input>
+                    <button className="btnEditDet">Edit</button>
+                </div>
+
+                <div className="addressDetailBox">
+                    <h3>Street</h3>
+                    <input type="text" defaultValue={Addr.line1} disabled></input>
+                    <button className="btnEditDet">Edit</button>
+                </div>
+
+                <div className="addressDetailBox">
+                    <h3>Street</h3>
+                    <input type="text" defaultValue={Addr.line2} disabled></input>
+                    <button className="btnEditDet">Edit</button>
+                </div>
+
+                <div className="addressDetailBox">
+                    <h3>City</h3>
+                    <input type="text" defaultValue={Addr.City} disabled></input>
+                    <button className="btnEditDet">Edit</button>
+                </div>
+
+                <div className="addressDetailBox">
+                    <h3>City</h3>
+                    <input type="text" defaultValue={Addr.region} disabled></input>
+                    <button className="btnEditDet">Edit</button>
+                    
+                </div>
+
+                <div className="addressDetailBox">
+                    <h3>Postal</h3>
+                    <input type="email" defaultValue={Addr.Postal} disabled></input>
+                    <button className="btnEditDet">Edit</button>
+                </div>
+
+                <div className="addressDetailBox">
+                    <h3>Phone</h3>
+                    <input type="password" defaultValue={Addr.Phone} disabled></input>
+                    <button className="btnEditDet">Edit</button>
+                </div>
+                
+                <button className="btnSave">Save Changes</button>
+            </section>)}
+        </>
     );
 } export default AddressModel
+
