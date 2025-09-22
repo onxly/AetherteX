@@ -20,6 +20,7 @@ import {GetProductbyID, GetGPU, GetCPU, GetRAM ,GetStorage} from "../jsfunctions
 
 function ProductsList({ toggleSidebar, isShowingSidebar }) {
   const [comPCs, setComPCs] = useState([]);
+  const [PCs, setPCs] = useState([]);
   const[showModal, setShowModal] = useState(true);
   const[Items,setItems] = useState([]);
   const [CPU, setCPU] = useState([]);
@@ -37,172 +38,165 @@ function ProductsList({ toggleSidebar, isShowingSidebar }) {
           }
           setProductList();
       },[]);
-  //Components for Product 1
-  useEffect(() => {
-    console.log("comPCs updated:", comPCs);
 
-    async function fetchCPU() {
-      const id = parseInt(comPCs[0]);
-      console.log("Trying to fetch CPU with id:", id);
-      if (!isNaN(id)) {
-        const ascCpu = await GetCPU(id);
-        console.log("Fetched CPU:", ascCpu);
-        setCPU(prevCPU => [...prevCPU, ascCpu]);
+      //Components for Product 1
+  useEffect(() => {
+    async function fetchPC1() {
+      if (!isNaN(comPCs[0])) {
+        const ascPC1 = await GetProductbyID(comPCs[0]);
+        console.log("Fetched PC1:", ascPC1);
+        setPCs(prevPC => [...prevPC, ascPC1]);
       } else {
-        console.log("Invalid CPU id:", comPCs[0]);
+        console.log("Invalid PC id:", comPCs[0]);
       }
     }
-
     if (comPCs.length === 2 && comPCs[0]) {
+      fetchPC1();
+    }
+  }, [comPCs]);
+
+  //Components for Product 2
+  useEffect(() => {
+    async function fetchPC1() {
+      if (!isNaN(comPCs[0])) {
+        const ascPC1 = await GetProductbyID(comPCs[1]);
+        console.log("Fetched PC1:", ascPC1);
+        setPCs(prevPC => [...prevPC, ascPC1]);
+      } else {
+        console.log("Invalid PC id:", comPCs[1]);
+      }
+    }
+    if (comPCs.length === 2 && comPCs[1]) {
+      fetchPC1();
+    }
+  }, [comPCs]);
+
+  //Prod1 Components
+  useEffect(() => {
+    async function fetchCPU() {
+      if (!isNaN(PCs[0].cpuId)) {
+        const ascPC1 = await GetCPU(PCs[0].cpuId);
+        console.log("Fetched CPU:", ascPC1);
+        setCPU(prevCpu => [...prevCpu, ascPC1]);
+      } else {
+        console.log("Invalid CPU:", PCs[0].cpuId);
+      }
+    }
+    if (PCs.length === 2 && PCs[0]) {
       fetchCPU();
     }
-  }, [comPCs]);
+  }, [PCs]);
 
   useEffect(() => {
-    console.log("comPCs updated:", comPCs);
-
     async function fetchGPU() {
-      const id = parseInt(comPCs[0]);
-      console.log("Trying to fetch GPU with id:", id);
-      if (!isNaN(id)) {
-        const ascCpu = await GetGPU(id);
-        console.log("Fetched GPU:", ascCpu);
-        setGPU(prevCPU => [...prevCPU, ascCpu]);
+      if (!isNaN(PCs[0].gpuId)) {
+        const ascPC1 = await GetGPU(PCs[0].gpuId);
+        console.log("Fetched CPU:", ascPC1);
+        setGPU(prevGpu => [...prevGpu, ascPC1]);
       } else {
-        console.log("Invalid GPU id:", comPCs[0]);
+        console.log("Invalid CPU:", PCs[0].gpuId);
       }
     }
-
-    if (comPCs.length === 2 && comPCs[0]) {
+    if (PCs.length === 2 && PCs[0]) {
       fetchGPU();
     }
-  }, [comPCs]);
+  }, [PCs]);
 
   useEffect(() => {
-    console.log("comPCs updated:", comPCs);
-
-    async function fetchRAM() {
-      const id = parseInt(comPCs[0]);
-      console.log("Trying to fetch GPU with id:", id);
-      if (!isNaN(id)) {
-        const ascCpu = await GetRAM(id);
-        console.log("Fetched GPU:", ascCpu);
-        setRAM(prevCPU => [...prevCPU, ascCpu]);
+    async function fetchRam() {
+      if (!isNaN(PCs[0].ramId)) {
+        const ascPC1 = await GetRAM(PCs[0].ramId);
+        console.log("Fetched RAM:", ascPC1);
+        setRAM(prevRam => [...prevRam, ascPC1]);
       } else {
-        console.log("Invalid GPU id:", comPCs[0]);
+        console.log("Invalid RAM:", PCs[0].ramId);
       }
     }
-
-    if (comPCs.length === 2 && comPCs[0]) {
-      fetchRAM();
+    if (PCs.length === 2 && PCs[0]) {
+      fetchRam();
     }
-  }, [comPCs]);
+  }, [PCs]);
 
   useEffect(() => {
-    console.log("comPCs updated:", comPCs);
-
     async function fetchSto() {
-      const id = parseInt(comPCs[0]);
-      console.log("Trying to fetch GPU with id:", id);
-      if (!isNaN(id)) {
-        const ascCpu = await GetStorage(id);
-        console.log("Fetched GPU:", ascCpu);
-        setStorage(prevCPU => [...prevCPU, ascCpu]);
+      if (!isNaN(PCs[0].storageId)) {
+        const ascPC1 = await GetStorage(PCs[0].storageId);
+        console.log("Fetched RAM:", ascPC1);
+        setStorage(prevSto => [...prevSto, ascPC1]);
       } else {
-        console.log("Invalid GPU id:", comPCs[0]);
+        console.log("Invalid RAM:", PCs[0].storageId);
       }
     }
-
-    if (comPCs.length === 2 && comPCs[0]) {
+    if (PCs.length === 2 && PCs[0]) {
       fetchSto();
     }
-  }, [comPCs]);
+  }, [PCs]);
 
-//gggggggggggggggggggggggg
-//Components for Product 2
+  //Product 2
+  //Prod1 Components
   useEffect(() => {
-    console.log("comPCs updated:", comPCs);
-
     async function fetchCPU() {
-      const id = parseInt(comPCs[1]);
-      console.log("Trying to fetch CPU with id:", id);
-      if (!isNaN(id)) {
-        const ascCpu = await GetCPU(id);
-        console.log("Fetched CPU:", ascCpu);
-        setCPU(prevCPU => [...prevCPU, ascCpu]);
+      if (!isNaN(PCs[1].cpuId)) {
+        const ascPC1 = await GetCPU(PCs[1].cpuId);
+        console.log("Fetched CPU:", ascPC1);
+        setCPU(prevCpu => [...prevCpu, ascPC1]);
       } else {
-        console.log("Invalid CPU id:", comPCs[1]);
+        console.log("Invalid CPU:", PCs[1].cpuId);
       }
     }
-
-    if (comPCs.length === 2 && comPCs[1]) {
+    if (PCs.length === 2 && PCs[1]) {
       fetchCPU();
     }
-  }, [comPCs]);
+  }, [PCs]);
 
   useEffect(() => {
-    console.log("comPCs updated:", comPCs);
-
     async function fetchGPU() {
-      const id = parseInt(comPCs[1]);
-      console.log("Trying to fetch GPU with id:", id);
-      if (!isNaN(id)) {
-        const ascCpu = await GetGPU(id);
-        console.log("Fetched GPU:", ascCpu);
-        setGPU(prevCPU => [...prevCPU, ascCpu]);
+      if (!isNaN(PCs[1].gpuId)) {
+        const ascPC1 = await GetGPU(PCs[1].gpuId);
+        console.log("Fetched CPU:", ascPC1);
+        setGPU(prevGpu => [...prevGpu, ascPC1]);
       } else {
-        console.log("Invalid GPU id:", comPCs[1]);
+        console.log("Invalid CPU:", PCs[1].gpuId);
       }
     }
-
-    if (comPCs.length === 2 && comPCs[1]) {
+    if (PCs.length === 2 && PCs[1]) {
       fetchGPU();
     }
-  }, [comPCs]);
+  }, [PCs]);
 
   useEffect(() => {
-    console.log("comPCs updated:", comPCs);
-
-    async function fetchRAM() {
-      const id = parseInt(comPCs[1]);
-      console.log("Trying to fetch GPU with id:", id);
-      if (!isNaN(id)) {
-        const ascCpu = await GetRAM(id);
-        console.log("Fetched GPU:", ascCpu);
-        setRAM(prevCPU => [...prevCPU, ascCpu]);
+    async function fetchRam() {
+      if (!isNaN(PCs[1].ramId)) {
+        const ascPC1 = await GetRAM(PCs[1].ramId);
+        console.log("Fetched RAM:", ascPC1);
+        setRAM(prevRam => [...prevRam, ascPC1]);
       } else {
-        console.log("Invalid GPU id:", comPCs[1]);
+        console.log("Invalid RAM:", PCs[1].ramId);
       }
     }
-
-    if (comPCs.length === 2 && comPCs[1]) {
-      fetchRAM();
+    if (PCs.length === 2 && PCs[1]) {
+      fetchRam();
     }
-  }, [comPCs]);
+  }, [PCs]);
 
   useEffect(() => {
-    console.log("comPCs updated:", comPCs);
-
     async function fetchSto() {
-      const id = parseInt(comPCs[1]);
-      console.log("Trying to fetch GPU with id:", id);
-      if (!isNaN(id)) {
-        const ascCpu = await GetStorage(id);
-        console.log("Fetched GPU:", ascCpu);
-        setStorage(prevCPU => [...prevCPU, ascCpu]);
+      if (!isNaN(PCs[1].storageId)) {
+        const ascPC1 = await GetStorage(PCs[1].storageId);
+        console.log("Fetched RAM:", ascPC1);
+        setStorage(prevSto => [...prevSto, ascPC1]);
       } else {
-        console.log("Invalid GPU id:", comPCs[1]);
+        console.log("Invalid RAM:", PCs[1].storageId);
       }
     }
-
-    if (comPCs.length === 2 && comPCs[1]) {
+    if (PCs.length === 2 && PCs[1]) {
       fetchSto();
     }
-  }, [comPCs]);
+  }, [PCs]);
 
 let dataA, dataB;
 
-if (CPU.length > 1 && GPU.length > 1 && RAM.length > 1 && Storage.length > 0) {
+if (CPU.length > 1 && GPU.length > 1 && RAM.length > 1 && Storage.length > 1) {
   dataA = [
     { y: "Avg", x: (((Storage[0].benchmarkScore / 712) *100) + ((RAM[0].benchmarkScore / 243) *100 ) + ((GPU[0].benchmarkScore / 183) *100) + (CPU[0].benchmarkScore / 133) *100) / 4 },
     { y: "Storage", x: (Storage[0].benchmarkScore / 712) *100 },
@@ -300,6 +294,7 @@ if (CPU.length > 1 && GPU.length > 1 && RAM.length > 1 && Storage.length > 0) {
                     <BsHdd  color="rgba(209, 166, 61, 1)"/> {" "}
                     {Storage.length > 0 ? Storage[0].capacity+ "GB, " + Storage[0].type +", "+Storage[0].speed+"Hz": "Loading..."}
                   </li>
+                  
                 </ul>
               </div>
 
@@ -379,6 +374,7 @@ if (CPU.length > 1 && GPU.length > 1 && RAM.length > 1 && Storage.length > 0) {
                     <BsHdd  color="white"/> {" "}
                     {Storage.length > 1 ? Storage[1].capacity+ "GB, " + Storage[1].type +", "+Storage[1].speed+"Hz": "Loading..."}
                   </li>
+                  
                 </ul>
               </div>
             </div>
