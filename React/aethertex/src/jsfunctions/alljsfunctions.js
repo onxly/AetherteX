@@ -3,7 +3,8 @@ const apilink="http://localhost:3000/AeatherAPI/";
 
 export async function getAllProducts()
 {
-    const res=await axios.get(apilink+"products");
+    const res=await axios.get("http://localhost:3000/AeatherAPI/products");
+    //console.log(res.data);
     return res.data;
 }
 
@@ -53,20 +54,43 @@ export async function updateAddress(clientId,line1,line2,City,region,postalCode)
 
 export async function UpdateUser(RequestBody)
 {
-    const res=await axios.PUT(apilink+"update/"+{id},RequestBody);
+    const res=await axios.PUT(apilink+"update/{id}",RequestBody);
     return res.data;
 }*/
 
 
 export async function GetProducts()
 {
-    const res= await get(apilink+"products");
+    const res=await get(apilink+"products");
     return res.data;
 }
 
 
-export async function GetProductbyID()
+export async function GetProductbyID(id)
 {
-    const res=await axios.get(apilink+"products/"+{id});
-    return  res.data;
+    const res=await axios.get(apilink+"products/"+id);
+    return res.data;
+}
+
+export async function GetCPU(CPU_id)
+{
+    const res = await axios.get(apilink+"components/cpu/"+CPU_id);
+    return res.data;
+}
+
+export async function GetGPU(GPU_id)
+{
+    const res = await axios.get(apilink+"components/gpu/"+GPU_id);
+    return res.data;
+}
+
+export async function GetRAM(RAM_id)
+{
+    const res = await axios.get(apilink+"components/ram/"+RAM_id);
+    return res.data;
+}
+export async function GetStorage(Storage_id)
+{
+    const res = await axios.get(apilink+"components/storage/"+Storage_id);
+    return res.data;
 }

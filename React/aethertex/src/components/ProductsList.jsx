@@ -16,21 +16,37 @@ import {
 } from "recharts";
 import "../stylesheets/ProductsList.css";
 import {getAllProducts} from "../jsfunctions/alljsfunctions";
+import {GetProductbyID, GetGPU, GetCPU, GetRAM ,GetStorage} from "../jsfunctions/alljsfunctions";
 
 function ProductsList({ toggleSidebar, isShowingSidebar }) {
   const [comPCs, setComPCs] = useState([]);
   const[showModal, setShowModal] = useState(true);
   const[Items,setItems] = useState([]);
+  const [CPU, setCPU] = useState({});
+  const [GPU, setGPU] = useState({});
+  const [RAM, setRAM] = useState({});
 
     useEffect(()=>
       {
         async function setProductList()
           {
             const ProdList=await getAllProducts();
+            
             setItems(ProdList);
           }
           setProductList();
       },[]);
+
+      useEffect(()=>
+      {
+  async function fetchProductAndCPU() {
+        const ascCpu = await GetCPU(parseInt(comPCs[0]));
+        setCPU(ascCpu);
+        console.log("CPU:", ascCpu);
+
+  }
+  fetchProductAndCPU();
+  },[]);
 
     const dataA = [
     
@@ -67,14 +83,14 @@ function ProductsList({ toggleSidebar, isShowingSidebar }) {
                     item =>
                     {
                         return <ProductCard 
-                                  key={item.id} 
-                                  prodId={item.id} 
-                                  price={item.Price} 
-                                  title={item.Title} 
+                                  key={item.productId} 
+                                  prodId={item.productId} 
+                                  price={item.price} 
+                                  title={item.title} 
                                   discount={item.discount} 
                                   rating={item.rating} 
                                   ReviewsNum={item.ReviewsNum}
-                                  imgSrc={item.imgSrc}
+                                  imgSrc={item.image1}
                                   comPCs={comPCs}
                                   setComPCs={setComPCs}
                                 />
@@ -92,13 +108,13 @@ function ProductsList({ toggleSidebar, isShowingSidebar }) {
               <h2>PC Comparision</h2>
 
               <div className="Product1">
-                <img src={Items.find(i => i.id === comPCs[0]).imgSrc} alt={comPCs[0].title} width={100} height={100}/>
-                <h3>{Items.find(i => i.id === comPCs[0]).title}</h3>
+                <img src={"/PCS/"+Items.find(i => i.productId === comPCs[0]).image1} alt={comPCs[0].title} width={100} height={100}/>
+                <h3>{Items.find(i => i.productId === comPCs[0]).title}</h3>
                 <ul>
-                  <li><FaMicrochip color="rgba(209, 166, 61, 1)"/> Intel i1</li>
+                  <li><FaMicrochip color="rgba(209, 166, 61, 1)"/> {CPU.name}</li>
                   <li><MdGraphicEq  color="rgba(209, 166, 61, 1)"/> Nvidia Geforce something</li>
-                  <li><RiRamLine emoryLine  color="rgba(209, 166, 61, 1)"/> Some cool ram</li>
-                  <li><BsHdd emoryLine  color="rgba(209, 166, 61, 1)"/> Something thing ssd</li>
+                  <li><RiRamLine  color="rgba(209, 166, 61, 1)"/> Some cool ram</li>
+                  <li><BsHdd  color="rgba(209, 166, 61, 1)"/> Something thing ssd</li>
                 </ul>
               </div>
 
@@ -151,21 +167,21 @@ function ProductsList({ toggleSidebar, isShowingSidebar }) {
                   />
 
                   {/* Series A */}
-                  <Scatter style={{fontSize: "10px"}} name={Items.find(i => i.id === comPCs[0]).title} data={dataA} fill="gold" />
+                  <Scatter style={{fontSize: "10px"}} name={Items.find(i => i.productId === comPCs[0]).title} data={dataA} fill="gold" />
 
                   {/* Series B */}
-                  <Scatter style={{fontSize: "10px"}} name={Items.find(i => i.id === comPCs[0]).title} data={dataB} fill="white" />
+                  <Scatter style={{fontSize: "10px"}} name={Items.find(i => i.productId === comPCs[0]).title} data={dataB} fill="white" />
               </ScatterChart>
               </div>
 
               <div className="Product2">
-                <img src={Items.find(i => i.id === comPCs[1]).imgSrc} alt={comPCs[1].title} width={100} height={100}/>
-                <h3>{Items.find(i => i.id === comPCs[1]).title}</h3>
+                <img src={"/PCS/"+Items.find(i => i.productId === comPCs[1]).image1} alt={comPCs[1].title} width={100} height={100}/>
+                <h3>{Items.find(i => i.productId === comPCs[1]).title}</h3>
                 <ul>
                   <li><FaMicrochip color="white"/> Intel i1</li>
                   <li><MdGraphicEq  color="white"/> Nvidia Geforce something</li>
-                  <li><RiRamLine emoryLine  color="white"/> Some cool ram</li>
-                  <li><BsHdd emoryLine  color="white"/> Something thing ssd</li>
+                  <li><RiRamLine  color="white"/> Some cool ram</li>
+                  <li><BsHdd  color="white"/> Something thing ssd</li>
                 </ul>
               </div>
             </div>

@@ -1,11 +1,12 @@
 import Button from "./Button";
+
 import Checkbox from "@mui/joy/Checkbox";
 import { Link } from "react-router";
 import { FaStar, FaStarHalfAlt, FaRegStar } from "react-icons/fa";
 import "../stylesheets/ProductCard.css";
  
 
-function ProductCard({ imgSrc, title, price, discount, prodId, rating, ReviewsNum, comPCs=[], setComPCs}) {
+function ProductCard({ imgSrc, title, price, discount, prodId, rating, ReviewsNum, comPCs=[], setComPCs, fetchProductAndCPU}) {
   const stars = [];
       for (let i = 1; i <= 5; i++) {
           if (rating >= i) {
@@ -16,8 +17,7 @@ function ProductCard({ imgSrc, title, price, discount, prodId, rating, ReviewsNu
               stars.push(<FaRegStar key={i} color="gold" />);
           }
       }
-  
-
+      
       const toggleItem = (newID) => {
         // check if id already exists
         const exists = comPCs.includes(newID);
@@ -25,6 +25,7 @@ function ProductCard({ imgSrc, title, price, discount, prodId, rating, ReviewsNu
         if (exists) {
           // remove it
           setComPCs(comPCs.filter(id => id !== newID));
+          fetchProductAndCPU(newID);
         } else {
           // add it
           setComPCs([...comPCs, newID]);
@@ -44,10 +45,10 @@ function ProductCard({ imgSrc, title, price, discount, prodId, rating, ReviewsNu
         <div className="product-card-img-container">
           <img
             src={
-              imgSrc ||
+              "/PCS/"+imgSrc ||
               "https://blocks.astratic.com/img/general-img-landscape.png"
             }
-            style={{ objectFit: "contain" }}
+            
             alt={"Image of " + title}
           />
         </div>

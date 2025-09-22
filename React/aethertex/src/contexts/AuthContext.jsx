@@ -6,32 +6,7 @@ export function AuthProvider({ children }) {
   const [user, setUser] = useState({username: "Boyzn", LPoints: 142, IsPremium: false, name: "Boyzn", surname: "Fem", email: "example@gmail.com", phone: "0123456789", password: "example"});
   const [isLoggedIn, setIsLoggedIn] = useState(true);
   const apilink="http://localhost:3000/AeatherAPI/";
-  const [cart, setCart] = useState([
-    {
-      id: 1,
-      Img: "https://m.media-amazon.com/images/I/41BiCUr2t9L.jpg",
-      Title: "AetherteX Prometheus II i9 12900K PC Desktop",
-      Price: 21000,
-      Stock: true,
-      Quantity: 2,
-    }, 
-    {
-      id: 2,
-      Img: "https://m.media-amazon.com/images/I/41BiCUr2t9L.jpg",
-      Title: "AetherteX Prometheus II i9 12900K PC Desktop",
-      Price: 21000,
-      Stock: true,
-      Quantity: 1,
-    },
-    {
-      id: 3,
-      Img: "https://m.media-amazon.com/images/I/41BiCUr2t9L.jpg",
-      Title: "AetherteX Prometheus II i9 12900K PC Desktop",
-      Price: 15000,
-      Stock: true,
-      Quantity: 2,
-    }
-  ]);
+  const [cart, setCart] = useState([]);
 
   /**
    *Logs in a user
@@ -44,7 +19,7 @@ export function AuthProvider({ children }) {
       try{
         const userdata={Email:email,
                         Password:password };
-        const res=await axios.post(apilink+"users/login",userdata,{withCredentials: true});
+        const res=await axios.post(apilink+"users/login",userdata,{withCredentials:true });
          return res.data;
       }catch(err)
       {
@@ -57,7 +32,7 @@ export function AuthProvider({ children }) {
       try{
         const userdata={Email:email,
                         Password:password };
-        const res=await axios.post(apilink+"users/verifyadmin",userdata,{withCredentials: true});
+        const res=await axios.post(apilink+"users/verifyadmin",userdata);
          return res.data;
       }catch(err)
       {
@@ -68,13 +43,10 @@ export function AuthProvider({ children }) {
   /**
    * Logs out the current user
    */
-  async function logout() 
+  function logout() 
   {
-      const res=await axios.post(apilink+"logout",{withCredentials: true})
-      return res.data;
+    setUser(null);
   }
-
-  
 
   /**
    *Registers a user
@@ -86,13 +58,13 @@ export function AuthProvider({ children }) {
    * @param {String} phoneNumber Phone Number of user
    * @param {String} password Password of user
    */
-  async function register(name, surname, email, phoneNumber, password,type) 
+  async function register(name, surname, email, phoneNumber, password) 
   {
     
       try{
         const res=await axios.post(apilink+"users/register",{Name:name,Surname:surname,
                                                             Email:email,PhoneNumber:phoneNumber,
-                                                            Password:password, Type:"client"});
+                                                            Password:password});
         console.log(res.data);
 
         return res.data;
