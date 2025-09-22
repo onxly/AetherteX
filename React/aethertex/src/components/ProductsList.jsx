@@ -204,16 +204,16 @@ let dataA, dataB;
 
 if (CPU.length > 1 && GPU.length > 1 && RAM.length > 1 && Storage.length > 0) {
   dataA = [
-    { y: "Avg", x: 25 },
-    { y: "Storage", x: 10 },
+    { y: "Avg", x: (((Storage[0].benchmarkScore / 712) *100) + ((RAM[0].benchmarkScore / 243) *100 ) + ((GPU[0].benchmarkScore / 183) *100) + (CPU[0].benchmarkScore / 133) *100) / 4 },
+    { y: "Storage", x: (Storage[0].benchmarkScore / 712) *100 },
     { y: "RAM", x: (RAM[0].benchmarkScore / 243) *100 },
     { y: "GPU", x: (GPU[0].benchmarkScore / 183) *100 },
     { y: "CPU", x: (CPU[0].benchmarkScore / 133) *100 }
   ];
 
   dataB = [
-    { y: "Avg", x: 55 },
-    { y: "Storage", x: 40 },
+    { y: "Avg", x: (((Storage[1].benchmarkScore / 712) *100) + ((RAM[1].benchmarkScore / 243) *100 ) + ((GPU[1].benchmarkScore / 183) *100) + (CPU[1].benchmarkScore / 133) *100) / 4 },
+    { y: "Storage", x: (Storage[1].benchmarkScore / 712) *100 },
     { y: "RAM", x: (RAM[1].benchmarkScore / 243) *100 },
     { y: "GPU", x: (GPU[1].benchmarkScore / 183) *100 },
     { y: "CPU", x: (CPU[1].benchmarkScore / 133) *100 }

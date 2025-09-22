@@ -5,41 +5,44 @@ import imgInvoice from "../assets/ProfilepageIcons/InvoiceIcon.png";
 import AddressModel from "../components/AddressModel.jsx";
 import DetailsModel from "../components/DetailsModel.jsx";
 import OrdersModel from "../components/OrdersModel.jsx";
-
+import InvoiceModel from "../components/InvoiceModel.jsx"
 import "../stylesheets/profile.css";
-import { useState,useEffect } from "react";
-
-import {getAllAddresses,getAllOrders} from "../jsfunctions/alljsfunctions.js";
+import { useEffect, useState ,useContext} from "react";
+import { AuthContext } from "../contexts/AuthContext";
 
 function Profile() {
-    const { isLoggedIn, setIsLoggedIn, user, cart, login } = useContext(AuthContext);
-
+  
+    const { user} = useContext(AuthContext);
+  
     document.title = "Profile | AetherteX";
     const [activeModel, setActiveModel] = useState("details"); 
+    const [allAddresses,setallAddresses]=useState([]);
+    const [allOrders,setallOrders]=useState([]);
 
-    [AddrList,setAddrList]=useState();
-    [OrderList,setOrderList]=useState();
-
-    useEffect(()=>
-    {
-        async function setAddr()
-        {
-            const actAddrlist= await getAllAddresses();
-            setAddrList(actAddrlist);
-        }
-        setAddr();
-    },[]);
-  
     useEffect(()=>{
-            async function setOrders()
-            {
-                const orderlist=await getAllOrders();
-                setOrderList(orderlist);
-            }
-            setOrders();
-    },[]);
+      async function getArrAddresses()
+      {
+        const arrAddresses=await getAllAddress(user.id);
+        setallAddresses(arrAddresses);
+      }
 
-  return (
+      async function getArrOrders()
+      {
+        const arrOrders=await getAllOrders(user.id)
+        setallOrders(arrOrders);
+      }
+
+      if(user.id)
+      {
+        getArrAddresses();
+        getArrOrders();
+      }
+      
+    },[user.id]);
+    
+    let User = {Username: "Boyzn", FirstName: "Orefemetse", LastName: "Mokotedi", Email: "example@gmail.com", Phone: "0123456789", Password: "example"};
+
+    return (
     <section className="ProfileSec" id="Profile">
         <div className="ProfileNav">
             <h1>My Account</h1>
@@ -65,9 +68,10 @@ function Profile() {
         </div>
 
         <div>
-            {activeModel === "details" && <DetailsModel User={user}/>}
-            {activeModel === "address" && <AddressModel Addr={AddrList}/>}
-            {activeModel === "orders" && <OrdersModel Orders={OrderList} Addr={Addr}/>}
+            {activeModel === "details" && <DetailsModel User={User}/>}
+            {activeModel === "address" && <AddressModel Addr={allAddresses}/>}
+            {activeModel === "orders" && <OrdersModel Orders={allOrders} Addr={allAddresses}/>}
+            {activeModel === "invoices" && <InvoiceModel Orders={allOrders} Addr={allAddresses}/>}
         </div>
         
     </section>    
