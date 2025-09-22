@@ -15,6 +15,11 @@ out/
 *.sln.docstates
 
 # =====================
+# Database files
+# =====================
+App_Data/
+
+# =====================
 # EF Core
 # =====================
 Migrations/
