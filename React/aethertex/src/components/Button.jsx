@@ -1,8 +1,9 @@
 import React from "react";
 
-function Button({ children, buttonClassName }) {
+function Button({ children, buttonClassName, onClick }) {
   return (
     <button
+      onClick={onClick}
       style={{
         height: 40,
         width: 90,

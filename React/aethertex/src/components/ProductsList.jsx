@@ -1,9 +1,9 @@
 import { useState,useEffect } from "react";
 import ProductCard from "./ProductCard";
 import { GiHamburgerMenu } from "react-icons/gi";
-import { FaMicrochip, FaDatabase } from "react-icons/fa";   // CPU + storage (alt)
-import { MdGraphicEq } from "react-icons/md";               // GPU
-import { RiRamLine } from "react-icons/ri";                 // RAM
+import { FaMicrochip, FaDatabase } from "react-icons/fa"; 
+import { MdGraphicEq } from "react-icons/md";          
+import { RiRamLine } from "react-icons/ri";              
 import { BsHdd } from "react-icons/bs";  
 import {
   ScatterChart,
@@ -22,9 +22,10 @@ function ProductsList({ toggleSidebar, isShowingSidebar }) {
   const [comPCs, setComPCs] = useState([]);
   const[showModal, setShowModal] = useState(true);
   const[Items,setItems] = useState([]);
-  const [CPU, setCPU] = useState({});
-  const [GPU, setGPU] = useState({});
-  const [RAM, setRAM] = useState({});
+  const [CPU, setCPU] = useState([]);
+  const [GPU, setGPU] = useState([]);
+  const [RAM, setRAM] = useState([]);
+  const [Storage, setStorage] = useState([]);
 
     useEffect(()=>
       {
@@ -36,35 +37,207 @@ function ProductsList({ toggleSidebar, isShowingSidebar }) {
           }
           setProductList();
       },[]);
+  //Components for Product 1
+  useEffect(() => {
+    console.log("comPCs updated:", comPCs);
 
-      useEffect(()=>
-      {
-  async function fetchProductAndCPU() {
-        const ascCpu = await GetCPU(parseInt(comPCs[0]));
-        setCPU(ascCpu);
-        console.log("CPU:", ascCpu);
+    async function fetchCPU() {
+      const id = parseInt(comPCs[0]);
+      console.log("Trying to fetch CPU with id:", id);
+      if (!isNaN(id)) {
+        const ascCpu = await GetCPU(id);
+        console.log("Fetched CPU:", ascCpu);
+        setCPU(prevCPU => [...prevCPU, ascCpu]);
+      } else {
+        console.log("Invalid CPU id:", comPCs[0]);
+      }
+    }
 
-  }
-  fetchProductAndCPU();
-  },[]);
+    if (comPCs.length === 2 && comPCs[0]) {
+      fetchCPU();
+    }
+  }, [comPCs]);
 
-    const dataA = [
+  useEffect(() => {
+    console.log("comPCs updated:", comPCs);
+
+    async function fetchGPU() {
+      const id = parseInt(comPCs[0]);
+      console.log("Trying to fetch GPU with id:", id);
+      if (!isNaN(id)) {
+        const ascCpu = await GetGPU(id);
+        console.log("Fetched GPU:", ascCpu);
+        setGPU(prevCPU => [...prevCPU, ascCpu]);
+      } else {
+        console.log("Invalid GPU id:", comPCs[0]);
+      }
+    }
+
+    if (comPCs.length === 2 && comPCs[0]) {
+      fetchGPU();
+    }
+  }, [comPCs]);
+
+  useEffect(() => {
+    console.log("comPCs updated:", comPCs);
+
+    async function fetchRAM() {
+      const id = parseInt(comPCs[0]);
+      console.log("Trying to fetch GPU with id:", id);
+      if (!isNaN(id)) {
+        const ascCpu = await GetRAM(id);
+        console.log("Fetched GPU:", ascCpu);
+        setRAM(prevCPU => [...prevCPU, ascCpu]);
+      } else {
+        console.log("Invalid GPU id:", comPCs[0]);
+      }
+    }
+
+    if (comPCs.length === 2 && comPCs[0]) {
+      fetchRAM();
+    }
+  }, [comPCs]);
+
+  useEffect(() => {
+    console.log("comPCs updated:", comPCs);
+
+    async function fetchSto() {
+      const id = parseInt(comPCs[0]);
+      console.log("Trying to fetch GPU with id:", id);
+      if (!isNaN(id)) {
+        const ascCpu = await GetStorage(id);
+        console.log("Fetched GPU:", ascCpu);
+        setStorage(prevCPU => [...prevCPU, ascCpu]);
+      } else {
+        console.log("Invalid GPU id:", comPCs[0]);
+      }
+    }
+
+    if (comPCs.length === 2 && comPCs[0]) {
+      fetchSto();
+    }
+  }, [comPCs]);
+
+//gggggggggggggggggggggggg
+//Components for Product 2
+  useEffect(() => {
+    console.log("comPCs updated:", comPCs);
+
+    async function fetchCPU() {
+      const id = parseInt(comPCs[1]);
+      console.log("Trying to fetch CPU with id:", id);
+      if (!isNaN(id)) {
+        const ascCpu = await GetCPU(id);
+        console.log("Fetched CPU:", ascCpu);
+        setCPU(prevCPU => [...prevCPU, ascCpu]);
+      } else {
+        console.log("Invalid CPU id:", comPCs[1]);
+      }
+    }
+
+    if (comPCs.length === 2 && comPCs[1]) {
+      fetchCPU();
+    }
+  }, [comPCs]);
+
+  useEffect(() => {
+    console.log("comPCs updated:", comPCs);
+
+    async function fetchGPU() {
+      const id = parseInt(comPCs[1]);
+      console.log("Trying to fetch GPU with id:", id);
+      if (!isNaN(id)) {
+        const ascCpu = await GetGPU(id);
+        console.log("Fetched GPU:", ascCpu);
+        setGPU(prevCPU => [...prevCPU, ascCpu]);
+      } else {
+        console.log("Invalid GPU id:", comPCs[1]);
+      }
+    }
+
+    if (comPCs.length === 2 && comPCs[1]) {
+      fetchGPU();
+    }
+  }, [comPCs]);
+
+  useEffect(() => {
+    console.log("comPCs updated:", comPCs);
+
+    async function fetchRAM() {
+      const id = parseInt(comPCs[1]);
+      console.log("Trying to fetch GPU with id:", id);
+      if (!isNaN(id)) {
+        const ascCpu = await GetRAM(id);
+        console.log("Fetched GPU:", ascCpu);
+        setRAM(prevCPU => [...prevCPU, ascCpu]);
+      } else {
+        console.log("Invalid GPU id:", comPCs[1]);
+      }
+    }
+
+    if (comPCs.length === 2 && comPCs[1]) {
+      fetchRAM();
+    }
+  }, [comPCs]);
+
+  useEffect(() => {
+    console.log("comPCs updated:", comPCs);
+
+    async function fetchSto() {
+      const id = parseInt(comPCs[1]);
+      console.log("Trying to fetch GPU with id:", id);
+      if (!isNaN(id)) {
+        const ascCpu = await GetStorage(id);
+        console.log("Fetched GPU:", ascCpu);
+        setStorage(prevCPU => [...prevCPU, ascCpu]);
+      } else {
+        console.log("Invalid GPU id:", comPCs[1]);
+      }
+    }
+
+    if (comPCs.length === 2 && comPCs[1]) {
+      fetchSto();
+    }
+  }, [comPCs]);
+
+let dataA, dataB;
+
+if (CPU.length > 1 && GPU.length > 1 && RAM.length > 1 && Storage.length > 0) {
+  dataA = [
+    { y: "Avg", x: (((Storage[0].benchmarkScore / 712) *100) + ((RAM[0].benchmarkScore / 243) *100 ) + ((GPU[0].benchmarkScore / 183) *100) + (CPU[0].benchmarkScore / 133) *100) / 4 },
+    { y: "Storage", x: (Storage[0].benchmarkScore / 712) *100 },
+    { y: "RAM", x: (RAM[0].benchmarkScore / 243) *100 },
+    { y: "GPU", x: (GPU[0].benchmarkScore / 183) *100 },
+    { y: "CPU", x: (CPU[0].benchmarkScore / 133) *100 }
+  ];
+
+  dataB = [
+    { y: "Avg", x: (((Storage[1].benchmarkScore / 712) *100) + ((RAM[1].benchmarkScore / 243) *100 ) + ((GPU[1].benchmarkScore / 183) *100) + (CPU[1].benchmarkScore / 133) *100) / 4 },
+    { y: "Storage", x: (Storage[1].benchmarkScore / 712) *100 },
+    { y: "RAM", x: (RAM[1].benchmarkScore / 243) *100 },
+    { y: "GPU", x: (GPU[1].benchmarkScore / 183) *100 },
+    { y: "CPU", x: (CPU[1].benchmarkScore / 133) *100 }
+  ];
+} else {
+  // fallback values
+  dataA = [
+    { y: "Avg", x: 0 },
+    { y: "Storage", x: 0 },
+    { y: "RAM", x: 0 },
+    { y: "GPU", x: 0 },
+    { y: "CPU", x: 0 }
+  ];
+
+  dataB = [
+    { y: "Avg", x: 0 },
+    { y: "Storage", x: 0 },
+    { y: "RAM", x: 0 },
+    { y: "GPU", x: 0 },
+    { y: "CPU", x: 0 }
+  ];
+}
     
-    { y: "Avg", x: 25 },
-    { y: "Storage", x: 10 },
-    { y: "RAM", x: 30 },
-    { y: "GPU", x: 70 },
-    { y: "CPU", x: 20 }
-  ];
-
-  const dataB = [
-    { y: "Avg", x: 55 },
-    { y: "Storage", x: 40 },
-    { y: "RAM", x: 60 },
-    { y: "GPU", x: 50 },
-    { y: "CPU", x: 40 }
-  ];
-
+  console.log(CPU[0], typeof(CPU[0]));
   return (
     <div className="productlist-container">
       <div className="sidebar-toggle-container">
@@ -111,10 +284,22 @@ function ProductsList({ toggleSidebar, isShowingSidebar }) {
                 <img src={"/PCS/"+Items.find(i => i.productId === comPCs[0]).image1} alt={comPCs[0].title} width={100} height={100}/>
                 <h3>{Items.find(i => i.productId === comPCs[0]).title}</h3>
                 <ul>
-                  <li><FaMicrochip color="rgba(209, 166, 61, 1)"/> {CPU.name}</li>
-                  <li><MdGraphicEq  color="rgba(209, 166, 61, 1)"/> Nvidia Geforce something</li>
-                  <li><RiRamLine  color="rgba(209, 166, 61, 1)"/> Some cool ram</li>
-                  <li><BsHdd  color="rgba(209, 166, 61, 1)"/> Something thing ssd</li>
+                  <li>
+                    <FaMicrochip color="rgba(209, 166, 61, 1)" />{" "}
+                    {CPU.length > 0 ? CPU[0].name : "Loading..."}
+                  </li>
+                  <li>
+                    <MdGraphicEq  color="rgba(209, 166, 61, 1)"/> {" "}
+                    {GPU.length > 0 ? GPU[0].name : "Loading..."}
+                  </li>
+                  <li>
+                    <RiRamLine  color="rgba(209, 166, 61, 1)"/> {" "}
+                    {RAM.length > 0 ? RAM[0].name + ", " + RAM[0].capacity + "GB": "Loading..."}
+                  </li>
+                  <li>
+                    <BsHdd  color="rgba(209, 166, 61, 1)"/> {" "}
+                    {Storage.length > 0 ? Storage[0].capacity+ "GB, " + Storage[0].type +", "+Storage[0].speed+"Hz": "Loading..."}
+                  </li>
                 </ul>
               </div>
 
@@ -170,7 +355,7 @@ function ProductsList({ toggleSidebar, isShowingSidebar }) {
                   <Scatter style={{fontSize: "10px"}} name={Items.find(i => i.productId === comPCs[0]).title} data={dataA} fill="gold" />
 
                   {/* Series B */}
-                  <Scatter style={{fontSize: "10px"}} name={Items.find(i => i.productId === comPCs[0]).title} data={dataB} fill="white" />
+                  <Scatter style={{fontSize: "10px"}} name={Items.find(i => i.productId === comPCs[1]).title} data={dataB} fill="white" />
               </ScatterChart>
               </div>
 
@@ -178,10 +363,22 @@ function ProductsList({ toggleSidebar, isShowingSidebar }) {
                 <img src={"/PCS/"+Items.find(i => i.productId === comPCs[1]).image1} alt={comPCs[1].title} width={100} height={100}/>
                 <h3>{Items.find(i => i.productId === comPCs[1]).title}</h3>
                 <ul>
-                  <li><FaMicrochip color="white"/> Intel i1</li>
-                  <li><MdGraphicEq  color="white"/> Nvidia Geforce something</li>
-                  <li><RiRamLine  color="white"/> Some cool ram</li>
-                  <li><BsHdd  color="white"/> Something thing ssd</li>
+                  <li>
+                    <FaMicrochip color="white" />{" "}
+                    {CPU.length > 1 ? CPU[1].name : "Loading..."}
+                  </li>
+                  <li>
+                    <MdGraphicEq  color="white"/> {" "}
+                    {GPU.length > 1 ? GPU[1].name : "Loading..."}
+                  </li>
+                  <li>
+                    <RiRamLine  color="white"/> {" "}
+                    {RAM.length > 1 ? RAM[1].name + ", " + RAM[1].capacity + "GB": "Loading..."}
+                  </li>
+                  <li>
+                    <BsHdd  color="white"/> {" "}
+                    {Storage.length > 1 ? Storage[1].capacity+ "GB, " + Storage[1].type +", "+Storage[1].speed+"Hz": "Loading..."}
+                  </li>
                 </ul>
               </div>
             </div>

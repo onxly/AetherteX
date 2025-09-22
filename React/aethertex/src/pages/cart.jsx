@@ -35,20 +35,20 @@ function Cart() {
         {
           if(item.id==id)
           {
-            return{...item, Quantity: item.Quantity > 0 ? item.Quantity - 1 : 0 }
+            return{...item, Quantity: item.Quantity > 0 ? item.Quantity - 1 : 0 };
           }
           return item;
         }
       )
     )
   }
-  function removeItem(id)
+  function removeItem(delid)
   {
     setCart
     (
       cart.filter
       (
-        item=>item.id!=id
+        item=>item.id!=delid
       )
     )
   }
@@ -77,7 +77,9 @@ function Cart() {
             item =>
             {
                 return <div key={item.id} className="cartItem">
+                  <Link to={`/product/${item.id}`} className="link">
                     <img className="itemImage" src={"/PCS/"+item.Img} width={200} height={200}/>
+                  </Link>
 
                     <div className="itemDetails" >
                         <h3>{item.Title}</h3>

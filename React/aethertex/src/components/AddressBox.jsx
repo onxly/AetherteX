@@ -2,7 +2,7 @@ import "../stylesheets/AddressBox.css";
 import {updateAddress} from "../jsfunctions/alljsfunctions"
 import { useState } from "react";
 
-export function AddressBox(addr,Name,Street,City,Postal,Phone,addressToEdit )
+export function AddressBox(addr,Name,Line1,Line2,City,Postal,Phone,addressToEdit )
 {
    
    /*[clientId,setclientId]=useState();
@@ -14,7 +14,7 @@ export function AddressBox(addr,Name,Street,City,Postal,Phone,addressToEdit )
 
     async function updateAddr( ){
 
-        const NewAddressID= await updateAddress(addresToEdit.ID,line1,line2,City,region,postalCode);
+        const NewAddressID= await updateAddress(addressToEdit.ID,Line1,Line2,City,region,postalCode);
     }
     
     return(       
