@@ -14,6 +14,8 @@ out/
 *.userosscache
 *.sln.docstates
 
+App_Data/
+
 # =====================
 # EF Core
 # =====================
