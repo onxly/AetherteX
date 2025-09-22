@@ -44,7 +44,7 @@ namespace AeatherteX_API.Controllers
 
         // POST: AeatherAPI/filter
         [HttpPost]
-        public ActionResult<FilterResponse> FilterProducts([FromBody] FilterRequest request)
+        public ActionResult<List<FilterResponse>> FilterProducts([FromBody] FilterRequest request)
         {
             var products = db.Products.AsQueryable();
             if (!string.IsNullOrEmpty(request.CpuBrand))
@@ -86,7 +86,7 @@ namespace AeatherteX_API.Controllers
 
         // POST: AeatherAPI/filter/search
         [HttpPost("search")]
-        public ActionResult<FilterResponse> SearchAndFilterProducts([FromBody] SearchRequest request)
+        public ActionResult<List<FilterResponse>> SearchAndFilterProducts([FromBody] SearchRequest request)
         {
             var products = db.Products.AsQueryable();
             if (!string.IsNullOrEmpty(request.Query))
