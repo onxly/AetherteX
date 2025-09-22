@@ -1,12 +1,23 @@
-import React from "react";
 import Welcome from "../assets/Welcome.png";
 import "../stylesheets/register.css";
 import { Link } from "react-router";
+import { useContext, useState } from "react";
+import { AuthContext } from "../contexts/AuthContext";
+
 
 function Register() {
+  const { user, setUser, isLoggedIn, setIsLoggedIn, login, logout, register } = useContext(AuthContext);
+  const [username, setUsername] = useState();
+  const [name, setName] = useState();
+  const [surname, setSurname] = useState();
+  const [email, setEmail] = useState();
+  const [phoneNumber, setPhoneNumber] = useState();
+  const [password, setPassword] = useState();
+  const [confirmPassword, setConfirmPassword] = useState();
+  
   document.title = "Register | AetherteX"
   return (
-    <form style={{ }}>
+    <div style={{ }}>
       <div className="column">
         <img src={Welcome} alt="" width={450} height={150}/>
 
@@ -19,6 +30,8 @@ function Register() {
           placeholder="Type your Username"
           className="RegisterBoxs"
           style={{ height: "60px" }}
+          value={username}
+          onChange={(e)=>setUsername(e.target.value)}
         />
 
         <label htmlFor="name" style={{ marginRight: "360px",fontSize:12 }}>
@@ -29,6 +42,8 @@ function Register() {
           id="name"
           placeholder="Type your Name"
           className="RegisterBoxs"
+          value={name}
+          onChange={(e)=>setName(e.target.value)}
         />
 
         <label htmlFor="surname" style={{ marginRight: "345px",fontSize:12 }}>
@@ -39,6 +54,8 @@ function Register() {
           id="surname"
           placeholder="Type your Surname"
           className="RegisterBoxs"
+          value={surname}
+          onChange={(e)=>setSurname(e.target.value)}
         />
 
         <label htmlFor="email" style={{ marginRight: "360px" ,fontSize:12}}>
@@ -49,6 +66,8 @@ function Register() {
           id="email"
           placeholder="Type your Email"
           className="RegisterBoxs"
+          value={email}
+          onChange={(e)=>setEmail(e.target.value)}
         />
 
         <label htmlFor="phoneNumber" style={{ marginRight: "304px" ,fontSize:12}}>
@@ -59,6 +78,8 @@ function Register() {
           id="phoneNumber"
           placeholder="Type your Phone Number"
           className="RegisterBoxs"
+          value={phoneNumber}
+          onChange={(e)=>setPhoneNumber(e.target.value)}
         />
 
         <label htmlFor="password" style={{ marginRight: "340px",fontSize:12 }}>
@@ -69,6 +90,8 @@ function Register() {
           id="password"
           placeholder="Type your Password"
           className="RegisterBoxs"
+          value={password}
+          onChange={(e)=>setPassword(e.target.value)}
         />
 
         <label htmlFor="confirmPassword" style={{ marginRight: "284px",fontSize:12 }}>
@@ -81,7 +104,7 @@ function Register() {
           className="RegisterBoxs"
         />
 
-        <button type="submit" className="Registerloginbtn">
+        <button className="Registerloginbtn" onClick={async () => await register(name, surname, email, phoneNumber, password)}>
           Create Account
         </button>
         <p style={{ marginTop: "10px",fontSize:13 }}>
@@ -89,7 +112,7 @@ function Register() {
         </p>
         <hr />
       </div>
-    </form>
+    </div>
   );
 }
 

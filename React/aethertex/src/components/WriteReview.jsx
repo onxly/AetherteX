@@ -2,7 +2,7 @@ import { useState } from "react";
 import { FaStar, FaStarHalfAlt, FaRegStar } from "react-icons/fa";
 import "../stylesheets/WriteReview.css";
 
-function WriteReview() {
+function WriteReview(prodId) {
     let stars = [];
     for (let i = 1; i <= 5; i++) {
         stars.push(<FaRegStar
