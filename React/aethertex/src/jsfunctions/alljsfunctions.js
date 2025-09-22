@@ -1,37 +1,31 @@
-import axios from "axios";
+import axios from "axios"
 const apilink="http://localhost:3000/AeatherAPI/";
 
 //Address
 export async function getAllAddress(id)
-//Address
-export async function getAllAddress(id)
 {
-    const res=await axios.get(apilink+"client/"+id);
     const res=await axios.get(apilink+"client/"+id);
     return res.data;
 }
 
 export async function getAddress(id)
-export async function getAddress(id)
 {
-    const res=await axios.post(apilink+"address/"+id);
     const res=await axios.post(apilink+"address/"+id);
     return res.data;
 }
 
-export async function createAddress(clientId,line1,line2,city,region,postalCode)
+export async function createAddress(ClientId,Line1,Line2,City,Region,PostalCode)
 {
-    const newadressobj={ClientId:clientId,
-                    Line1:line1,
-                    Line2:line2,    
-                    City:city,
-                    Region:region,
-                    PostalCode:postalCode}
+    const newadressobj={clientId:ClientId,
+                    line1:Line1,
+                    line2:Line2,    
+                    city:City,
+                    region:Region,
+                    postalCode:PostalCode}
 
     const res=await axios.post(apilink+"address",newadressobj);
     return res.data;
 }
-
 
 
 export async function updateAddress(clientId,line1,line2,City,region,postalCode)
@@ -48,41 +42,21 @@ export async function updateAddress(clientId,line1,line2,City,region,postalCode)
 
 //cart
 export async function getUserCart(id)
-//cart
-export async function getUserCart(id)
 {
-    const res=await axios.post(apilink+"cart/"+id);
     const res=await axios.post(apilink+"cart/"+id);
     return res.data;
 }
 
-export async function addProduct2Cart (ProductId,Quantity)
 export async function addProduct2Cart (ProductId,Quantity)
 {
     const newadressobj={productId:ProductId,
                     quantity:Quantity}
 
     const res=await axios.post(apilink+"address",newadressobj);
-    const newadressobj={productId:ProductId,
-                    quantity:Quantity}
-
-    const res=await axios.post(apilink+"address",newadressobj);
-    return res.data;
-}
-}
-
-
-export async function removeProdfromCart(id,Quant)
-{
-    const proddata={
-        ProductId:id,
-        Quantity:Quant
-    }
-    const res=await axios.delete(apilink+"cart/"+id,proddata);
     return res.data;
 }
 
-export async function ClearCart (Id)
+
 export async function removeProdfromCart(id,Quant)
 {
     const proddata={
@@ -99,20 +73,13 @@ export async function ClearCart (Id)
         UserId:Id
     }
     const res=await axios.delete(apilink+"cart/clear",cartdata);
-    const cartdata={
-        UserId:Id
-    }
-    const res=await axios.delete(apilink+"cart/clear",cartdata);
     return res.data;
 }
 
 //components 
-//components 
 
 export async function getAllCPUs()
-export async function getAllCPUs()
 {
-    const res = await axios.get(apilink+"components/cpu");
     const res = await axios.get(apilink+"components/cpu");
     return res.data;
 }
@@ -120,12 +87,6 @@ export async function getAllCPUs()
 export async function GetCPU(CPU_id)
 {
     const res = await axios.get(apilink+"components/cpu/"+CPU_id);
-    return res.data;
-}
-
-export async function getAllGPUs()
-{
-    const res = await axios.get(apilink+"components/gpu");
     return res.data;
 }
 
@@ -147,24 +108,11 @@ export async function getAllRAMs()
     return res.data;
 }
 
-export async function getAllRAMs()
-{
-    const res = await axios.get(apilink+"components/ram");
-    return res.data;
-}
-
 export async function GetRAM(RAM_id)
 {
     const res = await axios.get(apilink+"components/ram/"+RAM_id);
     return res.data;
 }
-
-export async function getAllStorageDevices()
-{
-    const res = await axios.get(apilink+"components/storage");
-    return res.data;
-}
-
 
 export async function getAllStorageDevices()
 {
@@ -271,6 +219,7 @@ export async function GetRatingsforProduct (id)
     const res=await axios.get(apilink+"ratings/"+id);
     return res.data;
 }
+
 
 export async function AddRatingforProduct(id,status,data)
 {
