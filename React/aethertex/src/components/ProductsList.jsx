@@ -1,4 +1,4 @@
-import React,{ useState } from "react";
+import { useState,useEffect } from "react";
 import ProductCard from "./ProductCard";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { FaMicrochip, FaDatabase } from "react-icons/fa";   // CPU + storage (alt)
@@ -15,174 +15,38 @@ import {
   Legend
 } from "recharts";
 import "../stylesheets/ProductsList.css";
+import {getAllProducts} from "../jsfunctions/alljsfunctions";
+import {GetProductbyID, GetGPU, GetCPU, GetRAM ,GetStorage} from "../jsfunctions/alljsfunctions";
 
 function ProductsList({ toggleSidebar, isShowingSidebar }) {
   const [comPCs, setComPCs] = useState([]);
-  const[showModal, setShowModal] = useState(true)
-  const[Items,setItems] = useState([
+  const[showModal, setShowModal] = useState(true);
+  const[Items,setItems] = useState([]);
+  const [CPU, setCPU] = useState({});
+  const [GPU, setGPU] = useState({});
+  const [RAM, setRAM] = useState({});
+
+    useEffect(()=>
       {
-        id: 1,
-        price: 21900,
-        title: "AetherteX Prometheus II i9 12900K PC Desktop",
-        imgSrc: "https://m.media-amazon.com/images/I/51DfICIDimL._SL500_.jpg",
-        rating: 4.8,
-        ReviewsNum: 183,
-      },
+        async function setProductList()
+          {
+            const ProdList=await getAllProducts();
+            
+            setItems(ProdList);
+          }
+          setProductList();
+      },[]);
+
+      useEffect(()=>
       {
-        id: 2,
-        price: 21900,
-        title: "AetherteX Prometheus II i9 12900K PC Desktop",
-        imgSrc: "https://m.media-amazon.com/images/I/51DfICIDimL._SL500_.jpg",
-        rating: 4.8,
-        ReviewsNum: 183,
-      },
-      {
-        id: 3,
-        price: 21900,
-        title: "AetherteX Prometheus II i9 12900K PC Desktop",
-        imgSrc: "https://m.media-amazon.com/images/I/51DfICIDimL._SL500_.jpg",
-        rating: 4.8,
-        ReviewsNum: 183,
-      },
-      {
-        id: 4,
-        price: 21900,
-        title: "AetherteX Prometheus II i9 12900K PC Desktop",
-        imgSrc: "https://m.media-amazon.com/images/I/51DfICIDimL._SL500_.jpg",
-        rating: 4.8,
-        ReviewsNum: 183,
-      },
-      {
-        id: 5,
-        price: 21900,
-        title: "AetherteX Prometheus II i9 12900K PC Desktop",
-        imgSrc: "https://m.media-amazon.com/images/I/51DfICIDimL._SL500_.jpg",
-        rating: 4.8,
-        ReviewsNum: 183,
-        Discount: 0,
-      },
-      {
-        id: 6,
-        price: 21900,
-        title: "AetherteX Prometheus II i9 12900K PC Desktop",
-        imgSrc: "https://m.media-amazon.com/images/I/51DfICIDimL._SL500_.jpg",
-        rating: 4.8,
-        ReviewsNum: 183,
-      },
-      {
-        id: 7,
-        price: 21900,
-        title: "AetherteX Prometheus II i9 12900K PC Desktop",
-        imgSrc: "https://m.media-amazon.com/images/I/51DfICIDimL._SL500_.jpg",
-        rating: 4.8,
-        ReviewsNum: 183,
-      },
-      {
-        id: 8,
-        price: 21900,
-        title: "AetherteX Prometheus II i9 12900K PC Desktop",
-        imgSrc: "https://m.media-amazon.com/images/I/51DfICIDimL._SL500_.jpg",
-        rating: 4.8,
-        ReviewsNum: 183,
-      },
-      {
-        id: 9,
-        price: 21900,
-        title: "AetherteX Prometheus II i9 12900K PC Desktop",
-        imgSrc: "https://m.media-amazon.com/images/I/51DfICIDimL._SL500_.jpg",
-        rating: 4.8,
-        ReviewsNum: 183,
-      },
-      {
-        id: 10,
-        price: 21900,
-        title: "AetherteX Prometheus II i9 12900K PC Desktop",
-        imgSrc: "https://m.media-amazon.com/images/I/51DfICIDimL._SL500_.jpg",
-        rating: 4.8,
-        ReviewsNum: 183,
-      },
-      {
-        id: 11,
-        price: 21900,
-        title: "AetherteX Prometheus II i9 12900K PC Desktop",
-        imgSrc: "https://m.media-amazon.com/images/I/51DfICIDimL._SL500_.jpg",
-        rating: 4.8,
-        ReviewsNum: 183,
-      },
-      {
-        id: 12,
-        price: 21900,
-        title: "AetherteX Prometheus II i9 12900K PC Desktop",
-        imgSrc: "https://m.media-amazon.com/images/I/51DfICIDimL._SL500_.jpg",
-        rating: 4.8,
-        ReviewsNum: 183,
-      },
-      {
-        id: 13,
-        price: 21900,
-        title: "AetherteX Prometheus II i9 12900K PC Desktop",
-        imgSrc: "https://m.media-amazon.com/images/I/51DfICIDimL._SL500_.jpg",
-        rating: 4.8,
-        ReviewsNum: 183,
-      },
-      {
-        id: 14,
-        price: 21900,
-        title: "AetherteX Prometheus II i9 12900K PC Desktop",
-        imgSrc: "https://m.media-amazon.com/images/I/51DfICIDimL._SL500_.jpg",
-        rating: 4.8,
-        ReviewsNum: 183,
-      },
-      {
-        id: 15,
-        price: 21900,
-        title: "AetherteX Prometheus II i9 12900K PC Desktop",
-        imgSrc: "https://m.media-amazon.com/images/I/51DfICIDimL._SL500_.jpg",
-        rating: 4.8,
-        ReviewsNum: 183,
-      },
-      {
-        id: 16,
-        price: 21900,
-        title: "AetherteX Prometheus II i9 12900K PC Desktop",
-        imgSrc: "https://m.media-amazon.com/images/I/51DfICIDimL._SL500_.jpg",
-        rating: 4.8,
-        ReviewsNum: 183,
-      },
-      {
-        id: 17,
-        price: 21900,
-        title: "AetherteX Prometheus II i9 12900K PC Desktop",
-        imgSrc: "https://m.media-amazon.com/images/I/51DfICIDimL._SL500_.jpg",
-        rating: 4.8,
-        ReviewsNum: 183,
-      },
-      {
-        id: 18,
-        price: 21900,
-        title: "AetherteX Prometheus II i9 12900K PC Desktop",
-        imgSrc: "https://m.media-amazon.com/images/I/51DfICIDimL._SL500_.jpg",
-        rating: 4.8,
-        ReviewsNum: 183,
-      },
-      {
-        id: 19,
-        price: 21900,
-        title: "AetherteX Prometheus II i9 12900K PC Desktop",
-        imgSrc: "https://m.media-amazon.com/images/I/51DfICIDimL._SL500_.jpg",
-        rating: 4.8,
-        ReviewsNum: 183,
-      },
-      {
-        id: 20,
-        price: 21900,
-        title: "AetherteX Prometheus II i9 12900K PC Desktop",
-        imgSrc: "https://m.media-amazon.com/images/I/51DfICIDimL._SL500_.jpg",
-        rating: 4.8,
-        ReviewsNum: 183,
-      }
-    
-    ]);
+  async function fetchProductAndCPU() {
+        const ascCpu = await GetCPU(parseInt(comPCs[0]));
+        setCPU(ascCpu);
+        console.log("CPU:", ascCpu);
+
+  }
+  fetchProductAndCPU();
+  },[]);
 
     const dataA = [
     
@@ -219,14 +83,14 @@ function ProductsList({ toggleSidebar, isShowingSidebar }) {
                     item =>
                     {
                         return <ProductCard 
-                                  key={item.id} 
-                                  prodId={item.id} 
+                                  key={item.productId} 
+                                  prodId={item.productId} 
                                   price={item.price} 
                                   title={item.title} 
                                   discount={item.discount} 
                                   rating={item.rating} 
                                   ReviewsNum={item.ReviewsNum}
-                                  imgSrc={item.imgSrc}
+                                  imgSrc={item.image1}
                                   comPCs={comPCs}
                                   setComPCs={setComPCs}
                                 />
@@ -244,13 +108,13 @@ function ProductsList({ toggleSidebar, isShowingSidebar }) {
               <h2>PC Comparision</h2>
 
               <div className="Product1">
-                <img src={Items.find(i => i.id === comPCs[0]).imgSrc} alt={comPCs[0].title} width={100} height={100}/>
-                <h3>{Items.find(i => i.id === comPCs[0]).title}</h3>
+                <img src={"/PCS/"+Items.find(i => i.productId === comPCs[0]).image1} alt={comPCs[0].title} width={100} height={100}/>
+                <h3>{Items.find(i => i.productId === comPCs[0]).title}</h3>
                 <ul>
-                  <li><FaMicrochip color="rgba(209, 166, 61, 1)"/> Intel i1</li>
+                  <li><FaMicrochip color="rgba(209, 166, 61, 1)"/> {CPU.name}</li>
                   <li><MdGraphicEq  color="rgba(209, 166, 61, 1)"/> Nvidia Geforce something</li>
-                  <li><RiRamLine emoryLine  color="rgba(209, 166, 61, 1)"/> Some cool ram</li>
-                  <li><BsHdd emoryLine  color="rgba(209, 166, 61, 1)"/> Something thing ssd</li>
+                  <li><RiRamLine  color="rgba(209, 166, 61, 1)"/> Some cool ram</li>
+                  <li><BsHdd  color="rgba(209, 166, 61, 1)"/> Something thing ssd</li>
                 </ul>
               </div>
 
@@ -303,21 +167,21 @@ function ProductsList({ toggleSidebar, isShowingSidebar }) {
                   />
 
                   {/* Series A */}
-                  <Scatter style={{fontSize: "10px"}} name={Items.find(i => i.id === comPCs[0]).title} data={dataA} fill="gold" />
+                  <Scatter style={{fontSize: "10px"}} name={Items.find(i => i.productId === comPCs[0]).title} data={dataA} fill="gold" />
 
                   {/* Series B */}
-                  <Scatter style={{fontSize: "10px"}} name={Items.find(i => i.id === comPCs[0]).title} data={dataB} fill="white" />
+                  <Scatter style={{fontSize: "10px"}} name={Items.find(i => i.productId === comPCs[0]).title} data={dataB} fill="white" />
               </ScatterChart>
               </div>
 
               <div className="Product2">
-                <img src={Items.find(i => i.id === comPCs[1]).imgSrc} alt={comPCs[1].title} width={100} height={100}/>
-                <h3>{Items.find(i => i.id === comPCs[1]).title}</h3>
+                <img src={"/PCS/"+Items.find(i => i.productId === comPCs[1]).image1} alt={comPCs[1].title} width={100} height={100}/>
+                <h3>{Items.find(i => i.productId === comPCs[1]).title}</h3>
                 <ul>
                   <li><FaMicrochip color="white"/> Intel i1</li>
                   <li><MdGraphicEq  color="white"/> Nvidia Geforce something</li>
-                  <li><RiRamLine emoryLine  color="white"/> Some cool ram</li>
-                  <li><BsHdd emoryLine  color="white"/> Something thing ssd</li>
+                  <li><RiRamLine  color="white"/> Some cool ram</li>
+                  <li><BsHdd  color="white"/> Something thing ssd</li>
                 </ul>
               </div>
             </div>
