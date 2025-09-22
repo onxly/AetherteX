@@ -14,9 +14,6 @@ out/
 *.userosscache
 *.sln.docstates
 
-# =====================
-# Database files
-# =====================
 App_Data/
 
 # =====================
