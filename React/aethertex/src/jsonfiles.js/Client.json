@@ -1,0 +1,16 @@
+[
+    {
+        "ClientID":1,
+        "Username":"john_smith",
+        "LoyaltyPoints":120,
+        "isPremium":true
+    },
+    
+    {
+        "ClientID":2,
+        "Username":"mary_j",
+        "LoyaltyPoints":45,
+        "isPremium":false
+    }
+
+]

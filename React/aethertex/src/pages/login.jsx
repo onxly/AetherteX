@@ -1,10 +1,15 @@
-import React from "react";
+import React, { useContext, useState } from "react";
 import Zeus from "../assets/Zeus.jpg"; // <-- import the image
 import "../stylesheets/login.css";
 import { Link } from "react-router";
+import { AuthContext } from "../contexts/AuthContext";
 
 function Login() {
+  const { isLoggedIn, setIsLoggedIn, user, cart, login } = useContext(AuthContext);
+  const [email, setEmail] = useState();
+  const [password, setPassword] = useState();
   document.title = "Login | AetherteX";
+
   return (
     <div className="formStyle">
       <div>
@@ -17,6 +22,8 @@ function Login() {
           id="email"
           placeholder="Member email"
           className="Boxs"
+          value={email}
+          onChange={(e)=>setEmail(e.target.value)}
         />{" "}
       </div>
       <div style={{ }}>
@@ -25,10 +32,12 @@ function Login() {
           id="password"
           placeholder="Password"
           className="Boxs"
+          value={password}
+          onChange={(e)=>setPassword(e.target.value)}
         />
       </div>
 
-      <button type="submit" className="loginbtn">
+      <button type="submit" className="loginbtn" onClick={async()=> await login(email,password)}>
         Log in
       </button>
       <p>

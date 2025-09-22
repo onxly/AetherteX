@@ -9,7 +9,12 @@ namespace AeatherteX_API.Controllers
     [Route("AeatherAPI/users")]
     public class UserController : ControllerBase
     {
-        private readonly Database1Context db = new Database1Context();
+        private readonly Database1Context db;
+
+        public UserController(Database1Context context)
+        {
+            db = context;
+        }
 
         public class LoginRequest
         {
@@ -82,11 +87,11 @@ namespace AeatherteX_API.Controllers
                         select u).FirstOrDefault();
 
             if (user == null)
-                return StatusCode(1, "Email does not exist");
+                return NotFound("Email does not exist");
 
             if (!Secrecy.VerifyPassword(request.Password, user.Password))
             {
-                return StatusCode(1, "Incorrect password");
+                return Unauthorized("Incorrect password");
             }
 
             var userResponse = new User
@@ -132,7 +137,7 @@ namespace AeatherteX_API.Controllers
 
             HttpContext.Session.SetInt32("userId", userResponse.UserId);
 
-            return StatusCode(0, userResponse);
+            return Ok(userResponse);
         }
 
         // POST: AeatherAPI/users/logout
@@ -140,7 +145,7 @@ namespace AeatherteX_API.Controllers
         public IActionResult Logout()
         {
             HttpContext.Session.Clear();
-            return StatusCode(0, "Logged out successfully");
+            return Ok();
         }
 
         // GET: AeatherAPI/users/me
@@ -150,13 +155,13 @@ namespace AeatherteX_API.Controllers
             var id = HttpContext.Session.GetString("userId");
 
             if (string.IsNullOrEmpty(id))
-                return StatusCode(1, "User is not logged in");
+                return BadRequest("User is not logged in");
 
             var user = (from u in db.Users
                         where u.UserId.ToString() == id
                         select u).FirstOrDefault();
             if (user == null)
-                return StatusCode(1, "User not found");
+                return NotFound("User not found");
             
             var userResponse = new User
             {
@@ -199,7 +204,7 @@ namespace AeatherteX_API.Controllers
                     };
                 }
             }
-            return StatusCode(0, userResponse);
+            return Ok(userResponse);
         }
 
         // POST: AeatherAPI/users/verifyadmin
@@ -211,8 +216,8 @@ namespace AeatherteX_API.Controllers
                          select a).FirstOrDefault();
 
             if (admin == null)
-                return StatusCode(1, false);
-            return StatusCode(0, true);
+                return Ok(false);
+            return Ok(true);
         }
 
         // POST: AeatherAPI/users/register
@@ -226,7 +231,7 @@ namespace AeatherteX_API.Controllers
                                 select u).FirstOrDefault();
 
             if (existingUser != null)
-                return StatusCode(1, "Email already registered");
+                return BadRequest("Email already registered");
 
             string userType = "client"; // Default user type
 
@@ -252,7 +257,7 @@ namespace AeatherteX_API.Controllers
             catch(DbUpdateException ex)
             {
                 ex.GetBaseException();
-                return StatusCode(-1, "Database update error");
+                return StatusCode(StatusCodes.Status500InternalServerError, "Database update error");
             }
             
             if(newUser.Type == "admin")
@@ -277,7 +282,7 @@ namespace AeatherteX_API.Controllers
                 db.Clients.Add(newClient);
             }
 
-            return StatusCode(0, newUser.UserId);
+            return Ok(newUser.UserId);
         }
 
         // PUT: AeatherAPI/users/update/{id}
@@ -288,7 +293,7 @@ namespace AeatherteX_API.Controllers
                         where u.UserId == id
                         select u).FirstOrDefault();
             if (user == null)
-                return StatusCode(1, "User not found");
+                return NotFound("User not found");
             if (!string.IsNullOrEmpty(request.Name))
                 user.Name = request.Name;
             if (!string.IsNullOrEmpty(request.Surname))
@@ -303,7 +308,7 @@ namespace AeatherteX_API.Controllers
             catch(DbUpdateException ex)
             {
                 ex.GetBaseException();
-                return StatusCode(-1, "Database update error");
+                return StatusCode(StatusCodes.Status500InternalServerError, "Database update error");
             }
 
             var userResponse = new User
@@ -348,7 +353,7 @@ namespace AeatherteX_API.Controllers
                 }
             }
 
-            return StatusCode(0, userResponse);
+            return Ok(userResponse);
         }
 
         // PUT: AeatherAPI/users/changepassword
@@ -359,9 +364,9 @@ namespace AeatherteX_API.Controllers
                         where u.UserId == request.UserId
                         select u).FirstOrDefault();
             if (user == null)
-                return StatusCode(1, "User not found");
+                return NotFound("User not found");
             if (!Secrecy.VerifyPassword(request.OldPassword, user.Password))
-                return StatusCode(1, "Incorrect old password");
+                return Unauthorized("Incorrect old password");
             user.Password = Secrecy.HashPassword(request.NewPassword);
             try {
                 db.SaveChanges();
@@ -369,9 +374,9 @@ namespace AeatherteX_API.Controllers
             catch(DbUpdateException ex)
             {
                 ex.GetBaseException();
-                return StatusCode(-1, "Database update error");
+                return StatusCode(StatusCodes.Status500InternalServerError, "Database update error");
             }
-            return StatusCode(0, "Password changed successfully");
+            return Ok("Password changed successfully");
         }
 
         // PUT: AeatherAPI/users/loyaltypoints
@@ -382,7 +387,7 @@ namespace AeatherteX_API.Controllers
                           where c.ClientId == request.ClientId
                           select c).FirstOrDefault();
             if (client == null)
-                return StatusCode(1, "Client not found");
+                return NotFound("Client not found");
             client.LoyaltyPoints = (client.LoyaltyPoints ?? 0) + request.PointsToAdd;
             try {
                 db.SaveChanges();
@@ -390,9 +395,9 @@ namespace AeatherteX_API.Controllers
             catch(DbUpdateException ex)
             {
                 ex.GetBaseException();
-                return StatusCode(-1, "Database update error");
+                return StatusCode(StatusCodes.Status500InternalServerError, "Database update error");
             }
-            return StatusCode(0, "Upadted Loyalty Points");
+            return Ok("Upadted Loyalty Points");
         }
 
         // GET: AeatherAPI/users/loyaltypoints/{id}
@@ -403,8 +408,8 @@ namespace AeatherteX_API.Controllers
                           where c.ClientId == id
                           select c).FirstOrDefault();
             if (client == null)
-                return StatusCode(1, "Client not found");
-            return StatusCode(0, client.LoyaltyPoints ?? 0);
+                return NotFound("Client not found");
+            return Ok(client.LoyaltyPoints ?? 0);
         }
 
         // PUT: AeatherAPI/users/premiumstatus
@@ -415,7 +420,7 @@ namespace AeatherteX_API.Controllers
                           where c.ClientId == request.ClientId
                           select c).FirstOrDefault();
             if (client == null)
-                return StatusCode(1, "Client not found");
+                return NotFound("Client not found");
             client.IsPremium = request.IsPremium;
             try {
                 db.SaveChanges();
@@ -423,9 +428,9 @@ namespace AeatherteX_API.Controllers
             catch(DbUpdateException ex)
             {
                 ex.GetBaseException();
-                return StatusCode(-1, "Database update error");
+                return StatusCode(StatusCodes.Status500InternalServerError, "Database update error");
             }
-            return StatusCode(0, "Updated Premium Status");
+            return Ok("Updated Premium Status");
         }
 
     }
