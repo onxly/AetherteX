@@ -3,10 +3,14 @@ import Button from "./Button";
 import Checkbox from "@mui/joy/Checkbox";
 import { Link } from "react-router";
 import { FaStar, FaStarHalfAlt, FaRegStar } from "react-icons/fa";
+import { useState } from "react";
+import { AuthContext } from "../contexts/AuthContext";
+import { useContext } from "react";
 import "../stylesheets/ProductCard.css";
  
 
-function ProductCard({ imgSrc, title, price, discount, prodId, rating, ReviewsNum, comPCs=[], setComPCs, fetchProductAndCPU}) {
+function ProductCard({prodId, imgSrc, title, price, discount, rating, ReviewsNum, comPCs=[], setComPCs, fetchProductAndCPU}) {
+  const { cart = [], addCart } = useContext(AuthContext);
   const stars = [];
       for (let i = 1; i <= 5; i++) {
           if (rating >= i) {
@@ -61,7 +65,9 @@ function ProductCard({ imgSrc, title, price, discount, prodId, rating, ReviewsNu
         <p className="product-price">R{price}</p>
 
         <div className="Prodbtn">
-          <Button buttonClassName={"product-card-button-cart"}>
+          <Button buttonClassName={"product-card-button-cart"}
+            onClick={()=> addCart(prodId, imgSrc, title, price, true, 1)}
+          >
             Add to Cart
           </Button>
 
