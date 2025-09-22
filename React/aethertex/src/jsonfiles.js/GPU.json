@@ -1,0 +1,17 @@
+[
+    {
+        "GPU_ID":1,
+        "Name":"Nvidia GeForce GT 730",
+        "CoreClock":700,
+        "BenchmarkScore":1.99,
+        "GPUimg":"https://www.gpu-monkey.com/gpu/nvidia_geforce_gt_730.jpg"
+    },
+
+    {
+        "GPU_ID":2,
+        "Name":"Nvidia GeForce GTX 1650",
+        "CoreClock":1395,
+        "BenchmarkScore":18.1,
+        "GPUimg":"https://gnd-tech.com/content/2019/04/14-932-148-V03.jpg"
+    }
+]

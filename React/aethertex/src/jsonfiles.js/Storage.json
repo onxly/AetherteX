@@ -1,0 +1,21 @@
+[
+    {
+        "Storage_ID":1,
+        "S_Type":"SSD",
+        "Capacity":"2000",
+        "Mem_Type":"NVMe",
+        "Speed":3500,
+        "BenchmarkScore":930
+    },
+
+    {
+        "Storage_ID":1,
+        "S_Type":"HDD",
+        "Capacity":"512",
+        "Mem_Type":"SATA",
+        "Speed":7200,
+        "BenchmarkScore":250
+    }
+
+
+]

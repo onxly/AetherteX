@@ -1,0 +1,19 @@
+[
+    {
+        "RatingID":1,
+        "Stars":5,
+        "DatePosted":"2025-01-12",
+        "Review":"Excellent product, highly recommend!",
+        "UserID":1,
+        "ProductID":1
+    },
+    
+    {
+        "RatingID":2,
+        "Stars":4,
+        "DatePosted":"2025-01-15",
+        "Review":"Very good quality but slightly expensive.",
+        "UserID":2,
+        "ProductID":2
+    }
+]
