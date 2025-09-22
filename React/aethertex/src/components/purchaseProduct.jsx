@@ -10,33 +10,32 @@ function PurchaseProduct({Product}) {
     const [quantity, setQuantity] = useState(1);
 
     let stockInfo;
-    if (Product.Stock > 0) {
+    if (Product.stock > 0) {
         stockInfo = <span>
                         <span className='InStock'>
-                            Only {Product.Stock} left
+                            Only {Product.stock} left
                         </span>
                     </span>;
     } else {
         stockInfo = <span className='OutStock'>Out of Stock</span>;
     }
-    console.log("Product ID:", Product.ProductId, typeof Product.ProductId);
-    console.log("Parsed Product ID:", parseInt(Product.ProductId), typeof parseInt(Product.ProductId))
+
     return (
         <div className="purchase-product">
             <div>{stockInfo}</div>
-            <b>R {Product.Price}</b>
+            <b>R {Product.price}</b>
             <div className='QuantitySec'>
                 Quantity:
                 <input className="txtQuantity" 
                         type="number" 
                         min="1" 
-                        max={Product.Stock} 
+                        max={Product.stock} 
                         defaultValue={quantity}
                         onChange={(e) => setQuantity(e.target.value)}
                 />
             </div>
 
-            <Link to={`/checkout/${Product.ProductId}`} className="link">
+            <Link to={`/checkout/${Product.productId}`} className="link">
                 <button className="btnBuy">
                     Buy Now
                 </button>
@@ -44,7 +43,7 @@ function PurchaseProduct({Product}) {
             <button className="btnAdd" 
                 onClick={() => 
                             
-                            addCart(parseInt(Product.ProductId), Product.Image1, Product.Title, Product.Price, true, parseInt(quantity))
+                            addCart(parseInt(Product.productId), Product.image1, Product.title, Product.price, true, parseInt(quantity))
                         }>
                 Add to Cart
             </button>

@@ -77,7 +77,7 @@ function Cart() {
             item =>
             {
                 return <div key={item.id} className="cartItem">
-                    <img className="itemImage" src={item.Img} width={200} height={200}/>
+                    <img className="itemImage" src={"/PCS/"+item.Img} width={200} height={200}/>
 
                     <div className="itemDetails" >
                         <h3>{item.Title}</h3>

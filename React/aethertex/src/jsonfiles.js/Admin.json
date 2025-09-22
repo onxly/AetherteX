@@ -1,0 +1,11 @@
+[
+    {
+        "UserId":1,
+        "AdminCode":"ADM1001"
+    },
+    {
+        "UserId":2,
+        "AdminCode":"ADM1002"
+    }
+
+]

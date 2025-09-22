@@ -1,0 +1,19 @@
+[
+    {
+        "RAM_ID":1,
+        "Name":"G.SKILL Ripjaws V DDR4 3200 C1",
+        "Capacity":8,
+        "Mem_Type":"DDR4",
+        "Speed":3200,
+        "BenchmarkScore": 50.0
+    },
+    {
+        "RAM_ID":2,
+        "Name":"Crucial Ballistix Sport LT DDR4 2666 C16",
+        "Capacity":8,
+        "Mem_Type":"DDR4",
+        "Speed":2400,
+        "BenchmarkScore":46.7
+    }
+
+]

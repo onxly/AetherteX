@@ -5,53 +5,56 @@ import ReviewProduct from "../components/ReviewProduct.jsx";
 import Footer from "../components/Footer.jsx";
 import { useParams } from "react-router-dom";
 import "../stylesheets/product.css";
+import { useState,useEffect } from "react";
+import {GetProductbyID, GetGPU, GetCPU, GetRAM ,GetStorage} from "../jsfunctions/alljsfunctions";
+
 
 function Product() {
   const {id} = useParams();
-  const Product = {
-  ProductId: id,
-  Title: "AetherteX Prometheus II i9 12900K PC Desktop",
-  Price: 21900,
-  Stock: 5,
-  Rating: 4.3,
-  Reviews: 120,
-  Description: "This is a sample product description.",
-  Image1: "https://m.media-amazon.com/images/I/41BiCUr2t9L.jpg",
-  Image2: "https://m.media-amazon.com/images/I/41BiCUr2t9L.jpg",
-  Image3: "https://m.media-amazon.com/images/I/51mzyMImf+L._SL500_.jpg",
-  Image4: "https://m.media-amazon.com/images/I/41tlFlXd+rL._SL500_.jpg",
-  Specs: {
-    CPU: "Intel Core i9-12900K",
-    GPU: "NVIDIA GeForce RTX 3090",
-    RAM: "32GB DDR4",
-    Storage: "1TB NVMe SSD",
-    Motherboard: "ASUS TUF GAMING B550M‑PLUS WiFi II (AMD)",
-    PowerSupply: "850W 80+ Gold",
-    Case: "Prometheus Metallic Gear Neo Qube Case",
+  const [prod, setProd]=useState({});
+  const [CPU, setCPU] = useState({});
+  const [GPU, setGPU] = useState({});
+  const [RAM, setRAM] = useState({});
+  const [Storage, setStorage] = useState({});
+
+ useEffect(() => {
+  async function fetchProductAndCPU() {
+    try {
+      const product = await GetProductbyID(parseInt(id));
+      setProd(product);
+
+      if (product?.cpuId) {
+        const ascCpu = await GetCPU(product.cpuId);
+        setCPU(ascCpu);
+        console.log("CPU:", ascCpu);
+      }
+
+      if (product?.gpuId) {
+        const ascGpu = await GetGPU(product.gpuId);
+        setGPU(ascGpu);
+        console.log("GPU:", ascGpu);
+      }
+
+      if (product?.ramId) {
+        const ascGpu = await GetRAM(product.ramId);
+        setRAM(ascGpu);
+        console.log("RAM:", ascGpu);
+      }
+
+      if (product?.storageId) {
+        const ascGpu = await GetStorage(product.storageId);
+        setStorage(ascGpu);
+        console.log("Storage:", ascGpu);
+        
+      }
+    } catch (error) {
+      console.error("Error fetching product/CPU:", error);
+    }
   }
-}
 
-  let CPU = {
-    Cores: 16,
-    Theads: 24,
-    ClockSpeed: 5.2,
-    CPUCache: 30,
-    Benchmark: 117.0,
-  };
-
-  let GPU = {
-    VRAM: 16,
-    ClockSpeed: 2321,
-    Benchmark: 49.6,
-  };
-
-  let RAM = {
-    Name: "Corsair Vengeance RGB PRO",
-    Speed: 3200,
-    Channel: "Single channel",
-    Benchmark: 88.5,
-  };
-
+  fetchProductAndCPU();
+}, [id]);
+  
   let CusReviews = [
     { user: "Boyzn1", rating: 5, comment: "Excellent product!" },
     { user: "Boyzn2", rating: 4, comment: "Very good, but could be improved." },
@@ -61,28 +64,31 @@ function Product() {
       comment: "Average performance for the price.",
     },
   ];
-  document.title = Product.Title + " | AetherteX";
+  document.title = prod.title+ " | AetherteX";
+  
   return (
     <div className="cApp">
       <ImgProduct
-        imgMain={Product.Image1}
-        img1={Product.Image1}
-        img2={Product.Image2}
-        img3={Product.Image3}
-        img4={Product.Image4}
+        imgMain={prod.image1}
+        img1={prod.image1}
+        img2={prod.image2}
+        img3={prod.image3}
+        img4={prod.image4}
       />
+
       <InfoProduct
-        name={Product.Title}
-        description={Product.Description}
-        rating={Product.Rating}
-        reviews={Product.Reviews}
-        specs={Product.Specs}
+        name={prod.title}
+        description={prod.description}
+        rating={4.7}
+        reviews={123}
         CPU={CPU}
         GPU={GPU}
         RAM={RAM}
+        Storage={Storage}
       />
-      <PurchaseProduct Product={Product} />
-      <ReviewProduct rating={Product.Rating} CusReviews={CusReviews} />
+
+      <PurchaseProduct Product={prod} />
+      <ReviewProduct Prodid={prod.productId} rating={prod.rating} CusReviews={CusReviews} />
       <Footer />
     </div>
   );
