@@ -291,14 +291,6 @@ export async function changePassword (UserId,OldPassword,NewPassword)
     const res=await axios.put(apilink+"users/changepassword",reqdata)
   }
 
-  export  async function VerifyAdmin (UserId,AdminCode) 
-  {
-    const reqdata={ userId: UserId, 
-                    adminCode: AdminCode} 
- 
-    const res=await axios.post(apilink+"users/verifyadmin",reqdata)
-  }
-
   //loyalty points 
 export async function updateLoyaltyPoints(ClientId,PointsToAdd) 
   {

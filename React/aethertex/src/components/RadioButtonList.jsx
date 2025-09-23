@@ -12,7 +12,6 @@ function RadioButtonList({
   textcolor,
   title,
   labels,
-  onChange,
   defaultValue,
   buttonColor,
 }) {
