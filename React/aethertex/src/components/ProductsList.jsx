@@ -337,15 +337,13 @@ if (CPU.length > 1 && GPU.length > 1 && RAM.length > 1 && Storage.length > 1) {
                             }}
                           >
                             {/* show category ONCE at the top */}
-                            <strong>{category}</strong>
-
-                            {/* show only values (not category again) */}
+                            <b>{category}</b>
                             {payload.map((entry, index) => {
                               const value = entry.payload.x;
                               return (
                                 <p key={index} style={{ color: entry.color, margin: 0 }}>
                                   {entry.name !== "Category" && (
-                                    <>{entry.name}: {value.toFixed(2)}%</>
+                                    <>{entry.name}: {value.toFixed(2)}</>
                                   )}
                                   
                                 </p>
