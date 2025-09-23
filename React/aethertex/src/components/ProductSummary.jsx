@@ -1,16 +1,35 @@
 import { PieChart, Pie, Cell, Tooltip, Legend } from "recharts";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import {GetGPU, GetCPU, GetRAM ,GetStorage} from "../jsfunctions/alljsfunctions";
 import '../stylesheets/ProductSummary.css';
 
-function ProductSummary({ summary }) {
+function ProductSummary({ CPU ={}, GPU = {}, RAM ={}, Storage={}}) {
     const [showModal, setShowModal] = useState(false);
+    
+    let data;
+    console.log("CPU "+CPU)
+    if (CPU && GPU && RAM && Storage )
+    {
+        const CPUBench = (CPU.benchmarkScore / 133) *100;
+        const GPUBench = (GPU.benchmarkScore / 183) *100;
+        const RAMBench = (GPU.benchmarkScore / 183) *100;
+        const StoBench = (Storage.benchmarkScore / 712) *100;
+        const TotBench = CPUBench + GPUBench + RAMBench + StoBench;
 
-    const data = [
-        { component: "CPU", benchmark: 40 },
-        { component: "GPU", benchmark: 25 },
-        { component: "RAM", benchmark: 20 },
-        { component: "Storage", benchmark: 15 },
-    ];
+         data = [
+            { component: "CPU", benchmark: (CPUBench / TotBench) * 100 },
+            { component: "GPU", benchmark: (GPUBench / TotBench) * 100 },
+            { component: "RAM", benchmark: (RAMBench / TotBench) * 100 },
+            { component: "Storage", benchmark: (StoBench / TotBench) * 100 },
+        ];
+    } else{
+        data = [
+            { component: "CPU", benchmark: 25 },
+            { component: "GPU", benchmark: 25 },
+            { component: "RAM", benchmark: 25 },
+            { component: "Storage", benchmark: 25 },
+        ];
+    }
 
 // Colors for slices
 const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042"];
@@ -38,7 +57,7 @@ const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042"];
                         </p>
                         
                         <div>               
-                        <PieChart width={400} height={300}>
+                        <PieChart width={500} height={400}>
                             <Pie
                             data={data}
                             dataKey="benchmark"      // tells recharts what number to use
@@ -47,13 +66,15 @@ const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042"];
                             cy="50%"             // y-position center
                             outerRadius={100}    // size of pie
                             fill="#8884d8"
-                            label                // adds labels on slices
+                            label={({ name, value }) => `${name}: ${value.toFixed(2)}%`}
                             >
                             {data.map((entry, index) => (
                                 <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
                             ))}
+                            
                             </Pie>
                             <Tooltip 
+                                formatter={(value, name, props) => value.toFixed(2)+"%"}
                                 contentStyle={{ 
                                 backgroundColor: "#121212",   
                                 border: "1px solid #ccc",   // border style
