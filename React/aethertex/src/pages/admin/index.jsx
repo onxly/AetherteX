@@ -17,6 +17,7 @@ function AdminHome() {
             inputClassName={"admin-search-input"}
             buttonClassName={"admin-search-button"}
           />
+          
         </div>
       </section>
     </div>
