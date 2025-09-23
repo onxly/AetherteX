@@ -62,7 +62,7 @@ function ProductCard({prodId, imgSrc, title, price, discount, rating, ReviewsNum
       </Link>
       <div className="description">
         <span className="ProdStars">{stars} ({ReviewsNum})</span>
-        <p className="product-price">R {price``.toLocaleString("fr-FR")}</p>
+        <p className="product-price">R {Number(price).toLocaleString("fr-FR")}</p>
 
         <div className="Prodbtn">
           <Button buttonClassName={"product-card-button-cart"}

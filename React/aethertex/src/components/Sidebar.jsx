@@ -1,11 +1,32 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import RadioButtonList from "./RadioButtonList";
 import Slider from "@mui/material/Slider";
 import "../stylesheets/Sidebar.css";
+//import {GetFilterProds} from "../jsfunctions/alljsfunctions";
+function Sidebar({ isShowing, filters, setFilters }) {
+  
+  const [minPrice,setMinPrice]=useState();
+  const [maxPrice,setMaxPrice]=useState();
+  const [priceRange, setPriceRange] = useState([0, 100000]);
+  const [CPUOption, setCPUOption] = useState();
+  const [storageTypeOption, setStorageTypeOption] = useState();
+  const [storageSizeOption, setStorageSizeOption] = useState();
 
-function Sidebar({ isShowing }) {
-  const [cpuOption, setCPUOption] = useState("Nothing");
 
+  const handleChange = (event, newValue) => {
+    setPriceRange(newValue);
+    setFilters(prev => ({ ...prev, priceRange: newValue }));
+    console.log("Small value:", newValue[0]); // min
+    console.log("Big value:", newValue[1]);   // max
+  };
+  
+
+  async function handlePrice(value)
+  {
+    setMinPrice(value[0]);
+    setMaxPrice(value[1]);
+  }
+  
   const radioColor = {
     color: "white",
     "&.Mui-checked": {
@@ -13,9 +34,27 @@ function Sidebar({ isShowing }) {
     },
   };
 
-  function handelCPUSelection(value) {
+  async function handelCPUSelection(value) {
     setCPUOption(value);
+    setFilters(prev => ({ ...prev, cpuOption: value }));
   }
+
+  async function handelStorageSelection(value) {
+  // Example value: "SSD 256GB"
+  const [type, sizeWithUnit] = value.split(" "); // ["SSD", "256GB"]
+  let size = parseFloat(sizeWithUnit); // 256
+
+  if (sizeWithUnit.endsWith("TB")) {
+    console.log("Size ::::",size)
+    size *= 1024; // convert TB to GB
+      console.log("Size ::::",size)
+  }
+
+  setStorageTypeOption(type);
+  setStorageSizeOption(size);
+  setFilters(prev => ({ ...prev, storageType: type, storageSize: size }));
+}
+
 
   return (
     <>
@@ -27,15 +66,15 @@ function Sidebar({ isShowing }) {
           labels={["Intel", "AMD"]}
           title={"CPU"}
           buttonColor={radioColor}
-          //onChange={handelCPUSelection}
+          onChange={handelCPUSelection}
         />
 
         <RadioButtonList
           textcolor={"white"}
-          labels={["500G", "1TB"]}
+          labels={["SSD 256GB","SSD 512GB","SSD 1TB","SSD 2TB"]}
           title={"Storage"}
           buttonColor={radioColor}
-          //onChange={handelCPUSelection}
+          onChange={handelStorageSelection}
         />
       </section>
 
@@ -49,7 +88,8 @@ function Sidebar({ isShowing }) {
       >
         <div style={{ textAlign: "center" }}>Price Range</div>
         <Slider
-          defaultValue={[0, 100000]}
+          value={priceRange}
+          onChange={handleChange}
           max={100000}
           valueLabelDisplay="auto"
           sx={{
