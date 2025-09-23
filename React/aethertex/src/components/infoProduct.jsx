@@ -105,7 +105,7 @@ function InfoProduct({name, description, rating, reviews, CPU ={}, GPU = {}, RAM
                         </button>
                     )}
     
-                <ProductSummary />
+                <ProductSummary CPU={CPU} GPU={GPU} RAM={RAM} Storage={Storage}/>
             </div>
         </div>
     );
