@@ -8,15 +8,6 @@ AppDomain.CurrentDomain.SetData("DataDirectory", Path.Combine(Directory.GetCurre
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddCors(options =>
-{
-    options.AddPolicy("AllowAll", policy =>
-    {
-        policy.AllowAnyOrigin()
-              .AllowAnyHeader()
-              .AllowAnyMethod();
-    });
-});
 
 builder.Services.AddControllers();
 
