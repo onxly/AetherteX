@@ -16,9 +16,8 @@ function AddressModel({Addr}){
 
     async function setNewAddress()
         {
-            const res=await createAddress(user.id,line1,line2,city,region,postalCode)
-            return res.data;
-        }
+            const res=await createAddress(user.id,line1,line2,city,region,postalCode);
+        }    
             
     const [showModal, setShowModal] = useState(false);
     const [lockline1input,setlockline1input]=useState(true);
