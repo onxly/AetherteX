@@ -1,0 +1,21 @@
+[
+    {
+        "CPU_ID":1,
+        "Name":"AMD Ryzen 5 3600",
+        "Cores":12,
+        "Threads":4.20,
+        "ClockSpeed":32,
+        "BenchmarkScore":83.1,
+        "CPUimg":"https://www.bhphotovideo.com/images/images1000x1000/amd_100_100000031box_ryzen_5_3600_3_6_1485462.jpg"
+    },
+
+    {
+        "CPU_ID":2,
+        "Name":"AMD Ryzen 5 7600",
+        "Cores":12,
+        "Threads":5.10,
+        "ClockSpeed":32,
+        "BenchmarkScore":106.0,
+        "CPUimg":"https://tse2.mm.bing.net/th/id/OIP.N3gtMBJUI1hBd5SePrc9EQHaHa?rs=1&pid=ImgDetMain&o=7&rm=3"
+    }
+]

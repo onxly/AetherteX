@@ -1,0 +1,11 @@
+.avatar-container {
+  display: flex;
+  background-color: var(--primary-color);
+  padding: 10px;
+  align-items: center;
+  gap: 10px;
+
+  border-bottom: solid;
+  border-bottom-width: 3px;
+  border-color: white;
+}

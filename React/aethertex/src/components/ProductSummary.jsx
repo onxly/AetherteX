@@ -1,0 +1,77 @@
+import { PieChart, Pie, Cell, Tooltip, Legend } from "recharts";
+import { useState } from "react";
+import '../stylesheets/ProductSummary.css';
+
+function ProductSummary({ summary }) {
+    const [showModal, setShowModal] = useState(false);
+
+    const data = [
+        { component: "CPU", benchmark: 40 },
+        { component: "GPU", benchmark: 25 },
+        { component: "RAM", benchmark: 20 },
+        { component: "Storage", benchmark: 15 },
+    ];
+
+// Colors for slices
+const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042"];
+
+    return(
+        <div>
+            <button className="btnSummary" onClick={() => setShowModal(true)}>
+                Show Summary
+            </button>
+    
+            {showModal && (
+                <div className="SummaryModal">
+                    <div className="SummaryContent">
+                        <span className="close" onClick={() => setShowModal(false)}>
+                            ×
+                        </span>
+                            
+                        <h2>Product Summary</h2>
+                        <p className="SummaryDescription">
+                            This pie chart breaks down benchmark scores across the 
+                            <br />
+                            CPU, GPU, RAM, and storage, highlighting each component’s 
+                            <br />
+                            share of overall system performance. 
+                        </p>
+                        
+                        <div>               
+                        <PieChart width={400} height={300}>
+                            <Pie
+                            data={data}
+                            dataKey="benchmark"      // tells recharts what number to use
+                            nameKey="component"       // tells recharts what label to show
+                            cx="50%"             // x-position center
+                            cy="50%"             // y-position center
+                            outerRadius={100}    // size of pie
+                            fill="#8884d8"
+                            label                // adds labels on slices
+                            >
+                            {data.map((entry, index) => (
+                                <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                            ))}
+                            </Pie>
+                            <Tooltip 
+                                contentStyle={{ 
+                                backgroundColor: "#121212",   
+                                border: "1px solid #ccc",   // border style
+                                borderRadius: "20px",        // rounded corners
+                                color: "white",             // text color
+                                fontSize: "14px"            // text size
+                                }} 
+                                    itemStyle={{ 
+                                    color: "gold"           // color of each value inside
+                                }} 
+                            /> {/* shows values on hover */}
+                            <Legend />  {/* shows a legend */}
+                        </PieChart>
+                        </div>
+        
+                    </div>
+                </div>
+            )}
+            </div>
+    );
+} export default ProductSummary;

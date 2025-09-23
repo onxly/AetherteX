@@ -1,0 +1,20 @@
+[
+    {
+        "InvoiceID":1,
+        "Quantity":2,
+        "Price":1200,
+        "Date":"18/05/2025",
+        "AddressID":"uj gate 6",
+        "ClientID":7
+    },
+
+    {
+        "InvoiceID":2,
+        "Quantity":4,
+        "Price":3400,
+        "Date":"23/08/2025",
+        "AddressID":"brixton kula shop",
+        "ClientID":7
+    }
+
+]
