@@ -12,11 +12,9 @@ function OrderDetModel({id, price, Date, Addr, products=[]}){
             <div className="OrdDetSec">
                 <b><FaMapMarkerAlt color="rgba(209, 166, 61, 1)"/> &nbsp;Shipping Address</b>
                 <p>
-                    <u>{Addr.Name}</u>
                     <br />
-                    <span>{Addr.Street}, {Addr.City}, {Addr.Postal}</span>
+                    <span>{Addr.Line1},{Addr.Line2}, {Addr.City},{Addr.Region} {Addr.PostalCode}</span>
                     <br />
-                    <em>{Addr.Phone}</em>
                 </p>
             </div>
 
@@ -39,8 +37,8 @@ function OrderDetModel({id, price, Date, Addr, products=[]}){
                     <div key={product.id} className="OrderDetProduct">
                         <img className="OrderImg" alt="" src={product.imgSrc} width={100} height={100}/>
                             <div className="OrdProdDetails" >
-                                <h3>{product.title}</h3>
-                                <em>Price: {product.price}</em>
+                                <h3>{product.Title}</h3>
+                                <em>Price: {product.Price}</em>
                                 <em>Qty: {products.length}</em>                                  
                         </div>{/*items details*/}
                     </div>

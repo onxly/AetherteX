@@ -1,48 +1,62 @@
-.AddrBox{
+
+.addAddressPage{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    padding-left: 20px;
+    margin-left: 100px;
+    grid-column: 2;
+}
+
+.addressDetailBox{
     position: relative;
     background-color: #1a1a1a;
     color: white;
     border-radius: 20px;
-    width: 600px;
+    width: 60%;
     padding: 20px;
     display: flex;
+    gap: 10px;
+    align-items: center;
 }
 
-.AddrBox:hover{
-    background-color: rgb(65, 65, 65);
-    border: rgba(209, 166, 61, 1) solid 1px;
+.addressDetailBox input{
+    height: 25px;
 }
 
-.AddrBox u{
-    font-size: 18px;
-    font-weight: bold;
-}
-
-
-.AddrBox em{
-    font-weight: lighter;
-    font-size: 12px;
-}
-
-.AddrDetails{
-    margin-right: 100px;
-}
-
-.Addrbuttons{
+.btnEditAddressDet{
+    background-color: transparent;
+    cursor: pointer;
+    height: 25px;
+    width: 50px;
+    margin-left: 200px;
     position: absolute;
-    display: flex;
-    flex-direction: column;
-    
-    top: 15px;
+    top: 40px;
     right: 25px;
     gap: 10px;
 }
 
-.editadress{
-    background-color: transparent;
-    cursor: pointer;
+.btnEditAddressDet:hover{
+    background-color: rgb(51, 50, 50);
 }
 
-.editadress:hover{
-    background-color: rgb(51, 50, 50);
+.btnSaveEdits{
+    background-color: rgba(209, 166, 61, 1);
+    color: black;
+    border: none;
+    margin-top: 10px;
+    margin-left: 10px;
+    margin-bottom: 10px;
+    padding: 10px 20px;
+    border-radius: 20px;
+    cursor: pointer;
+    width: 150px;
+    height: 40px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.btnSaveEdits:hover{
+    opacity: 0.8;
+    border: 2px solid black;
 }
