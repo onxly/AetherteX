@@ -3,13 +3,22 @@ import { useParams } from "react-router-dom";
 import Icon from "../assets/AetherteXIcon.png";
 import { FaLock } from "react-icons/fa";
 import { AuthContext } from "../contexts/AuthContext";
-import { useContext } from "react";
-import "../stylesheets/checkout.css"
+import { useContext, useEffect, useState } from "react";
+import "../stylesheets/checkout.css";
+import {updateLoyaltyPoints,getAllAddress} from "../jsfunctions/alljsfunctions";
 
 function checkout(info)
 {
+const { isLoggedIn, cart =[], setCart ,user} = useContext(AuthContext);
+const [addLoyaltyPoints,setaddLoyaltyPoints]=useState();
+
+async function funcaddLoyaltyPoints() 
+  {
+    const res=updateLoyaltyPoints(ClientId,PointsToAdd) ;
+    setaddLoyaltyPoints(res.data);
+  }
+
     document.title = "Checkout | AetherteX";
-    const { isLoggedIn, cart =[], setCart } = useContext(AuthContext);
     const totalItems = cart.reduce((acc, item) => acc + item.Quantity, 0);
     const subtotal = cart.reduce((acc, item) => acc + item.Price * item.Quantity, 0);
     const DeliveryFee = subtotal > 0 ? 100 : 0;
@@ -24,11 +33,17 @@ function checkout(info)
     },
   };
 
-    let Addr = [
-        {id: 1, Name: "Boyzn", Street: "1234 The streets", City: "Mahikeng", Postal: 2732, Phone: "0123456789"},
-        {id: 2, Name: "Boyzn1", Street: "56789 The streets1", City: "Mahikeng1", Postal: 2732, Phone: "0123456789"},
-        {id: 3, Name: "Boyzn2", Street: "1111 The streets2", City: "Mahikeng2", Postal: 2732, Phone: "0123456789"}
-    ]
+  const [Addr,setAddr]=useState();
+
+  useEffect(()=>{
+    async function getAddresses()
+    {
+        const res=await getAllAddress(user.id)
+        setAddr(res.data);
+    }
+    getAddresses();
+  },[user.id])
+   
 
     for (let y = currentYear; y <= endYear; y++) {
         years.push(y);
@@ -62,9 +77,9 @@ function checkout(info)
                 width={164}
             />
             <h2>Order Summary</h2>
-            <b>{totalItems} items: &nbsp;</b>R {total} <br /> <br />
+            <b>{totalItems} items: &nbsp;</b>R {total.toLocaleString("fr-FR")} <br /> <br />
             <em>No coupons applied</em> <br /> <br />
-            <b>To pay: &nbsp;</b> R {total} <br /> <br />
+            <b>To pay: &nbsp;</b> R {total.toLocaleString("fr-FR")} <br /> <br />
             <FaLock size={20} color="gray" /> Secure checkout
             
         </div>
@@ -123,7 +138,7 @@ function checkout(info)
                         <b>CVV  </b> 
                         <input className="Paymentbottxt" type:Text></input>
                     </label>
-            <button className="btnCheck">Checkout</button>     
+            <button className="btnCheck" onClick={()=>funcaddLoyaltyPoints()}>Checkout</button>     
         </div>
     </section>
     );

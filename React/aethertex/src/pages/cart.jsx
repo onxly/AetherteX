@@ -1,14 +1,29 @@
-import React,{ useState } from "react";
+import React,{ useEffect, useState } from "react";
 import { Link, UNSAFE_useFogOFWarDiscovery } from "react-router";
 import { AuthContext } from "../contexts/AuthContext";
 import { useContext } from "react";
 import { FaTrash } from "react-icons/fa";
-
+import {getLoyaltyPoints} from "../jsfunctions/alljsfunctions"
 import '../stylesheets/cart.css';
 function Cart() {
   document.title = "Cart | AetherteX";
-  const { isLoggedIn, cart =[], setCart } = useContext(AuthContext);
+  const { isLoggedIn, cart =[], setCart ,user} = useContext(AuthContext);
+  const [uLoyaltyPoints,setuLoyaltyPoints]=useState(0);
    
+useEffect(()=>
+{
+    async function setuserLoyaltyPoints()
+    {console.log("hello");
+       const loyaltypoints= getLoyaltyPoints(user.id);
+       console.log("there");
+       setuLoyaltyPoints(loyaltypoints);
+       console.log("im");
+    }
+    setuserLoyaltyPoints();
+    console.log("brendon");
+},[user.id])
+console.log("munashe");
+
   function increaseCount(id) {
     setCart
     (
@@ -18,7 +33,7 @@ function Cart() {
         {
           if(item.id==id)
           {
-            return {...item, Quantity :item.Quantity+1}
+            return {...item, quantity :item.quantity+1}
           }
           return item;
         }
@@ -35,7 +50,8 @@ function Cart() {
         {
           if(item.id==id)
           {
-            return{...item, Quantity: item.Quantity > 0 ? item.Quantity - 1 : 0 };
+            
+            return{...item, quantity: item.quantity > 0 ? item.quantity - 1 :  0};
           }
           return item;
         }
@@ -44,6 +60,7 @@ function Cart() {
   }
   function removeItem(delid)
   {
+  
     setCart
     (
       cart.filter
@@ -52,12 +69,22 @@ function Cart() {
       )
     )
   }
+  function removePerm(id)
+  {
+    for(const item of Cart)
+    {
+      if(item.id==id)
+      {
+        cart.splice(id,1);
+      }
+    }
+  }
 
   {/*calculations for billing*/}
-  const subtotal = cart.reduce((acc, item) => acc + item.Price * item.Quantity, 0);
+  const subtotal = cart.reduce((acc, item) => acc + item.price * item.quantity, 0);
   const DeliveryFee = subtotal > 0 ? 100 : 0;
   const total = subtotal > 5100 ? subtotal : subtotal - DeliveryFee;
-  const totalItems = cart.reduce((acc, item) => acc + item.Quantity, 0);
+  const totalItems = cart.reduce((acc, item) => acc + item.quantity, 0);
 
   return (
   <section className="CartSec" >
@@ -113,26 +140,27 @@ function Cart() {
             <h3>Price details</h3>
             <p>
               <label htmlFor="items" style={{marginRight:30}} >No. Items </label>
-              <input id="items" value={"R "+total} className="billingInput" />
-            </p>
-
-            <p>
-              <label htmlFor="savings" style={{marginRight:45}}>Savings </label>
-              <input id="savings" value="R 0" className="billingInput"/>
+              <input id="items" value={"R "+total.toLocaleString("fr-FR")} className="billingInput" />
             </p>
 
             <p>
               <label htmlFor="Subtotal" style={{marginRight:40}}>Subtotal </label>
-              <input id="Subtotal" value={"R "+subtotal} className="billingInput"/>
+              <input id="Subtotal" value={"R "+subtotal.toLocaleString("fr-FR")} className="billingInput"/>
             </p>
 
             <p>
               <label htmlFor="Delivery" style={{marginRight:15}}>Delivery fee </label>
-              <input id="Delivery" value={"R "+DeliveryFee} className="billingInput"/>
+              <input id="Delivery" value={"R "+DeliveryFee.toLocaleString("fr-FR")} className="billingInput"/>
             </p>
 
             <p>
-              <b><label htmlFor="Total amount" style={{marginRight:7}}>Total Amount</label><input id="Total amount" value={"R "+total} className="billingInput"/></b></p>
+              <label htmlFor="Loyaltypoints" style={{marginRight:15}}>Loyalty points</label>
+              <input id="Loyaltypoints" value={uLoyaltyPoints} className="billingInput"/>
+            </p>
+
+            <p>
+              <b><label htmlFor="Total amount" style={{marginRight:7}}>Total Amount</label><input id="Total amount" value={"R "+total.toLocaleString("fr-FR")} className="billingInput"/></b>
+            </p>
 
             <Link to={"/checkout"} className="link">
                 <button className="btnCheckout">Checkout</button>

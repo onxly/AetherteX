@@ -252,3 +252,73 @@ export async function removeProductfromWishlist(id,UserId,ProductId)
     const res=await axios.delete(apilink+"wishlist");
     return res.data;
 }
+
+
+//user
+export async function getCurrentUser() 
+  {
+    const res=await axios.get(apilink+"users/me")
+    setUser(res.data);
+  }
+
+  export async function updatePremiumStatus(ClientId,IsPremium) 
+  {
+    const reqdata={  
+                    clientId: ClientId, 
+                    isPremium: IsPremium, 
+                  } 
+    const res=await axios.put(apilink+"users/premiumstatus"+id,reqdata)
+  }
+
+export async function updateUser(id,Name,Email) 
+  {
+    const reqdata={  
+                    name: Name, 
+                    email: Email, 
+                  } 
+ 
+    const res=await axios.put(apilink+"users/update"+id,reqdata)
+  }
+
+export async function changePassword (UserId,OldPassword,NewPassword) 
+  {
+    const reqdata={  
+                    userId: UserId, 
+                    oldPassword: OldPassword, 
+                    newPassword:NewPassword
+                  } 
+ 
+    const res=await axios.put(apilink+"users/changepassword",reqdata)
+  }
+
+  export  async function VerifyAdmin (UserId,AdminCode) 
+  {
+    const reqdata={ userId: UserId, 
+                    adminCode: AdminCode} 
+ 
+    const res=await axios.post(apilink+"users/verifyadmin",reqdata)
+  }
+
+  //loyalty points 
+export async function updateLoyaltyPoints(ClientId,PointsToAdd) 
+  {
+    const reqdata={  
+                    clientId: ClientId, 
+                    pointsToAdd: PointsToAdd, 
+                  } 
+ 
+    const res=await axios.put(apilink+"users/loyaltypoints",reqdata)
+    return res.data;
+  }
+
+export async function getLoyaltyPoints(id) 
+  {
+    const res=await axios.get(apilink+"users/loyaltypoints"+id)
+    return res.data;
+  }
+
+
+
+
+
+

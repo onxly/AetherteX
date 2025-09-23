@@ -9,12 +9,6 @@ export function AuthProvider({ children }) {
   const [isLoggedIn, setIsLoggedIn] = useState(true);
   const [cart,setCart]=useState([]);
 
-  async function getCurrentUser() 
-  {
-    const res=await axios.get(apilink+"users/me")
-    setUser(res.data);
-  }
-
   /*
    *Logs in a user
    *
@@ -45,7 +39,7 @@ export function AuthProvider({ children }) {
     const res=await axios.post(apilink+"users/logout",reqdata)
   }
 
-  /**
+  /*
    *Registers a user
    *
    * @param {String} name Name of user
@@ -55,14 +49,6 @@ export function AuthProvider({ children }) {
    * @param {String} phoneNumber Phone Number of user
    * @param {String} password Password of user
    */
-
-  async function VerifyAdmin (UserId,AdminCode) 
-  {
-    const reqdata={ userId: UserId, 
-                    adminCode: AdminCode} 
- 
-    const res=await axios.post(apilink+"users/verifyadmin",reqdata)
-  }
 
 async function register(Name, Surname, Email, PhoneNumber, Password) 
   {
@@ -76,52 +62,6 @@ async function register(Name, Surname, Email, PhoneNumber, Password)
  
     const res=await axios.post(apilink+"users/register",reqdata)
   }
-
-  async function updateUser(id,Name,Email) 
-  {
-    const reqdata={  
-                    name: Name, 
-                    email: Email, 
-                  } 
- 
-    const res=await axios.put(apilink+"users/update"+id,reqdata)
-  }
-
-  async function changePassword (UserId,OldPassword,NewPassword) 
-  {
-    const reqdata={  
-                    userId: UserId, 
-                    oldPassword: OldPassword, 
-                    newPassword:NewPassword
-                  } 
- 
-    const res=await axios.put(apilink+"users/changepassword",reqdata)
-  }
-
-  async function updateLoyaltyPoints(ClientId,PointsToAdd) 
-  {
-    const reqdata={  
-                    clientId: ClientId, 
-                    pointsToAdd: PointsToAdd, 
-                  } 
- 
-    const res=await axios.put(apilink+"users/loyaltypoints",reqdata)
-  }
-
-  async function getLoyaltyPoints(id) 
-  {
-    const res=await axios.get(apilink+"users/loyaltypoints"+id,reqdata)
-  }
-
-  async function updatePremiumStatus(ClientId,IsPremium) 
-  {
-    const reqdata={  
-                    clientId: ClientId, 
-                    isPremium: IsPremium, 
-                  } 
-    const res=await axios.put(apilink+"users/premiumstatus"+id,reqdata)
-  }
-
 
   function addCart(newid, newImg, newTitle, newPrice, newStock, newQuantity)
   {    
@@ -148,24 +88,7 @@ async function register(Name, Surname, Email, PhoneNumber, Password)
         ];
       }
     });
-    {/*}
-      const ckCart = cart.find(c => c.id === newid);
-
-      if (ckCart == null)
-      {
-        setCart(prev => [
-          ...prev,
-          {
-            id: newid,
-            Img: newImg,
-            Title: newTitle,
-            Price: newPrice,
-            Stock: newStock,
-            Quantity: newQuantity
-          }
-        ]);
-      }
-    */}
+  
   }
 
   return (
