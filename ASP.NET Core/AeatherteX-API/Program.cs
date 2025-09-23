@@ -22,11 +22,12 @@ builder.Services.AddSession(options =>
 // Enable CORS for all origins, headers, and methods
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy("AllowAll", policy =>
+    options.AddPolicy("AllowFront", policy =>
     {
-        policy.AllowAnyOrigin()
+        policy.WithOrigins("http://localhost:5173")
               .AllowAnyHeader()
-              .AllowAnyMethod();
+              .AllowAnyMethod()
+              .AllowCredentials();
     });
 });
 
@@ -39,7 +40,7 @@ var app = builder.Build();
 
 // Configure the HTTP request pipeline.
 
-app.UseCors("AllowAll"); // Use the CORS policy
+app.UseCors("AllowFront"); // Use the CORS policy
 
 app.UseAuthorization();
 
