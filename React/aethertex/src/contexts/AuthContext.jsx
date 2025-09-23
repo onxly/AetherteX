@@ -145,10 +145,10 @@ export function AuthProvider({ children }) {
         isLoggedIn,
         cart,
         setCart,
-        addCart,
         login,
         logout,
         register,
+        addCart
       }}
     >
       {children}

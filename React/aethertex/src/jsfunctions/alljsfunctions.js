@@ -1,4 +1,4 @@
-import axios from "axios"
+import axios from "axios";
 const apilink="http://localhost:3000/AeatherAPI/";
 
 //Address
@@ -14,14 +14,14 @@ export async function getAddress(id)
     return res.data;
 }
 
-export async function createAddress(ClientId,Line1,Line2,City,Region,PostalCode)
+export async function createAddress(clientId,line1,line2,City,region,postalCode)
 {
-    const newadressobj={clientId:ClientId,
-                    line1:Line1,
-                    line2:Line2,    
-                    city:City,
-                    region:Region,
-                    postalCode:PostalCode}
+    const newadressobj={ClientId:clientId,
+                    Line1:line1,
+                    Line2:line2,    
+                    City:City,
+                    Region:region,
+                    PostalCode:postalCode}
 
     const res=await axios.post(apilink+"address",newadressobj);
     return res.data;
@@ -252,65 +252,3 @@ export async function removeProductfromWishlist(id,UserId,ProductId)
     const res=await axios.delete(apilink+"wishlist");
     return res.data;
 }
-
-
-//user
-export async function getCurrentUser() 
-  {
-    const res=await axios.get(apilink+"users/me")
-    setUser(res.data);
-  }
-
-  export async function updatePremiumStatus(ClientId,IsPremium) 
-  {
-    const reqdata={  
-                    clientId: ClientId, 
-                    isPremium: IsPremium, 
-                  } 
-    const res=await axios.put(apilink+"users/premiumstatus"+id,reqdata)
-  }
-
-export async function updateUser(id,Name,Email) 
-  {
-    const reqdata={  
-                    name: Name, 
-                    email: Email, 
-                  } 
- 
-    const res=await axios.put(apilink+"users/update"+id,reqdata)
-  }
-
-export async function changePassword (UserId,OldPassword,NewPassword) 
-  {
-    const reqdata={  
-                    userId: UserId, 
-                    oldPassword: OldPassword, 
-                    newPassword:NewPassword
-                  } 
- 
-    const res=await axios.put(apilink+"users/changepassword",reqdata)
-  }
-
-  //loyalty points 
-export async function updateLoyaltyPoints(ClientId,PointsToAdd) 
-  {
-    const reqdata={  
-                    clientId: ClientId, 
-                    pointsToAdd: PointsToAdd, 
-                  } 
- 
-    const res=await axios.put(apilink+"users/loyaltypoints",reqdata)
-    return res.data;
-  }
-
-export async function getLoyaltyPoints(id) 
-  {
-    const res=await axios.get(apilink+"users/loyaltypoints"+id)
-    return res.data;
-  }
-
-
-
-
-
-
