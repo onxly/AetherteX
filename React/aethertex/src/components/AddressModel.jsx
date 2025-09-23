@@ -14,15 +14,12 @@ function AddressModel({Addr}){
     const [region,setRegion]=useState();
     const [postalCode,setPostalCode]=useState();
 
-    useEffect(()=>
-    {
-        async function setNewAddress()
+
+    async function setNewAddress()
         {
-            const res=await createAddress(user.id,line1,line2,City,region,postalCode)
+            const res=await createAddress(user.id,line1,line2,city,region,postalCode)
             return res.data;
         }
-        setNewAddress();
-    },[])
 
     const [showModal, setShowModal] = useState(false);
 
@@ -52,42 +49,36 @@ function AddressModel({Addr}){
                 <h2>Address Details</h2>
 
                 <div className="addressDetailBox">
-                    <h3>Reciever name</h3>
-                    <input type="text" defaultValue={address.name} disabled></input>
+                    <h3>Line1</h3>
+                    <input type="text" onChange={e => setLine1(e.target.value)}></input>
                     <button className="btnEditDet">Edit</button>
                 </div>
 
                 <div className="addressDetailBox">
-                    <h3>Street</h3>
-                    <input type="text" defaultValue={address.line1} disabled></input>
-                    <button className="btnEditDet">Edit</button>
-                </div>
-
-                <div className="addressDetailBox">
-                    <h3>Street</h3>
-                    <input type="text" defaultValue={address.line2} disabled></input>
+                    <h3>Line2</h3>
+                    <input type="text" onChange={e => setLine2(e.target.value)}></input>
                     <button className="btnEditDet">Edit</button>
                 </div>
 
                 <div className="addressDetailBox">
                     <h3>City</h3>
-                    <input type="text" defaultValue={address.city} disabled></input>
+                    <input type="text" onChange={e => setCity(e.target.value)}></input>
+                    <button className="btnEditDet">Edit</button>
+                </div>
+
+                <div className="addressDetailBox">
+                    <h3>Region</h3>
+                    <input type="text" onChange={e => setRegion(e.target.value)}></input>
                     <button className="btnEditDet">Edit</button>
                 </div>
 
                 <div className="addressDetailBox">
                     <h3>Postal</h3>
-                    <input type="email" defaultValue={address.postalCode} disabled></input>
-                    <button className="btnEditDet">Edit</button>
-                </div>
-
-                <div className="addressDetailBox">
-                    <h3>Phone</h3>
-                    <input type="password" defaultValue={address.phone} disabled></input>
+                    <input type="text" onChange={e => setPostalCode(e.target.value)}></input>
                     <button className="btnEditDet">Edit</button>
                 </div>
                 
-                <button className="btnSave">Save Changes</button>
+                <button className="btnSave" onClick={()=>setNewAddress}>Save Changes</button>
             </section>)}
         </>
     );
