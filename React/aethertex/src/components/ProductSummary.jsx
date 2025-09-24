@@ -4,13 +4,30 @@ import '../stylesheets/ProductSummary.css';
 
 function ProductSummary({ summary }) {
     const [showModal, setShowModal] = useState(false);
+    
+    let data;
+    if (CPU && GPU && RAM && Storage )
+    {
+        const CPUBench = (CPU.benchmarkScore / 133) *100;
+        const GPUBench = (GPU.benchmarkScore / 183) *100;
+        const RAMBench = (GPU.benchmarkScore / 183) *100;
+        const StoBench = (Storage.benchmarkScore / 712) *100;
+        const TotBench = CPUBench + GPUBench + RAMBench + StoBench;
 
-    const data = [
-        { component: "CPU", benchmark: 40 },
-        { component: "GPU", benchmark: 25 },
-        { component: "RAM", benchmark: 20 },
-        { component: "Storage", benchmark: 15 },
-    ];
+         data = [
+            { component: "CPU", benchmark: (CPUBench / TotBench) * 100 },
+            { component: "GPU", benchmark: (GPUBench / TotBench) * 100 },
+            { component: "RAM", benchmark: (RAMBench / TotBench) * 100 },
+            { component: "Storage", benchmark: (StoBench / TotBench) * 100 },
+        ];
+    } else{
+        data = [
+            { component: "CPU", benchmark: 25 },
+            { component: "GPU", benchmark: 25 },
+            { component: "RAM", benchmark: 25 },
+            { component: "Storage", benchmark: 25 },
+        ];
+    }
 
 // Colors for slices
 const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042"];
@@ -54,6 +71,7 @@ const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042"];
                             ))}
                             </Pie>
                             <Tooltip 
+                                formatter={(value) => value.toFixed(2)+"%"}
                                 contentStyle={{ 
                                 backgroundColor: "#121212",   
                                 border: "1px solid #ccc",   // border style

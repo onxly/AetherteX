@@ -1,12 +1,12 @@
 import ImgProduct from "../components/ImgProduct.jsx";
 import InfoProduct from "../components/infoProduct.jsx";
 import PurchaseProduct from "../components/purchaseProduct.jsx";
-import ReviewProduct from "../components/ReviewProduct.jsx";
+import ReviewProduct from "../components/reviewProduct.jsx";
 import Footer from "../components/Footer.jsx";
 import { useParams } from "react-router-dom";
 import "../stylesheets/product.css";
 import { useState,useEffect } from "react";
-import {GetProductbyID, GetGPU, GetCPU, GetRAM ,GetStorage} from "../jsfunctions/alljsfunctions";
+import {GetRatingsforProduct, GetProductbyID, AvarageRatingforProduct, GetGPU, GetCPU, GetRAM ,GetStorage} from "../jsfunctions/alljsfunctions";
 
 
 function Product() {
@@ -16,6 +16,49 @@ function Product() {
   const [GPU, setGPU] = useState({});
   const [RAM, setRAM] = useState({});
   const [Storage, setStorage] = useState({});
+  const [avgRating, setAvg] = useState(0);
+  const [CusReviews, setCusReviews] = useState([]);
+    useEffect(() => {
+      async function getAvg() {
+        const pId = parseInt(id);
+        if (!isNaN(pId)) {
+          const avg = await AvarageRatingforProduct(pId);
+          if (avg === "No ratings found for this product")
+          {
+              setAvg(0);
+          } else {
+              setAvg(avg);
+          }   
+          console.log("Average retrived successfully");            
+        } else {
+          console.log("Average NOT!!! retrived successfully");
+        }  
+        }
+          if (!isNaN(id)) {
+            getAvg();
+        }
+          }, [id]);
+      
+    useEffect(() => {
+      async function getReviews() {
+        const pId = parseInt(id);
+        if (!isNaN(pId)) {
+          const revs = await GetRatingsforProduct(pId);
+          if (revs === "No ratings found for this product"){
+            setCusReviews([]);
+          } else {
+            setCusReviews(revs);
+          }
+          
+          console.log("Average retrived successfully");            
+        } else {
+          console.log("Average NOT!!! retrived successfully");
+        }  
+        }
+          if (!isNaN(id)) {
+            getReviews();
+        }
+          }, [id]);
 
  useEffect(() => {
   async function fetchProductAndCPU() {
@@ -55,15 +98,6 @@ function Product() {
   fetchProductAndCPU();
 }, [id]);
   
-  let CusReviews = [
-    { user: "Boyzn1", rating: 5, comment: "Excellent product!" },
-    { user: "Boyzn2", rating: 4, comment: "Very good, but could be improved." },
-    {
-      user: "Boyzn3",
-      rating: 3,
-      comment: "Average performance for the price.",
-    },
-  ];
   document.title = prod.title+ " | AetherteX";
   
   return (
@@ -79,8 +113,8 @@ function Product() {
       <InfoProduct
         name={prod.title}
         description={prod.description}
-        rating={4.7}
-        reviews={123}
+        rating={avgRating}
+        reviews={CusReviews.length}
         CPU={CPU}
         GPU={GPU}
         RAM={RAM}
@@ -88,7 +122,7 @@ function Product() {
       />
 
       <PurchaseProduct Product={prod} />
-      <ReviewProduct Prodid={prod.productId} rating={prod.rating} CusReviews={CusReviews} />
+      <ReviewProduct Prodid={prod.productId} rating={avgRating} CusReviews={CusReviews} />
       <Footer />
     </div>
   );
