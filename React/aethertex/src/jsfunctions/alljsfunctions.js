@@ -10,20 +10,24 @@ export async function getAllAddress(id)
 
 export async function getAddress(id)
 {
-    const res=await axios.post(apilink+"address/"+id);
+    const res=await axios.get(apilink+"address"+id);
     return res.data;
 }
 
 export async function createAddress(clientId,line1,line2,City,region,postalCode)
 {
-    const newadressobj={ClientId:clientId,
+    const newadressobj={
+                    ClientId:clientId,
                     Line1:line1,
                     Line2:line2,    
                     City:City,
                     Region:region,
-                    PostalCode:postalCode}
-
+                    PostalCode:postalCode};
+    
+    console.log(JSON.stringify(newadressobj));
+                
     const res=await axios.post(apilink+"address",newadressobj);
+    console.log("RESPONSE: "+ JSON.stringify(res));
     return res.data;
 }
 
@@ -43,16 +47,16 @@ export async function updateAddress(clientId,line1,line2,City,region,postalCode)
 //cart
 export async function getUserCart(id)
 {
-    const res=await axios.post(apilink+"cart/"+id);
+    const res=await axios.get(apilink+"cart/"+id);
     return res.data;
 }
 
-export async function addProduct2Cart (ProductId,Quantity)
+export async function addProduct2Cart (ProductId,Quantity,Id)
 {
     const newadressobj={productId:ProductId,
                     quantity:Quantity}
 
-    const res=await axios.post(apilink+"address",newadressobj);
+    const res=await axios.post(apilink+"cart/"+Id,newadressobj);
     return res.data;
 }
 
@@ -72,7 +76,7 @@ export async function ClearCart (Id)
     const cartdata={
         UserId:Id
     }
-    const res=await axios.delete(apilink+"cart/clear",cartdata);
+    const res=await axios.delete(apilink+"cart/clear"+ID,cartdata);
     return res.data;
 }
 
@@ -148,7 +152,7 @@ export async function  createNewOrder(id,ClientId,AddressId,Instructions,Purchas
                     instructions: Instructions, 
                     purchases: Purchases}
 
-    const res=await axios.put(apilink+"orders/"+id,orderdet);
+    const res=await axios.put(apilink+"orders",orderdet);
     return res.data;
 }
 
@@ -157,7 +161,7 @@ export async function getOrderByDate(firstDate,lastDate)
     const date={StartDate:firstDate, 
                 EndDate:lastDate} 
 
-    const res=await axios.get(apilink+"orders/bydate",date);
+    const res=await axios.post(apilink+"orders/bydate",date);
     return res.data;
 }
 
@@ -225,7 +229,15 @@ export async function AddRatingforProduct(id,status,data)
 {
     const reqproduct={  status:Stars, 
                         data:Data}
-    const res=await axios.post(apilink+"ratings/average"+id);
+    const res=await axios.post(apilink+"ratings");
+    return res.data;
+}
+
+export async function AvarageRatingforProduct(id,status,data)
+{
+    const reqproduct={  status:Stars, 
+                        data:Data}
+    const res=await axios.get(apilink+"ratings/average/"+id);
     return res.data;
 }
 

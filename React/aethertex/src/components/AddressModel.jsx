@@ -1,24 +1,25 @@
-import "../stylesheets/profile.css";
 import { useState,useContext, useEffect } from "react";
 import AddressBox from "../components/AddressBox";
 import { AuthContext } from "../contexts/AuthContext";
-import {createAddress} from "../jsfunctions/alljsfunctions"
+import {createAddress} from "../jsfunctions/alljsfunctions";
+import "../stylesheets/AddressBox.css";
 
 function AddressModel({Addr}){
 
     const { isLoggedIn, setIsLoggedIn, user, cart = [] } = useContext(AuthContext);
 
-    const [line1,setLine1]=useState();
-    const [line2,setLine2]=useState();
-    const [city,setCity]=useState();
-    const [region,setRegion]=useState();
-    const [postalCode,setPostalCode]=useState();
+    const [line1,setLine1]=useState("");
+    const [line2,setLine2]=useState("");
+    const [city,setCity]=useState("");
+    const [region,setRegion]=useState("");
+    const [postalCode,setPostalCode]=useState("");
 
 
     async function setNewAddress()
         {
-            const res=await createAddress(user.id,line1,line2,city,region,postalCode)
-            return res.data;
+            console.log(JSON.stringify(user))
+            console.log(user.clientId);
+            const res=await createAddress(user.userId,line1,line2,city,region,postalCode);
         }
 
     const [showModal, setShowModal] = useState(false);
@@ -50,35 +51,35 @@ function AddressModel({Addr}){
 
                 <div className="addressDetailBox">
                     <h3>Line1</h3>
-                    <input type="text" onChange={e => setLine1(e.target.value)}></input>
+                    <input type="text" id="Line1" onChange={e => setLine1(e.target.value)}></input>
                     <button className="btnEditDet">Edit</button>
                 </div>
 
                 <div className="addressDetailBox">
                     <h3>Line2</h3>
-                    <input type="text" onChange={e => setLine2(e.target.value)}></input>
+                    <input type="text" id="Line2" onChange={e => setLine2(e.target.value)}></input>
                     <button className="btnEditDet">Edit</button>
                 </div>
 
                 <div className="addressDetailBox">
                     <h3>City</h3>
-                    <input type="text" onChange={e => setCity(e.target.value)}></input>
+                    <input type="text" id="City" onChange={e => setCity(e.target.value)}></input>
                     <button className="btnEditDet">Edit</button>
                 </div>
 
                 <div className="addressDetailBox">
                     <h3>Region</h3>
-                    <input type="text" onChange={e => setRegion(e.target.value)}></input>
+                    <input type="text" id="Region" onChange={e => setRegion(e.target.value)}></input>
                     <button className="btnEditDet">Edit</button>
                 </div>
 
                 <div className="addressDetailBox">
                     <h3>Postal</h3>
-                    <input type="text" onChange={e => setPostalCode(e.target.value)}></input>
+                    <input type="text" id="Postal" onChange={e => setPostalCode(e.target.value)}></input>
                     <button className="btnEditDet">Edit</button>
                 </div>
                 
-                <button className="btnSave" onClick={()=>setNewAddress}>Save Changes</button>
+                <button className="btnSave" onClick={async ()=> await setNewAddress()}>Save Changes</button>
             </section>)}
         </>
     );
