@@ -219,7 +219,6 @@ namespace AeatherteX_API.Controllers
         [HttpPost("register")]
         public ActionResult<int> Register([FromBody] RegisterRequest request) // Register a new user given name, surname, email, phone number and password
         {
-
             // Check if email already exists
             var existingUser = (from u in db.Users
                                 where u.Email.Equals(request.Email)
