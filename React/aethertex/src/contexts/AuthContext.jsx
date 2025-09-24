@@ -67,7 +67,14 @@ export function AuthProvider({ children }) {
     const res = await axios.post(apilink + "users/verifyadmin", reqdata);
   }
 
-  async function register(Name, Surname, Email, PhoneNumber, Password) {
+  async function register(
+    Name,
+    Surname,
+    username,
+    Email,
+    PhoneNumber,
+    Password
+  ) {
     const reqdata = {
       name: Name,
       surname: Surname,

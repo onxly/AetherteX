@@ -32,6 +32,7 @@ namespace AeatherteX_API.Controllers
         {
             public string Name { get; set; }
             public string Surname { get; set; }
+            public string? Username { get; set; }
             public string Email { get; set; }
             public string PhoneNumber { get; set; }
             public string Password { get; set; }
@@ -41,6 +42,7 @@ namespace AeatherteX_API.Controllers
         {
             public string? Name { get; set; }
             public string? Surname { get; set; }
+            public string? Username { get; set; }
             public string? Email { get; set; }
             public string? PhoneNumber { get; set; }
         }
@@ -66,7 +68,7 @@ namespace AeatherteX_API.Controllers
 
         }
 
-        public class UserRespnse
+        public class UserResponse
         {
             public int UserId { get; set; }
             public string Username { get; set; }
@@ -77,9 +79,38 @@ namespace AeatherteX_API.Controllers
             public string Type { get; set; }
         }
 
+        // GET: AeatherAPI/users/{id}
+        [HttpGet("{id}")]
+        public ActionResult<UserResponse> GetUser(int id) // Get user information given userId
+        {
+            var user = (from u in db.Users
+                        where u.UserId == id
+                        select u).FirstOrDefault();
+            if (user == null)
+                return NotFound("User not found");
+            var userResponse = new UserResponse
+            {
+                UserId = user.UserId,
+                Name = user.Name,
+                Surname = user.Surname,
+                Email = user.Email,
+                PhoneNumber = user.PhoneNumber,
+                Type = user.Type,
+            };
+            var client = (from c in db.Clients
+                          where c.ClientId == user.UserId
+                          select c).FirstOrDefault();
+            if (client != null)
+            {
+                userResponse.Username = client.Username;
+            }
+            
+            return Ok(userResponse);
+        }
+
         // POST: AeatherAPI/users/login
         [HttpPost("login")]
-        public ActionResult<UserRespnse> Login([FromBody] LoginRequest request) // Login in user using email and password
+        public ActionResult<UserResponse> Login([FromBody] LoginRequest request) // Login in user using email and password
         {
             var user = (from u in db.Users
                         where u.Email.Equals(request.Email)
@@ -93,7 +124,7 @@ namespace AeatherteX_API.Controllers
                 return Unauthorized("Incorrect password");
             }
 
-            var userResponse = new UserRespnse
+            var userResponse = new UserResponse
             {
                 UserId = user.UserId,
                 Name = user.Name,
@@ -145,8 +176,8 @@ namespace AeatherteX_API.Controllers
         }
 
         // GET: AeatherAPI/users/me
-        [HttpGet("me")]
-        public ActionResult<UserRespnse> GetCurrentUser() // Get the currently logged-in user's ID from the session
+        /*[HttpGet("me")]*/
+        /*public ActionResult<UserResponse> GetCurrentUser() // Get the currently logged-in user's ID from the session
         {
             var id = HttpContext.Session.GetString("userId");
 
@@ -159,7 +190,7 @@ namespace AeatherteX_API.Controllers
             if (user == null)
                 return NotFound("User not found");
             
-            var userResponse = new User
+            var userResponse = new UserResponse
             {
                 UserId = user.UserId,
                 Name = user.Name,
@@ -167,15 +198,13 @@ namespace AeatherteX_API.Controllers
                 Email = user.Email,
                 PhoneNumber = user.PhoneNumber,
                 Type = user.Type,
-                Client = null,
-                Admin = null
             };
 
             var client = (from c in db.Clients
                           where c.ClientId == user.UserId
                           select c).FirstOrDefault();
             if (client != null)
-                {
+            {
                 userResponse.Client = new Client
                 {
                     ClientId = client.ClientId,
@@ -201,7 +230,7 @@ namespace AeatherteX_API.Controllers
                 }
             }
             return Ok(userResponse);
-        }
+        }*/
 
         // POST: AeatherAPI/users/verifyadmin
         [HttpPost("verifyadmin")]
@@ -220,7 +249,6 @@ namespace AeatherteX_API.Controllers
         [HttpPost("register")]
         public ActionResult<int> Register([FromBody] RegisterRequest request) // Register a new user given name, surname, email, phone number and password
         {
-
             // Check if email already exists
             var existingUser = (from u in db.Users
                                 where u.Email.Equals(request.Email)
@@ -265,11 +293,12 @@ namespace AeatherteX_API.Controllers
                 };
                 db.Admins.Add(newAdmin);
             }
-            else { 
+            else
+            { 
                 var newClient = new Client
                 {
                     ClientId = newUser.UserId,
-                    Username = (request.Name).ToLower(),
+                    Username = request.Username ?? (request.Name).ToLower(),
                     LoyaltyPoints = 0,
                     IsPremium = 0,
                     Address1 = null,
@@ -285,7 +314,7 @@ namespace AeatherteX_API.Controllers
 
         // PUT: AeatherAPI/users/update/{id}
         [HttpPut("update/{id}")]
-        public ActionResult<UserRespnse> Update(int id, [FromBody] UpdateRequest request) // Update user information given userId and new information
+        public ActionResult<UserResponse> Update(int id, [FromBody] UpdateRequest request) // Update user information given userId and new information
         {
             var user = (from u in db.Users
                         where u.UserId == id
@@ -296,6 +325,20 @@ namespace AeatherteX_API.Controllers
                 user.Name = request.Name;
             if (!string.IsNullOrEmpty(request.Surname))
                 user.Surname = request.Surname;
+            if (!string.IsNullOrEmpty(request.Username))
+            {
+                var tempClient = (from c in db.Clients
+                              where c.ClientId == id
+                              select c).FirstOrDefault();
+                if (tempClient != null)
+                {
+                    tempClient.Username = request.Username;
+                }
+                else
+                {
+                    return BadRequest("Only clients can update their username");
+                }
+            }
             if (!string.IsNullOrEmpty(request.Email))
                 user.Email = request.Email;
             if (!string.IsNullOrEmpty(request.PhoneNumber))
@@ -309,46 +352,23 @@ namespace AeatherteX_API.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, "Database update error");
             }
 
-            var userResponse = new User
+            var userResponse = new UserResponse
             {
                 UserId = user.UserId,
                 Name = user.Name,
                 Surname = user.Surname,
                 Email = user.Email,
                 PhoneNumber = user.PhoneNumber,
-                Type = user.Type,
-                Client = null,
-                Admin = null
+                Type = user.Type
             };
 
             var client = (from c in db.Clients
                           where c.ClientId == user.UserId
                           select c).FirstOrDefault();
+
             if (client != null)
             {
-                userResponse.Client = new Client
-                {
-                    ClientId = client.ClientId,
-                    Username = client.Username,
-                    LoyaltyPoints = client.LoyaltyPoints,
-                    IsPremium = client.IsPremium,
-                    Address1 = client.Address1,
-                    Address2 = client.Address2
-                };
-            }
-            else
-            {
-                var admin = (from a in db.Admins
-                             where a.UserId == user.UserId
-                             select a).FirstOrDefault();
-                if (admin != null)
-                {
-                    userResponse.Admin = new Admin
-                    {
-                        UserId = admin.UserId,
-                        AdminCode = admin.AdminCode
-                    };
-                }
+                userResponse.Username = client.Username;
             }
 
             return Ok(userResponse);
