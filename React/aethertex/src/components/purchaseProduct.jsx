@@ -22,7 +22,7 @@ function PurchaseProduct({Product}) {
     return (
         <div className="purchase-product">
             <div>{stockInfo}</div>
-            <b>R {Number(Product.price).toLocaleString("fr-FR")}</b>
+            <b>R {Product.price}</b>
             <div className='QuantitySec'>
                 Quantity:
                 <input className="txtQuantity" 

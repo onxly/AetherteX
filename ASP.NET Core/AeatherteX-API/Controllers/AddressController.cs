@@ -160,8 +160,8 @@ namespace AeatherteX_API.Controllers
             };
 
             var existingAddress = (from a in db.Addresses
-                                   where a.Line1 == newAddress.Line1 &&
-                                         a.Line2 == newAddress.Line2 &&
+                                   where a.Line1.Equals(newAddress.Line1) &&
+                                         a.Line2.Equals(newAddress.Line2) &&
                                          a.City == newAddress.City &&
                                          a.Region == newAddress.Region &&
                                          a.PostalCode == newAddress.PostalCode

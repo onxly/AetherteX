@@ -164,9 +164,7 @@ export function AuthProvider({ children }) {
         login,
         logout,
         register,
-        addCart,
-        updateUser,
-        changePassword,
+        addCart
       }}
     >
       {children}

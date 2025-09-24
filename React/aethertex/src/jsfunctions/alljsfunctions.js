@@ -1,28 +1,29 @@
-import axios from "axios"
+import axios from "axios";
 const apilink="http://localhost:3000/AeatherAPI/";
 
 //Address
 export async function getAllAddress(id)
 {
-    const res=await axios.get(apilink+"client/"+id);
+    const res=await axios.get(apilink+"address/client/"+id);
     return res.data;
 }
 
 export async function getAddress(id)
 {
-    const res=await axios.post(apilink+"address/"+id);
+    const res=await axios.get(apilink+"address"+id);
     return res.data;
 }
 
 export async function createAddress(ClientId,Line1,Line2,City,Region,PostalCode)
 {
-    const newadressobj={clientId:ClientId,
+    const newadressobj={
+                    clientId:ClientId,
                     line1:Line1,
                     line2:Line2,    
                     city:City,
                     region:Region,
-                    postalCode:PostalCode}
-
+                    postalCode:PostalCode};
+                    
     const res=await axios.post(apilink+"address",newadressobj);
     return res.data;
 }
@@ -40,19 +41,26 @@ export async function updateAddress(clientId,line1,line2,City,region,postalCode)
     return res.data;
 }
 
-//cart
-export async function getUserCart(id)
+export async function deleteAddress(clientId,addressId)
 {
-    const res=await axios.post(apilink+"cart/"+id);
+    const res=await axios.delete(apilink+"address/"+clientId+"/"+addressId);
     return res.data;
 }
 
-export async function addProduct2Cart (ProductId,Quantity)
+
+//cart
+export async function getUserCart(id)
+{
+    const res=await axios.get(apilink+"cart/"+id);
+    return res.data;
+}
+
+export async function addProduct2Cart (ProductId,Quantity,Id)
 {
     const newadressobj={productId:ProductId,
                     quantity:Quantity}
 
-    const res=await axios.post(apilink+"address",newadressobj);
+    const res=await axios.post(apilink+"cart/"+Id,newadressobj);
     return res.data;
 }
 
@@ -72,7 +80,7 @@ export async function ClearCart (Id)
     const cartdata={
         UserId:Id
     }
-    const res=await axios.delete(apilink+"cart/clear",cartdata);
+    const res=await axios.delete(apilink+"cart/clear"+ID,cartdata);
     return res.data;
 }
 
@@ -149,7 +157,7 @@ export async function  createNewOrder(id,ClientId,AddressId,Instructions,Purchas
                     instructions: Instructions, 
                     purchases: Purchases}
 
-    const res=await axios.put(apilink+"orders/"+id,orderdet);
+    const res=await axios.put(apilink+"orders",orderdet);
     return res.data;
 }
 
@@ -158,7 +166,7 @@ export async function getOrderByDate(firstDate,lastDate)
     const date={StartDate:firstDate, 
                 EndDate:lastDate} 
 
-    const res=await axios.get(apilink+"orders/bydate",date);
+    const res=await axios.post(apilink+"orders/bydate",date);
     return res.data;
 }
 

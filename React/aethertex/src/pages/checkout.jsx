@@ -1,17 +1,19 @@
 import RadioButtonList from "../components/RadioButtonList";
-import { useParams } from "react-router-dom";
 import Icon from "../assets/AetherteXIcon.png";
 import { FaLock } from "react-icons/fa";
 import { AuthContext } from "../contexts/AuthContext";
-import { useContext } from "react";
-import "../stylesheets/checkout.css"
+import { useContext, useEffect, useState } from "react";
+import "../stylesheets/checkout.css";
+import {getAllAddress} from "../jsfunctions/alljsfunctions";
 
 function checkout(info)
 {
+    const { isLoggedIn, setIsLoggedIn, user, cart = [] } = useContext(AuthContext);
+
+
     document.title = "Checkout | AetherteX";
-    const { isLoggedIn, cart =[], setCart } = useContext(AuthContext);
-    const totalItems = cart.reduce((acc, item) => acc + item.Quantity, 0);
-    const subtotal = cart.reduce((acc, item) => acc + item.Price * item.Quantity, 0);
+    const totalItems = cart.reduce((acc, item) => acc + item.quantity, 0);
+    const subtotal = cart.reduce((acc, item) => acc + item.price * item.quantity, 0);
     const DeliveryFee = subtotal > 0 ? 100 : 0;
     const total = subtotal > 5100 ? subtotal : subtotal - DeliveryFee;
     const currentYear = new Date().getFullYear();
@@ -24,17 +26,22 @@ function checkout(info)
     },
   };
 
-    let Addr = [
-        {id: 1, Name: "Boyzn", Street: "1234 The streets", City: "Mahikeng", Postal: 2732, Phone: "0123456789"},
-        {id: 2, Name: "Boyzn1", Street: "56789 The streets1", City: "Mahikeng1", Postal: 2732, Phone: "0123456789"},
-        {id: 3, Name: "Boyzn2", Street: "1111 The streets2", City: "Mahikeng2", Postal: 2732, Phone: "0123456789"}
-    ]
+  const [Addr,setAddr]=useState([]);
+
+  useEffect(()=>
+    {
+        async function setaddr()
+        {
+            const addresses=await getAllAddress(user.userId);
+            setAddr(addresses);
+        }
+        setaddr();
+    },[user.userId])
+
 
     for (let y = currentYear; y <= endYear; y++) {
         years.push(y);
     }
-
-    const { id } = useParams();
     
     return(
     <section className="ckPage">
@@ -44,7 +51,7 @@ function checkout(info)
                 
                 <RadioButtonList
                     textcolor={"white"}
-                    labels={Addr.map(Addr => Addr.Name + "\n" + Addr.Street + ", " + Addr.City + ", \n" + Addr.Postal)}
+                    labels={Addr.map(Addr => Addr.name + "\n" + Addr.street + ", " + Addr.city + ", \n" + Addr.postal)}
                     title={""}
                     buttonColor={radioColor}
                     //onChange={handelCPUSelection}
@@ -75,12 +82,12 @@ function checkout(info)
             <label>
                 <b>Card holder name</b>
                 <br />
-                <input className="Longtext" placeholder="Type you name" type:Text></input>
+                <input className="Longtext" placeholder="Type you name" type="Text"></input>
             </label>
             <label>
                 <b>Card number</b>
                 <br />
-                <input className="Longtext" placeholder="Type you number" type:Text></input>
+                <input className="Longtext" placeholder="Type you number" type="Text"></input>
             </label>
                 
                 <b className="EXPHead">Expiration date</b>
@@ -121,7 +128,7 @@ function checkout(info)
 
                     <label>
                         <b>CVV  </b> 
-                        <input className="Paymentbottxt" type:Text></input>
+                        <input className="Paymentbottxt" type="Text"></input>
                     </label>
             <button className="btnCheck">Checkout</button>     
         </div>

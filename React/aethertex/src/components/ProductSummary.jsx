@@ -1,9 +1,8 @@
 import { PieChart, Pie, Cell, Tooltip, Legend } from "recharts";
-import { useState, useEffect } from "react";
-import {GetGPU, GetCPU, GetRAM ,GetStorage} from "../jsfunctions/alljsfunctions";
+import { useState } from "react";
 import '../stylesheets/ProductSummary.css';
 
-function ProductSummary({ CPU ={}, GPU = {}, RAM ={}, Storage={}}) {
+function ProductSummary({ summary }) {
     const [showModal, setShowModal] = useState(false);
     
     let data;
@@ -56,7 +55,7 @@ const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042"];
                         </p>
                         
                         <div>               
-                        <PieChart width={500} height={400}>
+                        <PieChart width={400} height={300}>
                             <Pie
                             data={data}
                             dataKey="benchmark"      // tells recharts what number to use
@@ -65,12 +64,11 @@ const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042"];
                             cy="50%"             // y-position center
                             outerRadius={100}    // size of pie
                             fill="#8884d8"
-                            label={({ name, value }) => `${name}: ${value.toFixed(2)}%`}
+                            label                // adds labels on slices
                             >
                             {data.map((entry, index) => (
                                 <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
                             ))}
-                            
                             </Pie>
                             <Tooltip 
                                 formatter={(value) => value.toFixed(2)+"%"}
