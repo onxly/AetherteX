@@ -5,26 +5,47 @@ import CommentBox from "./CommentBox.jsx"
 import WriteReview from './WriteReview.jsx';
 import { useState } from 'react'
 
-function ReviewProduct(Reviews)
+function ReviewProduct({Prodid, rating, CusReviews = []})
 {
-    const ratNum = parseFloat(Reviews.rating);
+    const ratNum = parseFloat(rating);
     const stars = [];
         for (let i = 1; i <= 5; i++) {
-            if (Reviews.rating >= i) {
+            if (rating >= i) {
                 stars.push(<FaStar key={i} color="gold" />);
-            } else if (Reviews.rating >= i - 0.5) {
+            } else if (rating >= i - 0.5) {
                 stars.push(<FaStarHalfAlt key={i} color="gold" />);
             } else {
                 stars.push(<FaRegStar key={i} color="gold" />);
             }
         }
-        const id = Reviews.Prodid;
+        const id = Prodid;
+        let iOne = 0;
+        let iTwo = 0;
+        let iThree = 0;
+        let iFour = 0;
+        let iFive = 0;
+        let totCount = 0;
+
+        CusReviews.forEach(rev => {
+            totCount++;
+            if (rev.stars === 1) {
+                iOne++;          
+            } else if (rev.stars === 2) {
+                iTwo++;
+            } else if (rev.stars === 3) {
+                iThree++;
+            } else if (rev.stars === 4) {
+                iFour++;
+            } else if (rev.stars === 5) {
+                iFive++;
+            }
+        });
     const data = [
-        { name: "5", percentage: 80 },
-        { name: "4", percentage: 10 },
-        { name: "3", percentage: 6 },
-        { name: "2", percentage: 3 },
-        { name: "1", percentage: 1 },
+        { name: "5", Count: iFive },
+        { name: "4", Count: iFour },
+        { name: "3", Count: iThree },
+        { name: "2", Count: iTwo },
+        { name: "1", Count: iOne },
     ];
 
     return(
@@ -44,7 +65,7 @@ function ReviewProduct(Reviews)
                     color="white"
                 >
                     <CartesianGrid strokeDasharray="none" stroke='none'/>
-                    <XAxis type="number" domain={[0, 100]} stroke="white" strokeWidth={3}/>
+                    <XAxis type="number" domain={[0, totCount]} stroke="white" strokeWidth={3} ticks={Array.from({ length: totCount + 1 }, (_, i) => i)}/>
                     <YAxis type="category" dataKey="name" width={20} stroke="white" strokeWidth={3}/>
                     <Tooltip 
                         contentStyle={{ 
@@ -60,7 +81,7 @@ function ReviewProduct(Reviews)
                     />
 
                     <Legend />
-                    <Bar dataKey="percentage" fill="gold"/>
+                    <Bar dataKey="Count" fill="gold"/>
                 </BarChart>
                 {console.log(id)}
                 <WriteReview prodid={id}/>
@@ -69,15 +90,23 @@ function ReviewProduct(Reviews)
             <div>
                 <h2>Top reviews</h2>
                 <div className='CommentSec'>
-                    {Object.entries(Reviews.CusReviews || {}).map(([key, value]) => (
-                    <div className='reviewBox' key={key}>
-                        <CommentBox 
-                        Name={value.user} 
-                        numStars={value.rating} 
-                        comment={value.comment} 
-                        />
-                    </div>
-                    ))}
+                    {CusReviews.length > 0?(
+                        <section className='revs'>
+                            {Object.entries(CusReviews || {}).map(([key, value]) => (
+                                <div className='reviewBox' key={key}>
+                                    <CommentBox 
+                                    Name={value.userId} 
+                                    numStars={value.stars} 
+                                    comment={value.review} 
+                                    date={value.datePosted}
+                                    />
+                                </div>
+                             ))}
+                        </section>
+                    ):(
+                        <p style={{padding:"20px", textAlign:"center",color:"black" ,backgroundColor:"tan"}}>No reviews available</p>
+                    )}
+                    
                     
                 </div>
                 <a href="#reviews-product">

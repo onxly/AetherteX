@@ -11,29 +11,35 @@ import "../stylesheets/ProductCard.css";
  
 
 function ProductCard({prodId, imgSrc, title, price, discount, rating, ReviewsNum, comPCs=[], setComPCs, fetchProductAndCPU}) {
-  const { cart = [], addCart } = useContext(AuthContext);
+  const { cart = [], addCart, isLoggedIn } = useContext(AuthContext);
   const [avgRating, setAvg] = useState(0);
-  useEffect(() => {
-    async function getAvg() {
-      const pId = parseInt(prodId);
-      if (!isNaN(pId)) {
-        const avg = AvarageRatingforProduct(pId);
-        setAvg(avg);
-        console.log("Average retrived successfully");            
-      } else {
-        console.log("Average NOT!!! retrived successfully");
-      }  
-      }
-        if (prodId) {
-          getAvg();
-      }
-        }, [prodId]);
-
+    useEffect(() => {
+      async function getAvg() {
+        const pId = parseInt(prodId);
+        if (!isNaN(pId)) {
+          const avg = await AvarageRatingforProduct(pId);
+          if (avg === "No ratings found for this product")
+          {
+              setAvg(0);
+          } else {
+              setAvg(avg);
+          }   
+          console.log("Average retrived successfully");            
+        } else {
+          console.log("Average NOT!!! retrived successfully");
+        }  
+        }
+          if (!isNaN(prodId)) {
+            getAvg();
+        }
+          }, [prodId]);
+  
+  const dbAvgRating = parseFloat(avgRating);
   const stars = [];
       for (let i = 1; i <= 5; i++) {
           if (avgRating >= i) {
               stars.push(<FaStar key={i} color="gold" />);
-          } else if (rating >= i - 0.5) {
+          } else if (avgRating >= i - 0.5) {
               stars.push(<FaStarHalfAlt key={i} color="gold" />);
           } else {
               stars.push(<FaRegStar key={i} color="gold" />);
@@ -79,7 +85,7 @@ function ProductCard({prodId, imgSrc, title, price, discount, rating, ReviewsNum
         <h4 className="product-title">{title}</h4>
       </Link>
       <div className="description">
-        <span className="ProdStars">{stars} ({0})</span>
+        <span className="ProdStars">{stars} {dbAvgRating.toFixed(1)}</span>
         <p className="product-price">R {Number(price).toLocaleString("fr-FR")}</p>
 
         <div className="Prodbtn">
