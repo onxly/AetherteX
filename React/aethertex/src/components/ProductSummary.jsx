@@ -7,7 +7,6 @@ function ProductSummary({ CPU ={}, GPU = {}, RAM ={}, Storage={}}) {
     const [showModal, setShowModal] = useState(false);
     
     let data;
-    console.log("CPU "+CPU)
     if (CPU && GPU && RAM && Storage )
     {
         const CPUBench = (CPU.benchmarkScore / 133) *100;

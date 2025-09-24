@@ -1,7 +1,7 @@
 import ImgProduct from "../components/ImgProduct.jsx";
 import InfoProduct from "../components/infoProduct.jsx";
 import PurchaseProduct from "../components/purchaseProduct.jsx";
-import ReviewProduct from "../components/ReviewProduct.jsx";
+import ReviewProduct from "../components/reviewProduct.jsx";
 import Footer from "../components/Footer.jsx";
 import { useParams } from "react-router-dom";
 import "../stylesheets/product.css";

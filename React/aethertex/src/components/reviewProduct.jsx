@@ -17,7 +17,7 @@ function ReviewProduct(Reviews)
                 stars.push(<FaRegStar key={i} color="gold" />);
             }
         }
-
+        const id = Reviews.Prodid;
     const data = [
         { name: "5", percentage: 80 },
         { name: "4", percentage: 10 },
@@ -61,7 +61,8 @@ function ReviewProduct(Reviews)
                     <Legend />
                     <Bar dataKey="percentage" fill="gold"/>
                 </BarChart>
-                <WriteReview />
+                {console.log(id)}
+                <WriteReview prodid={id}/>
             </div>
 
             <div>

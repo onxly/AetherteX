@@ -223,7 +223,6 @@ if (CPU.length > 1 && GPU.length > 1 && RAM.length > 1 && Storage.length > 1) {
   ];
 }
     
-  console.log(CPU[0], typeof(CPU[0]));
   return (
     <div className="productlist-container">
       <div className="sidebar-toggle-container">
