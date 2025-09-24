@@ -221,11 +221,20 @@ export async function GetRatingsforProduct (id)
 }
 
 
-export async function AddRatingforProduct(id,status,data)
+export async function AddRatingforProduct(Id,Productid,Stars,Review)
 {
-    const reqproduct={  status:Stars, 
-                        data:Data}
-    const res=await axios.post(apilink+"ratings/average"+id);
+    const reqproduct={  stars:Stars, 
+                        review:Review,
+                        userId:Id,
+                        productid:Productid};
+    console.log(JSON.stringify(reqproduct));
+    const res=await axios.post(apilink+"ratings",reqproduct);
+    return res.data;
+}
+
+export async function AvarageRatingforProduct(id)
+{
+    const res=await axios.get(apilink+"ratings/average/"+id);
     return res.data;
 }
 

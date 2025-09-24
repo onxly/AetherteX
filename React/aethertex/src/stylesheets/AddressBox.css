@@ -1,62 +1,61 @@
-
-.addAddressPage{
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-    padding-left: 20px;
-    margin-left: 100px;
-    grid-column: 2;
+.addAddressPage {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  padding-left: 20px;
+  margin-left: 100px;
+  grid-column: 2;
 }
 
-.addressDetailBox{
-    position: relative;
-    background-color: #1a1a1a;
-    color: white;
-    border-radius: 20px;
-    width: 60%;
-    padding: 20px;
-    display: flex;
-    gap: 10px;
-    align-items: center;
+.addressDetailBox {
+  position: relative;
+  background-color: #1a1a1a;
+  color: white;
+  border-radius: 20px;
+  width: 60%;
+  padding: 20px;
+  display: flex;
+  gap: 10px;
+  align-items: center;
 }
 
-.addressDetailBox input{
-    height: 25px;
+.addressDetailBox input {
+  height: 25px;
 }
 
-.btnEditAddressDet{
-    background-color: transparent;
-    cursor: pointer;
-    height: 25px;
-    width: 50px;
-    margin-left: 200px;
-    position: absolute;
-    top: 40px;
-    right: 25px;
-    gap: 10px;
+.btnEditAddressDet {
+  background-color: transparent;
+  cursor: pointer;
+  height: 25px;
+  width: 50px;
+  margin-left: 200px;
+  position: absolute;
+  top: 40px;
+  right: 25px;
+  gap: 10px;
 }
 
-.btnEditAddressDet:hover{
-    background-color: rgb(51, 50, 50);
+.btnEditAddressDet:hover {
+  background-color: rgb(51, 50, 50);
 }
 
-.btnSaveEdits{
-    background-color: rgba(209, 166, 61, 1);
-    color: black;
-    border: none;
-    margin-top: 10px;
-    margin-left: 10px;
-    margin-bottom: 10px;
-    padding: 10px 20px;
-    border-radius: 20px;
-    cursor: pointer;
-    width: 150px;
-    height: 40px;
-    font-weight: bold;
-    text-align: center;
+.btnSaveEdits {
+  background-color: rgba(209, 166, 61, 1);
+  color: black;
+  border: none;
+  margin-top: 10px;
+  margin-left: 10px;
+  margin-bottom: 10px;
+  padding: 10px 20px;
+  border-radius: 20px;
+  cursor: pointer;
+  width: 150px;
+  height: 40px;
+  font-weight: bold;
+  text-align: center;
 }
 
-.btnSaveEdits:hover{
-    opacity: 0.8;
-    border: 2px solid black;
+.btnSaveEdits:hover {
+  opacity: 0.8;
+  border: 2px solid black;
 }

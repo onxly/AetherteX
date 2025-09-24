@@ -223,7 +223,6 @@ if (CPU.length > 1 && GPU.length > 1 && RAM.length > 1 && Storage.length > 1) {
   ];
 }
     
-  console.log(CPU[0], typeof(CPU[0]));
   return (
     <div className="productlist-container">
       <div className="sidebar-toggle-container">
@@ -263,7 +262,12 @@ if (CPU.length > 1 && GPU.length > 1 && RAM.length > 1 && Storage.length > 1) {
             <div className="CompareContents">
               <span className="close" 
                 onClick={() => {
-                  setComPCs([]); 
+                  setComPCs([])
+                  setPCs([]);     // <--- reset product details too
+                  setCPU([]);
+                  setGPU([]);
+                  setRAM([]);
+                  setStorage([]); 
                 }}
               >
                   ×
@@ -315,16 +319,40 @@ if (CPU.length > 1 && GPU.length > 1 && RAM.length > 1 && Storage.length > 1) {
                     tickLine={false} 
                   />
                   <Tooltip 
-                    contentStyle={{ 
-                        backgroundColor: "#121212",   
-                        border: "1px solid #ccc",   // border style
-                        borderRadius: "20px",        // rounded corners
-                        color: "white",             // text color
-                        fontSize: "14px"            // text size
-                        }} 
-                        itemStyle={{ 
-                            color: "gold"           // color of each value inside
-                        }}
+                    content={({ active, payload, label }) => {
+                      if (active && payload && payload.length) {
+                        // category comes from the Y axis (payload[0].payload.y)
+                        const category = payload[0]?.payload?.y;
+
+                        return (
+                          <div
+                            style={{
+                              backgroundColor: "#121212",
+                              border: "1px solid #ccc",
+                              borderRadius: "20px",
+                              color: "white",
+                              fontSize: "14px",
+                              padding: "8px",
+                            }}
+                          >
+                            {/* show category ONCE at the top */}
+                            <b>{category}</b>
+                            {payload.map((entry, index) => {
+                              const value = entry.payload.x;
+                              return (
+                                <p key={index} style={{ color: entry.color, margin: 0 }}>
+                                  {entry.name !== "Category" && (
+                                    <>{entry.name}: {value.toFixed(2)}</>
+                                  )}
+                                  
+                                </p>
+                              );
+                            })}
+                          </div>
+                        );
+                      }
+                      return null;
+                    }}
                   />
                   
                   <Legend

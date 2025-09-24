@@ -40,7 +40,7 @@ function Header() {
         >
           {/* Trigger button */}
           <div className="userOptions">
-            {user?.IsPremium ? (
+            {user?.isPremium ? (
               <FaCrown width={20} height={20} color="black" />
             ) : (
               <FaUser width={20} height={20} color="black" />
@@ -73,7 +73,7 @@ function Header() {
                     </h2>
                   )}
                   <em style={{ marginTop: "-20px", fontSize: "12px" }}>
-                    Loyaltity points: {user?.LPoints}
+                    Loyaltity points: {user?.loyaltyPoints}
                   </em>
                   <b style={{ marginTop: "8px" }}>Account</b>
                   <Link to={`/profile/${user?.username}`}>

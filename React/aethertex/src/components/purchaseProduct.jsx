@@ -8,7 +8,6 @@ import { useContext } from "react";
 function PurchaseProduct({Product}) {
     const { cart = [], addCart } = useContext(AuthContext);
     const [quantity, setQuantity] = useState(1);
-    console.log(Product.productId, typeof(Product.productId))
     let stockInfo;
     if (Product.stock > 0) {
         stockInfo = <span>

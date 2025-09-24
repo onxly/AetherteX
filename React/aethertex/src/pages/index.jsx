@@ -29,7 +29,6 @@
   useEffect(() => {
       async function fetchCPUs() {
         const allCPUs = await getAllCPUs();
-       // console.log(JSON.stringify(allCPUs));
         setCpus(allCPUs);
       }
       fetchCPUs();
@@ -49,11 +48,9 @@
           const instances = {};
           for (const prod of products)
           {
-           // console.log("my Instance :",prod)
             const myProd = await GetProductbyID(prod.productId);
            
             instances[prod.productId] = myProd;
-           // console.log("my Instance in array :",instances[prod.productId])
           }
     setProdInstances(instances);
        }
@@ -66,7 +63,6 @@
     const filteredProducts = products.filter(prod => {
 
     const _prod = prodInstances[prod.productId];
-  console.log("My Product boom : ", _prod);
   if (!_prod)
   {
       return false
@@ -91,7 +87,6 @@
       (!filters.storageType && !filters.storageSize) ||
       (stoObj.type === filters.storageType &&
       stoObj.capacity === filters.storageSize);
-      console.log("type: ",stoObj)
 
     const priceMatch =
       prod.price >= filters.priceRange[0] && prod.price <= filters.priceRange[1];
