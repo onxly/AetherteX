@@ -39,7 +39,7 @@ namespace AeatherteX_API.Controllers
         public class SearchRequest
         {
             public string Query { get; set; }
-            public FilterRequest Filter { get; set; }
+            public FilterRequest? Filter { get; set; }
         }
 
         // POST: AeatherAPI/filter
