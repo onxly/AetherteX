@@ -269,3 +269,20 @@ export async function removeProductfromWishlist(id,UserId,ProductId)
     const res=await axios.delete(apilink+"wishlist");
     return res.data;
 }
+
+//loyalty points
+export async function  getloyaltypoints(UserId)
+{
+    const res=await axios.get(apilink+"users/loyaltypoints/"+UserId);
+    return res.data;
+}
+
+ export async function  updateloyaltypoints(UserId,PointsToAdd)
+{
+    const reqdata={
+                        clientId:UserId,
+                        pointsToAdd:PointsToAdd
+                  }
+    const res=await axios.put(apilink+"users/loyaltypoints",reqdata);
+    return res.data;
+}

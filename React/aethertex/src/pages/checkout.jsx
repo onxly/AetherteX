@@ -4,11 +4,37 @@ import { FaLock } from "react-icons/fa";
 import { AuthContext } from "../contexts/AuthContext";
 import { useContext, useEffect, useState } from "react";
 import "../stylesheets/checkout.css";
-import {getAllAddress} from "../jsfunctions/alljsfunctions";
+import {getAllAddress,getloyaltypoints,updateloyaltypoints} from "../jsfunctions/alljsfunctions";
 
 function checkout(info)
 {
     const { isLoggedIn, setIsLoggedIn, user, cart = [] } = useContext(AuthContext);
+
+    const [LoyaltyPoints,setLoyaltyPoints]=useState(0);
+    const [usepoints,setusepoints]=useState(0);
+
+    useEffect(()=>
+    {
+        async function  getuserloyaltypoints()
+        {
+            const res=await getloyaltypoints(user.userId);
+            setLoyaltyPoints(res);
+        }
+        getuserloyaltypoints();
+    },[user.userId])
+
+    async function addloyaltypoints()
+        {
+            const updatepoints=await updateloyaltypoints(user.userId,10);
+            const loyaltypoints=await getloyaltypoints(user.userId);
+            setLoyaltyPoints(loyaltypoints);
+        }
+
+    async function  useloyaltypoints()
+        {
+            const updatepoints=await updateUserLoyaltyPoints(user.userId,-usepoints); 
+            const LoyaltyPoints=await getloyaltypoints(user.userId);
+        }
 
 
     document.title = "Checkout | AetherteX";
@@ -70,7 +96,12 @@ function checkout(info)
             />
             <h2>Order Summary</h2>
             <b>{totalItems} items: &nbsp;</b>R {total} <br /> <br />
-            <em>No coupons applied</em> <br /> <br />
+            <b>Loyalty Points:</b> {LoyaltyPoints} <br /> <br />
+            <input type="text" onChange={e => setusepoints(parseInt(e.target.value, 10) || 0)}></input>
+            <button onClick={()=>
+                useloyaltypoints()
+            }>use points</button>
+            <br /> <br />
             <b>To pay: &nbsp;</b> R {total} <br /> <br />
             <FaLock size={20} color="gray" /> Secure checkout
             
@@ -130,7 +161,11 @@ function checkout(info)
                         <b>CVV  </b> 
                         <input className="Paymentbottxt" type="Text"></input>
                     </label>
-            <button className="btnCheck">Checkout</button>     
+            <button className="btnCheck" onClick={()=>
+                {
+                    addloyaltypoints();
+                }
+            }>Checkout</button>     
         </div>
     </section>
     );
