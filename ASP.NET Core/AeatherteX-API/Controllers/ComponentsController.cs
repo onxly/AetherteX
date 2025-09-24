@@ -1,5 +1,6 @@
 ﻿using AeatherteX_API.Models;
 using Microsoft.AspNetCore.Mvc;
+using System.Text.RegularExpressions;
 
 namespace AeatherteX_API.Controllers
 {
@@ -225,6 +226,63 @@ namespace AeatherteX_API.Controllers
                 BenchmarkScore = storage.BenchmarkScore
             };
             return Ok(response);
+        }
+
+        // POST: AeatherAPI/components/summary/cpu/{id}
+        [HttpPost("summary/cpu/{id}")]
+        public ActionResult GenerateCPUDescription(int id)
+        {
+            var cpu = db.Cpus.Find(id);
+
+            if (cpu == null)
+            {
+                return NotFound("CPU not found");
+            }
+
+            string description = "";
+
+            if (cpu.Brand == "Intel")
+            {
+                if (cpu.Name.Contains("i9")) description += "Intel i9 — top-tier performance for gaming and heavy workloads.\n";
+                else if (cpu.Name.Contains("i7")) description += "Intel i7 — strong and balanced, suitable for gaming and productivity.\n";
+                else if (cpu.Name.Contains("i5")) description += "Intel i5 — reliable and versatile for everyday tasks.\n";
+                else if (cpu.Name.Contains("i3")) description += "Intel i3 — entry-level, ideal for office work and light use.\n";
+
+                // Generation
+                var match = Regex.Match(cpu.Name, @"\d{4,5}");
+                if (match.Success)
+                {
+                    int generation = int.Parse(match.Value.Substring(0, 2));
+                    description += $"Part of Intel’s {generation}th generation lineup.\n";
+                }
+
+                // Suffix
+                if (cpu.Name.EndsWith("K")) description += "Unlocked — supports overclocking with proper cooling.\n";
+                else if (cpu.Name.EndsWith("F")) description += "No integrated GPU — requires a dedicated graphics card.\n";
+                else if (cpu.Name.EndsWith("U")) description += "Low-power variant — designed for laptops.\n";
+            }
+            else if (cpu.Brand == "AMD")
+            {
+                if (cpu.Name.Contains("Ryzen 9")) description += "AMD Ryzen 9 — extreme multitasking and gaming performance.\n";
+                else if (cpu.Name.Contains("Ryzen 7")) description += "AMD Ryzen 7 — strong, balanced performance for most users.\n";
+                else if (cpu.Name.Contains("Ryzen 5")) description += "AMD Ryzen 5 — reliable for general use and moderate workloads.\n";
+                else if (cpu.Name.Contains("Ryzen 3")) description += "AMD Ryzen 3 — entry-level, best for light workloads.\n";
+
+                // Generation
+                var match = Regex.Match(cpu.Name, @"\d{4,5}");
+                if (match.Success)
+                {
+                    int generation = int.Parse(match.Value.Substring(0, 1));
+                    description += $"From AMD’s {generation}th generation Ryzen lineup.\n";
+                }
+
+                // Suffix
+                if (cpu.Name.EndsWith("X")) description += "X-series — optimized for higher clocks.\n";
+                else if (cpu.Name.EndsWith("G")) description += "Includes integrated graphics — can work without a GPU.\n";
+                else if (cpu.Name.EndsWith("U")) description += "Low-power laptop variant.\n";
+            }
+
+            return Ok(description);
         }
     }
 }
