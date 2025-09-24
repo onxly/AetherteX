@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace AeatherteX_API.Controllers
 {
+    [ApiController]
+    [Route("AeatherAPI/cart")]
     public class CartController : ControllerBase
     {
         private readonly Database1Context db;
@@ -59,7 +61,7 @@ namespace AeatherteX_API.Controllers
         }
 
         // POST: AeatherAPI/cart/{id}
-        [HttpPost]
+        [HttpPost("{id}")]
         public ActionResult AddToCart(int id, [FromBody] UpdateCartRequest request) // Add a product to the cart
         {
             var user = (from u in db.Users

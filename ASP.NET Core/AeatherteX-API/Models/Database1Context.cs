@@ -182,7 +182,9 @@ public partial class Database1Context : DbContext
             entity.Property(e => e.InvoiceId).HasColumnName("InvoiceID");
             entity.Property(e => e.AddressId).HasColumnName("AddressID");
             entity.Property(e => e.ClientId).HasColumnName("ClientID");
-            entity.Property(e => e.Date).HasColumnType("datetime");
+            entity.Property(e => e.Date)
+                .HasDefaultValueSql("(getdate())")
+                .HasColumnType("datetime");
             entity.Property(e => e.Price).HasColumnType("decimal(10, 2)");
 
             entity.HasOne(d => d.Address).WithMany(p => p.Invoices)
@@ -302,7 +304,9 @@ public partial class Database1Context : DbContext
             entity.ToTable("Rating");
 
             entity.Property(e => e.RatingId).HasColumnName("RatingID");
-            entity.Property(e => e.DatePosted).HasColumnType("datetime");
+            entity.Property(e => e.DatePosted)
+                .HasDefaultValueSql("(getdate())")
+                .HasColumnType("datetime");
             entity.Property(e => e.ProductId).HasColumnName("ProductID");
             entity.Property(e => e.Review)
                 .HasMaxLength(255)

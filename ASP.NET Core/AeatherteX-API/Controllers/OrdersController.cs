@@ -19,9 +19,15 @@ namespace AeatherteX_API.Controllers
             public int ClientId { get; set; }
         }
 
+        public class ProductPurchase
+        {
+            public int ProductId { get; set; }
+            public int Quantity { get; set; }
+        }
+
         public class CreateOrderRequest
         {
-            public List<Purchase> Purchases { get; set; }
+            public List<ProductPurchase> Purchases { get; set; }
             public int ClientId { get; set; }
             public int AddressId { get; set; }
             public string? Instructions { get; set; }
