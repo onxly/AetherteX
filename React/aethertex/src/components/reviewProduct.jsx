@@ -72,9 +72,10 @@ function ReviewProduct(Reviews)
                     {Object.entries(Reviews.CusReviews || {}).map(([key, value]) => (
                     <div className='reviewBox' key={key}>
                         <CommentBox 
-                        Name={value.user} 
-                        numStars={value.rating} 
-                        comment={value.comment} 
+                        Name={value.userId} 
+                        numStars={value.stars} 
+                        comment={value.review} 
+                        date={value.datePosted}
                         />
                     </div>
                     ))}
