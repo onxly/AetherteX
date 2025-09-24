@@ -32,6 +32,7 @@ namespace AeatherteX_API.Controllers
         {
             public string Name { get; set; }
             public string Surname { get; set; }
+            public string? Username { get; set; }
             public string Email { get; set; }
             public string PhoneNumber { get; set; }
             public string Password { get; set; }
@@ -76,6 +77,35 @@ namespace AeatherteX_API.Controllers
             public string Email { get; set; }
             public string PhoneNumber { get; set; }
             public string Type { get; set; }
+        }
+
+        // GET: AeatherAPI/users/{id}
+        [HttpGet("{id}")]
+        public ActionResult<UserResponse> GetUser(int id) // Get user information given userId
+        {
+            var user = (from u in db.Users
+                        where u.UserId == id
+                        select u).FirstOrDefault();
+            if (user == null)
+                return NotFound("User not found");
+            var userResponse = new UserResponse
+            {
+                UserId = user.UserId,
+                Name = user.Name,
+                Surname = user.Surname,
+                Email = user.Email,
+                PhoneNumber = user.PhoneNumber,
+                Type = user.Type,
+            };
+            var client = (from c in db.Clients
+                          where c.ClientId == user.UserId
+                          select c).FirstOrDefault();
+            if (client != null)
+            {
+                userResponse.Username = client.Username;
+            }
+            
+            return Ok(userResponse);
         }
 
         // POST: AeatherAPI/users/login
@@ -268,7 +298,7 @@ namespace AeatherteX_API.Controllers
                 var newClient = new Client
                 {
                     ClientId = newUser.UserId,
-                    Username = (request.Name).ToLower(),
+                    Username = request.Username ?? (request.Name).ToLower(),
                     LoyaltyPoints = 0,
                     IsPremium = 0,
                     Address1 = null,
