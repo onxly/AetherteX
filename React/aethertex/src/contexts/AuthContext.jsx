@@ -89,9 +89,17 @@ export function AuthProvider({ children }) {
     }
   }
 
-  async function updateUser(id, Name, Email) {
-    const reqdata = { name: Name, email: Email };
-    const res = await axios.put(apilink + "users/update" + id, reqdata);
+  async function updateUser(id, UserN, Name, Surname, Email, Phone) {
+    const reqdata = { username: UserN, name: Name, surname: Surname, email: Email, phoneNumber:Phone };
+    const res = await axios.put(apilink + "users/update/" + id, reqdata);
+    setUser({
+      userId: id,
+      username: UserN,
+      name: Name,
+      surname: Surname,
+      email: Email,
+      phoneNumber: Phone
+    })
   }
 
   async function changePassword(UserId, OldPassword, NewPassword) {
@@ -156,7 +164,8 @@ export function AuthProvider({ children }) {
         login,
         logout,
         register,
-        addCart
+        addCart,
+        updateUser
       }}
     >
       {children}
