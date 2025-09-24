@@ -1,9 +1,12 @@
 import { FaStar, FaStarHalfAlt, FaRegStar } from "react-icons/fa";
+import { AuthContext } from "../contexts/AuthContext";
+import { useContext } from "react";
 import { useState,useEffect } from "react";
 import {AddRatingforProduct} from "../jsfunctions/alljsfunctions";
 import "../stylesheets/WriteReview.css";
 
 function WriteReview({ prodid }) {
+    const { isLoggedIn } = useContext(AuthContext);
     let stars = [];
     for (let i = 1; i <= 5; i++) {
         stars.push(<FaRegStar
@@ -38,9 +41,14 @@ function WriteReview({ prodid }) {
 
     return (
         <div>
-            <button className="btnWrite" onClick={() => setShowModal(true)} >
-                Write a review
-            </button>
+            {isLoggedIn?(
+                <button className="btnWrite" onClick={() => setShowModal(true)} >
+                    Write a review
+                </button>
+            ):(
+                <></>
+            )}
+            
 
         {showModal && (
             <div className="WriteModel">          

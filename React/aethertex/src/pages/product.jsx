@@ -23,7 +23,12 @@ function Product() {
         const pId = parseInt(id);
         if (!isNaN(pId)) {
           const avg = await AvarageRatingforProduct(pId);
-          setAvg(avg);
+          if (avg === "No ratings found for this product")
+          {
+              setAvg(0);
+          } else {
+              setAvg(avg);
+          }   
           console.log("Average retrived successfully");            
         } else {
           console.log("Average NOT!!! retrived successfully");
@@ -39,7 +44,12 @@ function Product() {
         const pId = parseInt(id);
         if (!isNaN(pId)) {
           const revs = await GetRatingsforProduct(pId);
-          setCusReviews(revs);
+          if (revs === "No ratings found for this product"){
+            setCusReviews([]);
+          } else {
+            setCusReviews(revs);
+          }
+          
           console.log("Average retrived successfully");            
         } else {
           console.log("Average NOT!!! retrived successfully");
@@ -101,7 +111,7 @@ function Product() {
         name={prod.title}
         description={prod.description}
         rating={avgRating}
-        reviews={123}
+        reviews={CusReviews.length}
         CPU={CPU}
         GPU={GPU}
         RAM={RAM}
