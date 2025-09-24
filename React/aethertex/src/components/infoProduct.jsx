@@ -3,7 +3,7 @@ import ProductSummary from "./ProductSummary.jsx";
 import "../stylesheets/infoProduct.css";
 import { useState } from "react";
 
-function InfoProduct({name, description, rating, reviews, CPU ={}, GPU = {}, RAM ={}, Storage={}}) {
+function InfoProduct({product={}, name, description, rating, reviews, CPU ={}, GPU = {}, RAM ={}, Storage={}}) {
     const [showModel, setShowModal] = useState(false);
     console.log("Rating "+rating, typeof(rating))
     const ratNum = parseFloat(rating);
@@ -17,7 +17,7 @@ function InfoProduct({name, description, rating, reviews, CPU ={}, GPU = {}, RAM
             stars.push(<FaRegStar key={i} color="gold" />);
         }
     }
-
+    console.log(product.productId)
     return (
         <div className="product-info">
             <h1>{name}</h1>
@@ -113,8 +113,8 @@ function InfoProduct({name, description, rating, reviews, CPU ={}, GPU = {}, RAM
                             Show More
                         </button>
                     )}
-    
-                <ProductSummary CPU={CPU} GPU={GPU} RAM={RAM} Storage={Storage}/>
+        
+                <ProductSummary prodId={product.productId} CPU={CPU} GPU={GPU} RAM={RAM} Storage={Storage}/>
             </div>
         </div>
     );

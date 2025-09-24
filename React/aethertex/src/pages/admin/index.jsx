@@ -4,6 +4,7 @@ import "../../stylesheets/AdminHome.css";
 import AdminPanel from "../../components/AdminPanel";
 import InputSubmit from "../../components/InputSubmit";
 import AdminProductsList from "../../components/AdminProductsList";
+import ReportPopup from "../../components/ReportPopup";
 import { GetProductbyID,getAllProducts,getAllCPUs,getAllStorageDevices } from "../../jsfunctions/alljsfunctions";
 
 function AdminHome() {
@@ -14,7 +15,8 @@ const [products, setProducts] = useState([]);
     const [stos, setstos] = useState([]);
    const [prodInstances, setProdInstances] = useState({});
    const [disableNavigation, setDisableNavigation] = useState(false);
-
+   const [Report , setReport]= useState(false);
+   const [showReport, setShowReport] = useState(false);
     const [filters, setFilters] = useState({
     cpuOption: "Nothing",
     storageType: null,
@@ -114,10 +116,26 @@ const [products, setProducts] = useState([]);
       <section className="panel">
         <AdminPanel />
 
-        <div style={{ marginBottom: "10px" }}>
-          <button onClick={() => setDisableNavigation(prev => !prev)} className="Admin-Nav-Edit-Remove-button">
-              {disableNavigation ? "Enable Admin mode" : "Disable Admin mode"}
-          </button>
+        <div style={{ marginBottom: "10px",marginTop:"100px" }}>
+          <p><button onClick={() => setDisableNavigation(prev => !prev)} className="Admin-Nav-Edit-Remove-button">
+              {disableNavigation ? "Disable Admin mode" : "Enable Admin mode"}
+          </button></p>
+
+
+
+
+
+          <p><button onClick={()=> setShowReport(true)} className="Admin-Nav-Edit-Remove-button">
+             Report
+          </button></p>
+
+         
+
+
+
+
+
+
          
         </div>
 
@@ -159,6 +177,12 @@ const [products, setProducts] = useState([]);
                   boxShadow: "2px 0px 10px rgba(0,0,0,0.3)",
                 }}
               >
+                {showReport && (
+                  <ReportPopup
+                    products={filteredProducts} // pass filtered products for the report
+                    onClose={() => setShowReport(false)}
+                  />
+                )}
                 <Sidebar
                   isShowing={isShowingSidebar}
                   filters={filters}

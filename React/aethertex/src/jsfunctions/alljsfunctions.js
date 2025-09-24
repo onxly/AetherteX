@@ -243,6 +243,18 @@ export async function DeleteProduct(id)
     const res=await axios.delete(apilink+"products/"+id);
     return res.data;
 }
+export async function GetSummary(id)
+{
+    const res  = await axios.get(apilink+"products/summary/"+id);
+    console.log(res);
+    return res.data;
+}
+export async function GetCPUSummary(id)
+{
+    const res  = await axios.get(apilink+"components/summary/cpu/"+id);
+    console.log(res);
+    return res.data;
+}
 
 //Ratings
 export async function GetRatingsforProduct (id)
@@ -291,4 +303,72 @@ export async function removeProductfromWishlist(id,UserId,ProductId)
                         productId:ProductId}
     const res=await axios.delete(apilink+"wishlist");
     return res.data;
+}
+///////////////////////////////
+export async function getTotalSales(startDate, endDate) {
+  try {
+    const res = await axios.get(
+      `${apilink}reports/sales/${startDate}/${endDate}`
+    );
+    return res.data; // decimal
+  } catch (err) {
+    console.error("Error fetching total sales:", err);
+    return null;
+  }
+}
+export async function getTopNProducts(n) {
+  try {
+    const res = await axios.get(`${apilink}reports/top-products/${n}`);
+    return res.data; // list of {ProductId, SalesCount}
+  } catch (err) {
+    console.error("Error fetching top products:", err);
+    return [];
+  }
+}
+export async function getInventoryStatus() {
+  try {
+    const res = await axios.get(`${apilink}reports/inventory`);
+    return res.data; // list of {ProductId, Title, Stock, IsActive}
+  } catch (err) {
+    console.error("Error fetching inventory status:", err);
+    return [];
+  }
+}
+export async function getSoldProductsCount() {
+  try {
+    const res = await axios.get(`${apilink}reports/sold`);
+    return res.data; // integer
+  } catch (err) {
+    console.error("Error fetching sold products count:", err);
+    return 0;
+  }
+}
+export async function getAverageSpending() {
+  try {
+    const res = await axios.get(`${apilink}reports/average-spending`);
+    return res.data; // decimal
+  } catch (err) {
+    console.error("Error fetching average spending:", err);
+    return 0;
+  }
+}
+export async function getNewRegistrations(startDate, endDate) {
+  try {
+    const res = await axios.get(
+      `${apilink}reports/registers/${startDate}/${endDate}`
+    );
+    return res.data; // integer
+  } catch (err) {
+    console.error("Error fetching new registrations:", err);
+    return 0;
+  }
+}
+export async function getAllRegistrations() {
+  try {
+    const res = await axios.get(`${apilink}reports/registers`);
+    return res.data; // list of {Email, CreatedAt}
+  } catch (err) {
+    console.error("Error fetching all registrations:", err);
+    return [];
+  }
 }

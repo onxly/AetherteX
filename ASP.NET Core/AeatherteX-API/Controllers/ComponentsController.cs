@@ -229,7 +229,7 @@ namespace AeatherteX_API.Controllers
         }
 
         // POST: AeatherAPI/components/summary/cpu/{id}
-        [HttpPost("summary/cpu/{id}")]
+        [HttpGet("summary/cpu/{id}")]
         public ActionResult GenerateCPUDescription(int id)
         {
             var cpu = db.Cpus.Find(id);

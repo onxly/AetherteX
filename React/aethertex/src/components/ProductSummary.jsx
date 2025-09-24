@@ -1,11 +1,26 @@
 import { PieChart, Pie, Cell, Tooltip, Legend } from "recharts";
 import { useState, useEffect } from "react";
-import {GetGPU, GetCPU, GetRAM ,GetStorage} from "../jsfunctions/alljsfunctions";
+import {GetGPU, GetCPU, GetRAM ,GetStorage ,GetSummary, GetCPUSummary } from "../jsfunctions/alljsfunctions";
 import '../stylesheets/ProductSummary.css';
 
-function ProductSummary({ CPU ={}, GPU = {}, RAM ={}, Storage={}}) {
+function ProductSummary({ prodId, CPU ={}, GPU = {}, RAM ={}, Storage={}}) {
     const [showModal, setShowModal] = useState(false);
-    
+    const [ProdSummary, setSummary]= useState();
+    let MyCPU = CPU.cpuId;
+    console.log("hello there : ",JSON.stringify(prodId)
+)
+    async function EnableSummary(prodId,MyCPU)
+    {
+        const s = await GetSummary(prodId);
+        const c= await GetCPUSummary(MyCPU);
+        setSummary(s+"\n\n"+c);
+    }
+
+// Inside useEffect just call it
+useEffect(() => {
+    EnableSummary(prodId);
+}, [prodId]);
+
     let data;
     if (CPU && GPU && RAM && Storage )
     {
@@ -35,7 +50,9 @@ const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042"];
 
     return(
         <div>
-            <button className="btnSummary" onClick={() => setShowModal(true)}>
+            
+            <button className="btnSummary" onClick={() => {setShowModal(true);EnableSummary(prodId,MyCPU)}}>
+                
                 Show Summary
             </button>
     
@@ -47,13 +64,9 @@ const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042"];
                         </span>
                             
                         <h2>Product Summary</h2>
-                        <p className="SummaryDescription">
-                            This pie chart breaks down benchmark scores across the 
-                            <br />
-                            CPU, GPU, RAM, and storage, highlighting each component’s 
-                            <br />
-                            share of overall system performance. 
-                        </p>
+                        <pre>
+                            {ProdSummary}
+                        </pre>
                         
                         <div>               
                         <PieChart width={500} height={400}>
