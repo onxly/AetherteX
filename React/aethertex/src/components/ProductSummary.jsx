@@ -7,7 +7,6 @@ function ProductSummary({ CPU ={}, GPU = {}, RAM ={}, Storage={}}) {
     const [showModal, setShowModal] = useState(false);
     
     let data;
-    console.log("CPU "+CPU)
     if (CPU && GPU && RAM && Storage )
     {
         const CPUBench = (CPU.benchmarkScore / 133) *100;
@@ -74,7 +73,7 @@ const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042"];
                             
                             </Pie>
                             <Tooltip 
-                                formatter={(value, name, props) => value.toFixed(2)+"%"}
+                                formatter={(value) => value.toFixed(2)+"%"}
                                 contentStyle={{ 
                                 backgroundColor: "#121212",   
                                 border: "1px solid #ccc",   // border style

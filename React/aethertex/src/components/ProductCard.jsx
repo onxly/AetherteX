@@ -3,17 +3,35 @@ import Button from "./Button";
 import Checkbox from "@mui/joy/Checkbox";
 import { Link } from "react-router";
 import { FaStar, FaStarHalfAlt, FaRegStar } from "react-icons/fa";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { AuthContext } from "../contexts/AuthContext";
 import { useContext } from "react";
+import {AvarageRatingforProduct} from "../jsfunctions/alljsfunctions";
 import "../stylesheets/ProductCard.css";
  
 
 function ProductCard({prodId, imgSrc, title, price, discount, rating, ReviewsNum, comPCs=[], setComPCs, fetchProductAndCPU}) {
   const { cart = [], addCart } = useContext(AuthContext);
+  const [avgRating, setAvg] = useState(0);
+  useEffect(() => {
+    async function getAvg() {
+      const pId = parseInt(prodId);
+      if (!isNaN(pId)) {
+        const avg = AvarageRatingforProduct(pId);
+        setAvg(avg);
+        console.log("Average retrived successfully");            
+      } else {
+        console.log("Average NOT!!! retrived successfully");
+      }  
+      }
+        if (prodId) {
+          getAvg();
+      }
+        }, [prodId]);
+
   const stars = [];
       for (let i = 1; i <= 5; i++) {
-          if (rating >= i) {
+          if (avgRating >= i) {
               stars.push(<FaStar key={i} color="gold" />);
           } else if (rating >= i - 0.5) {
               stars.push(<FaStarHalfAlt key={i} color="gold" />);
@@ -61,7 +79,7 @@ function ProductCard({prodId, imgSrc, title, price, discount, rating, ReviewsNum
         <h4 className="product-title">{title}</h4>
       </Link>
       <div className="description">
-        <span className="ProdStars">{stars} ({ReviewsNum})</span>
+        <span className="ProdStars">{stars} ({0})</span>
         <p className="product-price">R {Number(price).toLocaleString("fr-FR")}</p>
 
         <div className="Prodbtn">
