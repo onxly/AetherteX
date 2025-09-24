@@ -90,10 +90,9 @@ namespace AeatherteX_API.Controllers
 
         // GET: AeatherAPI/products
         [HttpGet]
-        public ActionResult<List<ProductsResponse>> GetAllProducts() // Get all active and in-stock products
+        public ActionResult<List<ProductsResponse>> GetAllProducts() // Get all products
         {
             var products = (from p in db.Products
-                            where p.IsActive == 1 && p.Stock > 0
                             select p).ToList();
             var productsResponse = products.Select(p => new ProductsResponse
             {
@@ -296,5 +295,71 @@ namespace AeatherteX_API.Controllers
             return Ok();
         }
 
+        // GET: AeatherAPI/products/summary/{id}
+        [HttpGet("summary/{id}")]
+        public IActionResult GenerateSystemOverview(int id) // Generate a summary of the product's components
+        {
+            var product = (from p in db.Products
+                            where p.ProductId == id
+                           select p).FirstOrDefault();
+
+            if (product == null)
+                return NotFound("Product not found");
+
+            var cpu = (from c in db.Cpus
+                       where c.CpuId == product.CpuId
+                       select c).FirstOrDefault();
+            var gpu = (from g in db.Gpus
+                       where g.GpuId == product.GpuId
+                       select g).FirstOrDefault();
+            var ram = (from r in db.Rams
+                       where r.RamId == product.RamId
+                          select r).FirstOrDefault();
+            var storage = (from s in db.Storages
+                           where s.StorageId == product.StorageId
+                            select s).FirstOrDefault();
+
+            if (cpu == null || gpu == null || ram == null || storage == null)
+            {
+                return NotFound("One or more components not found");
+            }
+
+            string summary = "";
+
+            if (cpu.BenchmarkScore > 100)
+                summary += "CPU: Extremely fast — easily handles demanding tasks and multitasking.\n";
+            else if (cpu.BenchmarkScore > 80)
+                summary += "CPU: Solid performance — reliable for most workloads.\n";
+            else
+                summary += "CPU: Modest — may struggle under heavy usage.\n";
+
+            if (gpu.BenchmarkScore > 100)
+                summary += "GPU: High-end graphics performance — perfect for gaming, 3D rendering, and video editing.\n";
+            else if (gpu.BenchmarkScore > 80)
+                summary += "GPU: Adequate — handles casual gaming and creative tasks well.\n";
+            else
+                summary += "GPU: Low-end — not ideal for modern gaming or graphics-heavy work.\n";
+
+            if (ram.BenchmarkScore > 100)
+                summary += "RAM: Excellent multitasking capacity — smooth performance with multiple applications.\n";
+            else if (ram.BenchmarkScore > 80)
+                summary += "RAM: Sufficient for most daily tasks and multitasking.\n";
+            else
+                summary += "RAM: Limited — performance drops when running many applications simultaneously.\n";
+
+            if (storage.BenchmarkScore > 100)
+                summary += "Storage: Ultra-fast — quick boot times and file access.\n";
+            else if (storage.BenchmarkScore > 80)
+                summary += "Storage: Responsive — performs well for standard use.\n";
+            else
+                summary += "Storage: Slow — file operations can be noticeably delayed.\n";
+
+            return Ok(summary.Trim());
+        }
+
     }
+
+
+
+
 }

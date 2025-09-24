@@ -30,6 +30,7 @@ namespace AeatherteX_API.Controllers
             public DateTime DatePosted { get; set; }
             public string? Review { get; set; }
             public int UserId { get; set; }
+            public string? UserName { get; set; }
 
         }
 
@@ -42,19 +43,38 @@ namespace AeatherteX_API.Controllers
                            select p).FirstOrDefault();
             if (product == null)
                 return NotFound("Product not found");
+
+            
             var ratings = (from r in db.Ratings
                            where r.ProductId == id
-                           select new RatingResponse
-                           {
-                               RatingId = r.RatingId,
-                               Stars = r.Stars,
-                               DatePosted = r.DatePosted,
-                               Review = r.Review,
-                               UserId = r.UserId
-                           }).ToList();
-            if (ratings.Count == 0)
+                           select r).ToList();
+
+            if (ratings == null || ratings.Count == 0)
                 return NotFound("No ratings found for this product");
-            return Ok(ratings);
+
+            var response = new List<RatingResponse>();
+
+            foreach (var rating in ratings)
+            {
+                var client = (from c in db.Clients
+                            where c.ClientId == rating.UserId
+                            select c).FirstOrDefault();
+
+                if (client == null)
+                    continue; // Skip if user not found
+
+                response.Add(new RatingResponse
+                {
+                    RatingId = rating.RatingId,
+                    Stars = rating.Stars,
+                    DatePosted = rating.DatePosted,
+                    Review = rating.Review,
+                    UserId = rating.UserId,
+                    UserName = client.Username
+                });
+            }
+
+            return Ok(response);
 
         }
 
