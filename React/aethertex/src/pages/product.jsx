@@ -6,7 +6,7 @@ import Footer from "../components/Footer.jsx";
 import { useParams } from "react-router-dom";
 import "../stylesheets/product.css";
 import { useState,useEffect } from "react";
-import {GetProductbyID, GetGPU, GetCPU, GetRAM ,GetStorage} from "../jsfunctions/alljsfunctions";
+import {GetProductbyID, AvarageRatingforProduct, GetGPU, GetCPU, GetRAM ,GetStorage} from "../jsfunctions/alljsfunctions";
 
 
 function Product() {
@@ -16,6 +16,22 @@ function Product() {
   const [GPU, setGPU] = useState({});
   const [RAM, setRAM] = useState({});
   const [Storage, setStorage] = useState({});
+  const [avgRating, setAvg] = useState(0);
+    useEffect(() => {
+      async function getAvg() {
+        const pId = parseInt(id);
+        if (!isNaN(pId)) {
+          const avg = await AvarageRatingforProduct(pId);
+          setAvg(avg);
+          console.log("Average retrived successfully");            
+        } else {
+          console.log("Average NOT!!! retrived successfully");
+        }  
+        }
+          if (!isNaN(id)) {
+            getAvg();
+        }
+          }, [id]);
 
  useEffect(() => {
   async function fetchProductAndCPU() {
@@ -76,7 +92,7 @@ function Product() {
         product={prod}
         name={prod.title}
         description={prod.description}
-        rating={4.7}
+        rating={avgRating}
         reviews={123}
         CPU={CPU}
         GPU={GPU}
@@ -85,7 +101,7 @@ function Product() {
       />
 
       <PurchaseProduct Product={prod} />
-      <ReviewProduct Prodid={prod.productId} rating={prod.rating} CusReviews={CusReviews} />
+      <ReviewProduct Prodid={prod.productId} rating={avgRating} CusReviews={CusReviews} />
       <Footer />
     </div>
   );

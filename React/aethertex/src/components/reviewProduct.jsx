@@ -7,6 +7,7 @@ import { useState } from 'react'
 
 function ReviewProduct(Reviews)
 {
+    const ratNum = parseFloat(Reviews.rating);
     const stars = [];
         for (let i = 1; i <= 5; i++) {
             if (Reviews.rating >= i) {
@@ -33,7 +34,7 @@ function ReviewProduct(Reviews)
         >   
             <div style={{display:"flex", flexDirection:"column"}}>  
                 <h2>Product Reviews</h2>
-                <span>{stars} {Reviews.rating}</span>
+                <span>{stars} {ratNum.toFixed(1)}</span>
                 <BarChart 
                     data={data}
                     width={500}

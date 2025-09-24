@@ -5,12 +5,13 @@ import { useState } from "react";
 
 function InfoProduct({name, description, rating, reviews, CPU ={}, GPU = {}, RAM ={}, Storage={}}) {
     const [showModel, setShowModal] = useState(false);
-
+    console.log("Rating "+rating, typeof(rating))
+    const ratNum = parseFloat(rating);
     const stars = [];
     for (let i = 1; i <= 5; i++) {
-        if (rating >= i) {
+        if (parseFloat(rating) >= i) {
             stars.push(<FaStar key={i} color="gold" />);
-        } else if (rating >= i - 0.5) {
+        } else if (parseFloat(rating) >= i - 0.5) {
             stars.push(<FaStarHalfAlt key={i} color="gold" />);
         } else {
             stars.push(<FaRegStar key={i} color="gold" />);
@@ -21,7 +22,7 @@ function InfoProduct({name, description, rating, reviews, CPU ={}, GPU = {}, RAM
         <div className="product-info">
             <h1>{name}</h1>
             <div className="rating">
-                <span>{rating}</span>
+                <span>{ratNum.toFixed(1)}</span>
                 <span className="spanStars">{stars}</span>
                 <a className="PrdATag" href="#reviewSec" >
                         {reviews} reviews
