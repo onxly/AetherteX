@@ -208,7 +208,8 @@ namespace AeatherteX_API.Controllers
                            select p).FirstOrDefault();
             if (product == null)
                 return NotFound("Product not found");
-            db.Products.Remove(product);
+            product.IsActive = 0;
+            db.Products.Update(product);
             db.SaveChanges();
 
             return Ok();

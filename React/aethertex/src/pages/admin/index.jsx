@@ -116,8 +116,9 @@ const [products, setProducts] = useState([]);
 
         <div style={{ marginBottom: "10px" }}>
           <button onClick={() => setDisableNavigation(prev => !prev)} className="Admin-Nav-Edit-Remove-button">
-              {disableNavigation ? "Enable Navigation" : "Disable Navigation"}
+              {disableNavigation ? "Enable Admin mode" : "Disable Admin mode"}
           </button>
+         
         </div>
 
       </section>

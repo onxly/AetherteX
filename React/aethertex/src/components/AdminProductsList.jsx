@@ -17,7 +17,7 @@ import {
 import "../stylesheets/ProductsList.css";
 import "../stylesheets/AdminHome.css";
 import {getAllProducts} from "../jsfunctions/alljsfunctions";
-import {GetProductbyID, GetGPU, GetCPU, GetRAM ,GetStorage} from "../jsfunctions/alljsfunctions";
+import {GetProductbyID, GetGPU, GetCPU, GetRAM ,GetStorage,DeleteProduct,updateProduct,getAllCPUs,getAllGPUs,getAllRAMs,getAllStorageDevices} from "../jsfunctions/alljsfunctions";
 
 function AdminProductsList({toggleSidebar, isShowingSidebar, products,onClick ,disableNavigation })
  {
@@ -30,10 +30,66 @@ function AdminProductsList({toggleSidebar, isShowingSidebar, products,onClick ,d
   const [RAM, setRAM] = useState([]);
   const [Storage, setStorage] = useState([]);
   const [selectedProductId, setSelectedProductId] = useState(null);
-  
-    
+  const [isEditing,setisEditing]=useState(false);
+  const [CurrentProd, setCurrentProd]=useState(null);
+ const [CPUs, setCPUs] = useState([]);
+  const [GPUs, setGPUs] = useState([]);
+  const [RAMs, setRAMs] = useState([]);
+const [Storages, setStorages] = useState([]);
 //remove duse effect from get products
       //Components for Product 1
+
+    useEffect(()=>{
+        async function getCpus()
+        {
+            const Objs = await getAllCPUs();
+            setCPUs(Objs)
+        }
+        getCpus();
+    },[])
+    useEffect(()=>{
+        async function getGpus()
+        {
+            const Objs = await getAllGPUs();
+             setGPUs(Objs)
+        }
+        getGpus();
+    },[])
+    useEffect(()=>{
+        async function getRams()
+        {
+            const Objs = await getAllRAMs();
+             setRAMs(Objs)
+        }
+        getRams();
+    },[])
+    useEffect(()=>{
+        async function getStors()
+        {
+            const Objs = await getAllStorageDevices();
+             setStorages(Objs)
+        }
+        getStors();
+    },[])
+    
+
+
+
+
+      useEffect(()=>{
+        async function getCurrent(id)
+      {
+        if(id)
+        {
+            const Obj = await GetProductbyID(id);
+             setCurrentProd(Obj); 
+        }
+                 
+      }
+      getCurrent(selectedProductId);
+      },[selectedProductId])
+      
+      
   useEffect(() => {
     async function fetchPC1() {
       if (!isNaN(comPCs[0])) {
@@ -229,14 +285,57 @@ function handleSelectProduct(prodId) {
   setSelectedProductId(prev => (prev === prodId ? null : prodId));
 }
 
-function handleEdit(prodId) {
+async function handleEdit(prodId) {
+    setisEditing(true);
+    console.log("Current : ",CurrentProd);
   console.log("Editing product:", prodId);
 }
-function handleRemove(prodId) {
+async function SaveEdit(prodId,
+                        Image1,
+                        Image2,
+                        Image3,
+                        Image4,
+                        Description,
+                        Price,
+                        Title,
+                        Motherboard,
+                        Case,
+                        PowerSupply,
+                        CpuId,
+                        GpuId,
+                        RamId,
+                        StorageId,
+                        IsActive,
+                        Stock) {
+
+  
+    console.log("Current : ",CurrentProd);
+  console.log("Editing product:", prodId);
+  const Edit= await updateProduct(prodId,
+                                 Image1,
+                                 Image2,
+                                 Image3,
+                                 Image4,
+                                 Description,
+                                 Price,
+                                 Title,
+                                 Motherboard,
+                                 Case,
+                                 PowerSupply,
+                                 CpuId,
+                                 GpuId,
+                                 RamId,
+                                 StorageId,
+                                 IsActive,
+                                 Stock);
+
+}
+
+async function handleRemove(prodId) {
   if (window.confirm("Are you sure you want to remove this product?")) {
     console.log("Removing product:", prodId);
-    // optionally remove from products state
-    // setProducts(prev => prev.filter(p => p.productId !== prodId));
+    const removeit = await DeleteProduct(prodId);
+     //setProducts(prev => prev.filter(p => p.productId !== prodId));
   }
 }
   console.log(CPU[0], typeof(CPU[0]));
@@ -295,6 +394,149 @@ function handleRemove(prodId) {
                                 >
                                     <div className="Admin-Contain-btns">
                                         <button onClick={() => handleEdit(item.productId)} className="Admin-Nav-Edit-Remove-button">Edit</button>
+                                        {isEditing&&(<div>
+                                        
+                                              <div style={{display:"inline-block"}}>
+                                                 <label htmlFor="PCImage">Main Image : </label>
+                                                <input id="PCImage" placeholder="Main Image"  defaultValue={CurrentProd.image1} style={{}}></input>
+                                             </div>
+                                              <div style={{display:"inline-block"}}>
+                                                 <label htmlFor="PCAngle1">Angle1 : </label>
+                                                <input id="PCAngle1" placeholder="Angle1" defaultValue={CurrentProd.image2}></input>
+                                                </div>
+                                              <div style={{display:"inline-block"}}>
+                                                 <label htmlFor="PCAngle2">Angle2 : </label>
+                                                <input id="PCAngle2" placeholder="Angle2"  defaultValue={CurrentProd.image3}></input>
+                                              </div>
+                                              <div style={{display:""}}>
+                                                 <label htmlFor="PCAngle3">Angle3 : </label>
+                                                <input id="PCAngle3" placeholder="Angle3"  defaultValue={CurrentProd.image4}></input>
+                                              </div>
+                                              <div style={{display:"flex"}}>
+                                                 <label htmlFor="PCdescription">description : </label>
+                                                <input id="PCdescription" placeholder="description"  defaultValue={CurrentProd.description}></input>
+                                              </div>
+                                              <div style={{display:"inline-block"}}>
+                                                 <label htmlFor="PCprice">price : </label>
+                                                <input id="PCprice" placeholder="price" defaultValue={CurrentProd.price}></input>
+                                              </div>
+                                              <div style={{display:"inline-block"}}>
+                                                 <label htmlFor="PCtitle">title : </label>
+                                                <input id="PCtitle" placeholder="title" defaultValue={CurrentProd.title}></input>
+                                              </div>
+                                              <div style={{display:"inline-block"}}>
+                                                 <label htmlFor="PCmotherboard">motherboard : </label>
+                                                <input id="PCmotherboard" placeholder="motherboard" defaultValue={CurrentProd.motherboard}></input>
+                                              <div style={{display:"inline-block"}}>
+                                                 <label htmlFor="PCCase">case:</label>
+                                                <input id="PCCase" placeholder="case" defaultValue={CurrentProd.case}></input>
+                                              </div>
+                                              <div style={{display:"inline-block"}}>
+                                                 <label htmlFor="PCpowerSupply">powerSupply : </label>
+                                                <input id="PCpowerSupply" placeholder="powerSupply" defaultValue={CurrentProd.powerSupply}></input>
+                                              </div>
+                                              <div style={{display:"inline-block"}}>
+                                                 <label htmlFor="PCcpuId">cpuId : </label>
+
+                                                <select
+                                                    id="PCcpuId"
+                                                    value={CurrentProd?.cpuId || ""}
+                                                    onChange={(e) =>
+                                                        setCurrentProd((prev) => ({ ...prev, cpuId: parseInt(e.target.value) }))
+                                                    }
+                                                    >
+                                                    <option value="">-- Select CPU --</option>
+                                                    {CPUs.map((cpu) => (
+                                                        <option key={cpu.cpuId} value={cpu.cpuId}>
+                                                        {cpu.name}
+                                                        </option>
+                                                    ))}
+                                                    </select>
+
+
+                                              </div>
+                                              <div style={{display:"inline-block"}}>
+                                                 <label htmlFor="PCgpuId">gpuId :</label>
+                                                <select
+                                                    id="PCgpuId"
+                                                    value={CurrentProd?.gpuId || ""}
+                                                    onChange={(e) => setCurrentProd((prev) => ({ ...prev, gpuId: parseInt(e.target.value) }))}
+                                                    >
+                                                    <option value="">-- Select GPU --</option>
+                                                    {GPUs.map((gpu) => (
+                                                        <option key={gpu.gpuId} value={gpu.gpuId}>
+                                                        {gpu.name}
+                                                        </option>
+                                                    ))}
+                                                    </select>
+
+                                              </div>
+                                              <div style={{display:"inline-block"}}>
+                                                 <label htmlFor="PCramId">ramId : </label>
+                                                <select
+                                                    id="PCramId"
+                                                    value={CurrentProd?.ramId || ""}
+                                                    onChange={(e) => setCurrentProd((prev) => ({ ...prev, ramId: parseInt(e.target.value) }))}
+                                                    >
+                                                    <option value="">-- Select RAM --</option>
+                                                    {RAMs.map((ram) => (
+                                                        <option key={ram.ramId} value={ram.ramId}>
+                                                        {ram.name} - {ram.capacity}GB
+                                                        </option>
+                                                    ))}
+                                                    </select>
+
+                                              </div>
+                                              <div style={{display:"inline-block"}}>
+                                                 <label htmlFor="PCstorageId">storageId : </label>
+                                               <select
+                                                    id="PCstorageId"
+                                                    value={CurrentProd?.storageId || ""}
+                                                    onChange={(e) => setCurrentProd((prev) => ({ ...prev, storageId: parseInt(e.target.value) }))}
+                                                    >
+                                                    <option value="">-- Select Storage --</option>
+                                                    {Storages.map((sto) => (
+                                                        <option key={sto.storageId} value={sto.storageId}>
+                                                        {sto.type} {sto.capacity}GB
+                                                        </option>
+                                                    ))}
+                                                </select>
+
+                                              </div>
+                                              <div style={{display:"inline-block"}}>
+                                                 <label htmlFor="PCisActive">isActive : </label>
+                                                <input id="PCisActive" placeholder="isActive" defaultValue={Boolean(CurrentProd.isActive)}></input>
+                                            </div>
+                                            <div style={{display:"inline-block"}}>
+                                                <label htmlFor="PCstock">Stock : </label>
+                                                <input id="PCstock" placeholder="stock" defaultValue={CurrentProd.stock}></input>
+                                            </div>   
+                                            <div style={{display:"inline-block"}}>
+                                            
+                                                <button onClick={() => SaveEdit(item.productId,
+                                                                                PCImage.value,
+                                                                                PCAngle1.value,
+                                                                                PCAngle2.value,
+                                                                                PCAngle3.value,
+                                                                                PCdescription.value,
+                                                                                parseFloat(PCprice.value),
+                                                                                PCtitle.value,
+                                                                                PCmotherboard.value,
+                                                                                PCCase.value,
+                                                                                PCpowerSupply.value,
+                                                                                parseInt(PCcpuId.value),
+                                                                                parseInt(PCgpuId.value),
+                                                                                parseInt(PCramId.value),
+                                                                                parseInt(PCstorageId.value),
+                                                                                parseInt(PCisActive.value),
+                                                                                parseInt(PCstock.value))}>
+                                                    Save Change</button>
+                                            </div>   
+                                        </div>
+                                        </div>
+                                            
+                                        )}
+
                                         <button onClick={() => handleRemove(item.productId)} className="Admin-Nav-Edit-Remove-button">Remove</button>
                                     </div>
                                 </div>

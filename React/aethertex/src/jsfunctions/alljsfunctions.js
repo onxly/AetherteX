@@ -196,19 +196,50 @@ export async function addProduct(Title,Image1,Image2,Image3,Image4,Description,P
     return res.data;
 }
 
-export async function updateProduct(id,Title,Price,Stock)
+/* Title { get; set; }
+            public string? Image1 { get; set; }
+            public string? Image2 { get; set; }
+            public string? Image3 { get; set; }
+            public string? Image4 { get; set; }
+            public string? Description { get; set; }
+            public decimal? Price { get; set; }
+            public string? Motherboard { get; set; }
+            public string? Case { get; set; }
+            public string? PowerSupply { get; set; }
+            public int? CpuId { get; set; }
+            public int? GpuId { get; set; }
+            public int? RamId { get; set; }
+            public int? StorageId { get; set; }
+            public int? IsActive { get; set; }
+            public int? Stock { get; set; }*/
+
+export async function updateProduct(id,Image1,Image2,Image3,Image4,Description,Price,Title,Motherboard,Case,PowerSupply,CpuId,GpuId,RamId,StorageId,IsActive,Stock)
 {
-    const reqproduct={  title:Title, 
+    const reqproduct={image1:Image1,
+                        image2:Image2,
+                        image3:Image3,
+                        image4:Image4,
+                        description:Description,
                         price:Price, 
+                        title:Title,
+                        motherboard:Motherboard,
+                        case:Case,
+                        powerSupply:PowerSupply,
+                        cpuId:CpuId,
+                        gpuId:GpuId,
+                        ramId:RamId,
+                        storageId:StorageId,
+                        isActive:IsActive,
                         stock:Stock}
-    const res=await axios.put(apilink+"products/"+id);
+                    console.log("Update: ",JSON.stringify(reqproduct));
+    const res=await axios.put(apilink+"products/"+id,reqproduct);
     return res.data;
 }
 
-export async function DeleteProduct(id,Status,Message)
+export async function DeleteProduct(id)
 {
-    const reqproduct={  status:Status, 
-                        message:Message}
+    //const reqproduct={  status:Status, 
+    // message:Message}
     const res=await axios.delete(apilink+"products/"+id);
     return res.data;
 }
