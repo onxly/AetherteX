@@ -22,7 +22,7 @@ export function AddressBox(addr,Name,Line1,Line2,City,Postal,Phone,addressToEdit
 
         <div>
             <u>{addr.Name}</u>
-            <address>{addr.Line1},{addr.Line2}, {addr.City}, {addr.Region} , {addr.Postal}</address>
+            <address>z{addr.Line1},{addr.Line2}, {addr.City}, {addr.Region} , {addr.Postal}</address>
             <em>{addr.Phone}</em>
         </div>
         <div className="Addrbuttons">

@@ -4,7 +4,7 @@ const apilink="http://localhost:3000/AeatherAPI/";
 //Address
 export async function getAllAddress(id)
 {
-    const res=await axios.get(apilink+"client/"+id);
+    const res=await axios.get(apilink+"address/client/"+id);
     return res.data;
 }
 
@@ -14,20 +14,17 @@ export async function getAddress(id)
     return res.data;
 }
 
-export async function createAddress(clientId,line1,line2,City,region,postalCode)
+export async function createAddress(ClientId,Line1,Line2,City,Region,PostalCode)
 {
     const newadressobj={
-                    ClientId:clientId,
-                    Line1:line1,
-                    Line2:line2,    
-                    City:City,
-                    Region:region,
-                    PostalCode:postalCode};
-    
-    console.log(JSON.stringify(newadressobj));
-                
+                    clientId:ClientId,
+                    line1:Line1,
+                    line2:Line2,    
+                    city:City,
+                    region:Region,
+                    postalCode:PostalCode};
+                    
     const res=await axios.post(apilink+"address",newadressobj);
-    console.log("RESPONSE: "+ JSON.stringify(res));
     return res.data;
 }
 
@@ -43,6 +40,13 @@ export async function updateAddress(clientId,line1,line2,City,region,postalCode)
     const res=await axios.put(apilink+"address",adressobj);
     return res.data;
 }
+
+export async function deleteAddress(clientId,addressId)
+{
+    const res=await axios.delete(apilink+"address/"+clientId+"/"+addressId);
+    return res.data;
+}
+
 
 //cart
 export async function getUserCart(id)

@@ -1,10 +1,10 @@
 import { useState,useContext, useEffect } from "react";
 import AddressBox from "../components/AddressBox";
 import { AuthContext } from "../contexts/AuthContext";
-import {createAddress} from "../jsfunctions/alljsfunctions";
+import {createAddress,getAllAddress} from "../jsfunctions/alljsfunctions";
 import "../stylesheets/AddressBox.css";
 
-function AddressModel({Addr}){
+function AddressModel({Addr= []}){
 
     const { isLoggedIn, setIsLoggedIn, user, cart = [] } = useContext(AuthContext);
 
@@ -13,39 +13,31 @@ function AddressModel({Addr}){
     const [city,setCity]=useState("");
     const [region,setRegion]=useState("");
     const [postalCode,setPostalCode]=useState("");
+    const [addresses,setaddress]=useState(Addr||[]);
 
-
+    useEffect(()=>
+    {
+        async function loadAddress()
+        {
+            const updatedaddresses=await getAllAddress(user.userId);
+            setaddress(updatedaddresses);
+        }
+        loadAddress();
+    },[user.userId])
+    
     async function setNewAddress()
         {
-            console.log(JSON.stringify(user))
-            console.log(user.clientId);
             const res=await createAddress(user.userId,line1,line2,city,region,postalCode);
+            const updatedaddresses=await getAllAddress(user.userId);
+            setaddress(updatedaddresses);
         }
 
     const [showModal, setShowModal] = useState(false);
 
     return(
-
         <>
-        <section className="AddressPage">
-            <h2>Address Book</h2>
-            {Addr.map(address => (
-                <AddressBox 
-                    key={address.id} 
-                    Name={address.name} 
-                    Line1={address.line1} 
-                    Line2={address.line2} 
-                    City={address.city} 
-                    Postal={address.postalCode} 
-                    Phone={address.phone} 
-                />
-            ))}
-            <button className="btnAddAddr" onClick={() => setShowModal(true)} >
-                Add an address
-            </button>
-        </section>
-            
-        {showModal && (<section className="addAddressPage">
+        {showModal?(
+            <section className="addAddressPage">
 
                 <h2>Address Details</h2>
 
@@ -79,8 +71,36 @@ function AddressModel({Addr}){
                     <button className="btnEditDet">Edit</button>
                 </div>
                 
-                <button className="btnSave" onClick={async ()=> await setNewAddress()}>Save Changes</button>
-            </section>)}
+                <button className="btnSave" onClick={()=> {
+                                                        setNewAddress();
+                                                        setShowModal(false)
+                                                    }}>Save Changes</button>
+                
+            </section>
+
+            
+        ):(
+            <section className="AddressPage">
+            <h2>Address Book</h2>
+            {addresses.map(address => (
+                <AddressBox 
+                    key={address.id} 
+                    Name={address.name} 
+                    Line1={address.line1} 
+                    Line2={address.line2} 
+                    City={address.city} 
+                    Postal={address.postalCode} 
+                    Phone={address.phone} 
+                />
+            ))}
+            <button className="btnAddAddr" onClick={() => setShowModal(true)} >
+                Add an address
+            </button>
+        </section>
+        )}
+
+            
         </>
+       
     );
 } export default AddressModel
