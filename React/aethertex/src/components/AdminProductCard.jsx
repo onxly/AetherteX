@@ -9,8 +9,9 @@ import { useContext } from "react";
 import "../stylesheets/ProductCard.css";
  
 
-function ProductCard({prodId, imgSrc, title, price, discount, rating, ReviewsNum, comPCs=[], setComPCs, fetchProductAndCPU}) {
+function AdminProductCard({prodId, imgSrc, title, price, discount, rating, ReviewsNum, comPCs=[], setComPCs, fetchProductAndCPU,onClick, disableNavigation}) {
   const { cart = [], addCart } = useContext(AuthContext);
+  
   const stars = [];
       for (let i = 1; i <= 5; i++) {
           if (rating >= i) {
@@ -36,7 +37,7 @@ function ProductCard({prodId, imgSrc, title, price, discount, rating, ReviewsNum
         }
       };
   return (
-    <div className="product-card">
+    <div className="product-card" onClick={onClick}>
       {/* Badge */}
       {discount && (
         <div className="badge-container">
@@ -44,54 +45,55 @@ function ProductCard({prodId, imgSrc, title, price, discount, rating, ReviewsNum
         </div>
       )}
 
-      <Link to={`/product/${prodId}`} className="link">
-        {/* Image Section */}
-        <div className="product-card-img-container">
-          <img
-            src={
-              "/PCS/"+imgSrc ||
-              "https://blocks.astratic.com/img/general-img-landscape.png"
-            }
-            
-            alt={"Image of " + title}
-          />
-        </div>
+      <Link 
+            to={`/product/${prodId}`} 
+            className="link"
+            onClick={(e) =>
+             {
+                if (disableNavigation) e.preventDefault();
+             }}
+            >
 
-        {/* Description Section */}
-        <h4 className="product-title">{title}</h4>
-      </Link>
+            <div className="product-card-img-container">
+                <img src={"/PCS/"+imgSrc || "..."} alt={"Image of " + title} />
+            </div>
+
+            <h4 className="product-title">{title}</h4>
+        </Link>
+
       <div className="description">
         <span className="ProdStars">{stars} ({ReviewsNum})</span>
         <p className="product-price">R{price}
           <Checkbox 
-              checked={comPCs.includes(prodId)}
-              onChange={() => toggleItem(prodId)}
-              disabled={comPCs.length >= 2 && !comPCs.includes(prodId)} 
-              label="Compare" 
-              sx={{ color: "white" }} 
-              size="sm" 
+            checked={comPCs.includes(prodId)}
+            onClick={(e) => e.stopPropagation()} // stop overlay click
+            onChange={() => toggleItem(prodId)}
+            disabled={comPCs.length >= 2 && !comPCs.includes(prodId)} 
+            label="Compare" 
+            sx={{ color: "white" }} 
+            size="sm" 
             />
         </p>
 
 
-              <div className="Prodbtn">
+      
+
+    
+            <Button 
+                buttonClassName={"product-card-button-cart Admin-Nav-Edit-Remove-button"}
+                onClick={(e) => { e.stopPropagation(); addCart(prodId, imgSrc, title, price, true, 1); }}
+                style={{width:"100"}}>
+                Add to Cart
+            </Button>
+        
+          
 
             
-                    <Button buttonClassName={"product-card-button-cart"}
-                  
-                    onClick={()=> addCart(prodId, imgSrc, title, price, true, 1)}
-                  >
-                    Add to Cart
-                  </Button>
-            
-                
-
-                  
-              </div>
+    
         
       </div>
     </div>
   );
 }
 
-export default ProductCard;
+export default AdminProductCard;

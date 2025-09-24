@@ -9,43 +9,9 @@
   margin-bottom: 20px;
 }
 
-/*new from here*/
-.hiddenBox
- {
-	width: 360px;
-	height:100px;
-	background-color: black;
-	color: white;
-	transform: translateY(90%);
-	z-index:1;
-  opacity:0;
-  transition: transform 0.3s ease, opacity 0.3s ease;
-	position:absolute;
-  pointer-events: none;
-  
- }
- 
-.product-card:hover .hiddenBox {
-  transform: translateY(10%);
-    opacity:1;
-	  transform: translate(0%);
-    pointer-events: auto;
-}
-.product-card-button-cart:hover .hiddenBox
-{
-  transform: translateY(10%);
-    opacity:1;
-	  transform: translate(0%);
-    pointer-events: auto;
-}
-
-
-
 .product-card:hover {
   transform: translateY(-6px);
 }
-
-/*to here*/
 
 .product-card-img-container img {
   width: 100%;
@@ -99,7 +65,7 @@
 .buy-btn,
 .product-card-button-cart,
 .product-card-button-buy {
-  /*flex: 1;*/
+  flex: 1;
   background-color: var(--primary-color);
   color: #fff;
   border: none;
@@ -109,7 +75,6 @@
   font-weight: 600;
   cursor: pointer;
   transition: background-color 0.25s ease, transform 0.15s ease;
- 
 }
 
 .buy-btn:hover,
@@ -141,6 +106,56 @@
   display: flex;
   gap: 20px;
 }
-.product-card-button-cart {
-  width: 100%;       /* wider */
+
+/* Base admin button */
+.admin-button {
+  border-radius: 6px;
+  padding: 0.4rem 0.8rem;  /* smaller than before */
+  font-weight: bold;
+  font-size: 0.85rem;      /* slightly smaller text */
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+  transition: all 0.2s ease;
 }
+
+/* Add Product button */
+.admin-button.add-product-button {
+  background-color: #28a745;
+  color: #fff;
+}
+.admin-button.add-product-button:hover {
+  background-color: #218838;
+  transform: translateY(-1px);
+  box-shadow: 0 3px 6px rgba(0,0,0,0.25);
+}
+
+/* Edit button */
+.admin-button.edit-button {
+  background-color: #ffc107;
+  color: #212529;
+}
+.admin-button.edit-button:hover {
+  background-color: #e0a800;
+  transform: translateY(-1px);
+  box-shadow: 0 3px 6px rgba(0,0,0,0.25);
+}
+
+/* Delete button */
+.admin-button.delete-button {
+  background-color: #dc3545;
+  color: #fff;
+}
+.admin-button.delete-button:hover {
+  background-color: #c82333;
+  transform: translateY(-1px);
+  box-shadow: 0 3px 6px rgba(0,0,0,0.25);
+}
+
+/* Container for admin buttons */
+.admin-card-buttons {
+  display: flex;
+  gap: 8px;
+  margin-top: 5px;
+}
+
