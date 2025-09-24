@@ -45,7 +45,7 @@ public partial class Database1Context : DbContext
     {
         modelBuilder.Entity<Address>(entity =>
         {
-            entity.HasKey(e => e.AddressId).HasName("PK__tmp_ms_x__091C2A1B3B4FB66E");
+            entity.HasKey(e => e.AddressId).HasName("PK__tmp_ms_x__091C2A1B2357A23E");
 
             entity.ToTable("Address");
 
@@ -53,8 +53,12 @@ public partial class Database1Context : DbContext
             entity.Property(e => e.City)
                 .HasMaxLength(50)
                 .IsUnicode(false);
-            entity.Property(e => e.Line1).HasColumnType("text");
-            entity.Property(e => e.Line2).HasColumnType("text");
+            entity.Property(e => e.Line1)
+                .HasMaxLength(255)
+                .IsUnicode(false);
+            entity.Property(e => e.Line2)
+                .HasMaxLength(255)
+                .IsUnicode(false);
             entity.Property(e => e.PostalCode)
                 .HasMaxLength(50)
                 .IsUnicode(false)
@@ -120,11 +124,11 @@ public partial class Database1Context : DbContext
 
             entity.HasOne(d => d.Address1Navigation).WithMany(p => p.ClientAddress1Navigations)
                 .HasForeignKey(d => d.Address1)
-                .HasConstraintName("FK__Client__Address1__3A4CA8FD");
+                .HasConstraintName("FK__Client__Address1__41B8C09B");
 
             entity.HasOne(d => d.Address2Navigation).WithMany(p => p.ClientAddress2Navigations)
                 .HasForeignKey(d => d.Address2)
-                .HasConstraintName("FK__Client__Address2__3B40CD36");
+                .HasConstraintName("FK__Client__Address2__42ACE4D4");
 
             entity.HasOne(d => d.ClientNavigation).WithOne(p => p.Client)
                 .HasForeignKey<Client>(d => d.ClientId)
@@ -184,7 +188,7 @@ public partial class Database1Context : DbContext
             entity.HasOne(d => d.Address).WithMany(p => p.Invoices)
                 .HasForeignKey(d => d.AddressId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Invoice__Address__282DF8C2");
+                .HasConstraintName("FK__Invoice__Address__43A1090D");
 
             entity.HasOne(d => d.Client).WithMany(p => p.Invoices)
                 .HasForeignKey(d => d.ClientId)
@@ -318,14 +322,16 @@ public partial class Database1Context : DbContext
 
         modelBuilder.Entity<Shipping>(entity =>
         {
-            entity.HasKey(e => e.InvoiceId).HasName("PK__tmp_ms_x__D796AAD5858B3160");
+            entity.HasKey(e => e.InvoiceId).HasName("PK__tmp_ms_x__D796AAD5F102BB27");
 
             entity.ToTable("Shipping");
 
             entity.Property(e => e.InvoiceId)
                 .ValueGeneratedNever()
                 .HasColumnName("InvoiceID");
-            entity.Property(e => e.Instructions).HasColumnType("text");
+            entity.Property(e => e.Instructions)
+                .HasMaxLength(255)
+                .IsUnicode(false);
             entity.Property(e => e.Status)
                 .HasMaxLength(10)
                 .IsUnicode(false);
@@ -333,7 +339,7 @@ public partial class Database1Context : DbContext
             entity.HasOne(d => d.Invoice).WithOne(p => p.Shipping)
                 .HasForeignKey<Shipping>(d => d.InvoiceId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Shipping__Invoic__4F47C5E3");
+                .HasConstraintName("FK__Shipping__Invoic__54CB950F");
         });
 
         modelBuilder.Entity<Storage>(entity =>
