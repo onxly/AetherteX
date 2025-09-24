@@ -6,7 +6,6 @@ import "../stylesheets/profile.css";
 function OrdersModel({Orders= [], Addr = [] }){
     const [activeModel, setActiveModel] = useState(true);
     const [selectedOrder, setselectedOrder] = useState(null);
-
     return(
         <section className="OrdersPage">
             { Orders.length!=0?(
@@ -35,9 +34,9 @@ function OrdersModel({Orders= [], Addr = [] }){
                     <div className="OrderDet">
                         <OrderDetModel 
                             id={selectedOrder.id} 
-                            price={selectedOrder.price} 
-                            Date={selectedOrder.date} 
-                            Addr={Addr[selectedOrder.address]} 
+                            price={selectedOrder.Price} 
+                            Date={selectedOrder.Date} 
+                            Addr={Addr[selectedOrder.Address]} 
                             products={selectedOrder.products}
                         />
                         <span className="OrdReturn" onClick={() => setActiveModel(true)}>Return to History</span>

@@ -55,21 +55,17 @@ function InfoProduct({name, description, rating, reviews, CPU ={}, GPU = {}, RAM
                             <tr>
                                 <td colSpan={2} className="hRow">CPU</td>
                             </tr>
-                            {Object.entries(CPU || {})
-                                .filter(([key]) => key !== "cpuId") 
-                                .map(([key, value]) => (
-                                <tr key={key}>
+                            {Object.entries(CPU || {}).map(([key, value]) => (
+                                <tr key ={key}>
                                     <td className="col1">{key}:</td>
-                                    <td className="col2">{value}</td>
+                                    <td className="col2">{CPU[key]}</td>
                                 </tr>
                             ))}
 
                             <tr>
                                 <td colSpan={2} className="hRow">GPU</td>
                             </tr>
-                            {Object.entries(GPU || {})
-                                .filter(([key]) => key !== "gpuId") 
-                                .map(([key, value]) => (
+                            {Object.entries(GPU || {}).map(([key, value]) => (
                                 <tr key ={key}>
                                     <td className="col1">{key}:</td>
                                     <td className="col2">{GPU[key]}</td>
@@ -79,9 +75,7 @@ function InfoProduct({name, description, rating, reviews, CPU ={}, GPU = {}, RAM
                             <tr>
                                 <td colSpan={2} className="hRow">RAM</td>
                             </tr>
-                            {Object.entries(RAM || {})
-                                .filter(([key]) => key !== "ramId")
-                                .map(([key, value]) => (
+                            {Object.entries(RAM || {}).map(([key, value]) => (
                                 <tr key ={key}>
                                     <td className="col1">{key}:</td>
                                     <td className="col2">{RAM[key]}</td>
@@ -91,9 +85,7 @@ function InfoProduct({name, description, rating, reviews, CPU ={}, GPU = {}, RAM
                             <tr>
                                 <td colSpan={2} className="hRow">Storage</td>
                             </tr>
-                            {Object.entries(Storage || {})
-                                .filter(([key]) => key !== "storageId")
-                                .map(([key, value]) => (
+                            {Object.entries(Storage || {}).map(([key, value]) => (
                                 <tr key ={key}>
                                     <td className="col1">{key}:</td>
                                     <td className="col2">{Storage[key]}</td>
@@ -114,7 +106,7 @@ function InfoProduct({name, description, rating, reviews, CPU ={}, GPU = {}, RAM
                         </button>
                     )}
     
-                <ProductSummary CPU={CPU} GPU={GPU} RAM={RAM} Storage={Storage}/>
+                <ProductSummary />
             </div>
         </div>
     );
