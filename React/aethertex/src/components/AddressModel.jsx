@@ -8,12 +8,14 @@ function AddressModel({Addr= []}){
 
     const { isLoggedIn, setIsLoggedIn, user, cart = [] } = useContext(AuthContext);
 
-    const [line1,setLine1]=useState("");
-    const [line2,setLine2]=useState("");
-    const [city,setCity]=useState("");
-    const [region,setRegion]=useState("");
-    const [postalCode,setPostalCode]=useState("");
-    const [addresses,setaddress]=useState(Addr||[]);
+    const [line1, setLine1]=useState("");
+    const [line2, setLine2]=useState("");
+    const [city, setCity]=useState("");
+    const [region, setRegion]=useState("");
+    const [postalCode, setPostalCode]=useState("");
+    const [addresses, setaddress]=useState(Addr||[]);
+    const [bChange, setChange] = useState(true);
+    const [bAdd, setbAdd] = useState(false);
 
     useEffect(()=>
     {
@@ -21,16 +23,39 @@ function AddressModel({Addr= []}){
         {
             const updatedaddresses=await getAllAddress(user.userId);
             setaddress(updatedaddresses);
+            setChange(false);
         }
-        loadAddress();
-    },[user.userId])
-    
-    async function setNewAddress()
+        if (bChange === true)
         {
-            const res=await createAddress(user.userId,line1,line2,city,region,postalCode);
-            const updatedaddresses=await getAllAddress(user.userId);
-            setaddress(updatedaddresses);
+            loadAddress();
         }
+    },[bChange])
+    
+    useEffect(() => {
+        async function setNewAddress() {
+            const uID = parseInt(user.userId);
+            try {
+            const res = await createAddress(uID, line1, line2, city, region, postalCode);
+            setChange(true);
+            setbAdd(false);
+            alert("Address added successfully");
+            } catch (err) {
+            if (err.response) {
+                if (err.response.status === 404) {
+                alert("Couldd not add (404)");
+                } else {
+                alert(`Server error: ${err.response.status}`);
+                }
+            } else {
+                alert(`Network error: ${err.message}`);
+            }
+            }
+        }
+
+        if (bAdd === true) {
+            setNewAddress();
+        }
+        }, [bAdd]);
 
     const [showModal, setShowModal] = useState(false);
 
@@ -43,36 +68,34 @@ function AddressModel({Addr= []}){
 
                 <div className="addressDetailBox">
                     <h3>Line1</h3>
-                    <input type="text" id="Line1" onChange={e => setLine1(e.target.value)}></input>
-                    <button className="btnEditDet">Edit</button>
+                    <input type="text" id="Line1" onChange={(e) => setLine1(e.target.value)}></input>
                 </div>
 
                 <div className="addressDetailBox">
                     <h3>Line2</h3>
                     <input type="text" id="Line2" onChange={e => setLine2(e.target.value)}></input>
-                    <button className="btnEditDet">Edit</button>
                 </div>
 
                 <div className="addressDetailBox">
                     <h3>City</h3>
                     <input type="text" id="City" onChange={e => setCity(e.target.value)}></input>
-                    <button className="btnEditDet">Edit</button>
+                   
                 </div>
 
                 <div className="addressDetailBox">
                     <h3>Region</h3>
                     <input type="text" id="Region" onChange={e => setRegion(e.target.value)}></input>
-                    <button className="btnEditDet">Edit</button>
+                
                 </div>
 
                 <div className="addressDetailBox">
                     <h3>Postal</h3>
                     <input type="text" id="Postal" onChange={e => setPostalCode(e.target.value)}></input>
-                    <button className="btnEditDet">Edit</button>
                 </div>
                 
                 <button className="btnSave" onClick={()=> {
-                                                        setNewAddress();
+
+                                                        setbAdd(true);
                                                         setShowModal(false)
                                                     }}>Save Changes</button>
                 
@@ -84,13 +107,9 @@ function AddressModel({Addr= []}){
             <h2>Address Book</h2>
             {addresses.map(address => (
                 <AddressBox 
-                    key={address.id} 
-                    Name={address.name} 
-                    Line1={address.line1} 
-                    Line2={address.line2} 
-                    City={address.city} 
-                    Postal={address.postalCode} 
-                    Phone={address.phone} 
+                    key={address.addressId} 
+                    address={address} 
+                    setChange={setChange}
                 />
             ))}
             <button className="btnAddAddr" onClick={() => setShowModal(true)} >

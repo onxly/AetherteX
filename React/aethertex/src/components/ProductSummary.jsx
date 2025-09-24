@@ -2,7 +2,7 @@ import { PieChart, Pie, Cell, Tooltip, Legend } from "recharts";
 import { useState } from "react";
 import '../stylesheets/ProductSummary.css';
 
-function ProductSummary({ summary }) {
+function ProductSummary({  CPU, GPU, RAM, Storage }) {
     const [showModal, setShowModal] = useState(false);
     
     let data;
@@ -64,10 +64,10 @@ const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042"];
                             cy="50%"             // y-position center
                             outerRadius={100}    // size of pie
                             fill="#8884d8"
-                            label                // adds labels on slices
+                            label={({ value }) => `${value.toFixed(2)}%`} 
                             >
                             {data.map((entry, index) => (
-                                <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                                <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} formatter={(value) => value.toFixed(2)+"%"}/>
                             ))}
                             </Pie>
                             <Tooltip 
