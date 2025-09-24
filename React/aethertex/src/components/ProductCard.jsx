@@ -62,8 +62,16 @@ function ProductCard({prodId, imgSrc, title, price, discount, rating, ReviewsNum
       </Link>
       <div className="description">
         <span className="ProdStars">{stars} ({ReviewsNum})</span>
-        <p className="product-price">R{price}
-          <Checkbox 
+        <p className="product-price">R {Number(price).toLocaleString("fr-FR")}</p>
+
+        <div className="Prodbtn">
+          <Button buttonClassName={"product-card-button-cart"}
+            onClick={()=> addCart(prodId, imgSrc, title, price, true, 1)}
+          >
+            Add to Cart
+          </Button>
+
+            <Checkbox 
               checked={comPCs.includes(prodId)}
               onChange={() => toggleItem(prodId)}
               disabled={comPCs.length >= 2 && !comPCs.includes(prodId)} 
@@ -71,7 +79,7 @@ function ProductCard({prodId, imgSrc, title, price, discount, rating, ReviewsNum
               sx={{ color: "white" }} 
               size="sm" 
             />
-        </p>
+        </div>
 
 
               <div className="Prodbtn">

@@ -1,20 +1,21 @@
-import { useState, useEffect} from "react";
-import { Outlet, Route, Routes, useLocation} from "react-router-dom";
-import Loader from "./components/Loader";
+import { useState, useEffect, useContext } from "react";
+import { Outlet, Route, Routes, useLocation } from "react-router-dom";
+import { AuthContext, AuthProvider } from "./contexts/AuthContext";
 import Home from "./pages";
 import Product from "./pages/product";
 import Login from "./pages/login";
 import Register from "./pages/register";
 import Cart from "./pages/cart";
 import Profile from "./pages/profile";
-import { AuthProvider } from "./contexts/AuthContext";
-import "./App.css";
-import NotFound from "./pages/not-found";
 import AdminHome from "./pages/admin";
-import Header from "./components/Header";
 import Checkout from "./pages/checkout";
+import ProtectedRoute from "./contexts/ProtectedRoute";
+import Header from "./components/Header";
+import NotFound from "./pages/not-found";
+import Unauthorized from "./pages/unauthorized";
+import "./App.css";
 
-// Layout that always shows Navbar
+// Layouts
 function LayoutWithNavbar() {
   return (
     <>
@@ -24,7 +25,6 @@ function LayoutWithNavbar() {
   );
 }
 
-// Layout without Navbar
 function LayoutNoNavbar() {
   return <Outlet />;
 }
@@ -34,7 +34,7 @@ function App() {
   const [fadeOut, setFadeOut] = useState(false);
   const location = useLocation();
 
-  // Initial page load
+  // Initial page load fade
   useEffect(() => {
     const timer = setTimeout(() => setFadeOut(true), 1500);
     return () => clearTimeout(timer);
@@ -46,18 +46,18 @@ function App() {
     return () => clearTimeout(timer);
   }, [fadeOut]);
 
-  // Show loader on route change
+  // Loader on route change
   useEffect(() => {
     setLoading(true);
     setFadeOut(false);
-    const timer = setTimeout(() => setFadeOut(true), 300); // loader duration on page change
+    const timer = setTimeout(() => setFadeOut(true), 300);
     return () => clearTimeout(timer);
   }, [location]);
 
   return (
     <AuthProvider>
       {loading && (
-        <div id="preloder" className={fadeOut ? "fade-out" : ""}>
+        <div id="preloader" className={fadeOut ? "fade-out" : ""}>
           <div className="loader"></div>
         </div>
       )}
@@ -74,12 +74,13 @@ function App() {
         <Route element={<LayoutNoNavbar />}>
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
-          <Route path="/admin/:id" element={<AdminHome />} />
+          <Route element={<ProtectedRoute allowedRoles={["admin"]} />}>
+            <Route path="/admin/:id" element={<AdminHome />} />
+          </Route>
           <Route path="/checkout" element={<Checkout />} />
+          <Route path="/unauthorized" element={<Unauthorized />} />
+          <Route path="*" element={<NotFound />} />
         </Route>
-
-        {/* Catch all */}
-        <Route path="*" element={<NotFound />} />
       </Routes>
     </AuthProvider>
   );

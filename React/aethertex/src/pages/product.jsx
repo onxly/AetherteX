@@ -22,29 +22,24 @@ function Product() {
     try {
       const product = await GetProductbyID(parseInt(id));
       setProd(product);
-      console.log("Product:", product);
       if (product?.cpuId) {
         const ascCpu = await GetCPU(product.cpuId);
         setCPU(ascCpu);
-        console.log("CPU:", ascCpu);
       }
 
       if (product?.gpuId) {
         const ascGpu = await GetGPU(product.gpuId);
         setGPU(ascGpu);
-        console.log("GPU:", ascGpu);
       }
 
       if (product?.ramId) {
         const ascGpu = await GetRAM(product.ramId);
         setRAM(ascGpu);
-        console.log("RAM:", ascGpu);
       }
 
       if (product?.storageId) {
         const ascGpu = await GetStorage(product.storageId);
         setStorage(ascGpu);
-        console.log("Storage:", ascGpu);
         
       }
     } catch (error) {
@@ -68,6 +63,7 @@ function Product() {
   
   return (
     <div className="cApp">
+      {}
       <ImgProduct
         imgMain={prod.image1}
         img1={prod.image1}
@@ -77,6 +73,7 @@ function Product() {
       />
 
       <InfoProduct
+        product={prod}
         name={prod.title}
         description={prod.description}
         rating={4.7}

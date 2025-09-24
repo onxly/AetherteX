@@ -1,10 +1,8 @@
   import React, { useState,useEffect } from "react";
   import Sidebar from "../components/Sidebar";
   import ProductsList from "../components/ProductsList";
-  //import AdminHome from "../pages/admin/index"
   import "../stylesheets/Home.css";
   import { GetProductbyID,getAllProducts,getAllCPUs,getAllStorageDevices } from "../jsfunctions/alljsfunctions";
-  import AdminHome from "./admin/index";
 
   function Home() {
     document.title = "Home | AetherteX";
@@ -127,7 +125,6 @@
           isShowingSidebar={isShowingSidebar}
           products={filteredProducts}
         />
-        
       </div>
     );
   }

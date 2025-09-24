@@ -258,10 +258,14 @@ if (CPU.length > 1 && GPU.length > 1 && RAM.length > 1 && Storage.length > 1) {
                }
       </div>
 
-      {comPCs.length >= 2 && showModal && (
+      {comPCs.length >= 2 && (
           <div className="CompareModel">
             <div className="CompareContents">
-              <span className="close" onClick={() => setShowModal(false)}>
+              <span className="close" 
+                onClick={() => {
+                  setComPCs([]); 
+                }}
+              >
                   ×
               </span>
               <h2>PC Comparision</h2>

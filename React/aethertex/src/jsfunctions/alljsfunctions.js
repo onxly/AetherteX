@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from "axios"
 const apilink="http://localhost:3000/AeatherAPI/";
 
 //Address
@@ -14,14 +14,14 @@ export async function getAddress(id)
     return res.data;
 }
 
-export async function createAddress(clientId,line1,line2,City,region,postalCode)
+export async function createAddress(ClientId,Line1,Line2,City,Region,PostalCode)
 {
-    const newadressobj={ClientId:clientId,
-                    Line1:line1,
-                    Line2:line2,    
-                    City:City,
-                    Region:region,
-                    PostalCode:postalCode}
+    const newadressobj={clientId:ClientId,
+                    line1:Line1,
+                    line2:Line2,    
+                    city:City,
+                    region:Region,
+                    postalCode:PostalCode}
 
     const res=await axios.post(apilink+"address",newadressobj);
     return res.data;

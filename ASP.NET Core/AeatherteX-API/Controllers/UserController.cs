@@ -69,13 +69,12 @@ namespace AeatherteX_API.Controllers
         public class UserRespnse
         {
             public int UserId { get; set; }
+            public string Username { get; set; }
             public string Name { get; set; }
             public string Surname { get; set; }
             public string Email { get; set; }
             public string PhoneNumber { get; set; }
             public string Type { get; set; }
-            public Client? Client { get; set; }
-            public Admin? Admin { get; set; }
         }
 
         // POST: AeatherAPI/users/login
@@ -94,7 +93,7 @@ namespace AeatherteX_API.Controllers
                 return Unauthorized("Incorrect password");
             }
 
-            var userResponse = new User
+            var userResponse = new UserRespnse
             {
                 UserId = user.UserId,
                 Name = user.Name,
@@ -102,24 +101,16 @@ namespace AeatherteX_API.Controllers
                 Email = user.Email,
                 PhoneNumber = user.PhoneNumber,
                 Type = user.Type,
-                Client = null,
-                Admin = null
             };
 
             var client = (from c in db.Clients
                           where c.ClientId == user.UserId
                           select c).FirstOrDefault();
+
             if (client != null)
             {
-                userResponse.Client = new Client
-                {
-                    ClientId = client.ClientId,
-                    Username = client.Username,
-                    LoyaltyPoints = client.LoyaltyPoints,
-                    IsPremium = client.IsPremium,
-                    Address1 = client.Address1,
-                    Address2 = client.Address2
-                };
+                userResponse.Username = client.Username;
+
             }else
             {
                 var admin = (from a in db.Admins
@@ -127,11 +118,7 @@ namespace AeatherteX_API.Controllers
                              select a).FirstOrDefault();
                 if (admin != null)
                 {
-                    userResponse.Admin = new Admin
-                    {
-                        UserId = admin.UserId,
-                        AdminCode = admin.AdminCode
-                    };
+                    userResponse.Username = "admin #" + admin.UserId;
                 }
             }
 
@@ -144,8 +131,17 @@ namespace AeatherteX_API.Controllers
         [HttpPost("logout")]
         public IActionResult Logout()
         {
-            HttpContext.Session.Clear();
-            return Ok();
+            try
+            {
+                HttpContext.Session.Clear();
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                ex.GetBaseException();
+                return Unauthorized();
+            }
+            
         }
 
         // GET: AeatherAPI/users/me
@@ -273,7 +269,7 @@ namespace AeatherteX_API.Controllers
                 var newClient = new Client
                 {
                     ClientId = newUser.UserId,
-                    Username = (newUser.Name).ToLower(),
+                    Username = (request.Name).ToLower(),
                     LoyaltyPoints = 0,
                     IsPremium = 0,
                     Address1 = null,
@@ -281,6 +277,8 @@ namespace AeatherteX_API.Controllers
                 };
                 db.Clients.Add(newClient);
             }
+
+            db.SaveChanges();
 
             return Ok(newUser.UserId);
         }
